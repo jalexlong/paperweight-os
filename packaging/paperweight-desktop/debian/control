@@ -19,7 +19,7 @@ Depends:
  sway-notification-center,
  wofi,
  foot,
- qutebrowser,
+ firefox-esr,
  thunar,
  grim,
  slurp,

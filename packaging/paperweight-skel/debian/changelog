@@ -1,3 +1,9 @@
+paperweight-skel (0.1.4-1) trixie; urgency=low
+
+  * Switch $browser from qutebrowser to firefox-esr
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.1.3-1) trixie; urgency=low
 
   * Switch to Pop!_OS-style keybindings

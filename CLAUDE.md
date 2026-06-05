@@ -59,6 +59,7 @@ user-local fragments also work without modifying the skel defaults.
 | Compositor | Sway (Wayland) | Lightweight, keyboard-driven |
 | Screen locker | gtklock | Better GTK CSS theming than swaylock |
 | Notification daemon | sway-notification-center (swaync) | Notification center panel, more usable than mako |
+| Browser | Firefox ESR | GTK3, first-class Wayland support, reliable |
 | App launcher | wofi | Lightweight, Wayland-native |
 | Terminal | foot | Lightweight, Wayland-native, no GPU required |
 | Audio | PipeWire + pipewire-pulse + WirePlumber | Modern stack, PulseAudio compat |
