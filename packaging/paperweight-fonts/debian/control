@@ -1,0 +1,19 @@
+Source: paperweight-fonts
+Section: fonts
+Priority: optional
+Maintainer: Alex Long <johnalexanderlong@gmail.com>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.2
+Homepage: https://github.com/jalexlong/paperweight-os
+Rules-Requires-Root: no
+
+Package: paperweight-fonts
+Architecture: all
+Depends: ${misc:Depends}
+Description: PaperweightOS Nerd Fonts — JetBrains Mono and Symbols
+ Ships JetBrains Mono Nerd Font (Regular, Bold, Italic, BoldItalic, Medium,
+ SemiBold, and Mono variants) and the Nerd Fonts Symbols-Only font, providing
+ full Nerd Font glyph coverage for terminals, waybar, and editors.
+ .
+ Fonts are sourced from https://github.com/ryanoasis/nerd-fonts and licensed
+ under the SIL Open Font License 1.1.

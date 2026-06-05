@@ -1,0 +1,205 @@
+// -*- mode: jsonc -*-
+// PaperweightOS Waybar — Catppuccin Macchiato
+{
+    "layer": "top",
+    "position": "top",
+    "height": 40,
+    "spacing": 0,
+
+    "modules-left": [
+        "cpu",
+        "memory",
+        "sway/mode",
+        "sway/scratchpad"
+    ],
+
+    "modules-center": [
+        "sway/workspaces"
+    ],
+
+    "modules-right": [
+        "tray",
+        "custom/notification",
+        "idle_inhibitor",
+        "custom/music",
+        "network",
+        "power-profiles-daemon",
+        "pulseaudio",
+        "backlight",
+        "battery",
+        "clock"
+    ],
+
+    "cpu": {
+        "interval": 5,
+        "format": "{usage}% ",
+        "tooltip": true,
+        "states": {
+            "good": 30,
+            "warning": 60,
+            "critical": 85
+        }
+    },
+
+    "memory": {
+        "interval": 30,
+        "format": "{}% ",
+        "tooltip-format": "{used:0.1f}G / {total:0.1f}G",
+        "states": {
+            "good": 50,
+            "warning": 75,
+            "critical": 90
+        }
+    },
+
+    "sway/mode": {
+        "format": "<span style=\"italic\">{}</span>"
+    },
+
+    "sway/scratchpad": {
+        "format": "{icon} {count}",
+        "show-empty": false,
+        "format-icons": ["", ""],
+        "tooltip": true,
+        "tooltip-format": "{app}: {title}"
+    },
+
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": " {icon} ",
+        "format-icons": {
+            "1": "",
+            "2": "󰖟",
+            "3": "",
+            "4": "",
+            "5": "",
+            "urgent": "",
+            "default": ""
+        }
+    },
+
+    "tray": {
+        "icon-size": 17,
+        "spacing": 8
+    },
+
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "󰂚",
+            "none": "󰂜",
+            "dnd-notification": "󰂛",
+            "dnd-none": "󰂛",
+            "inhibited-notification": "󰂚",
+            "inhibited-none": "󰂜",
+            "dnd-inhibited-notification": "󰂛",
+            "dnd-inhibited-none": "󰂛"
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    },
+
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        },
+        "tooltip-format-activated": "Idle inhibitor on",
+        "tooltip-format-deactivated": "Idle inhibitor off"
+    },
+
+    "custom/music": {
+        "format": " {}",
+        "escape": true,
+        "interval": 5,
+        "tooltip": false,
+        "exec": "playerctl metadata --format='{{ artist }} - {{ title }}' 2>/dev/null || echo ''",
+        "exec-if": "playerctl status 2>/dev/null | grep -q Playing",
+        "on-click": "playerctl play-pause",
+        "max-length": 40
+    },
+
+    "network": {
+        "family": "ipv4",
+        "format-wifi": "{icon}",
+        "format-ethernet": "󰌘",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "󰌙",
+        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+        "tooltip-format": "{ifname} via {gwaddr}",
+        "tooltip-format-ethernet": "{ipaddr}/{cidr}",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%)",
+        "tooltip-format-disconnected": "Disconnected",
+        "on-click": "kitty --class nmtui -e nmtui"
+    },
+
+    "power-profiles-daemon": {
+        "format": "{icon}",
+        "tooltip-format": "{profile} — {driver}",
+        "tooltip": true,
+        "format-icons": {
+            "default": "󱐌",
+            "performance": "󱐌",
+            "balanced": "󰾅",
+            "power-saver": "󰾆"
+        }
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}%",
+        "format-muted": "󰖁",
+        "format-icons": {
+            "hands-free": "󱡏",
+            "headset": "󰋎",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["󰕿", "󰖀", "󰕾"]
+        },
+        "scroll-step": 5,
+        "max-volume": 100,
+        "on-click": "pavucontrol",
+        "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
+    },
+
+    "backlight": {
+        "disable-scroll": false,
+        "scroll-step": 5,
+        "min-brightness": 5,
+        "format": "{icon}",
+        "format-icons": ["", "", "", "", "", "", "", "", ""],
+        "tooltip": true,
+        "tooltip-format": "Brightness: {percent}%",
+        "on-scroll-up": "brightnessctl set 5%+",
+        "on-scroll-down": "brightnessctl set 5%- --min-value=5"
+    },
+
+    "battery": {
+        "states": {
+            "good": 80,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon}",
+        "format-alt": "{capacity}% {icon}",
+        "format-charging": "{icon}󱐋",
+        "format-plugged": "󰚥",
+        "format-full": "󰁹",
+        "format-icons": ["󰂎","󰁺","󰁻","󰁼","󰁽","󰁾","󰁿","󰂀","󰂁","󰂂","󰁹"],
+        "tooltip-format": "{timeTo}"
+    },
+
+    "clock": {
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "format": "{:%H:%M %d/%m/%y}"
+    }
+}

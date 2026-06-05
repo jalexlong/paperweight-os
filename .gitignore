@@ -1,0 +1,17 @@
+# Debian build artifacts
+packaging/**/*.deb
+packaging/**/*.buildinfo
+packaging/**/*.changes
+packaging/**/debian/.debhelper/
+packaging/**/debian/debhelper-build-stamp
+packaging/**/debian/files
+packaging/**/debian/*.substvars
+packaging/**/debian/tmp/
+packaging/**/debian/paperweight-*/
+
+# reprepro generated output (lives on gh-pages branch, not main)
+gh-pages/
+
+# GPG secrets — never commit these
+*.asc
+*.gpg.bak

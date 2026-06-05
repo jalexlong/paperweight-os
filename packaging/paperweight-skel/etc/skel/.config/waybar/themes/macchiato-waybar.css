@@ -1,0 +1,185 @@
+* {
+  border: none;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font", "Symbols Nerd Font", monospace;
+  font-size: 13px;
+  min-height: 0;
+}
+
+window#waybar {
+  background: transparent;
+  color: @text;
+}
+
+/* ── Workspaces (center) ──────────────────────────────── */
+
+#workspaces {
+  border-radius: 1rem;
+  margin: 5px auto;
+  background-color: alpha(@surface0, 0.92);
+}
+
+#workspaces button {
+  color: @lavender;
+  background: transparent;
+  border-radius: 1rem;
+  padding: 0.35rem 0.55rem;
+  margin: 0;
+}
+
+#workspaces button.focused,
+#workspaces button.active {
+  color: @mauve;
+  background-color: alpha(@surface1, 0.85);
+}
+
+#workspaces button.visible {
+  color: @text;
+}
+
+#workspaces button:hover {
+  color: @sapphire;
+  background-color: alpha(@surface1, 0.7);
+}
+
+#workspaces button.urgent {
+  color: @crust;
+  background-color: @red;
+}
+
+/* ── Shared module base ───────────────────────────────── */
+
+#cpu,
+#memory,
+#mode,
+#scratchpad,
+#tray,
+#idle_inhibitor,
+#network,
+#pulseaudio,
+#backlight,
+#battery,
+#clock,
+#power-profiles-daemon,
+#custom-music {
+  background-color: alpha(@surface0, 0.92);
+  padding: 0.45rem 0.85rem;
+  margin: 5px 0;
+}
+
+/* ── Left group: cpu + memory ─────────────────────────── */
+
+#cpu {
+  color: @blue;
+  border-radius: 1rem 0 0 1rem;
+  margin-left: 1rem;
+}
+
+#cpu.good    { color: @green; }
+#cpu.warning { color: @yellow; }
+#cpu.critical { color: @red; }
+
+#memory {
+  color: @blue;
+  border-radius: 0 1rem 1rem 0;
+  margin-right: 0.5rem;
+}
+
+#memory.good    { color: @green; }
+#memory.warning { color: @yellow; }
+#memory.critical { color: @red; }
+
+#mode {
+  color: @text;
+  background-color: alpha(@overlay0, 0.92);
+  border-radius: 1rem;
+  margin-left: 0.5rem;
+  font-style: italic;
+}
+
+#scratchpad {
+  color: @subtext0;
+  border-radius: 1rem;
+  margin-left: 0.5rem;
+}
+
+/* ── Right group ──────────────────────────────────────── */
+
+#tray {
+  border-radius: 1rem;
+  margin-left: 1rem;
+  margin-right: 0.5rem;
+}
+
+#custom-notification {
+  color: @lavender;
+  border-radius: 1rem;
+  margin: 5px 0.5rem;
+  padding: 0.45rem 0.85rem;
+  background-color: alpha(@surface0, 0.92);
+}
+
+#custom-notification.dnd-none,
+#custom-notification.dnd-notification {
+  color: @overlay0;
+}
+
+#idle_inhibitor {
+  color: @rosewater;
+  border-radius: 1rem 0 0 1rem;
+  margin-left: 0.5rem;
+}
+
+#idle_inhibitor.deactivated {
+  color: @surface2;
+}
+
+#custom-music {
+  color: @mauve;
+  border-radius: 1rem;
+  margin: 5px 0.5rem;
+}
+
+#network {
+  color: @lavender;
+}
+
+#network.disconnected {
+  color: @maroon;
+}
+
+#pulseaudio {
+  color: @lavender;
+}
+
+#pulseaudio.muted {
+  color: @maroon;
+}
+
+#backlight {
+  color: @yellow;
+}
+
+#battery {
+  color: @lavender;
+}
+
+#battery.charging,
+#battery.plugged {
+  color: @green;
+}
+
+#battery.good:not(.charging)    { color: @green; }
+#battery.warning:not(.charging) { color: @yellow; }
+#battery.critical:not(.charging) { color: @red; }
+
+#power-profiles-daemon          { color: @overlay1; }
+#power-profiles-daemon.balanced { color: @blue; }
+#power-profiles-daemon.performance { color: @red; }
+#power-profiles-daemon.power-saver { color: @green; }
+
+#clock {
+  color: @lavender;
+  border-radius: 0 1rem 1rem 0;
+  margin-right: 1rem;
+}

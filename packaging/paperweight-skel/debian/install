@@ -1,0 +1,12 @@
+# Format: <source path relative to package root>  <destination in the .deb>
+# dh_install uses this to place files during dpkg-buildpackage.
+
+etc/skel/.config/sway/config                              etc/skel/.config/sway/
+etc/skel/.config/sway/config.d/                           etc/skel/.config/sway/
+etc/skel/.config/waybar/config.jsonc                      etc/skel/.config/waybar/
+etc/skel/.config/waybar/style.css                         etc/skel/.config/waybar/
+etc/skel/.config/waybar/themes/                           etc/skel/.config/waybar/
+etc/skel/.config/swaync/config.json                       etc/skel/.config/swaync/
+etc/skel/.config/swaync/style.css                         etc/skel/.config/swaync/
+etc/skel/.config/wofi/style.css                           etc/skel/.config/wofi/
+etc/skel/.config/gtklock/style.css                        etc/skel/.config/gtklock/

@@ -1,0 +1,7 @@
+paperweight-fonts (0.1.0-1) trixie; urgency=medium
+
+  * Initial packaging: JetBrains Mono Nerd Font (Regular, Bold, Italic,
+    BoldItalic, Medium, SemiBold, Mono variants) and Symbols Nerd Font.
+    Sourced from ryanoasis/nerd-fonts v3 releases under SIL OFL 1.1.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Wed, 04 Jun 2026 00:00:00 +0000

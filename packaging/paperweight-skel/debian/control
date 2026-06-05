@@ -1,0 +1,20 @@
+Source: paperweight-skel
+Section: misc
+Priority: optional
+Maintainer: Alex Long <johnalexanderlong@gmail.com>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.2
+Homepage: https://github.com/jalexlong/paperweight-os
+Rules-Requires-Root: no
+
+Package: paperweight-skel
+Architecture: all
+Depends: ${misc:Depends}
+Description: PaperweightOS default configuration skeleton
+ Provides default XDG configuration files for the PaperweightOS desktop,
+ installed to /etc/skel so they are copied into new user home directories
+ at account creation time.
+ .
+ Includes base configs for: sway, waybar, mako, wofi, and kitty.
+ Hardware-specific fragments (e.g. Chromebook keys) ship in separate packages
+ and are dropped into config.d/ directories for fragment-based composition.

@@ -1,0 +1,59 @@
+@define-color rosewater #f4dbd6;
+@define-color flamingo  #f0c6c6;
+@define-color pink      #f6bde6;
+@define-color mauve     #c6a0f6;
+@define-color red       #ed8796;
+@define-color peach     #f5a97f;
+@define-color yellow    #eed49f;
+@define-color green     #a6da95;
+@define-color sky       #91d7e3;
+@define-color blue      #8aadf4;
+@define-color lavender  #b7bdf8;
+@define-color text      #cad3f5;
+@define-color subtext1  #b8c0e0;
+@define-color overlay0  #6e738d;
+@define-color surface0  #363a4f;
+@define-color base      #24273a;
+@define-color mantle    #1e2030;
+@define-color crust     #181926;
+
+window {
+  margin: 0px;
+  border: 1px solid @mauve;
+  background-color: @crust;
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 12px;
+}
+
+#input {
+  margin: 8px;
+  padding: 6px;
+  color: @text;
+  background-color: @base;
+  border: 1px solid @surface0;
+}
+
+#inner-box {
+  margin: 4px 8px 8px 8px;
+  background-color: @crust;
+}
+
+#outer-box,
+#scroll {
+  background-color: @crust;
+}
+
+#entry {
+  padding: 5px;
+  color: @subtext1;
+  background-color: transparent;
+}
+
+#entry:selected {
+  color: @crust;
+  background-color: @mauve;
+}
+
+#text {
+  color: inherit;
+}
