@@ -1,6 +1,6 @@
 Package: paperweight-chromebook
 Source: paperweight-desktop
-Version: 0.1.0-1
+Version: 0.1.1-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
 Installed-Size: 8
@@ -8,29 +8,29 @@ Depends: paperweight-desktop, brightnessctl, acpi, acpid
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: metapackages
-Filename: pool/main/p/paperweight-desktop/paperweight-chromebook_0.1.0-1_all.deb
-Size: 1578
-SHA256: ad148bd1366eaa680c5ad25a09fb73c32710d139724e2d675544479b92c6ef3f
-SHA1: ded951267e1d0b455b0459dc3d6f409e2c5f6d4c
-MD5sum: b3fd76aa109a8864f92ad291714cd92c
+Filename: pool/main/p/paperweight-desktop/paperweight-chromebook_0.1.1-1_all.deb
+Size: 1644
+SHA256: afe8563ba780522893b48a7c88a87ecc04b7e7f328a5b4997b2d43c108710c40
+SHA1: 1c5f59c6e643cdaf4841daaaaaa5f6177f1e3704
+MD5sum: 1a5bd6314c56f11687a21f5dc8f5eff9
 Description: PaperweightOS extra dependencies for Chromebook hardware
  Optional add-on for machines running coreboot, providing Chromebook-specific
  keyboard mappings and power management quirks on top of the base desktop.
 
 Package: paperweight-desktop
-Version: 0.1.0-1
+Version: 0.1.1-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
 Installed-Size: 8
-Depends: paperweight-skel, paperweight-fonts, sway, waybar, gtklock, swayidle, sway-notification-center, wofi, kitty, grim, slurp, wl-clipboard, brightnessctl, playerctl, network-manager, pipewire, pipewire-pulse, wireplumber, pavucontrol, xdg-desktop-portal-wlr, mosh, xdg-user-dirs, fonts-font-awesome, fonts-noto-color-emoji, git, curl, wget, vim, neovim, tmux, btop, zoxide, ca-certificates
+Depends: paperweight-skel, paperweight-fonts, sway, waybar, gtklock, swayidle, sway-notification-center, wofi, kitty, grim, slurp, wl-clipboard, brightnessctl, playerctl, network-manager, pipewire, pipewire-pulse, wireplumber, pavucontrol, xdg-desktop-portal-wlr, mosh, xdg-user-dirs, fonts-font-awesome, fonts-noto-color-emoji, git, curl, wget, vim, neovim, tmux, btop, zoxide, ca-certificates, power-profiles-daemon
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: metapackages
-Filename: pool/main/p/paperweight-desktop/paperweight-desktop_0.1.0-1_all.deb
-Size: 1824
-SHA256: 2da3f06cb15a001e962d1b2dbc442f2f32c341b30def5d9df27eb2270c1ae773
-SHA1: 79d3fbe8cc41888368e7bd5569dc1aac93d481ae
-MD5sum: b7a4a9537fdd08454a30c4b79831e73a
+Filename: pool/main/p/paperweight-desktop/paperweight-desktop_0.1.1-1_all.deb
+Size: 1908
+SHA256: 8f338d966489787218edafe934bf1ee9d56258df16a1d283997108aa9b8da66a
+SHA1: 75855b964295c43d691df0888ed2e3c62b7eb9d0
+MD5sum: 5f10782b879e33e38be0308a3d915bb0
 Description: PaperweightOS desktop environment metapackage
  Installs all packages required for the PaperweightOS Sway-based desktop
  environment on Debian Stable (Trixie). Intended for use on refurbished
@@ -61,18 +61,18 @@ Description: PaperweightOS Nerd Fonts — JetBrains Mono and Symbols
  under the SIL Open Font License 1.1.
 
 Package: paperweight-skel
-Version: 0.1.0-1
+Version: 0.1.1-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
 Installed-Size: 51
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-skel/paperweight-skel_0.1.0-1_all.deb
-Size: 8116
-SHA256: c39099e9b9d8397248bd3242fd11dd0ad78938e11313e7ae5f009a3cc38a543d
-SHA1: d0db1a869ee12d5a4712c17a684ddd430bd3b2ce
-MD5sum: 8ed92876a8726548b141e8bd5b73b00d
+Filename: pool/main/p/paperweight-skel/paperweight-skel_0.1.1-1_all.deb
+Size: 8366
+SHA256: 67e0e30e8d9509a76dd56af9ce79c72f5f554367bccb98cd2f65d6610343b627
+SHA1: d5eb79d0f777d74329f02afb3d311d835add787a
+MD5sum: 507f7ccea9d9721d0e905f416fe00f0e
 Description: PaperweightOS default configuration skeleton
  Provides default XDG configuration files for the PaperweightOS desktop,
  installed to /etc/skel so they are copied into new user home directories
