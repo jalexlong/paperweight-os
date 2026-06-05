@@ -1,3 +1,11 @@
+paperweight-skel (0.1.6-1) trixie; urgency=low
+
+  * Ship dconf system defaults for dark mode (prefer-dark via /etc/dconf/)
+  * Add postinst to run dconf update on install
+  * Remove exec_always gsettings workaround from session config
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.1.5-1) trixie; urgency=low
 
   * Add GTK3/GTK4 settings.ini enforcing dark theme
