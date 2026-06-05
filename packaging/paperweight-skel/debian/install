@@ -11,3 +11,5 @@ etc/skel/.config/swaync/style.css                         etc/skel/.config/swayn
 etc/skel/.config/wofi/style.css                           etc/skel/.config/wofi/
 etc/skel/.config/gtklock/style.css                        etc/skel/.config/gtklock/
 etc/skel/.config/foot/foot.ini                            etc/skel/.config/foot/
+etc/skel/.config/gtk-3.0/settings.ini                     etc/skel/.config/gtk-3.0/
+etc/skel/.config/gtk-4.0/settings.ini                     etc/skel/.config/gtk-4.0/
