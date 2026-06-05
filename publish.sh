@@ -51,7 +51,7 @@ done
 # ---------------------------------------------------------------------------
 GPG_KEY_ID="$(grep '^SignWith:' "$APT_CONF/distributions" | awk '{print $2}')"
 if [[ "$GPG_KEY_ID" != "PAPERWEIGHT_GPG_KEY_ID" ]]; then
-    gpg --armor --export "$GPG_KEY_ID" > "$PAGES_DIR/pubkey.gpg"
+    gpg --export "$GPG_KEY_ID" > "$PAGES_DIR/pubkey.gpg"
     echo "Exported GPG public key to gh-pages/pubkey.gpg"
 else
     echo "WARNING: GPG key not configured — skipping pubkey export."
@@ -68,6 +68,6 @@ git -C "$PAGES_DIR" push origin gh-pages
 
 echo ""
 echo "Done. Users can add your repo with:"
-echo "  curl https://jalexlong.github.io/paperweight-os/pubkey.gpg | sudo tee /etc/apt/trusted.gpg.d/paperweight.gpg"
+echo "  wget -O - https://jalexlong.github.io/paperweight-os/pubkey.gpg | sudo tee /etc/apt/trusted.gpg.d/paperweight.gpg"
 echo "  echo 'deb https://jalexlong.github.io/paperweight-os trixie main' | sudo tee /etc/apt/sources.list.d/paperweight.list"
 echo "  sudo apt update"

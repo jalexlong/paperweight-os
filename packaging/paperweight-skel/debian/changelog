@@ -1,3 +1,11 @@
+paperweight-skel (0.1.1-1) trixie; urgency=low
+
+  * Fix sway lock keybinding conflict ($mod+Shift+l → $mod+Ctrl+l)
+  * Fix waybar CSS: replace margin: auto with margin: 5px 0
+  * Fix waybar icons: replace Nerd Fonts v2 codepoints with v3 MDI equivalents
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.1.0-1) trixie; urgency=low
 
   * Initial packaging. Default config skeleton for PaperweightOS desktop.

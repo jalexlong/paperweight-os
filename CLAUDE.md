@@ -116,7 +116,7 @@ The theme switcher (future) will automate steps 3–5.
 | `$mod+d` | App launcher (wofi) |
 | `$mod+q` | Kill window |
 | `$mod+m` | Fullscreen |
-| `$mod+Shift+l` | Lock (gtklock) |
+| `$mod+Ctrl+l` | Lock (gtklock) |
 | `$mod+Shift+n` | Toggle notification center |
 | `$mod+Shift+b` | Restart waybar |
 | `$mod+Shift+c` | Reload sway config |
@@ -145,7 +145,7 @@ GitHub Pages must be enabled on the repo (Settings → Pages → gh-pages branch
 
 Users add the repo with:
 ```bash
-curl https://jalexlong.github.io/paperweight-os/pubkey.gpg \
+wget -O - https://jalexlong.github.io/paperweight-os/pubkey.gpg \
   | sudo tee /etc/apt/trusted.gpg.d/paperweight.gpg
 echo "deb https://jalexlong.github.io/paperweight-os trixie main" \
   | sudo tee /etc/apt/sources.list.d/paperweight.list

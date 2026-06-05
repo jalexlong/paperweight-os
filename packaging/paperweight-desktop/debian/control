@@ -43,6 +43,7 @@ Depends:
  btop,
  zoxide,
  ca-certificates,
+ power-profiles-daemon,
 Description: PaperweightOS desktop environment metapackage
  Installs all packages required for the PaperweightOS Sway-based desktop
  environment on Debian Stable (Trixie). Intended for use on refurbished

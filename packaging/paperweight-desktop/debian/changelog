@@ -1,3 +1,9 @@
+paperweight-desktop (0.1.1-1) trixie; urgency=low
+
+  * Add power-profiles-daemon to Depends
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+
 paperweight-desktop (0.1.0-1) trixie; urgency=low
 
   * Initial packaging. Metapackage for PaperweightOS Sway desktop stack.
