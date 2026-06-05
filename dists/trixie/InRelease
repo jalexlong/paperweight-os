@@ -1,0 +1,38 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+Origin: PaperweightOS
+Label: PaperweightOS
+Codename: trixie
+Date: Fri, 05 Jun 2026 15:13:49 UTC
+Architectures: amd64
+Components: main
+Description: PaperweightOS package repository
+MD5Sum:
+ 734dbd455c02852ca812642b6ac4a737 3852 main/binary-amd64/Packages
+ 07370e6e44fbaca786df5d3d0cac3be9 1660 main/binary-amd64/Packages.gz
+ 2a5b562e92f35e9a3f9efbca426607d3 125 main/binary-amd64/Release
+SHA1:
+ 699d2c412002f4ef9070eb5019c23ca2464c5b14 3852 main/binary-amd64/Packages
+ 1bb6d94a0ac3ba2f2598121d18d18fbe4fec6841 1660 main/binary-amd64/Packages.gz
+ 0e69efac0057bcf7153e8dfb097d68bff8883215 125 main/binary-amd64/Release
+SHA256:
+ e2cfeaef291f1ac98edbc1b4094e67d0dd7a756811e2dee4eccedf1fb1e2594d 3852 main/binary-amd64/Packages
+ 0e10c4cb69350725d95d9f2912de01bf3145acaae23d20b631bcd5cfbd63f40e 1660 main/binary-amd64/Packages.gz
+ cc615ee67c628c10068d765690fa8ae3b374f95ee7ad42cdf14e3115f83156d8 125 main/binary-amd64/Release
+-----BEGIN PGP SIGNATURE-----
+
+iQIzBAEBCgAdFiEEDs/jVB4/zhMo9VsnoKUh90eAoBQFAmoi560ACgkQoKUh90eA
+oBTIpg//YRQ+UToiPb9nqHFSd88q0LpXQUp5ECHGQlJrO6QmvimjLWUVh/75ZSj7
+A15rlaHjk15ufT1Q9U026n0KGxvlGarjWsAmML/XEefF8DUYudpzl74U7cZSWGOy
++oAvuHSKW0Kyzg7j5hc3PEJZZ8vAUCDj3cGB1neenfWJh8FwRt6YpzkY3pQ0jpc9
+Us0vo0JvOtiS+Uthsyc5a2M2sJ5btaFB1slVIUUyAuMRRlXvscpPm1M8X95jkK6F
+Eq5X0jk+lDeSiRKX2jH4XqEecDVzueDocTh220VCxS3gDYwDznBVnnV0GT+hAP53
+GiJ56GYIrIW83T0cf+/zTo/XVL1Ns2g4KCnNtc2V63RN/8z9nloDzdy6APU2bj0f
+4QHGeT32JVSVAIZn9QAAYMnE+Zp1izQZBZn9/4tu/aDDL3YKCEn56BdZqazOx7Tk
+gXK0yNlM5JVW5jwjYpQflXX7XJe462SFpRQ7b1SlGG10Bi1dBc3s0ioSElnRKiRy
+oH2lQ7oPwfKrvpTu9doiRI1MVlSYfLZzOgRVXbe04lHRRXrjlI/Fb0elCiGSm8G5
+2YgyPykNdg7Ar6Bjqaj1wtqeRiIn/uXa8DqbUHj401na8ZD+9VGcFrBrNxUvccNl
+J5tqEW+IQE6jpy4dFJ+M+C7YRmmVzpF81PP/dCYKL731BeH+nTI=
+=rmXt
+-----END PGP SIGNATURE-----

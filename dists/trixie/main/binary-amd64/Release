@@ -1,0 +1,5 @@
+Component: main
+Origin: PaperweightOS
+Label: PaperweightOS
+Architecture: amd64
+Description: PaperweightOS package repository

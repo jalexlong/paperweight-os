@@ -1,0 +1,7 @@
+Origin: PaperweightOS
+Label: PaperweightOS
+Codename: trixie
+Architectures: amd64
+Components: main
+Description: PaperweightOS package repository
+SignWith: A0A521F74780A014

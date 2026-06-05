@@ -1,0 +1,84 @@
+Package: paperweight-chromebook
+Source: paperweight-desktop
+Version: 0.1.0-1
+Architecture: all
+Maintainer: Alex Long <johnalexanderlong@gmail.com>
+Installed-Size: 8
+Depends: paperweight-desktop, brightnessctl, acpi, acpid
+Homepage: https://github.com/jalexlong/paperweight-os
+Priority: optional
+Section: metapackages
+Filename: pool/main/p/paperweight-desktop/paperweight-chromebook_0.1.0-1_all.deb
+Size: 1578
+SHA256: ad148bd1366eaa680c5ad25a09fb73c32710d139724e2d675544479b92c6ef3f
+SHA1: ded951267e1d0b455b0459dc3d6f409e2c5f6d4c
+MD5sum: b3fd76aa109a8864f92ad291714cd92c
+Description: PaperweightOS extra dependencies for Chromebook hardware
+ Optional add-on for machines running coreboot, providing Chromebook-specific
+ keyboard mappings and power management quirks on top of the base desktop.
+
+Package: paperweight-desktop
+Version: 0.1.0-1
+Architecture: all
+Maintainer: Alex Long <johnalexanderlong@gmail.com>
+Installed-Size: 8
+Depends: paperweight-skel, paperweight-fonts, sway, waybar, gtklock, swayidle, sway-notification-center, wofi, kitty, grim, slurp, wl-clipboard, brightnessctl, playerctl, network-manager, pipewire, pipewire-pulse, wireplumber, pavucontrol, xdg-desktop-portal-wlr, mosh, xdg-user-dirs, fonts-font-awesome, fonts-noto-color-emoji, git, curl, wget, vim, neovim, tmux, btop, zoxide, ca-certificates
+Homepage: https://github.com/jalexlong/paperweight-os
+Priority: optional
+Section: metapackages
+Filename: pool/main/p/paperweight-desktop/paperweight-desktop_0.1.0-1_all.deb
+Size: 1824
+SHA256: 2da3f06cb15a001e962d1b2dbc442f2f32c341b30def5d9df27eb2270c1ae773
+SHA1: 79d3fbe8cc41888368e7bd5569dc1aac93d481ae
+MD5sum: b7a4a9537fdd08454a30c4b79831e73a
+Description: PaperweightOS desktop environment metapackage
+ Installs all packages required for the PaperweightOS Sway-based desktop
+ environment on Debian Stable (Trixie). Intended for use on refurbished
+ hardware with lightweight Wayland compositing.
+ .
+ Installing this package pulls in the full desktop stack. Configuration
+ defaults are provided by the paperweight-skel package.
+
+Package: paperweight-fonts
+Version: 0.1.0-1
+Architecture: all
+Maintainer: Alex Long <johnalexanderlong@gmail.com>
+Installed-Size: 33826
+Homepage: https://github.com/jalexlong/paperweight-os
+Priority: optional
+Section: fonts
+Filename: pool/main/p/paperweight-fonts/paperweight-fonts_0.1.0-1_all.deb
+Size: 5279968
+SHA256: 516b935f6d523a9b6d87d96f0b68fc3fe06cf972f11300cca6657f3f2e2f24f5
+SHA1: bde4d034687e73262383de5041cfd7c2caa07093
+MD5sum: c6671a3fc6b23df5a3c878830de5ba03
+Description: PaperweightOS Nerd Fonts — JetBrains Mono and Symbols
+ Ships JetBrains Mono Nerd Font (Regular, Bold, Italic, BoldItalic, Medium,
+ SemiBold, and Mono variants) and the Nerd Fonts Symbols-Only font, providing
+ full Nerd Font glyph coverage for terminals, waybar, and editors.
+ .
+ Fonts are sourced from https://github.com/ryanoasis/nerd-fonts and licensed
+ under the SIL Open Font License 1.1.
+
+Package: paperweight-skel
+Version: 0.1.0-1
+Architecture: all
+Maintainer: Alex Long <johnalexanderlong@gmail.com>
+Installed-Size: 51
+Homepage: https://github.com/jalexlong/paperweight-os
+Priority: optional
+Section: misc
+Filename: pool/main/p/paperweight-skel/paperweight-skel_0.1.0-1_all.deb
+Size: 8116
+SHA256: c39099e9b9d8397248bd3242fd11dd0ad78938e11313e7ae5f009a3cc38a543d
+SHA1: d0db1a869ee12d5a4712c17a684ddd430bd3b2ce
+MD5sum: 8ed92876a8726548b141e8bd5b73b00d
+Description: PaperweightOS default configuration skeleton
+ Provides default XDG configuration files for the PaperweightOS desktop,
+ installed to /etc/skel so they are copied into new user home directories
+ at account creation time.
+ .
+ Includes base configs for: sway, waybar, mako, wofi, and kitty.
+ Hardware-specific fragments (e.g. Chromebook keys) ship in separate packages
+ and are dropped into config.d/ directories for fragment-based composition.
+
