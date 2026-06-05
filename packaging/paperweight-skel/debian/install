@@ -10,3 +10,4 @@ etc/skel/.config/swaync/config.json                       etc/skel/.config/swayn
 etc/skel/.config/swaync/style.css                         etc/skel/.config/swaync/
 etc/skel/.config/wofi/style.css                           etc/skel/.config/wofi/
 etc/skel/.config/gtklock/style.css                        etc/skel/.config/gtklock/
+etc/skel/.config/foot/foot.ini                            etc/skel/.config/foot/

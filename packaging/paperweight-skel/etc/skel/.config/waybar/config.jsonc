@@ -137,7 +137,7 @@
         "tooltip-format-ethernet": "{ipaddr}/{cidr}",
         "tooltip-format-wifi": "{essid} ({signalStrength}%)",
         "tooltip-format-disconnected": "Disconnected",
-        "on-click": "kitty --class nmtui -e nmtui"
+        "on-click": "foot --app-id nmtui -e nmtui"
     },
 
     "power-profiles-daemon": {

@@ -60,7 +60,7 @@ user-local fragments also work without modifying the skel defaults.
 | Screen locker | gtklock | Better GTK CSS theming than swaylock |
 | Notification daemon | sway-notification-center (swaync) | Notification center panel, more usable than mako |
 | App launcher | wofi | Lightweight, Wayland-native |
-| Terminal | kitty | Fast, GPU-accelerated |
+| Terminal | foot | Lightweight, Wayland-native, no GPU required |
 | Audio | PipeWire + pipewire-pulse + WirePlumber | Modern stack, PulseAudio compat |
 | Default theme | Catppuccin Macchiato | First theme; more + theme switcher planned |
 | Font | JetBrains Mono Nerd Font | Monospace + icons in one font |
@@ -93,6 +93,7 @@ swaync/
   style.css                    — Macchiato-themed notification + panel CSS
 wofi/style.css                 — launcher styles using @define-color variables
 gtklock/style.css              — lock screen: Macchiato, clock, pill entry
+foot/foot.ini                  — terminal: Macchiato colors, JetBrainsMono NF 11pt
 ```
 
 ### Adding a new theme
@@ -111,17 +112,21 @@ The theme switcher (future) will automate steps 3–5.
 
 | Binding | Action |
 |---|---|
-| `$mod+Return` | Terminal (kitty) |
+| `$mod+t` | Terminal (foot) |
+| `$mod+Return` | Terminal (foot) — alias |
 | `$mod+Shift+Return` | Floating terminal |
+| `$mod+b` | Browser (qutebrowser) |
+| `$mod+f` | Files (thunar) |
 | `$mod+d` | App launcher (wofi) |
 | `$mod+q` | Kill window |
+| `$mod+space` | Toggle floating |
 | `$mod+m` | Fullscreen |
+| `$mod+F5` | Toggle layout (tabbed / splith) |
 | `$mod+Ctrl+l` | Lock (gtklock) |
 | `$mod+Shift+n` | Toggle notification center |
 | `$mod+Shift+b` | Restart waybar |
 | `$mod+Shift+c` | Reload sway config |
 | `$mod+r` | Resize mode |
-| `$mod+F5` | Toggle layout (tabbed / splith) |
 | `Print` | Screenshot → ~/Pictures/ |
 | `$mod+Print` | Region screenshot |
 

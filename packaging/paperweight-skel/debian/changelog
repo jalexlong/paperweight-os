@@ -1,3 +1,21 @@
+paperweight-skel (0.1.3-1) trixie; urgency=low
+
+  * Switch to Pop!_OS-style keybindings
+  * Add $mod+t (terminal), $mod+b (browser), $mod+f (files)
+  * Change $mod+space to floating toggle (was focus mode_toggle)
+  * Add foot skel config with Catppuccin Macchiato theme
+  * Add $browser and $files variables to sway config
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+
+paperweight-skel (0.1.2-1) trixie; urgency=low
+
+  * Switch terminal from kitty to foot
+  * Add foot skel config with Catppuccin Macchiato theme
+  * Add app_id float rule for foot floating terminal
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.1.1-1) trixie; urgency=low
 
   * Fix sway lock keybinding conflict ($mod+Shift+l → $mod+Ctrl+l)
