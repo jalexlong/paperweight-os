@@ -4,5 +4,29 @@ set -e
 case "$1" in
     configure)
         dconf update
+
+        # Ensure new users created by adduser are placed in the video group
+        # so brightnessctl works without sudo.
+        if [ -f /etc/adduser.conf ]; then
+            # Enable ADD_EXTRA_GROUPS (uncomment or set to 1)
+            if grep -q "^#.*ADD_EXTRA_GROUPS" /etc/adduser.conf; then
+                sed -i 's/^#\s*ADD_EXTRA_GROUPS.*/ADD_EXTRA_GROUPS=1/' /etc/adduser.conf
+            elif ! grep -q "^ADD_EXTRA_GROUPS=" /etc/adduser.conf; then
+                echo "ADD_EXTRA_GROUPS=1" >> /etc/adduser.conf
+            else
+                sed -i 's/^ADD_EXTRA_GROUPS=.*/ADD_EXTRA_GROUPS=1/' /etc/adduser.conf
+            fi
+
+            # Add video to EXTRA_GROUPS if not already present
+            if grep -q "^EXTRA_GROUPS=" /etc/adduser.conf; then
+                if ! grep -qE "^EXTRA_GROUPS=.*\bvideo\b" /etc/adduser.conf; then
+                    sed -i 's/^EXTRA_GROUPS="\(.*\)"/EXTRA_GROUPS="\1 video"/' /etc/adduser.conf
+                fi
+            elif grep -q "^#.*EXTRA_GROUPS" /etc/adduser.conf; then
+                sed -i 's/^#\s*EXTRA_GROUPS.*/EXTRA_GROUPS="video"/' /etc/adduser.conf
+            else
+                echo 'EXTRA_GROUPS="video"' >> /etc/adduser.conf
+            fi
+        fi
         ;;
 esac

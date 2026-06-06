@@ -34,8 +34,10 @@
 - [ ] **`40-workspaces.conf`** — app-to-workspace assignments for Chromebook.
       Needs user input on preferred layout before writing.
 
-- [ ] **brightnessctl udev rule** — add a udev rule or postinst so
-      `brightnessctl` works without sudo. Users need to be in the `video` group.
+- [x] **brightnessctl udev rule** — 70-paperweight-backlight.rules grants
+      video group write access to brightness sysfs on device discovery.
+      postinst enables ADD_EXTRA_GROUPS and adds 'video' to EXTRA_GROUPS
+      in /etc/adduser.conf so new users land in the group automatically.
 
 - [x] **xdg-user-dirs on session start** — `exec xdg-user-dirs-update` added
       to 50-desktop-session.conf; runs as user on sway startup.

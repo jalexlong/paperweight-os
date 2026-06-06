@@ -1,3 +1,12 @@
+paperweight-skel (0.1.8-1) trixie; urgency=low
+
+  * Ship 70-paperweight-backlight.rules: grants video group write access
+    to /sys/class/backlight/*/brightness on device discovery.
+  * postinst: enable ADD_EXTRA_GROUPS and add 'video' to EXTRA_GROUPS in
+    /etc/adduser.conf so new users can use brightnessctl without sudo.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.1.7-1) trixie; urgency=low
 
   * Run xdg-user-dirs-update on session start so ~/Pictures, ~/Downloads

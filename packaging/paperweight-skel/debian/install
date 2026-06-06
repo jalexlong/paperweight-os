@@ -15,3 +15,4 @@ etc/skel/.config/gtk-3.0/settings.ini                     etc/skel/.config/gtk-3
 etc/skel/.config/gtk-4.0/settings.ini                     etc/skel/.config/gtk-4.0/
 etc/dconf/db/paperweight.d/00-defaults                    etc/dconf/db/paperweight.d/
 etc/dconf/profile/user                                    etc/dconf/profile/
+usr/lib/udev/rules.d/70-paperweight-backlight.rules       usr/lib/udev/rules.d/

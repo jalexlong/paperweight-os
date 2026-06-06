@@ -1,0 +1,5 @@
+# Grant video group write access to backlight brightness on device discovery.
+# Users must be in the 'video' group; see paperweight-skel postinst.
+ACTION=="add", SUBSYSTEM=="backlight", \
+    RUN+="/bin/chgrp video /sys%p/brightness", \
+    RUN+="/bin/chmod g+w /sys%p/brightness"
