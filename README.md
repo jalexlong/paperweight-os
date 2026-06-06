@@ -40,7 +40,7 @@ Installing `paperweight-desktop` pulls in:
 
 **Fonts & Theme**
 - **JetBrains Mono Nerd Font** — monospace font with full icon glyph support
-- **Catppuccin Macchiato** — consistent dark theme across all components
+- **Catppuccin themes** — all four variants (Latte, Frappé, Macchiato, Mocha); switch with `Super+p` or `paperweight-theme <name>`
 
 Default configs land in `/etc/skel/.config/` via `paperweight-skel` and are
 copied to new user home directories automatically.

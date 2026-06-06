@@ -43,9 +43,9 @@
 - [x] **xdg-user-dirs on session start** — `exec xdg-user-dirs-update` added
       to 50-desktop-session.conf; runs as user on sway startup.
 
-- [ ] **Publish updated packages** — new packages (paperweight-chromebook,
-      skel 0.2.3) need `bash publish.sh` run on the dev laptop with the GPG key.
-      Requires: `sudo apt install debhelper reprepro` if not already present.
+- [x] **CI publishing** — GitHub Actions builds all packages on every push/PR
+      and publishes to gh-pages on push to main. `bash publish.sh` is still
+      available for local publishing with the GPG key.
 
 - [x] **Verify ncspot, helix, cava in Trixie** — cava ✓ (0.10.4+dfsg-1),
       helix ✓ (package name is `hx`, fixed in control), ncspot ✗ not in Trixie.
@@ -64,7 +64,8 @@
       theme atomically: sway colors, waybar imports, swaync CSS, gtklock CSS.
       Prompts via wofi with no args. Bound to `$mod+p`.
 
-- [x] **Catppuccin Latte** — light theme, all five files wired up.
+- [x] **All four Catppuccin variants** — Latte (light), Frappé, Macchiato, Mocha.
+      All five per-theme files wired up for each variant.
 - [ ] **Additional themes** — Rosé Pine, Gruvbox Material.
 
 - [x] **`paperweight-wallpapers` package** — solid-color Catppuccin wallpapers
