@@ -174,6 +174,13 @@ bash publish.sh
    ```
    Or serve it over HTTP and pass `url=http://<server>/paperweight.cfg`.
 
+   **virt-manager note:** use the virbr0 gateway IP (`192.168.122.1` by default),
+   not your host's physical IP — the VM can't reach the physical interface through
+   libvirt NAT. Serve with `python3 -m http.server 8080` from the repo root, then:
+   ```
+   auto=true priority=critical url=http://192.168.122.1:8080/preseed/paperweight.cfg
+   ```
+
 The `late_command` adds the PaperweightOS apt repo and runs
 `apt-get install -y paperweight-desktop` inside the target system.
 
