@@ -1,0 +1,222 @@
+/* PaperweightOS swaync theme — Catppuccin Mocha */
+
+* {
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 13px;
+}
+
+/* ── Notification toasts ──────────────────────────────── */
+
+.notification-row {
+  outline: none;
+  margin: 4px;
+}
+
+.notification-row:focus,
+.notification-row:hover {
+  background: transparent;
+}
+
+.notification {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+.notification-background {
+  background-color: #1e1e2e;
+  border: 1px solid #45475a;
+  border-radius: 10px;
+  padding: 8px;
+  margin: 4px;
+}
+
+.notification-background:hover {
+  background-color: #181825;
+}
+
+.close-button {
+  background: #313244;
+  color: #cdd6f4;
+  border-radius: 5px;
+  padding: 2px;
+  margin: 4px;
+}
+
+.close-button:hover {
+  background: #f38ba8;
+  color: #1e1e2e;
+}
+
+.notification-default-action {
+  background: transparent;
+  border-radius: 8px;
+  padding: 0;
+  margin: 0;
+}
+
+.notification-default-action:hover {
+  background: #313244;
+}
+
+.notification-content {
+  background: transparent;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.notification-icon {
+  margin: 8px;
+}
+
+.notification-header {
+  padding: 0;
+  color: #a6adc8;
+}
+
+.app-name {
+  font-weight: bold;
+  color: #b4befe;
+}
+
+.notification-summary {
+  color: #cdd6f4;
+  font-weight: bold;
+}
+
+.notification-body {
+  color: #a6adc8;
+}
+
+.notification-time {
+  color: #6c7086;
+  font-size: 11px;
+}
+
+.notification-action {
+  background: #313244;
+  color: #cdd6f4;
+  border-radius: 6px;
+  margin: 2px;
+  padding: 4px 10px;
+}
+
+.notification-action:hover {
+  background: #89b4fa;
+  color: #1e1e2e;
+}
+
+/* ── Urgency variants ─────────────────────────────────── */
+
+.notification-background.low {
+  border-color: #6c7086;
+}
+
+.notification-background.normal {
+  border-color: #cba6f7;
+}
+
+.notification-background.critical {
+  border-color: #f38ba8;
+}
+
+/* ── Control center panel ─────────────────────────────── */
+
+.control-center {
+  background-color: #181825;
+  border: 1px solid #313244;
+  border-radius: 0 0 0 12px;
+  padding: 8px;
+  color: #cdd6f4;
+}
+
+.control-center-list {
+  background: transparent;
+}
+
+.control-center-list-placeholder {
+  color: #6c7086;
+  font-size: 13px;
+}
+
+/* ── Widget: label / header ───────────────────────────── */
+
+.widget-label {
+  margin: 8px 4px 4px;
+}
+
+.widget-label > label {
+  font-size: 15px;
+  font-weight: bold;
+  color: #cdd6f4;
+}
+
+.widget-label > button {
+  background: #313244;
+  color: #a6adc8;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+.widget-label > button:hover {
+  background: #f38ba8;
+  color: #1e1e2e;
+}
+
+/* ── Widget: mpris ────────────────────────────────────── */
+
+.widget-mpris {
+  background: #1e1e2e;
+  border: 1px solid #313244;
+  border-radius: 10px;
+  margin: 4px;
+  padding: 8px;
+}
+
+.widget-mpris-album-art {
+  border-radius: 8px;
+}
+
+.widget-mpris-title {
+  font-weight: bold;
+  color: #cdd6f4;
+}
+
+.widget-mpris-subtitle {
+  color: #a6adc8;
+}
+
+/* ── Widget: volume / backlight ───────────────────────── */
+
+.widget-volume,
+.widget-backlight {
+  background: #1e1e2e;
+  border: 1px solid #313244;
+  border-radius: 10px;
+  margin: 4px;
+  padding: 8px 12px;
+  color: #cdd6f4;
+}
+
+scale trough {
+  background: #313244;
+  border-radius: 4px;
+  min-height: 6px;
+}
+
+scale highlight {
+  background: #89b4fa;
+  border-radius: 4px;
+}
+
+/* ── Widget: inhibitors ───────────────────────────────── */
+
+.widget-inhibitors {
+  background: #1e1e2e;
+  border: 1px solid #313244;
+  border-radius: 10px;
+  margin: 4px;
+  padding: 8px 12px;
+  color: #a6adc8;
+}

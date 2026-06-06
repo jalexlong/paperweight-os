@@ -1,0 +1,222 @@
+/* PaperweightOS swaync theme — Catppuccin Frappé */
+
+* {
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 13px;
+}
+
+/* ── Notification toasts ──────────────────────────────── */
+
+.notification-row {
+  outline: none;
+  margin: 4px;
+}
+
+.notification-row:focus,
+.notification-row:hover {
+  background: transparent;
+}
+
+.notification {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+.notification-background {
+  background-color: #303446;
+  border: 1px solid #51576d;
+  border-radius: 10px;
+  padding: 8px;
+  margin: 4px;
+}
+
+.notification-background:hover {
+  background-color: #292c3c;
+}
+
+.close-button {
+  background: #414559;
+  color: #c6d0f5;
+  border-radius: 5px;
+  padding: 2px;
+  margin: 4px;
+}
+
+.close-button:hover {
+  background: #e78284;
+  color: #303446;
+}
+
+.notification-default-action {
+  background: transparent;
+  border-radius: 8px;
+  padding: 0;
+  margin: 0;
+}
+
+.notification-default-action:hover {
+  background: #414559;
+}
+
+.notification-content {
+  background: transparent;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.notification-icon {
+  margin: 8px;
+}
+
+.notification-header {
+  padding: 0;
+  color: #a5adce;
+}
+
+.app-name {
+  font-weight: bold;
+  color: #babbf1;
+}
+
+.notification-summary {
+  color: #c6d0f5;
+  font-weight: bold;
+}
+
+.notification-body {
+  color: #a5adce;
+}
+
+.notification-time {
+  color: #737994;
+  font-size: 11px;
+}
+
+.notification-action {
+  background: #414559;
+  color: #c6d0f5;
+  border-radius: 6px;
+  margin: 2px;
+  padding: 4px 10px;
+}
+
+.notification-action:hover {
+  background: #8caaee;
+  color: #303446;
+}
+
+/* ── Urgency variants ─────────────────────────────────── */
+
+.notification-background.low {
+  border-color: #737994;
+}
+
+.notification-background.normal {
+  border-color: #ca9ee6;
+}
+
+.notification-background.critical {
+  border-color: #e78284;
+}
+
+/* ── Control center panel ─────────────────────────────── */
+
+.control-center {
+  background-color: #292c3c;
+  border: 1px solid #414559;
+  border-radius: 0 0 0 12px;
+  padding: 8px;
+  color: #c6d0f5;
+}
+
+.control-center-list {
+  background: transparent;
+}
+
+.control-center-list-placeholder {
+  color: #737994;
+  font-size: 13px;
+}
+
+/* ── Widget: label / header ───────────────────────────── */
+
+.widget-label {
+  margin: 8px 4px 4px;
+}
+
+.widget-label > label {
+  font-size: 15px;
+  font-weight: bold;
+  color: #c6d0f5;
+}
+
+.widget-label > button {
+  background: #414559;
+  color: #a5adce;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+.widget-label > button:hover {
+  background: #e78284;
+  color: #303446;
+}
+
+/* ── Widget: mpris ────────────────────────────────────── */
+
+.widget-mpris {
+  background: #303446;
+  border: 1px solid #414559;
+  border-radius: 10px;
+  margin: 4px;
+  padding: 8px;
+}
+
+.widget-mpris-album-art {
+  border-radius: 8px;
+}
+
+.widget-mpris-title {
+  font-weight: bold;
+  color: #c6d0f5;
+}
+
+.widget-mpris-subtitle {
+  color: #a5adce;
+}
+
+/* ── Widget: volume / backlight ───────────────────────── */
+
+.widget-volume,
+.widget-backlight {
+  background: #303446;
+  border: 1px solid #414559;
+  border-radius: 10px;
+  margin: 4px;
+  padding: 8px 12px;
+  color: #c6d0f5;
+}
+
+scale trough {
+  background: #414559;
+  border-radius: 4px;
+  min-height: 6px;
+}
+
+scale highlight {
+  background: #8caaee;
+  border-radius: 4px;
+}
+
+/* ── Widget: inhibitors ───────────────────────────────── */
+
+.widget-inhibitors {
+  background: #303446;
+  border: 1px solid #414559;
+  border-radius: 10px;
+  margin: 4px;
+  padding: 8px 12px;
+  color: #a5adce;
+}

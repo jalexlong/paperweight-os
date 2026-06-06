@@ -1,0 +1,56 @@
+/* Catppuccin Frappé */
+
+window {
+    background-color: #303446;
+}
+
+#clock-label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 72px;
+    font-weight: bold;
+    color: #c6d0f5;
+    margin-bottom: 8px;
+}
+
+#date-label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 16px;
+    color: #a5adce;
+    margin-bottom: 32px;
+}
+
+entry {
+    background-color: #414559;
+    color: #c6d0f5;
+    border: 2px solid #51576d;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 14px;
+    caret-color: #8caaee;
+}
+
+entry:focus {
+    border-color: #8caaee;
+}
+
+#error-label {
+    color: #e78284;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+button {
+    background-color: #8caaee;
+    color: #303446;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 20px;
+    font-family: "JetBrains Mono", monospace;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #babbf1;
+}
