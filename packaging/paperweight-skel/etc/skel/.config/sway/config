@@ -47,7 +47,6 @@ default_border pixel 2
 ### Utilities
     bindsym $mod+Shift+b exec sh -c 'pkill -SIGUSR1 waybar || waybar'
     bindsym $mod+Shift+n exec swaync-client --toggle-panel
-    bindsym $mod+c exec wl-copy < /dev/null
 
 ### Focus
     bindsym $mod+$left focus left

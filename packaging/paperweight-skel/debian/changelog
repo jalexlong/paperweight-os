@@ -1,3 +1,14 @@
+paperweight-skel (0.2.0-1) trixie; urgency=low
+
+  * Add 40-workspaces.conf: workspace assignments and app-launch keybinds.
+    $mod+[t/b/e/s/c/g] switches to workspace and launches app.
+    $mod+Shift+[t/b/e/s] opens floating variant on current workspace.
+    assign rules for firefox (ws2), discord/vesktop (ws5).
+    MOZ_APP_REMOTINGNAME trick for floating Firefox with distinct app_id.
+  * Remove $mod+c clipboard-clear binding; reassigned to chat (workspace 5).
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.1.9-1) trixie; urgency=low
 
   * 90-theme.conf: set solid Macchiato base color as sway background

@@ -31,8 +31,9 @@
       `packaging/paperweight-chromebook/`. Keyboard (1:1:AT_Translated_Set_2_keyboard)
       uses xkb_model "chromebook"; output (eDP-1) set to 1366x768@60Hz.
 
-- [ ] **`40-workspaces.conf`** — app-to-workspace assignments for Chromebook.
-      Needs user input on preferred layout before writing.
+- [x] **`40-workspaces.conf`** — workspace assignments and app-launch keybinds.
+      ws1 terminal, ws2 browser, ws3 helix, ws4 ncspot, ws5 chat, ws6 games.
+      Floating variants via $mod+Shift+key. helix/ncspot/cava added to deps.
 
 - [x] **brightnessctl udev rule** — 70-paperweight-backlight.rules grants
       video group write access to brightness sysfs on device discovery.
