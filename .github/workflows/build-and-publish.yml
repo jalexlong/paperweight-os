@@ -72,9 +72,15 @@ jobs:
             | base64 -d \
             | gpg --batch --yes --import \
                   --passphrase "$GPG_PASSPHRASE" --pinentry-mode loopback
+          # Pre-cache the passphrase in the agent so reprepro can sign
+          # without interactive prompting.
+          echo "$GPG_PASSPHRASE" \
+            | gpg --batch --yes --pinentry-mode loopback --passphrase-fd 0 \
+                  -u "$GPG_KEY_ID" --sign --output /dev/null /dev/null
         env:
           GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+          GPG_KEY_ID: A0A521F74780A014
 
       - name: Set up gh-pages worktree
         run: |
