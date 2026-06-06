@@ -138,7 +138,7 @@ lock screen). On the Chromebook, the top-row keys send these by default;
 
 | Package | Version | Description |
 |---|---|---|
-| `paperweight-skel` | 0.2.9 | Default configs installed to `/etc/skel/` |
+| `paperweight-skel` | 0.2.10 | Default configs installed to `/etc/skel/` |
 | `paperweight-desktop` | — | Metapackage: pulls in the full desktop stack |
 | `paperweight-fonts` | — | JetBrains Mono Nerd Font + Symbols Nerd Font |
 | `paperweight-chromebook` | 0.1.7 | Dell Chromebook 11 3180 hardware support |
