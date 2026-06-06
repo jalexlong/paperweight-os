@@ -1,3 +1,11 @@
+paperweight-desktop (0.1.6-1) trixie; urgency=low
+
+  * Fix Depends: correct helix → hx (Trixie package name).
+    Remove ncspot (not available in Trixie); install manually via cargo or
+    a third-party .deb if desired.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+
 paperweight-desktop (0.1.5-1) trixie; urgency=low
 
   * Add dconf-cli to Depends (required for gsettings dark mode enforcement)

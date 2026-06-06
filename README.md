@@ -29,7 +29,7 @@ Installing `paperweight-desktop` pulls in:
 
 **Media**
 - **cava** — audio visualizer (integrated into waybar)
-- **ncspot** — lightweight TUI Spotify client (requires Premium)
+- **ncspot** — lightweight TUI Spotify client (requires Premium) — *not in Trixie; install via `cargo install ncspot`*
 - **playerctl** — media key control
 
 **Development**
@@ -88,7 +88,7 @@ sudo apt install paperweight-chromebook
 | `Super+t` | Terminal (foot) — workspace 1 |
 | `Super+b` | Browser (Firefox) — workspace 2 |
 | `Super+e` | Editor (Helix) — workspace 3 |
-| `Super+s` | Music (ncspot) — workspace 4 |
+| `Super+s` | Music (ncspot) — workspace 4 — *ncspot must be installed manually* |
 | `Super+c` | Chat (Discord/Vesktop) — workspace 5 |
 | `Super+g` | Games — workspace 6 |
 | `Super+f` | Files (Thunar) |
