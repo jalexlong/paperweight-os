@@ -9,6 +9,7 @@
     "modules-left": [
         "cpu",
         "memory",
+        "custom/cava",
         "sway/mode",
         "sway/scratchpad"
     ],
@@ -29,6 +30,13 @@
         "battery",
         "clock"
     ],
+
+    "custom/cava": {
+        "exec": "$HOME/.local/bin/cava-waybar",
+        "return-type": "json",
+        "format": "{}",
+        "tooltip": false
+    },
 
     "cpu": {
         "interval": 5,

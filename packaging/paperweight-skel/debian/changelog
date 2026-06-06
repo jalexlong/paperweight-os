@@ -1,3 +1,14 @@
+paperweight-skel (0.2.1-1) trixie; urgency=low
+
+  * Add cava waybar visualizer module.
+    ~/.config/cava/waybar-config: 10 bars, 30fps, raw 8-bit output via pulse.
+    ~/.local/bin/cava-waybar: Python3 script mapping cava frames to Unicode
+    block characters and emitting waybar JSON.
+    waybar/config.jsonc: custom/cava in modules-left after memory.
+    macchiato-waybar.css: @teal pill with 11px font and 1px letter-spacing.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.2.0-1) trixie; urgency=low
 
   * Add 40-workspaces.conf: workspace assignments and app-launch keybinds.

@@ -89,6 +89,16 @@ window#waybar {
 #memory.warning { color: @yellow; }
 #memory.critical { color: @red; }
 
+#custom-cava {
+  color: @teal;
+  background-color: alpha(@surface0, 0.92);
+  border-radius: 1rem;
+  padding: 0.45rem 0.75rem;
+  margin: 5px 0.5rem;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
 #mode {
   color: @text;
   background-color: alpha(@overlay0, 0.92);

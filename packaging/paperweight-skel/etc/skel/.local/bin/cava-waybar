@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+"""Pipe cava raw output to waybar as Unicode bar characters."""
+
+import json
+import os
+import subprocess
+import sys
+
+BARS = 10
+BLOCKS = " ▁▂▃▄▅▆▇█"
+CONF = os.path.expanduser("~/.config/cava/waybar-config")
+
+proc = subprocess.Popen(
+    ["cava", "-p", CONF],
+    stdout=subprocess.PIPE,
+    stderr=subprocess.DEVNULL,
+)
+
+try:
+    while True:
+        frame = proc.stdout.read(BARS)
+        if len(frame) < BARS:
+            break
+        text = "".join(BLOCKS[b * 8 // 256] for b in frame)
+        print(json.dumps({"text": text}), flush=True)
+except (KeyboardInterrupt, BrokenPipeError):
+    pass
+finally:
+    proc.terminate()

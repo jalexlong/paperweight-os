@@ -4,6 +4,7 @@ set -e
 case "$1" in
     configure)
         dconf update
+        chmod +x /etc/skel/.local/bin/cava-waybar
 
         # Ensure new users created by adduser are placed in the video group
         # so brightnessctl works without sudo.
