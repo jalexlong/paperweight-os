@@ -1,3 +1,10 @@
+paperweight-skel (0.1.7-1) trixie; urgency=low
+
+  * Run xdg-user-dirs-update on session start so ~/Pictures, ~/Downloads
+    etc. exist before screenshot and other keybinds need them.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.1.6-1) trixie; urgency=low
 
   * Ship dconf system defaults for dark mode (prefer-dark via /etc/dconf/)

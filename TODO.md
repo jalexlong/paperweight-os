@@ -37,9 +37,8 @@
 - [ ] **brightnessctl udev rule** — add a udev rule or postinst so
       `brightnessctl` works without sudo. Users need to be in the `video` group.
 
-- [ ] **postinst for xdg-user-dirs** — run `xdg-user-dirs-update` on first
-      login so ~/Pictures/, ~/Downloads/ etc. exist (screenshot keybinds
-      write to ~/Pictures/).
+- [x] **xdg-user-dirs on session start** — `exec xdg-user-dirs-update` added
+      to 50-desktop-session.conf; runs as user on sway startup.
 
 ---
 
