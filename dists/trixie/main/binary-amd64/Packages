@@ -1,21 +1,25 @@
 Package: paperweight-chromebook
-Source: paperweight-desktop
-Version: 0.1.5-1
+Version: 0.1.6-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
-Installed-Size: 8
-Depends: paperweight-desktop, brightnessctl, acpi, acpid
+Installed-Size: 17
+Depends: paperweight-desktop, acpi, acpid
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
-Section: metapackages
-Filename: pool/main/p/paperweight-desktop/paperweight-chromebook_0.1.5-1_all.deb
-Size: 1790
-SHA256: 635eb31de13e66bef61f1247b907bc52c1f45b5fa127a86264990564831acc94
-SHA1: 47e526343f5705b8f7f46aa7bbd4a06caa6abb58
-MD5sum: 1e0dfae90177d7761c8b347db2d9c4f8
-Description: PaperweightOS extra dependencies for Chromebook hardware
- Optional add-on for machines running coreboot, providing Chromebook-specific
- keyboard mappings and power management quirks on top of the base desktop.
+Section: misc
+Filename: pool/main/p/paperweight-chromebook/paperweight-chromebook_0.1.6-1_all.deb
+Size: 2804
+SHA256: a6a1c6aadaa9d09ed22c814b94647ee54b496e1276975d599cafb4cb6487a5a8
+SHA1: 0b2f0a9e195406ff19848dc1d4878b44183a57e4
+MD5sum: 055241b77c581bcd50013e32951f3872
+Description: PaperweightOS hardware support for Chromebook 11 (3180)
+ Sway config fragments for the Dell Chromebook 11 3180 running coreboot.
+ Configures the Chromebook keyboard top-row as media/utility keys by default,
+ with Search+key sending F1-F10. Also sets the internal display (eDP-1) output
+ parameters explicitly.
+ .
+ Installs drop-in fragments into /etc/skel/.config/sway/config.d/ for
+ automatic composition with the base paperweight-skel configuration.
 
 Package: paperweight-desktop
 Version: 0.1.6-1
@@ -61,24 +65,24 @@ Description: PaperweightOS Nerd Fonts — JetBrains Mono and Symbols
  under the SIL Open Font License 1.1.
 
 Package: paperweight-skel
-Version: 0.2.3-1
+Version: 0.2.4-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
-Installed-Size: 78
+Installed-Size: 79
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.3-1_all.deb
-Size: 12850
-SHA256: 4c0a977df40a888a9223b9578e1c09b06a3a558ce6ec8412a8d72eb2faec15f0
-SHA1: a05cf1a66f39c91cc64d311aeda0edabb960fa66
-MD5sum: 5e6c4eeca032b4a8965466da5d308c1d
+Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.4-1_all.deb
+Size: 13402
+SHA256: 26d7ffb8849aa83d9baa02dbb2a9346eb285e4362983aa9da79bcb7318f8f5b4
+SHA1: aee3a5666d560ab5e878454798f8f2818a8818c7
+MD5sum: 92d109ddb35ef498152b9a89989d7255
 Description: PaperweightOS default configuration skeleton
  Provides default XDG configuration files for the PaperweightOS desktop,
  installed to /etc/skel so they are copied into new user home directories
  at account creation time.
  .
- Includes base configs for: sway, waybar, mako, wofi, and kitty.
+ Includes base configs for: sway, waybar, swaync, wofi, foot, gtklock, and cava.
  Hardware-specific fragments (e.g. Chromebook keys) ship in separate packages
  and are dropped into config.d/ directories for fragment-based composition.
 
