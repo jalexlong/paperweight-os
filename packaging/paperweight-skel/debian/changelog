@@ -1,3 +1,20 @@
+paperweight-skel (0.2.3-1) trixie; urgency=low
+
+  * Fix keybind conflicts introduced by 40-workspaces.conf:
+    $mod+Shift+c (sway reload) moved to $mod+Shift+r.
+    $mod+Shift+b (waybar restart) moved to $mod+Ctrl+w.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+
+paperweight-skel (0.2.3-1) trixie; urgency=low
+
+  * Fix keybind conflicts with 40-workspaces.conf:
+    sway reload moved from $mod+Shift+c to $mod+Shift+r.
+    waybar restart moved from $mod+Shift+b to $mod+Ctrl+w.
+  * Fix debian/copyright: correct license from GPL-3.0-or-later to MIT.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.2.2-1) trixie; urgency=low
 
   * waybar: update workspace 4 icon to music note (󰎵) to match its role.

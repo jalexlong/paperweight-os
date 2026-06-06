@@ -39,13 +39,13 @@ default_border pixel 2
 
 ### Session
     bindsym $mod+ctrl+l exec $lock
-    bindsym $mod+Shift+c reload
+    bindsym $mod+Shift+r reload
     bindsym $mod+Shift+q exec swaynag -t warning \
         -m 'Exit sway? This will end your Wayland session.' \
         -B 'Yes, exit' 'swaymsg exit'
 
 ### Utilities
-    bindsym $mod+Shift+b exec sh -c 'pkill -SIGUSR1 waybar || waybar'
+    bindsym $mod+ctrl+w exec sh -c 'pkill -SIGUSR1 waybar || waybar'
     bindsym $mod+Shift+n exec swaync-client --toggle-panel
 
 ### Focus
