@@ -8,7 +8,8 @@ This directory contains Debian source packages for PaperweightOS.
 |---|---|
 | `paperweight-desktop` | Metapackage — depends on the full desktop stack |
 | `paperweight-skel` | Ships config files into `/etc/skel/` for new users |
-| `paperweight-chromebook` | (planned) Chromebook hardware quirks |
+| `paperweight-fonts` | JetBrains Mono Nerd Font + Symbols Nerd Font |
+| `paperweight-chromebook` | Dell Chromebook 11 3180 hardware support |
 
 ## How Debian Packaging Works (Quick Primer)
 

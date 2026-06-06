@@ -19,7 +19,8 @@ paperweight-os/
 ├── packaging/
 │   ├── paperweight-skel/        # Ships /etc/skel configs; no binary deps
 │   ├── paperweight-desktop/     # Pure metapackage: Depends on full stack
-│   └── paperweight-chromebook/  # (TODO) Hardware add-on for Chromebook/coreboot
+│   ├── paperweight-fonts/       # JetBrains Mono Nerd Font + Symbols NF
+│   └── paperweight-chromebook/  # Hardware add-on for Chromebook/coreboot
 ├── apt-repo/
 │   └── conf/                    # reprepro config (SignWith key must be set)
 ├── publish.sh                   # Build all .debs → sign → push gh-pages
@@ -43,7 +44,8 @@ All configs use a `config.d/` drop-in model — no patching base files.
 Same pattern as `/etc/apt/apt.conf.d/`. Hardware packages drop fragments into:
 
 ```
-/etc/skel/.config/sway/config.d/10-chromebook-input.conf
+/etc/skel/.config/sway/config.d/20-keys.conf
+/etc/skel/.config/sway/config.d/50-chromebook-output.conf
 ```
 
 The base sway config ends with `include ~/.config/sway/config.d/*.conf`, so
@@ -80,21 +82,26 @@ sway/config                    — base keybindings, bar, includes
 sway/config.d/
   10-input.conf                — generic touchpad + keyboard tuning
   30-idle.conf                 — swayidle → gtklock (750s lock, 900s display off)
-  50-desktop-session.conf      — exec swaync
+  40-workspaces.conf           — workspace assignments + app-launch keybinds
+  50-desktop-session.conf      — exec swaync; xdg-user-dirs-update on start
   50-systemd-user.conf         — D-Bus / systemd user env import
-  90-theme.conf                — full Catppuccin Macchiato palette + float rules
+  90-theme.conf                — Catppuccin Macchiato palette, output bg, float rules
 waybar/
-  config.jsonc                 — modules: cpu+mem left, workspaces center, status right
+  config.jsonc                 — modules: cava+cpu+mem left, workspaces center, status right
   style.css                    — @import only; real styles in themes/
   themes/
     catppuccin-macchiato.css   — @define-color variables (the palette)
     macchiato-waybar.css       — actual module styles referencing those variables
+cava/
+  waybar-config                — cava visualizer: 10 bars, raw 8-bit output via pulse
 swaync/
   config.json                  — notification center layout + widgets
   style.css                    — Macchiato-themed notification + panel CSS
 wofi/style.css                 — launcher styles using @define-color variables
 gtklock/style.css              — lock screen: Macchiato, clock, pill entry
 foot/foot.ini                  — terminal: Macchiato colors, JetBrainsMono NF 11pt
+.local/bin/
+  cava-waybar                  — Python3: pipes cava frames → waybar JSON (Unicode blocks)
 ```
 
 ### Adding a new theme
@@ -109,14 +116,21 @@ The theme switcher (future) will automate steps 3–5.
 
 ---
 
-## Sway Keybindings (base)
+## Sway Keybindings
+
+App-launch bindings (from `40-workspaces.conf`) switch to the workspace and open the app.
+`$mod+Shift+key` opens the same app as a floating window.
 
 | Binding | Action |
 |---|---|
-| `$mod+t` | Terminal (foot) |
+| `$mod+t` | Terminal (foot) → workspace 1 |
 | `$mod+Return` | Terminal (foot) — alias |
 | `$mod+Shift+Return` | Floating terminal |
-| `$mod+b` | Browser (qutebrowser) |
+| `$mod+b` | Browser (firefox-esr) → workspace 2 |
+| `$mod+e` | Editor (helix) → workspace 3 |
+| `$mod+s` | Music (ncspot) → workspace 4 |
+| `$mod+c` | Chat (discord/vesktop) → workspace 5 |
+| `$mod+g` | Games → workspace 6 |
 | `$mod+f` | Files (thunar) |
 | `$mod+d` | App launcher (wofi) |
 | `$mod+q` | Kill window |
@@ -124,9 +138,9 @@ The theme switcher (future) will automate steps 3–5.
 | `$mod+m` | Fullscreen |
 | `$mod+F5` | Toggle layout (tabbed / splith) |
 | `$mod+Ctrl+l` | Lock (gtklock) |
+| `$mod+Shift+r` | Reload sway config |
 | `$mod+Shift+n` | Toggle notification center |
-| `$mod+Shift+b` | Restart waybar |
-| `$mod+Shift+c` | Reload sway config |
+| `$mod+Ctrl+w` | Restart waybar |
 | `$mod+r` | Resize mode |
 | `Print` | Screenshot → ~/Pictures/ |
 | `$mod+Print` | Region screenshot |
@@ -162,23 +176,19 @@ sudo apt update && sudo apt install paperweight-desktop
 
 ## Known Issues / Watchpoints
 
-- **Nerd Font**: `fonts-jetbrains-mono` (Debian package) is NOT the Nerd Font variant.
-  Waybar and terminal icons require JetBrainsMono Nerd Font. This needs to be
-  packaged separately or installed via another source. Without it, icon glyphs
-  show as blank boxes. **This is the #1 blocking issue for a working install.**
+- **paperweight-wallpapers**: No wallpaper package yet. `90-theme.conf` sets
+  `output * bg $base solid_color` as a fallback. A future `paperweight-wallpapers`
+  package will provide `/usr/share/paperweight-os/wallpapers/` and override this.
 
-- **Wallpaper**: `sway/config` references `/usr/share/paperweight-os/wallpapers/default.jpg`.
-  This path doesn't exist yet — needs a `paperweight-wallpapers` package.
-  Until then, sway falls back to a solid color background.
+- **ncspot / helix in Trixie**: These are added to `paperweight-desktop` Depends
+  but haven't been verified in the Trixie repos yet. Run `apt-cache show ncspot helix`
+  before publishing. If absent, they need a separate source or removal from Depends.
 
-- **brightnessctl**: Requires user to be in the `video` group, or a udev rule must
-  grant access. Add a postinst script to `paperweight-skel` or document in setup.
+- **Discord / Vesktop**: Not in Debian repos — must be installed manually as a `.deb`
+  from discord.com/download or vencord.dev. The `$mod+Shift+c` floating variant uses
+  a `sleep 2` hack to wait for the window before floating it; timing may need tuning
+  on slow hardware.
 
-- **gtklock in Trixie**: Confirm `apt-cache show gtklock` before building the
-  final package. If unavailable, fall back to swaylock with the Macchiato config
-  from `.dotfiles/chromebook/.config/swaylock/config`.
-
-- **paperweight-chromebook package**: Stubbed in `paperweight-desktop` control file
-  but not yet built as its own source package. Configs to pull from
-  `.dotfiles` `chromebook-optimizations` branch: `20-keys.conf`, `40-workspaces.conf`,
-  and a chromebook-specific output fragment.
+- **existing users and `video` group**: The postinst patches `/etc/adduser.conf` so
+  new users land in the `video` group for brightnessctl. Users who already exist at
+  install time need a manual `usermod -aG video $USER`.
