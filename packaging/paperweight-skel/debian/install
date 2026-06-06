@@ -18,4 +18,9 @@ etc/dconf/profile/user                                    etc/dconf/profile/
 etc/skel/.config/cava/waybar-config                       etc/skel/.config/cava/
 etc/skel/.local/bin/cava-waybar                           etc/skel/.local/bin/
 etc/skel/.local/bin/sway-wait-float                       etc/skel/.local/bin/
+etc/skel/.local/bin/paperweight-theme                     etc/skel/.local/bin/
+etc/skel/.config/sway/config.d/90-colors.conf             etc/skel/.config/sway/config.d/
+etc/skel/.config/sway/themes/                             etc/skel/.config/sway/
+etc/skel/.config/swaync/themes/                           etc/skel/.config/swaync/
+etc/skel/.config/gtklock/themes/                          etc/skel/.config/gtklock/
 usr/lib/udev/rules.d/70-paperweight-backlight.rules       usr/lib/udev/rules.d/

@@ -120,6 +120,7 @@ Add `Shift` to open as a floating window instead: `Super+Shift+t`, `Super+Shift+
 | `Super+Ctrl+L` | Lock screen (gtklock) |
 | `Super+Shift+R` | Reload sway config |
 | `Super+Ctrl+W` | Restart waybar |
+| `Super+p` | Theme picker (wofi) |
 | `Super+Shift+N` | Toggle notification center |
 | `Super+Shift+Q` | Exit sway |
 | `Print` | Screenshot → ~/Pictures/ |

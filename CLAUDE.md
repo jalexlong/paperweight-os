@@ -106,13 +106,24 @@ foot/foot.ini                  — terminal: Macchiato colors, JetBrainsMono NF 
 
 ### Adding a new theme
 
-1. Add `themes/<name>-palette.css` with `@define-color` overrides
-2. Add `themes/<name>-waybar.css` (or reuse `macchiato-waybar.css` if structure matches)
-3. Update `waybar/style.css` imports
-4. Add matching swaync and gtklock CSS
-5. Update `90-theme.conf` color variables
+Per-theme files live in four directories under `~/.config/`:
 
-The theme switcher (future) will automate steps 3–5.
+| File | Purpose |
+|---|---|
+| `sway/themes/<name>.conf` | `set $var #hex` color variables for sway |
+| `waybar/themes/<name>-palette.css` | `@define-color` CSS variables for waybar |
+| `waybar/themes/<name>-waybar.css` | waybar module styles (can reuse `macchiato-waybar.css` for Catppuccin variants) |
+| `swaync/themes/<name>.css` | swaync notification + panel CSS |
+| `gtklock/themes/<name>.css` | gtklock screen-locker CSS |
+
+To add a theme:
+1. Create the five files above under `packaging/paperweight-skel/etc/skel/`
+2. Run `paperweight-theme <name>` to activate it
+
+`~/.local/bin/paperweight-theme` handles activation: copies palette to
+`sway/config.d/90-colors.conf`, writes `waybar/style.css` imports, copies
+swaync/gtklock CSS, then reloads sway, waybar, and swaync.
+`$mod+p` opens the wofi theme picker.
 
 ---
 

@@ -1,0 +1,57 @@
+#!/bin/sh
+# Apply a PaperweightOS color theme atomically.
+# Usage: paperweight-theme [<name>]
+#
+# Theme files live in:
+#   ~/.config/sway/themes/<name>.conf          ← sway color variables
+#   ~/.config/waybar/themes/<name>-palette.css ← CSS @define-color palette
+#   ~/.config/waybar/themes/<name>-waybar.css  ← waybar module styles
+#   ~/.config/swaync/themes/<name>.css
+#   ~/.config/gtklock/themes/<name>.css
+#
+# With no argument, prompts via wofi.
+
+SWAY_THEMES="$HOME/.config/sway/themes"
+WAYBAR_THEMES="$HOME/.config/waybar/themes"
+SWAYNC_THEMES="$HOME/.config/swaync/themes"
+GTKLOCK_THEMES="$HOME/.config/gtklock/themes"
+
+list_themes() {
+    for f in "$SWAY_THEMES"/*.conf; do
+        [ -f "$f" ] || continue
+        basename "$f" .conf
+    done
+}
+
+if [ -n "$1" ]; then
+    THEME="$1"
+else
+    THEME=$(list_themes | wofi --dmenu --prompt "Theme:" --lines 8)
+fi
+
+[ -z "$THEME" ] && exit 0
+
+if [ ! -f "$SWAY_THEMES/$THEME.conf" ]; then
+    notify-send -u critical "paperweight-theme" "Unknown theme: $THEME"
+    exit 1
+fi
+
+# Apply sway color variables
+cp "$SWAY_THEMES/$THEME.conf" "$HOME/.config/sway/config.d/90-colors.conf"
+
+# Apply waybar palette + module styles
+printf '@import url("./themes/%s-palette.css");\n@import url("./themes/%s-waybar.css");\n' \
+    "$THEME" "$THEME" > "$HOME/.config/waybar/style.css"
+
+# Apply swaync and gtklock
+cp "$SWAYNC_THEMES/$THEME.css"  "$HOME/.config/swaync/style.css"
+cp "$GTKLOCK_THEMES/$THEME.css" "$HOME/.config/gtklock/style.css"
+
+# Record active theme
+mkdir -p "$HOME/.config/paperweight-os"
+printf '%s\n' "$THEME" > "$HOME/.config/paperweight-os/active-theme"
+
+# Reload: sway first (color vars), then waybar, then swaync
+swaymsg reload
+pkill -x waybar 2>/dev/null; waybar &
+swaync-client -rs 2>/dev/null || { pkill -x swaync 2>/dev/null; swaync & }

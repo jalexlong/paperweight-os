@@ -60,9 +60,9 @@
 
 ## Polish / Roadmap
 
-- [ ] **Theme switcher** — script that swaps `waybar/style.css` imports,
-      `90-theme.conf` colors, `swaync/style.css`, and `gtklock/style.css`
-      atomically. Triggered via wofi or a keybind.
+- [x] **Theme switcher** — `~/.local/bin/paperweight-theme` applies a named
+      theme atomically: sway colors, waybar imports, swaync CSS, gtklock CSS.
+      Prompts via wofi with no args. Bound to `$mod+p`.
 
 - [ ] **Additional themes** — Catppuccin Latte (light), Rosé Pine, Gruvbox Material.
 

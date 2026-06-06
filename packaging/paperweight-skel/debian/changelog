@@ -1,3 +1,20 @@
+paperweight-skel (0.2.5-1) trixie; urgency=low
+
+  * Add theme switcher infrastructure:
+    - 90-theme.conf split: color variables extracted to 90-colors.conf
+      (managed by switcher); 90-theme.conf retains structural settings.
+    - sway/themes/macchiato.conf: Macchiato palette as the first named theme.
+    - swaync/themes/macchiato.css, gtklock/themes/macchiato.css: per-theme
+      stylesheets matching the existing active stylesheets.
+    - waybar/themes/catppuccin-macchiato.css renamed to macchiato-palette.css
+      for consistent <name>-palette.css / <name>-waybar.css naming.
+  * Add ~/.local/bin/paperweight-theme: applies a named theme by copying
+    palette/style files and reloading sway, waybar, and swaync atomically.
+    Prompts via wofi when called with no argument.
+  * 40-workspaces.conf: bind $mod+p to paperweight-theme.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.2.4-1) trixie; urgency=low
 
   * Fix debian/control description: update component list from
