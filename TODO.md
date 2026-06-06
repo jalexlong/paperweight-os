@@ -43,6 +43,18 @@
 - [x] **xdg-user-dirs on session start** — `exec xdg-user-dirs-update` added
       to 50-desktop-session.conf; runs as user on sway startup.
 
+- [ ] **Publish updated packages** — new packages (paperweight-chromebook,
+      skel 0.2.3) need `bash publish.sh` run on the dev laptop with the GPG key.
+      Requires: `sudo apt install debhelper reprepro` if not already present.
+
+- [ ] **Verify ncspot, helix, cava in Trixie** — added to paperweight-desktop
+      Depends but not confirmed in repos. Run `apt-cache show ncspot helix cava`
+      before publishing. Remove from Depends if absent.
+
+- [ ] **Discord/Vesktop floating hack** — `$mod+Shift+c` uses `sleep 2` before
+      applying floating via swaymsg. Replace with a polling script that waits
+      for the window to appear. May need longer sleep on slow hardware.
+
 ---
 
 ## Polish / Roadmap
