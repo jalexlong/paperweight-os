@@ -1,0 +1,7 @@
+paperweight-wallpapers (0.1.0-1) trixie; urgency=low
+
+  * Initial release. Solid-color wallpapers for Catppuccin Latte, Frappé,
+    Macchiato, and Mocha. Includes 91-wallpaper.conf skel fragment to apply
+    the active theme's wallpaper on session start and sway reload.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000

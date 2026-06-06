@@ -67,14 +67,18 @@
 - [x] **Catppuccin Latte** — light theme, all five files wired up.
 - [ ] **Additional themes** — Rosé Pine, Gruvbox Material.
 
-- [ ] **`paperweight-wallpapers` package** — curated wallpapers in
-      `/usr/share/paperweight-os/wallpapers/`. Default referenced in sway config.
+- [x] **`paperweight-wallpapers` package** — solid-color Catppuccin wallpapers
+      (Latte, Frappé, Macchiato, Mocha) in `/usr/share/paperweight-os/wallpapers/`.
+      Includes `91-wallpaper.conf` skel fragment; `paperweight-theme` applies
+      wallpaper immediately via swaymsg when the package is installed.
 
 - [ ] **Plymouth splash** — Macchiato-themed boot splash.
 
 - [ ] **GRUB theme** — match Macchiato palette.
 
-- [ ] **Preseed file** — unattended Debian installer config for one-shot installs.
+- [x] **Preseed file** — `preseed/paperweight.cfg`: automates a Trixie install,
+      then adds the PaperweightOS apt repo and installs `paperweight-desktop`
+      via `late_command`. Customize disk, locale, and password before use.
 
 - [x] **CI via GitHub Actions** — `.github/workflows/build-and-publish.yml` builds
       all packages on every push/PR; publishes to `gh-pages` on push to `main`

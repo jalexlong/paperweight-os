@@ -138,10 +138,11 @@ lock screen). On the Chromebook, the top-row keys send these by default;
 
 | Package | Version | Description |
 |---|---|---|
-| `paperweight-skel` | 0.2.3 | Default configs installed to `/etc/skel/` |
+| `paperweight-skel` | 0.2.8 | Default configs installed to `/etc/skel/` |
 | `paperweight-desktop` | — | Metapackage: pulls in the full desktop stack |
 | `paperweight-fonts` | — | JetBrains Mono Nerd Font + Symbols Nerd Font |
-| `paperweight-chromebook` | 0.1.0 | Dell Chromebook 11 3180 hardware support |
+| `paperweight-chromebook` | 0.1.7 | Dell Chromebook 11 3180 hardware support |
+| `paperweight-wallpapers` | 0.1.0 | Catppuccin wallpapers (Latte/Frappé/Macchiato/Mocha) |
 
 ---
 
@@ -158,6 +159,22 @@ dpkg-buildpackage -us -uc -b
 bash setup-gpg.sh   # one-time: generate your GPG signing key
 bash publish.sh
 ```
+
+---
+
+## Automated Install (Preseed)
+
+`preseed/paperweight.cfg` automates a Debian Trixie install and bootstraps the desktop:
+
+1. Edit the file — set `partman-auto/disk`, locale, timezone, and the password hash.
+2. Boot a Debian Trixie netinstall ISO with the preseed file on a USB stick:
+   ```
+   auto=true priority=critical file=/cdrom/preseed.cfg
+   ```
+   Or serve it over HTTP and pass `url=http://<server>/paperweight.cfg`.
+
+The `late_command` adds the PaperweightOS apt repo and runs
+`apt-get install -y paperweight-desktop` inside the target system.
 
 ---
 
