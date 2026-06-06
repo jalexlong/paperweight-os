@@ -1,3 +1,13 @@
+paperweight-skel (0.2.6-1) trixie; urgency=low
+
+  * Add Catppuccin Latte theme (light variant):
+    sway/themes/latte.conf, waybar/themes/latte-palette.css,
+    waybar/themes/latte-waybar.css, swaync/themes/latte.css,
+    gtklock/themes/latte.css.
+    Activate with: paperweight-theme latte
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.2.5-1) trixie; urgency=low
 
   * Add theme switcher infrastructure:

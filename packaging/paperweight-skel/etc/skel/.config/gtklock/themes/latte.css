@@ -1,0 +1,56 @@
+/* Catppuccin Latte */
+
+window {
+    background-color: #eff1f5;
+}
+
+#clock-label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 72px;
+    font-weight: bold;
+    color: #4c4f69;
+    margin-bottom: 8px;
+}
+
+#date-label {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 16px;
+    color: #6c6f85;
+    margin-bottom: 32px;
+}
+
+entry {
+    background-color: #ccd0da;
+    color: #4c4f69;
+    border: 2px solid #bcc0cc;
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 14px;
+    caret-color: #1e66f5;
+}
+
+entry:focus {
+    border-color: #1e66f5;
+}
+
+#error-label {
+    color: #d20f39;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+button {
+    background-color: #1e66f5;
+    color: #eff1f5;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 20px;
+    font-family: "JetBrains Mono", monospace;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #7287fd;
+}

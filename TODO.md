@@ -64,7 +64,8 @@
       theme atomically: sway colors, waybar imports, swaync CSS, gtklock CSS.
       Prompts via wofi with no args. Bound to `$mod+p`.
 
-- [ ] **Additional themes** — Catppuccin Latte (light), Rosé Pine, Gruvbox Material.
+- [x] **Catppuccin Latte** — light theme, all five files wired up.
+- [ ] **Additional themes** — Rosé Pine, Gruvbox Material.
 
 - [ ] **`paperweight-wallpapers` package** — curated wallpapers in
       `/usr/share/paperweight-os/wallpapers/`. Default referenced in sway config.

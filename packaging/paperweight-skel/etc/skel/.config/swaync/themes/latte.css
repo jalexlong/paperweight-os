@@ -1,0 +1,222 @@
+/* PaperweightOS swaync theme — Catppuccin Latte */
+
+* {
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 13px;
+}
+
+/* ── Notification toasts ──────────────────────────────── */
+
+.notification-row {
+  outline: none;
+  margin: 4px;
+}
+
+.notification-row:focus,
+.notification-row:hover {
+  background: transparent;
+}
+
+.notification {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+}
+
+.notification-background {
+  background-color: #eff1f5;
+  border: 1px solid #bcc0cc;
+  border-radius: 10px;
+  padding: 8px;
+  margin: 4px;
+}
+
+.notification-background:hover {
+  background-color: #e6e8ef;
+}
+
+.close-button {
+  background: #ccd0da;
+  color: #4c4f69;
+  border-radius: 5px;
+  padding: 2px;
+  margin: 4px;
+}
+
+.close-button:hover {
+  background: #d20f39;
+  color: #eff1f5;
+}
+
+.notification-default-action {
+  background: transparent;
+  border-radius: 8px;
+  padding: 0;
+  margin: 0;
+}
+
+.notification-default-action:hover {
+  background: #ccd0da;
+}
+
+.notification-content {
+  background: transparent;
+  padding: 4px;
+  border-radius: 8px;
+}
+
+.notification-icon {
+  margin: 8px;
+}
+
+.notification-header {
+  padding: 0;
+  color: #6c6f85;
+}
+
+.app-name {
+  font-weight: bold;
+  color: #7287fd;
+}
+
+.notification-summary {
+  color: #4c4f69;
+  font-weight: bold;
+}
+
+.notification-body {
+  color: #6c6f85;
+}
+
+.notification-time {
+  color: #9ca0b0;
+  font-size: 11px;
+}
+
+.notification-action {
+  background: #ccd0da;
+  color: #4c4f69;
+  border-radius: 6px;
+  margin: 2px;
+  padding: 4px 10px;
+}
+
+.notification-action:hover {
+  background: #1e66f5;
+  color: #eff1f5;
+}
+
+/* ── Urgency variants ─────────────────────────────────── */
+
+.notification-background.low {
+  border-color: #9ca0b0;
+}
+
+.notification-background.normal {
+  border-color: #8839ef;
+}
+
+.notification-background.critical {
+  border-color: #d20f39;
+}
+
+/* ── Control center panel ─────────────────────────────── */
+
+.control-center {
+  background-color: #e6e8ef;
+  border: 1px solid #ccd0da;
+  border-radius: 0 0 0 12px;
+  padding: 8px;
+  color: #4c4f69;
+}
+
+.control-center-list {
+  background: transparent;
+}
+
+.control-center-list-placeholder {
+  color: #9ca0b0;
+  font-size: 13px;
+}
+
+/* ── Widget: label / header ───────────────────────────── */
+
+.widget-label {
+  margin: 8px 4px 4px;
+}
+
+.widget-label > label {
+  font-size: 15px;
+  font-weight: bold;
+  color: #4c4f69;
+}
+
+.widget-label > button {
+  background: #ccd0da;
+  color: #6c6f85;
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-size: 12px;
+}
+
+.widget-label > button:hover {
+  background: #d20f39;
+  color: #eff1f5;
+}
+
+/* ── Widget: mpris ────────────────────────────────────── */
+
+.widget-mpris {
+  background: #eff1f5;
+  border: 1px solid #ccd0da;
+  border-radius: 10px;
+  margin: 4px;
+  padding: 8px;
+}
+
+.widget-mpris-album-art {
+  border-radius: 8px;
+}
+
+.widget-mpris-title {
+  font-weight: bold;
+  color: #4c4f69;
+}
+
+.widget-mpris-subtitle {
+  color: #6c6f85;
+}
+
+/* ── Widget: volume / backlight ───────────────────────── */
+
+.widget-volume,
+.widget-backlight {
+  background: #eff1f5;
+  border: 1px solid #ccd0da;
+  border-radius: 10px;
+  margin: 4px;
+  padding: 8px 12px;
+  color: #4c4f69;
+}
+
+scale trough {
+  background: #ccd0da;
+  border-radius: 4px;
+  min-height: 6px;
+}
+
+scale highlight {
+  background: #1e66f5;
+  border-radius: 4px;
+}
+
+/* ── Widget: inhibitors ───────────────────────────────── */
+
+.widget-inhibitors {
+  background: #eff1f5;
+  border: 1px solid #ccd0da;
+  border-radius: 10px;
+  margin: 4px;
+  padding: 8px 12px;
+  color: #6c6f85;
+}
