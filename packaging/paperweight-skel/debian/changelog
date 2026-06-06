@@ -1,3 +1,9 @@
+paperweight-skel (0.2.2-1) trixie; urgency=low
+
+  * waybar: update workspace 4 icon to music note (󰎵) to match its role.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.2.1-1) trixie; urgency=low
 
   * Add cava waybar visualizer module.
