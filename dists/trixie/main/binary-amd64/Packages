@@ -1,5 +1,5 @@
 Package: paperweight-chromebook
-Version: 0.1.6-1
+Version: 0.1.7-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
 Installed-Size: 17
@@ -7,11 +7,11 @@ Depends: paperweight-desktop, acpi, acpid
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-chromebook/paperweight-chromebook_0.1.6-1_all.deb
-Size: 2804
-SHA256: a6a1c6aadaa9d09ed22c814b94647ee54b496e1276975d599cafb4cb6487a5a8
-SHA1: 0b2f0a9e195406ff19848dc1d4878b44183a57e4
-MD5sum: 055241b77c581bcd50013e32951f3872
+Filename: pool/main/p/paperweight-chromebook/paperweight-chromebook_0.1.7-1_all.deb
+Size: 2836
+SHA256: 43ad2a9253a8c4b6861535dabd71f76ba369ca8d15e1faad96cf050d1498b0b2
+SHA1: ac0c23082068d66763b854e5a4c27a454f62fc0c
+MD5sum: 766a0a78f159b342c2f6b6dff07e4794
 Description: PaperweightOS hardware support for Chromebook 11 (3180)
  Sway config fragments for the Dell Chromebook 11 3180 running coreboot.
  Configures the Chromebook keyboard top-row as media/utility keys by default,
@@ -65,18 +65,18 @@ Description: PaperweightOS Nerd Fonts — JetBrains Mono and Symbols
  under the SIL Open Font License 1.1.
 
 Package: paperweight-skel
-Version: 0.2.4-1
+Version: 0.2.5-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
-Installed-Size: 79
+Installed-Size: 93
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.4-1_all.deb
-Size: 13402
-SHA256: 26d7ffb8849aa83d9baa02dbb2a9346eb285e4362983aa9da79bcb7318f8f5b4
-SHA1: aee3a5666d560ab5e878454798f8f2818a8818c7
-MD5sum: 92d109ddb35ef498152b9a89989d7255
+Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.5-1_all.deb
+Size: 14598
+SHA256: 087d0084c81759eb1108f2e1d482a570103643189fd3ea795f9f356994844ac0
+SHA1: a252e9ea588b7209a90967bcb42602350c2ba941
+MD5sum: 5894739a45932545719c480f12f5480e
 Description: PaperweightOS default configuration skeleton
  Provides default XDG configuration files for the PaperweightOS desktop,
  installed to /etc/skel so they are copied into new user home directories
