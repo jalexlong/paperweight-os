@@ -59,6 +59,7 @@ user-local fragments also work without modifying the skel defaults.
 |---|---|---|
 | Base distro | Debian Stable (Trixie) | Stability over features |
 | Compositor | Sway (Wayland) | Lightweight, keyboard-driven |
+| Display manager | greetd + gtkgreet | Wayland-native, GTK4, CSS-themed; same pattern as gtklock |
 | Screen locker | gtklock | Better GTK CSS theming than swaylock |
 | Notification daemon | sway-notification-center (swaync) | Notification center panel, more usable than mako |
 | Browser | Firefox ESR | GTK3, first-class Wayland support, reliable |

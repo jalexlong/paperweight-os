@@ -1,0 +1,9 @@
+#!/bin/sh
+# Sets the active gtkgreet CSS theme. Invoked via sudo from paperweight-theme.
+THEME="${1:?Usage: paperweight-set-greeter-theme <theme>}"
+SRC="/etc/greetd/themes/$THEME.css"
+if [ ! -f "$SRC" ]; then
+    echo "paperweight-set-greeter-theme: unknown theme: $THEME" >&2
+    exit 1
+fi
+cp "$SRC" /etc/greetd/gtkgreet.css

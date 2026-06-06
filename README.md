@@ -17,6 +17,7 @@ no custom ISO required.
 Installing `paperweight-desktop` pulls in:
 
 **Desktop**
+- **greetd + gtkgreet** — minimal Wayland login manager with GTK4 greeter; themed to match the active Catppuccin variant
 - **Sway** — tiling Wayland compositor
 - **Waybar** — status bar: CPU/memory, audio visualizer, workspace icons, battery, clock
 - **sway-notification-center** — notification daemon with slide-out panel
@@ -138,8 +139,8 @@ lock screen). On the Chromebook, the top-row keys send these by default;
 
 | Package | Version | Description |
 |---|---|---|
-| `paperweight-skel` | 0.2.10 | Default configs installed to `/etc/skel/` |
-| `paperweight-desktop` | — | Metapackage: pulls in the full desktop stack |
+| `paperweight-skel` | 0.2.11 | Default configs installed to `/etc/skel/` |
+| `paperweight-desktop` | 0.1.7 | Metapackage: pulls in the full desktop stack |
 | `paperweight-fonts` | — | JetBrains Mono Nerd Font + Symbols Nerd Font |
 | `paperweight-chromebook` | 0.1.7 | Dell Chromebook 11 3180 hardware support |
 | `paperweight-wallpapers` | 0.1.0 | Catppuccin wallpapers (Latte/Frappé/Macchiato/Mocha) |

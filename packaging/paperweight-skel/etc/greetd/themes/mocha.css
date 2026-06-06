@@ -1,0 +1,70 @@
+* {
+    color: #cdd6f4;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 14px;
+}
+
+window {
+    background-color: #1e1e2e;
+}
+
+box#body {
+    background-color: #181825;
+    border: 1px solid #313244;
+    border-radius: 12px;
+    padding: 40px 48px;
+    min-width: 360px;
+}
+
+label#clock {
+    color: #cdd6f4;
+    font-size: 42px;
+    font-weight: bold;
+    margin-bottom: 24px;
+}
+
+label {
+    color: #bac2de;
+    margin-bottom: 4px;
+}
+
+entry {
+    background-color: #313244;
+    border: 1px solid #45475a;
+    border-radius: 8px;
+    color: #cdd6f4;
+    padding: 10px 14px;
+    margin-bottom: 12px;
+    caret-color: #89b4fa;
+}
+
+entry:focus {
+    border-color: #89b4fa;
+}
+
+button {
+    background-color: #89b4fa;
+    border: none;
+    border-radius: 8px;
+    color: #1e1e2e;
+    padding: 10px;
+    font-weight: bold;
+    margin-top: 8px;
+}
+
+button:hover {
+    background-color: #b4befe;
+}
+
+button:active {
+    background-color: #74c7ec;
+}
+
+combobox button {
+    background-color: #313244;
+    border: 1px solid #45475a;
+    color: #cdd6f4;
+    margin-top: 0px;
+    margin-bottom: 12px;
+    font-weight: normal;
+}

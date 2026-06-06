@@ -6,7 +6,9 @@ case "$1" in
         dconf update
         chmod +x /etc/skel/.local/bin/cava-waybar \
                  /etc/skel/.local/bin/paperweight-theme \
-                 /etc/skel/.local/bin/sway-wait-float
+                 /etc/skel/.local/bin/sway-wait-float \
+                 /usr/bin/paperweight-set-greeter-theme
+        chmod 0440 /etc/sudoers.d/paperweight-greeter
 
         # Apply skel configs to the real user on fresh install (not upgrade).
         # $SUDO_USER is set when running interactive `sudo apt install`.

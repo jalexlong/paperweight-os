@@ -55,6 +55,9 @@ printf '%s\n' "$THEME" > "$HOME/.config/paperweight-os/active-theme"
 WP="/usr/share/paperweight-os/wallpapers/$THEME.png"
 [ -f "$WP" ] && swaymsg "output * bg $WP fill"
 
+# Update gtkgreet login screen theme (requires sudo; skips silently if unavailable)
+sudo paperweight-set-greeter-theme "$THEME" 2>/dev/null || true
+
 # Reload: sway first (color vars), then waybar, then swaync
 swaymsg reload
 pkill -x waybar 2>/dev/null; waybar &

@@ -1,3 +1,17 @@
+paperweight-skel (0.2.11-1) trixie; urgency=low
+
+  * Add greetd/gtkgreet login screen theming:
+    - /etc/greetd/config.toml: launches gtkgreet with CSS on vt1.
+    - /etc/greetd/gtkgreet.css: active theme CSS (default: macchiato).
+    - /etc/greetd/themes/{macchiato,mocha,frappe,latte}.css: per-theme GTK CSS.
+    - /usr/bin/paperweight-set-greeter-theme: root helper for theme switching.
+    - /etc/sudoers.d/paperweight-greeter: allows %sudo to call helper
+      without password so paperweight-theme can update the login screen.
+  * paperweight-theme: call paperweight-set-greeter-theme via sudo on switch.
+  * postinst: chmod 0440 sudoers file; chmod +x greeter theme helper.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.2.10-1) trixie; urgency=low
 
   * postinst: on fresh install, copy skel configs to the real user's home

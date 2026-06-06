@@ -24,3 +24,8 @@ etc/skel/.config/sway/themes/                             etc/skel/.config/sway/
 etc/skel/.config/swaync/themes/                           etc/skel/.config/swaync/
 etc/skel/.config/gtklock/themes/                          etc/skel/.config/gtklock/
 usr/lib/udev/rules.d/70-paperweight-backlight.rules       usr/lib/udev/rules.d/
+etc/greetd/config.toml                                    etc/greetd/
+etc/greetd/gtkgreet.css                                   etc/greetd/
+etc/greetd/themes/                                        etc/greetd/
+etc/sudoers.d/paperweight-greeter                         etc/sudoers.d/
+usr/bin/paperweight-set-greeter-theme                     usr/bin/

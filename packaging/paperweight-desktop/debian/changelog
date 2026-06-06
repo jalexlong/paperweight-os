@@ -1,3 +1,9 @@
+paperweight-desktop (0.1.7-1) trixie; urgency=low
+
+  * Add greetd and gtkgreet to Depends for the login screen.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+
 paperweight-desktop (0.1.6-1) trixie; urgency=low
 
   * Fix Depends: correct helix → hx (Trixie package name).

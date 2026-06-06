@@ -1,0 +1,3 @@
+# Allow sudo-group users to switch the gtkgreet login screen theme
+# without a password. The helper only copies from /etc/greetd/themes/.
+%sudo ALL=(root) NOPASSWD: /usr/bin/paperweight-set-greeter-theme

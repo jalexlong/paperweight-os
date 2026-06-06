@@ -75,6 +75,11 @@
       Includes `91-wallpaper.conf` skel fragment; `paperweight-theme` applies
       wallpaper immediately via swaymsg when the package is installed.
 
+- [x] **Display manager** — greetd + gtkgreet; GTK4 greeter themed with
+      Catppuccin CSS. `/etc/greetd/themes/` holds per-variant CSS files.
+      `paperweight-theme` updates the login screen via a sudoers-gated
+      helper (`paperweight-set-greeter-theme`) on every theme switch.
+
 - [ ] **Plymouth splash** — Macchiato-themed boot splash.
 
 - [ ] **GRUB theme** — match Macchiato palette.
