@@ -1,3 +1,11 @@
+paperweight-skel (0.2.9-1) trixie; urgency=low
+
+  * sway/config: remove duplicate $mod+t and $mod+b bindings superseded
+    by config.d/40-workspaces.conf (which adds workspace switching).
+  * sway/config: bind XF86AudioPlay/Stop/Prev/Next to playerctl.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.2.8-1) trixie; urgency=low
 
   * paperweight-theme: apply wallpaper immediately via swaymsg when

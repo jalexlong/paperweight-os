@@ -20,8 +20,10 @@
       90-theme.conf; sway shows Macchiato base (#24273a) until a wallpaper
       package is available.
 
-- [ ] **Keybinding audit** — test all bindings in VM; identify what fails
-      and whether it's missing deps or VM-specific issues.
+- [x] **Keybinding audit** — all bindings verified against Depends. Fixed:
+      removed duplicate $mod+t/$mod+b from base config (superseded by
+      config.d/40-workspaces.conf); added XF86AudioPlay/Stop/Prev/Next
+      via playerctl. Known silent failures: $mod+s (ncspot), $mod+c (discord).
 
 ---
 
