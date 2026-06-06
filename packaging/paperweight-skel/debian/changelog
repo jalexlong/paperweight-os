@@ -1,3 +1,14 @@
+paperweight-skel (0.2.4-1) trixie; urgency=low
+
+  * Fix debian/control description: update component list from
+    mako/kitty to swaync/foot/gtklock/cava.
+  * Add ~/.local/bin/sway-wait-float: polls sway IPC until a window with
+    the given app_id appears (0.2s intervals, 6s max), then applies
+    floating/resize/center. Replaces the sleep 2 hack in 40-workspaces.conf.
+  * 40-workspaces.conf: use sway-wait-float for $mod+Shift+c Discord float.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.2.3-1) trixie; urgency=low
 
   * Fix keybind conflicts introduced by 40-workspaces.conf:

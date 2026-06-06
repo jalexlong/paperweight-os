@@ -52,9 +52,9 @@
       ncspot removed from Depends; install manually via `cargo install ncspot`
       or a third-party .deb. ws4 `$mod+s` keybind will silently fail without it.
 
-- [ ] **Discord/Vesktop floating hack** — `$mod+Shift+c` uses `sleep 2` before
-      applying floating via swaymsg. Replace with a polling script that waits
-      for the window to appear. May need longer sleep on slow hardware.
+- [x] **Discord/Vesktop floating hack** — replaced `sleep 2` with
+      `~/.local/bin/sway-wait-float`: polls sway IPC every 0.2s (6s max)
+      and applies floating only once the window actually appears.
 
 ---
 
@@ -75,7 +75,9 @@
 
 - [ ] **Preseed file** — unattended Debian installer config for one-shot installs.
 
-- [ ] **CI via GitHub Actions** — auto-build `.deb`s on push, publish to `gh-pages`.
+- [x] **CI via GitHub Actions** — `.github/workflows/build-and-publish.yml` builds
+      all packages on every push/PR; publishes to `gh-pages` on push to `main`
+      (requires `GPG_PRIVATE_KEY` + `GPG_PASSPHRASE` secrets in repo settings).
 
 - [ ] **`live-build` ISO** — long term, after .debs are solid and the apt repo
       is stable.

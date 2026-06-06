@@ -15,6 +15,6 @@ Description: PaperweightOS default configuration skeleton
  installed to /etc/skel so they are copied into new user home directories
  at account creation time.
  .
- Includes base configs for: sway, waybar, mako, wofi, and kitty.
+ Includes base configs for: sway, waybar, swaync, wofi, foot, gtklock, and cava.
  Hardware-specific fragments (e.g. Chromebook keys) ship in separate packages
  and are dropped into config.d/ directories for fragment-based composition.

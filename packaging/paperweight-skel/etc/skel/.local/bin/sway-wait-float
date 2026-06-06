@@ -1,0 +1,16 @@
+#!/bin/sh
+# Wait for a sway window to appear, then apply floating/size/center rules.
+# Usage: sway-wait-float <app_id> [width height]
+#
+# Polls sway IPC every 0.2s; gives up after 6s (30 attempts).
+app_id="${1:?usage: sway-wait-float <app_id> [width height]}"
+width="${2:-900}"
+height="${3:-600}"
+
+i=0
+while [ "$i" -lt 30 ]; do
+    result=$(swaymsg "[app_id=$app_id] floating enable, resize set $width $height, move position center" 2>&1)
+    echo "$result" | grep -q '"success":true' && exit 0
+    sleep 0.2
+    i=$((i + 1))
+done

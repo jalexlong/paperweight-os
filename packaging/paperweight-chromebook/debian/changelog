@@ -1,3 +1,11 @@
+paperweight-chromebook (0.1.6-1) trixie; urgency=low
+
+  * Repackage as standalone source (previously built from paperweight-desktop).
+    Version bumped past 0.1.5 to supersede the old package in the apt repo.
+  * Drop brightnessctl from Depends: already pulled in by paperweight-desktop.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+
 paperweight-chromebook (0.1.0-1) trixie; urgency=low
 
   * Initial release: Dell Chromebook 11 3180 hardware support.

@@ -17,4 +17,5 @@ etc/dconf/db/paperweight.d/00-defaults                    etc/dconf/db/paperweig
 etc/dconf/profile/user                                    etc/dconf/profile/
 etc/skel/.config/cava/waybar-config                       etc/skel/.config/cava/
 etc/skel/.local/bin/cava-waybar                           etc/skel/.local/bin/
+etc/skel/.local/bin/sway-wait-float                       etc/skel/.local/bin/
 usr/lib/udev/rules.d/70-paperweight-backlight.rules       usr/lib/udev/rules.d/

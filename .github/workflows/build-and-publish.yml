@@ -1,0 +1,86 @@
+name: Build and publish packages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            debhelper devscripts reprepro
+
+      - name: Build packages
+        run: |
+          for pkg_dir in packaging/*/; do
+            [ -f "$pkg_dir/debian/control" ] || continue
+            echo "==> Building $(basename "$pkg_dir")..."
+            (cd "$pkg_dir" && dpkg-buildpackage -us -uc -b)
+          done
+
+      # --- Publish (push to main only) ---
+
+      - name: Import GPG signing key
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          mkdir -p ~/.gnupg && chmod 700 ~/.gnupg
+          printf 'allow-loopback-pinentry\n' >> ~/.gnupg/gpg-agent.conf
+          printf 'pinentry-mode loopback\n'  >> ~/.gnupg/gpg.conf
+          gpg-connect-agent reloadagent /bye
+          echo "$GPG_PRIVATE_KEY" \
+            | base64 -d \
+            | gpg --batch --yes --import \
+                  --passphrase "$GPG_PASSPHRASE" --pinentry-mode loopback
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+
+      - name: Set up gh-pages worktree
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name  "github-actions[bot]"
+          git fetch origin gh-pages
+          git worktree add gh-pages-dir gh-pages
+
+      - name: Publish .debs to apt repo
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          mkdir -p gh-pages-dir/conf
+          cp apt-repo/conf/* gh-pages-dir/conf/
+
+          for deb in packaging/*.deb; do
+            [ -f "$deb" ] || continue
+            echo "  including $(basename "$deb")..."
+            reprepro --basedir gh-pages-dir includedeb trixie "$deb"
+          done
+        env:
+          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+
+      - name: Export public key
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          KEY_ID="$(grep '^SignWith:' apt-repo/conf/distributions | awk '{print $2}')"
+          gpg --export "$KEY_ID" > gh-pages-dir/pubkey.gpg
+
+      - name: Commit and push gh-pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        run: |
+          git -C gh-pages-dir add -A
+          git -C gh-pages-dir commit \
+            -m "Publish packages $(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+            || echo "(nothing changed)"
+          git -C gh-pages-dir push origin gh-pages
