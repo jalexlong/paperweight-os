@@ -20,8 +20,13 @@ if [[ ! -d "$PAGES_DIR" ]]; then
 fi
 
 # ---------------------------------------------------------------------------
-# Build all source packages
+# Build all source packages (clean old artifacts first to avoid hash conflicts)
 # ---------------------------------------------------------------------------
+echo "Cleaning old build artifacts..."
+rm -f "$REPO_ROOT"/packaging/*.deb \
+      "$REPO_ROOT"/packaging/*.buildinfo \
+      "$REPO_ROOT"/packaging/*.changes
+
 echo "Building packages..."
 for pkg_dir in "$REPO_ROOT"/packaging/*/; do
     [[ -f "$pkg_dir/debian/control" ]] || continue
