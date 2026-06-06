@@ -47,6 +47,13 @@ cp "$APT_CONF"/* "$PAGES_DIR/conf/"
 
 for deb in "$REPO_ROOT"/packaging/*.deb; do
     [[ -f "$deb" ]] || continue
+    pkg_name="$(dpkg-deb -f "$deb" Package)"
+    deb_ver="$(dpkg-deb -f "$deb" Version)"
+    pool_ver="$(reprepro --basedir "$PAGES_DIR" list trixie "$pkg_name" 2>/dev/null | awk '{print $NF}')"
+    if [[ "$pool_ver" == "$deb_ver" ]]; then
+        echo "  Skipping $pkg_name $deb_ver (already in pool)"
+        continue
+    fi
     echo "  Including $(basename "$deb")..."
     reprepro --basedir "$PAGES_DIR" includedeb trixie "$deb"
 done
