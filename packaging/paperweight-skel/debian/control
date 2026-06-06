@@ -10,6 +10,8 @@ Rules-Requires-Root: no
 Package: paperweight-skel
 Architecture: all
 Depends: ${misc:Depends}
+Replaces: greetd
+Breaks: greetd
 Description: PaperweightOS default configuration skeleton
  Provides default XDG configuration files for the PaperweightOS desktop,
  installed to /etc/skel so they are copied into new user home directories

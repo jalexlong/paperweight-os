@@ -1,3 +1,10 @@
+paperweight-skel (0.2.13-1) trixie; urgency=low
+
+  * debian/control: add Replaces/Breaks: greetd to allow paperweight-skel
+    to overwrite /etc/greetd/config.toml shipped by the greetd package.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.2.12-1) trixie; urgency=low
 
   * postinst: make dconf update non-fatal (|| true) — dconf-cli install
