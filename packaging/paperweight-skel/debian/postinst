@@ -3,7 +3,7 @@ set -e
 
 case "$1" in
     configure)
-        dconf update
+        dconf update 2>/dev/null || true
         chmod +x /etc/skel/.local/bin/cava-waybar \
                  /etc/skel/.local/bin/paperweight-theme \
                  /etc/skel/.local/bin/sway-wait-float \

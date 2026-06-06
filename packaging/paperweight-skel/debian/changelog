@@ -1,3 +1,11 @@
+paperweight-skel (0.2.12-1) trixie; urgency=low
+
+  * postinst: make dconf update non-fatal (|| true) — dconf-cli install
+    order relative to paperweight-skel is not guaranteed, so the postinst
+    was failing when dconf wasn't yet available.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.2.11-1) trixie; urgency=low
 
   * Add greetd/gtkgreet login screen theming:
