@@ -16,9 +16,9 @@
 
 - [x] **Verify gtklock is in Trixie** — confirmed at version 4.0.0-1.
 
-- [ ] **Wallpaper** — sway config references `/usr/share/paperweight-os/wallpapers/default.jpg`.
-      Create a `paperweight-wallpapers` package or inline a fallback.
-      Without it, sway logs an error on start.
+- [x] **Wallpaper fallback** — `output * bg $base solid_color` added to
+      90-theme.conf; sway shows Macchiato base (#24273a) until a wallpaper
+      package is available.
 
 - [ ] **Keybinding audit** — test all bindings in VM; identify what fails
       and whether it's missing deps or VM-specific issues.
