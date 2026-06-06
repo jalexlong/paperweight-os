@@ -7,21 +7,16 @@ on:
     branches: [main]
 
 jobs:
-  build-and-publish:
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
       - name: Install build dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends \
-            debhelper devscripts reprepro
+          sudo apt-get install -y --no-install-recommends debhelper
 
       - name: Build packages
         run: |
@@ -31,11 +26,44 @@ jobs:
             (cd "$pkg_dir" && dpkg-buildpackage -us -uc -b)
           done
 
-      # --- Publish (push to main only) ---
+      - name: Upload debs
+        uses: actions/upload-artifact@v4
+        with:
+          name: debs
+          path: packaging/*.deb
+          retention-days: 7
+
+  publish:
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install publish dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends reprepro
+
+      - name: Download debs
+        uses: actions/download-artifact@v4
+        with:
+          name: debs
+          path: packaging/
 
       - name: Import GPG signing key
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
+          if [ -z "$GPG_PRIVATE_KEY" ]; then
+            echo "::error::GPG_PRIVATE_KEY secret is not set."
+            echo "::error::Export your key and add it to repo secrets:"
+            echo "::error::  gpg --export-secret-keys --armor A0A521F74780A014 | base64 -w0"
+            exit 1
+          fi
           mkdir -p ~/.gnupg && chmod 700 ~/.gnupg
           printf 'allow-loopback-pinentry\n' >> ~/.gnupg/gpg-agent.conf
           printf 'pinentry-mode loopback\n'  >> ~/.gnupg/gpg.conf
@@ -49,35 +77,36 @@ jobs:
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
       - name: Set up gh-pages worktree
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git config user.name  "github-actions[bot]"
           git fetch origin gh-pages
           git worktree add gh-pages-dir gh-pages
 
-      - name: Publish .debs to apt repo
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      - name: Publish to apt repo
         run: |
           mkdir -p gh-pages-dir/conf
           cp apt-repo/conf/* gh-pages-dir/conf/
 
           for deb in packaging/*.deb; do
             [ -f "$deb" ] || continue
-            echo "  including $(basename "$deb")..."
+            pkg_name="$(dpkg-deb -f "$deb" Package)"
+            deb_ver="$(dpkg-deb -f "$deb" Version)"
+            pool_ver="$(reprepro --basedir gh-pages-dir list trixie "$pkg_name" 2>/dev/null | awk '{print $NF}')"
+            if [ "$pool_ver" = "$deb_ver" ]; then
+              echo "  Skipping $pkg_name $deb_ver (already in pool)"
+              continue
+            fi
+            echo "  Including $(basename "$deb")..."
             reprepro --basedir gh-pages-dir includedeb trixie "$deb"
           done
-        env:
-          GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
       - name: Export public key
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           KEY_ID="$(grep '^SignWith:' apt-repo/conf/distributions | awk '{print $2}')"
           gpg --export "$KEY_ID" > gh-pages-dir/pubkey.gpg
 
       - name: Commit and push gh-pages
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
         run: |
           git -C gh-pages-dir add -A
           git -C gh-pages-dir commit \
