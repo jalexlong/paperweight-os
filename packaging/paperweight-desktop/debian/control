@@ -54,14 +54,3 @@ Description: PaperweightOS desktop environment metapackage
  .
  Installing this package pulls in the full desktop stack. Configuration
  defaults are provided by the paperweight-skel package.
-
-Package: paperweight-chromebook
-Architecture: all
-Depends:
- paperweight-desktop,
- brightnessctl,
- acpi,
- acpid,
-Description: PaperweightOS extra dependencies for Chromebook hardware
- Optional add-on for machines running coreboot, providing Chromebook-specific
- keyboard mappings and power management quirks on top of the base desktop.

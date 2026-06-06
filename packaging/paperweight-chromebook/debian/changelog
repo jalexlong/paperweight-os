@@ -1,0 +1,7 @@
+paperweight-chromebook (0.1.0-1) trixie; urgency=low
+
+  * Initial release: Dell Chromebook 11 3180 hardware support.
+  * 20-keys.conf: xkb_model "chromebook" for top-row media keys + Search+Fn.
+  * 50-chromebook-output.conf: explicit eDP-1 output at 1366x768@60Hz.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000

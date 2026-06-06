@@ -14,8 +14,7 @@
 - [x] **First working VM install** — paperweight-desktop installs and sway
       launches on a fresh Debian Trixie VM. Waybar, swaync, wofi all working.
 
-- [ ] **Verify gtklock is in Trixie** — run `apt-cache show gtklock`.
-      If not: substitute swaylock + Macchiato config from dotfiles.
+- [x] **Verify gtklock is in Trixie** — confirmed at version 4.0.0-1.
 
 - [ ] **Wallpaper** — sway config references `/usr/share/paperweight-os/wallpapers/default.jpg`.
       Create a `paperweight-wallpapers` package or inline a fallback.
@@ -28,13 +27,12 @@
 
 ## Near-term (next few sessions)
 
-- [ ] **`paperweight-chromebook` source package** — currently just a stub in
-      `paperweight-desktop/debian/control`. Needs its own source tree under
-      `packaging/paperweight-chromebook/` with:
-      - `debian/control`, `changelog`, `rules`, `copyright`
-      - `etc/skel/.config/sway/config.d/20-keys.conf` (F-key mappings from dotfiles)
-      - `etc/skel/.config/sway/config.d/40-workspaces.conf` (app assignments)
-      - A chromebook output fragment (wallpaper path override)
+- [x] **`paperweight-chromebook` source package** — full source tree created at
+      `packaging/paperweight-chromebook/`. Keyboard (1:1:AT_Translated_Set_2_keyboard)
+      uses xkb_model "chromebook"; output (eDP-1) set to 1366x768@60Hz.
+
+- [ ] **`40-workspaces.conf`** — app-to-workspace assignments for Chromebook.
+      Needs user input on preferred layout before writing.
 
 - [ ] **brightnessctl udev rule** — add a udev rule or postinst so
       `brightnessctl` works without sudo. Users need to be in the `video` group.

@@ -1,0 +1,24 @@
+Source: paperweight-chromebook
+Section: misc
+Priority: optional
+Maintainer: Alex Long <johnalexanderlong@gmail.com>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.2
+Homepage: https://github.com/jalexlong/paperweight-os
+Rules-Requires-Root: no
+
+Package: paperweight-chromebook
+Architecture: all
+Depends:
+ paperweight-desktop,
+ acpi,
+ acpid,
+ ${misc:Depends}
+Description: PaperweightOS hardware support for Chromebook 11 (3180)
+ Sway config fragments for the Dell Chromebook 11 3180 running coreboot.
+ Configures the Chromebook keyboard top-row as media/utility keys by default,
+ with Search+key sending F1-F10. Also sets the internal display (eDP-1) output
+ parameters explicitly.
+ .
+ Installs drop-in fragments into /etc/skel/.config/sway/config.d/ for
+ automatic composition with the base paperweight-skel configuration.
