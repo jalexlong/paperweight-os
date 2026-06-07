@@ -1,3 +1,11 @@
+paperweight-skel (0.2.15-1) trixie; urgency=low
+
+  * postinst: create greeter system user if missing — greetd's postinst
+    should do this but install ordering can cause a race; greetd fails
+    to start with "configured default session user 'greeter' not found".
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.2.14-1) trixie; urgency=low
 
   * debian/control: drop Breaks: greetd — caused unsatisfiable deps since

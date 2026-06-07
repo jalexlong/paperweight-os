@@ -4,6 +4,14 @@ set -e
 case "$1" in
     configure)
         dconf update 2>/dev/null || true
+
+        # Ensure the greeter user exists for greetd — greetd's own postinst
+        # should create it, but install ordering can race.
+        if ! getent passwd greeter > /dev/null 2>&1; then
+            useradd --system --no-create-home \
+                    --shell /usr/sbin/nologin greeter
+        fi
+
         chmod +x /etc/skel/.local/bin/cava-waybar \
                  /etc/skel/.local/bin/paperweight-theme \
                  /etc/skel/.local/bin/sway-wait-float \
