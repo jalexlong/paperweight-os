@@ -65,7 +65,7 @@ Description: PaperweightOS Nerd Fonts — JetBrains Mono and Symbols
  under the SIL Open Font License 1.1.
 
 Package: paperweight-skel
-Version: 0.2.14-1
+Version: 0.2.15-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
 Installed-Size: 145
@@ -73,11 +73,11 @@ Replaces: greetd
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.14-1_all.deb
-Size: 18452
-SHA256: f7c62e3122bd988046ef3e7df04dd630ee325476328a8c11cf037c1fac5dc930
-SHA1: d9cd9dbc6cb1832df8999268c64b8fd44bbdb4c3
-MD5sum: 96ffc60bd1e2424ed2f5a16f3d23a5df
+Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.15-1_all.deb
+Size: 18668
+SHA256: 952b9b3af5d7b958f11d1c97848de6ba51e230afc08a1cc73b30f5c3f0311548
+SHA1: 2ff145373aec1f42d41441ecc19724ffbde82243
+MD5sum: 49faf6b34525259c7ec1d3a92dd65d58
 Description: PaperweightOS default configuration skeleton
  Provides default XDG configuration files for the PaperweightOS desktop,
  installed to /etc/skel so they are copied into new user home directories
