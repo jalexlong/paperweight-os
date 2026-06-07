@@ -1,0 +1,7 @@
+#!/bin/sh
+# Create XDG_RUNTIME_DIR for the greeter user — systemd-logind does not
+# create it for system users (UID < 1000) without an explicit PAM session.
+export XDG_RUNTIME_DIR="/run/user/$(id -u)"
+mkdir -p "$XDG_RUNTIME_DIR"
+chmod 0700 "$XDG_RUNTIME_DIR"
+exec cage -s -- gtkgreet -l -s /etc/greetd/gtkgreet.css

@@ -29,3 +29,4 @@ etc/greetd/gtkgreet.css                                   etc/greetd/
 etc/greetd/themes/                                        etc/greetd/
 etc/sudoers.d/paperweight-greeter                         etc/sudoers.d/
 usr/bin/paperweight-set-greeter-theme                     usr/bin/
+usr/lib/paperweight-os/start-greeter                      usr/lib/paperweight-os/

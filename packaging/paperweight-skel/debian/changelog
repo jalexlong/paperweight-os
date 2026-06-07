@@ -1,3 +1,21 @@
+paperweight-skel (0.2.17-1) trixie; urgency=low
+
+  * Add usr/lib/paperweight-os/start-greeter: wrapper that creates
+    XDG_RUNTIME_DIR before launching cage+gtkgreet. systemd-logind does
+    not create it for system users (UID < 1000), causing cage to fail.
+  * etc/greetd/config.toml: use start-greeter instead of calling cage
+    directly.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+
+paperweight-skel (0.2.16-1) trixie; urgency=low
+
+  * etc/greetd/config.toml: wrap gtkgreet with cage — gtkgreet is a GTK4
+    Wayland client and needs a compositor; without cage it exits immediately
+    causing greetd to hit the restart limit.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.2.15-1) trixie; urgency=low
 
   * postinst: create greeter system user if missing — greetd's postinst

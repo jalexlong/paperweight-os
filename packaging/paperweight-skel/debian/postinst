@@ -15,7 +15,8 @@ case "$1" in
         chmod +x /etc/skel/.local/bin/cava-waybar \
                  /etc/skel/.local/bin/paperweight-theme \
                  /etc/skel/.local/bin/sway-wait-float \
-                 /usr/bin/paperweight-set-greeter-theme
+                 /usr/bin/paperweight-set-greeter-theme \
+                 /usr/lib/paperweight-os/start-greeter
         chmod 0440 /etc/sudoers.d/paperweight-greeter
 
         # Apply skel configs to the real user on fresh install (not upgrade).
