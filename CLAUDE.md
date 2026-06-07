@@ -204,3 +204,17 @@ sudo apt update && sudo apt install paperweight-desktop
 - **existing users and `video` group**: The postinst patches `/etc/adduser.conf` so
   new users land in the `video` group for brightnessctl. Users who already exist at
   install time need a manual `usermod -aG video $USER`.
+
+- **gtkgreet / cage flags (Trixie)**: The gtkgreet package in Trixie has no `-f`
+  (fullscreen) flag and no `--no-session-selector`. Use `-l` (`--layer-shell`) for
+  fullscreen without CSD decorations, and `-c sway` to pre-fill the session command.
+  The session-selector combobox is never populated from `/usr/share/wayland-sessions/`
+  in this build — it is hidden via CSS instead. The cage package has no `-r` (rootless)
+  flag; use `cage -s` (VT switching only).
+
+- **gtkgreet CSS**: GTK4 does not support `display: none`. To hide widgets use
+  `opacity: 0`, `min-height: 0`, `max-height: 0`, `padding: 0`, `font-size: 0`.
+  To override the Adwaita headerbar color you must use both `@define-color headerbar_bg_color`
+  (named color override) AND `headerbar { background-color: ... }` — one alone is
+  insufficient. The `start-greeter` script must explicitly export `GDK_BACKEND=wayland`
+  and `XDG_RUNTIME_DIR` (systemd-logind does not create it for system users with UID < 1000).
