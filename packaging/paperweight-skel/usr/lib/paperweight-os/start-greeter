@@ -5,4 +5,15 @@ export XDG_RUNTIME_DIR="/run/user/$(id -u)"
 mkdir -p "$XDG_RUNTIME_DIR"
 chmod 0700 "$XDG_RUNTIME_DIR"
 cd "${HOME:-/var/lib/greetd}" 2>/dev/null || cd /tmp
-exec cage -r -s -- gtkgreet -l -s /etc/greetd/gtkgreet.css
+
+# Force GTK4 Wayland backend — without this GTK4 may attempt X11 and
+# fail with "Cannot open display" even when WAYLAND_DISPLAY is set.
+export GDK_BACKEND=wayland
+
+exec cage -r -s -- sh -c '
+    echo "WAYLAND_DISPLAY=$WAYLAND_DISPLAY" > /tmp/greeter-debug.log
+    echo "XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR" >> /tmp/greeter-debug.log
+    ls -la "$XDG_RUNTIME_DIR" >> /tmp/greeter-debug.log 2>&1
+    gtkgreet -l -s /etc/greetd/gtkgreet.css >> /tmp/greeter-debug.log 2>&1
+    echo "gtkgreet exit: $?" >> /tmp/greeter-debug.log
+'

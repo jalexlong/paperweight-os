@@ -5,6 +5,9 @@ case "$1" in
     configure)
         dconf update 2>/dev/null || true
 
+        # greetd takes over VT1; mask getty@tty1 so they don't race.
+        systemctl mask getty@tty1.service 2>/dev/null || true
+
         # Ensure the greeter user exists for greetd — greetd's own postinst
         # should create it, but install ordering can race.
         if ! getent passwd greeter > /dev/null 2>&1; then
