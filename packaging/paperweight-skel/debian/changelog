@@ -1,3 +1,11 @@
+paperweight-skel (0.2.21-1) trixie; urgency=low
+
+  * start-greeter: remove -r flag — Debian Trixie cage does not support
+    rootless mode; cage -s (VT switching) with libseat/logind is correct.
+    Also set GDK_BACKEND=wayland to force GTK4 Wayland backend.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.2.20-1) trixie; urgency=low
 
   * start-greeter: export GDK_BACKEND=wayland before cage so GTK4 uses
