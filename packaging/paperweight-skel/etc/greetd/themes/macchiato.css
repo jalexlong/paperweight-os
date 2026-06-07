@@ -86,11 +86,13 @@ button:active {
     background-color: #7dc4e4;
 }
 
-combobox button {
-    background-color: #363a4f;
-    border: 1px solid #494d64;
-    color: #cad3f5;
-    margin-top: 0px;
-    margin-bottom: 12px;
-    font-weight: normal;
+combobox,
+combobox * {
+    min-height: 0;
+    max-height: 0;
+    opacity: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+    font-size: 0;
 }
