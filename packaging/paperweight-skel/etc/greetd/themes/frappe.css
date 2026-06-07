@@ -9,7 +9,12 @@ window {
 }
 
 headerbar {
-    display: none;
+    background-color: #303446;
+    border-bottom-color: #303446;
+    box-shadow: none;
+    color: #303446;
+    min-height: 0;
+    padding: 0;
 }
 
 box#body {
