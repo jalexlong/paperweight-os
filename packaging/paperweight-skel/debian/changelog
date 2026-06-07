@@ -1,3 +1,15 @@
+paperweight-skel (0.2.25-1) trixie; urgency=low
+
+  * gtkgreet CSS (all themes): add @define-color overrides for GTK4
+    Adwaita named headerbar colors so they blend with the window
+    background. Also add .titlebar selector and hide titlebutton via
+    opacity/padding so the close button is invisible.
+  * cava-waybar: hide module when silent — output empty text after 30
+    consecutive all-zero frames (~1 s). Waybar json modules with empty
+    text are hidden automatically.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.2.24-1) trixie; urgency=low
 
   * start-greeter: export XDG_DATA_DIRS so gtkgreet can locate session

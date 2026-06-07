@@ -16,13 +16,23 @@ proc = subprocess.Popen(
     stderr=subprocess.DEVNULL,
 )
 
+SILENCE_FRAMES = 30  # ~1 s at 30 fps before hiding
+
 try:
+    silence = 0
     while True:
         frame = proc.stdout.read(BARS)
         if len(frame) < BARS:
             break
-        text = "".join(BLOCKS[b * 8 // 256] for b in frame)
-        print(json.dumps({"text": text}), flush=True)
+        if all(b == 0 for b in frame):
+            silence += 1
+        else:
+            silence = 0
+        if silence >= SILENCE_FRAMES:
+            print(json.dumps({"text": ""}), flush=True)
+        else:
+            text = "".join(BLOCKS[b * 8 // 256] for b in frame)
+            print(json.dumps({"text": text}), flush=True)
 except (KeyboardInterrupt, BrokenPipeError):
     pass
 finally:
