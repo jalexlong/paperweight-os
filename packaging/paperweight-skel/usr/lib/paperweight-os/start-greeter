@@ -10,4 +10,4 @@ cd "${HOME:-/var/lib/greetd}" 2>/dev/null || cd /tmp
 export GDK_BACKEND=wayland
 export XDG_DATA_DIRS=/usr/local/share:/usr/share
 
-exec cage -s -- gtkgreet -s /etc/greetd/gtkgreet.css
+exec cage -s -- gtkgreet -l -c sway -s /etc/greetd/gtkgreet.css

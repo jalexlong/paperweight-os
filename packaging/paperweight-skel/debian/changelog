@@ -1,3 +1,14 @@
+paperweight-skel (0.2.26-1) trixie; urgency=low
+
+  * start-greeter: restore -l (--layer-shell) and add -c sway.
+    -l makes gtkgreet a Wayland layer surface (full-screen, no CSD
+    decorations or headerbar). -c sway pre-fills "sway" as the
+    default command so users only enter username + password.
+    The session-selector dropdown is unused — this version of gtkgreet
+    in Trixie does not populate it from wayland-sessions at all.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.2.25-1) trixie; urgency=low
 
   * gtkgreet CSS (all themes): add @define-color overrides for GTK4
