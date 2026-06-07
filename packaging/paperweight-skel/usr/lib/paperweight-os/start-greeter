@@ -9,4 +9,4 @@ cd "${HOME:-/var/lib/greetd}" 2>/dev/null || cd /tmp
 # Force GTK4 Wayland backend — without this GTK4 may attempt X11.
 export GDK_BACKEND=wayland
 
-exec cage -s -- gtkgreet -f -s /etc/greetd/gtkgreet.css
+exec cage -s -- gtkgreet -s /etc/greetd/gtkgreet.css
