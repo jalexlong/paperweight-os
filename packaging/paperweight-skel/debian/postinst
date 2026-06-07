@@ -9,7 +9,8 @@ case "$1" in
         # should create it, but install ordering can race.
         if ! getent passwd greeter > /dev/null 2>&1; then
             useradd --system --create-home --home-dir /var/lib/greetd \
-                    --shell /usr/sbin/nologin greeter
+                    --shell /usr/sbin/nologin \
+                    --groups video,input greeter
         fi
 
         chmod +x /etc/skel/.local/bin/cava-waybar \

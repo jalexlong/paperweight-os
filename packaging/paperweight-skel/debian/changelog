@@ -1,3 +1,13 @@
+paperweight-skel (0.2.19-1) trixie; urgency=low
+
+  * start-greeter: use cage -r (rootless) so cage bypasses logind seat
+    management and opens DRM/input devices directly. Logind doesn't grant
+    seat access to the greeter system user's PAM session reliably.
+  * postinst: add greeter user to video and input groups so cage -r can
+    open /dev/dri/card0 and /dev/input/event* without seat management.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.2.18-1) trixie; urgency=low
 
   * postinst: create greeter user with --create-home --home-dir
