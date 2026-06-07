@@ -8,7 +8,7 @@ case "$1" in
         # Ensure the greeter user exists for greetd — greetd's own postinst
         # should create it, but install ordering can race.
         if ! getent passwd greeter > /dev/null 2>&1; then
-            useradd --system --no-create-home \
+            useradd --system --create-home --home-dir /var/lib/greetd \
                     --shell /usr/sbin/nologin greeter
         fi
 
