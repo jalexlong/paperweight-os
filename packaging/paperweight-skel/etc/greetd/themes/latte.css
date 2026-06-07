@@ -8,6 +8,10 @@ window {
     background-color: #eff1f5;
 }
 
+headerbar {
+    display: none;
+}
+
 box#body {
     background-color: #e6e9ef;
     border: 1px solid #ccd0da;

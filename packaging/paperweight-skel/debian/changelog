@@ -1,3 +1,12 @@
+paperweight-skel (0.2.23-1) trixie; urgency=low
+
+  * start-greeter: add -f (fullscreen) to gtkgreet so the window covers
+    the entire cage output and the GTK4 CSD titlebar is suppressed.
+  * gtkgreet CSS (all themes): add headerbar { display: none; } as a
+    belt-and-suspenders measure against the "Greeter" title bar showing.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.2.22-1) trixie; urgency=low
 
   * start-greeter: remove -l (--no-session-selector) from gtkgreet — it

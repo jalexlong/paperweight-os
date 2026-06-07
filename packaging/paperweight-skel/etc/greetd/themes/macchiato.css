@@ -8,6 +8,10 @@ window {
     background-color: #24273a;
 }
 
+headerbar {
+    display: none;
+}
+
 box#body {
     background-color: #1e2030;
     border: 1px solid #363a4f;
