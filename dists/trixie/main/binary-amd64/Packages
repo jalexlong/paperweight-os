@@ -22,19 +22,19 @@ Description: PaperweightOS hardware support for Chromebook 11 (3180)
  automatic composition with the base paperweight-skel configuration.
 
 Package: paperweight-desktop
-Version: 0.1.7-1
+Version: 0.1.8-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
 Installed-Size: 9
-Depends: paperweight-skel, paperweight-fonts, sway, waybar, gtklock, swayidle, sway-notification-center, wofi, foot, firefox-esr, thunar, grim, slurp, wl-clipboard, brightnessctl, playerctl, network-manager, pipewire, pipewire-pulse, wireplumber, pavucontrol, xdg-desktop-portal-wlr, mosh, xdg-user-dirs, fonts-font-awesome, fonts-noto-color-emoji, git, curl, wget, vim, neovim, hx, cava, tmux, btop, zoxide, ca-certificates, power-profiles-daemon, dconf-cli, greetd, gtkgreet
+Depends: paperweight-skel, paperweight-fonts, sway, waybar, gtklock, swayidle, sway-notification-center, wofi, foot, firefox-esr, thunar, grim, slurp, wl-clipboard, brightnessctl, playerctl, network-manager, pipewire, pipewire-pulse, wireplumber, pavucontrol, xdg-desktop-portal-wlr, mosh, xdg-user-dirs, fonts-font-awesome, fonts-noto-color-emoji, git, curl, wget, vim, neovim, hx, cava, tmux, btop, zoxide, ca-certificates, power-profiles-daemon, dconf-cli, greetd, gtkgreet, cage
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: metapackages
-Filename: pool/main/p/paperweight-desktop/paperweight-desktop_0.1.7-1_all.deb
-Size: 2684
-SHA256: 4d0ccd21f967d62431162ecd7b2e3855d4156693fe7102a754e5ae4ee3630951
-SHA1: a4e9a5a58676398c5e47e39d724473aacd47db64
-MD5sum: ac74af0ad5b5d5aeb57ab0879fd10c40
+Filename: pool/main/p/paperweight-desktop/paperweight-desktop_0.1.8-1_all.deb
+Size: 2712
+SHA256: aadcacbedce8e49b2cef08025a537c631efcfb282b6f05cbd7f7ec7abba858f4
+SHA1: 10ffef3304c312854524b4949812089937642c55
+MD5sum: dfd8ddc82471c18caff1f488c0d7c647
 Description: PaperweightOS desktop environment metapackage
  Installs all packages required for the PaperweightOS Sway-based desktop
  environment on Debian Stable (Trixie). Intended for use on refurbished
@@ -65,19 +65,19 @@ Description: PaperweightOS Nerd Fonts — JetBrains Mono and Symbols
  under the SIL Open Font License 1.1.
 
 Package: paperweight-skel
-Version: 0.2.15-1
+Version: 0.2.17-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
-Installed-Size: 145
+Installed-Size: 148
 Replaces: greetd
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.15-1_all.deb
-Size: 18668
-SHA256: 952b9b3af5d7b958f11d1c97848de6ba51e230afc08a1cc73b30f5c3f0311548
-SHA1: 2ff145373aec1f42d41441ecc19724ffbde82243
-MD5sum: 49faf6b34525259c7ec1d3a92dd65d58
+Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.17-1_all.deb
+Size: 19114
+SHA256: 7c39db7299e1e8d42242b9abcd0057f0068420c52c39d18f793ba96fdd10f139
+SHA1: 7dd59809b404f895836b101fec37780853ceebf9
+MD5sum: 243119b32e9ed1e2422ddd556b3b6056
 Description: PaperweightOS default configuration skeleton
  Provides default XDG configuration files for the PaperweightOS desktop,
  installed to /etc/skel so they are copied into new user home directories
