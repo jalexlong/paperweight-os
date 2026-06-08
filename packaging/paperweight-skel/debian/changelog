@@ -1,3 +1,11 @@
+paperweight-skel (0.2.29-1) trixie; urgency=low
+
+  * gtkgreet CSS: remove `max-height` from combobox hide rule — GTK4 does
+    not support max-height and rejects the entire stylesheet when it sees it.
+    The remaining min-height/opacity/padding/margin properties are sufficient.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 08 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.2.28-1) trixie; urgency=low
 
   * gtkgreet CSS: remove `font-size: 0` and `border: none` from combobox
