@@ -212,9 +212,12 @@ sudo apt update && sudo apt install paperweight-desktop
   in this build — it is hidden via CSS instead. The cage package has no `-r` (rootless)
   flag; use `cage -s` (VT switching only).
 
-- **gtkgreet CSS**: GTK4 does not support `display: none`. To hide widgets use
-  `opacity: 0`, `min-height: 0`, `max-height: 0`, `padding: 0`, `font-size: 0`.
+- **gtkgreet CSS**: GTK4 does not support `display: none`, `max-height`, or unitless
+  `font-size: 0`. Any invalid property causes GTK4 to reject the **entire** stylesheet
+  and fall back to Adwaita light — there is no partial application. To hide widgets use
+  `opacity: 0`, `min-height: 0`, `padding: 0`, `margin: 0` only.
   To override the Adwaita headerbar color you must use both `@define-color headerbar_bg_color`
   (named color override) AND `headerbar { background-color: ... }` — one alone is
   insufficient. The `start-greeter` script must explicitly export `GDK_BACKEND=wayland`
   and `XDG_RUNTIME_DIR` (systemd-logind does not create it for system users with UID < 1000).
+  Debug CSS errors with: `GTK_DEBUG=all G_MESSAGES_DEBUG=all gtkgreet -c sway -s /etc/greetd/gtkgreet.css 2>&1`
