@@ -1,17 +1,17 @@
 Package: paperweight-chromebook
-Version: 0.1.8-1
+Version: 0.1.9-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
 Installed-Size: 18
-Depends: paperweight-desktop, acpi, acpid
+Depends: paperweight-desktop, acpi, acpid, wtype
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-chromebook/paperweight-chromebook_0.1.8-1_all.deb
-Size: 3124
-SHA256: 649ff45645e55686abad7c1dd723c36317c60d539c22cd1625a20bfc363218d4
-SHA1: 933f199957c5f770e2273ea76ed4dfae142750c4
-MD5sum: 73a0ff79cc1d39dda91c1a1a43791549
+Filename: pool/main/p/paperweight-chromebook/paperweight-chromebook_0.1.9-1_all.deb
+Size: 3492
+SHA256: 9ccab2d2ad6950cb92ebec5cf76dbef86a19017b88c9c4c951658ba073d25186
+SHA1: fdb834ab644579eb29f88d915b32cfdd08099658
+MD5sum: 628d1ef14b9846139ff25a71ea4e6075
 Description: PaperweightOS hardware support for Chromebook 11 (3180)
  Sway config fragments for the Dell Chromebook 11 3180 running coreboot.
  Configures the Chromebook keyboard top-row as media/utility keys by default,
