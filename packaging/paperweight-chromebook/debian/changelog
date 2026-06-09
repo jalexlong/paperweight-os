@@ -1,3 +1,12 @@
+paperweight-chromebook (0.1.9-1) trixie; urgency=low
+
+  * 20-keys.conf: bind F11 (F4 position) to fullscreen toggle, F5 (overview
+    key) to layout toggle. Add $mod+top-row bindings that inject literal F1-F10
+    into the focused window via wtype.
+  * debian/control: add wtype to Depends.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Mon, 09 Jun 2026 00:00:00 +0000
+
 paperweight-chromebook (0.1.8-1) trixie; urgency=low
 
   * Add 15-chromebook-input.conf: override repeat_delay to 200ms and set

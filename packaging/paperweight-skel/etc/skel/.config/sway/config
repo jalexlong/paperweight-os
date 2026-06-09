@@ -33,7 +33,6 @@ default_border pixel 2
     bindsym $mod+space floating toggle
     bindsym $mod+Shift+space focus mode_toggle
     bindsym $mod+m fullscreen
-    bindsym $mod+F5 layout toggle tabbed splith
 
     floating_modifier $mod normal
 

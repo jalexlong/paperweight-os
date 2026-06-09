@@ -13,6 +13,7 @@ Depends:
  paperweight-desktop,
  acpi,
  acpid,
+ wtype,
  ${misc:Depends}
 Description: PaperweightOS hardware support for Chromebook 11 (3180)
  Sway config fragments for the Dell Chromebook 11 3180 running coreboot.
