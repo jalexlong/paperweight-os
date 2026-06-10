@@ -20,6 +20,9 @@ paperweight-os/
 │   ├── paperweight-skel/        # Ships /etc/skel configs; no binary deps
 │   ├── paperweight-desktop/     # Pure metapackage: Depends on full stack
 │   ├── paperweight-fonts/       # JetBrains Mono Nerd Font + Symbols NF
+│   ├── paperweight-wallpapers/  # Catppuccin solid-color wallpapers (PNG)
+│   ├── paperweight-grub/        # Catppuccin Macchiato GRUB2 theme
+│   ├── paperweight-plymouth/    # Catppuccin Macchiato Plymouth boot splash
 │   └── paperweight-chromebook/  # Hardware add-on for Chromebook/coreboot
 ├── apt-repo/
 │   └── conf/                    # reprepro config (SignWith key must be set)
@@ -33,9 +36,17 @@ paperweight-os/
 ```
 paperweight-desktop
   └── Depends: paperweight-skel + sway stack + fonts + tools
+  └── Recommends: paperweight-grub, paperweight-plymouth
+
+paperweight-grub        (recommended, installed by default)
+  └── Catppuccin Macchiato GRUB2 theme; sets GRUB_THEME in /etc/default/grub
+
+paperweight-plymouth    (recommended, installed by default)
+  └── Catppuccin Macchiato Plymouth splash; sets default theme + rebuilds initramfs
 
 paperweight-chromebook  (optional add-on)
   └── Depends: paperweight-desktop + Chromebook-specific packages
+  └── postinst sets GRUB_GFXMODE=1366x768,auto + GRUB_GFXPAYLOAD_LINUX=keep
 ```
 
 ### Config fragment philosophy
@@ -188,18 +199,13 @@ sudo apt update && sudo apt install paperweight-desktop
 
 ## Known Issues / Watchpoints
 
-- **paperweight-wallpapers**: No wallpaper package yet. `90-theme.conf` sets
-  `output * bg $base solid_color` as a fallback. A future `paperweight-wallpapers`
-  package will provide `/usr/share/paperweight-os/wallpapers/` and override this.
-
-- **ncspot / helix in Trixie**: These are added to `paperweight-desktop` Depends
-  but haven't been verified in the Trixie repos yet. Run `apt-cache show ncspot helix`
-  before publishing. If absent, they need a separate source or removal from Depends.
+- **ncspot**: Not in Debian Trixie repos — removed from `paperweight-desktop` Depends.
+  Install manually via `cargo install ncspot`. The `$mod+s` keybind silently fails
+  without it.
 
 - **Discord / Vesktop**: Not in Debian repos — must be installed manually as a `.deb`
   from discord.com/download or vencord.dev. The `$mod+Shift+c` floating variant uses
-  a `sleep 2` hack to wait for the window before floating it; timing may need tuning
-  on slow hardware.
+  `sway-wait-float` (polls sway IPC until the window appears) rather than a fixed sleep.
 
 - **existing users and `video` group**: The postinst patches `/etc/adduser.conf` so
   new users land in the `video` group for brightnessctl. Users who already exist at

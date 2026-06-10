@@ -140,17 +140,19 @@ lock screen). On the Chromebook, the top-row keys send these by default;
 | Package | Version | Description |
 |---|---|---|
 | `paperweight-skel` | 0.2.29 | Default configs installed to `/etc/skel/` |
-| `paperweight-desktop` | 0.1.8 | Metapackage: pulls in the full desktop stack |
+| `paperweight-desktop` | 0.1.10 | Metapackage: pulls in the full desktop stack |
 | `paperweight-fonts` | 0.1.0 | JetBrains Mono Nerd Font + Symbols Nerd Font |
-| `paperweight-chromebook` | 0.1.8 | Dell Chromebook 11 3180 hardware support |
 | `paperweight-wallpapers` | 0.1.0 | Catppuccin wallpapers (Latte/Frappé/Macchiato/Mocha) |
+| `paperweight-grub` | 0.1.1 | Catppuccin Macchiato GRUB2 theme |
+| `paperweight-plymouth` | 0.1.0 | Catppuccin Macchiato Plymouth boot splash |
+| `paperweight-chromebook` | 0.1.11 | Dell Chromebook 11 3180 hardware support |
 
 ---
 
 ## Building from Source
 
 ```bash
-sudo apt install devscripts debhelper build-essential reprepro
+sudo apt install devscripts debhelper build-essential grub-common reprepro
 
 # Build a single package
 cd packaging/paperweight-skel

@@ -68,7 +68,6 @@
 
 - [x] **All four Catppuccin variants** — Latte (light), Frappé, Macchiato, Mocha.
       All five per-theme files wired up for each variant.
-- [ ] **Additional themes** — Rosé Pine, Gruvbox Material.
 
 - [x] **`paperweight-wallpapers` package** — solid-color Catppuccin wallpapers
       (Latte, Frappé, Macchiato, Mocha) in `/usr/share/paperweight-os/wallpapers/`.
