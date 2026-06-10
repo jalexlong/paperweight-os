@@ -1,5 +1,5 @@
 Package: paperweight-chromebook
-Version: 0.1.10-1
+Version: 0.1.11-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
 Installed-Size: 20
@@ -7,11 +7,11 @@ Depends: paperweight-desktop, acpi, acpid, wtype
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-chromebook/paperweight-chromebook_0.1.10-1_all.deb
-Size: 3936
-SHA256: 7c9fc52dcf40ccf2c26effc6601ca07400b1a9beb1bac4e3d34190c00e2e9429
-SHA1: 118616d9d4745f5ad035c5c75e48e5a667657a68
-MD5sum: d7e7c82c80dd3f1ea71c2974e54a0e60
+Filename: pool/main/p/paperweight-chromebook/paperweight-chromebook_0.1.11-1_all.deb
+Size: 4128
+SHA256: 67956198f7e761ca0b57dc0f570fff07cb2ee4b88dc2789a5e260d674eaa8098
+SHA1: a311a762664129e6ce61d3f2800d3b8c6222739c
+MD5sum: e554b0f7b381059a9df48b0176fba0c7
 Description: PaperweightOS hardware support for Chromebook 11 (3180)
  Sway config fragments for the Dell Chromebook 11 3180 running coreboot.
  Configures the Chromebook keyboard top-row as media/utility keys by default,
@@ -22,20 +22,20 @@ Description: PaperweightOS hardware support for Chromebook 11 (3180)
  automatic composition with the base paperweight-skel configuration.
 
 Package: paperweight-desktop
-Version: 0.1.9-1
+Version: 0.1.10-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
 Installed-Size: 9
 Depends: paperweight-skel, paperweight-fonts, sway, waybar, gtklock, swayidle, sway-notification-center, wofi, foot, firefox-esr, thunar, grim, slurp, wl-clipboard, brightnessctl, playerctl, network-manager, pipewire, pipewire-pulse, wireplumber, pavucontrol, xdg-desktop-portal-wlr, mosh, xdg-user-dirs, fonts-font-awesome, fonts-noto-color-emoji, git, curl, wget, vim, neovim, hx, cava, tmux, btop, zoxide, ca-certificates, power-profiles-daemon, dconf-cli, greetd, gtkgreet, cage
-Recommends: paperweight-grub
+Recommends: paperweight-grub, paperweight-plymouth
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: metapackages
-Filename: pool/main/p/paperweight-desktop/paperweight-desktop_0.1.9-1_all.deb
-Size: 2804
-SHA256: add6240f3a2e6c1a5f1f35b030c0bf053953c31682da308553ff4d9ac8afbd3b
-SHA1: b9d6ee01f3dca6ff695146dc91138c519e59e9c0
-MD5sum: d337a1477f6a47bd452ae8cb2a07305e
+Filename: pool/main/p/paperweight-desktop/paperweight-desktop_0.1.10-1_all.deb
+Size: 2854
+SHA256: ca88bfe4357692fd04f9f8361e0702bb034f9a8ac5d2bdb6f6e8bfe8bf700e16
+SHA1: e7ce270edbd35264ffc6eb27338f425e73c29a89
+MD5sum: aa9e712ccb4a249ec275288568dbd6c9
 Description: PaperweightOS desktop environment metapackage
  Installs all packages required for the PaperweightOS Sway-based desktop
  environment on Debian Stable (Trixie). Intended for use on refurbished
@@ -66,23 +66,45 @@ Description: PaperweightOS Nerd Fonts — JetBrains Mono and Symbols
  under the SIL Open Font License 1.1.
 
 Package: paperweight-grub
-Version: 0.1.0-1
+Version: 0.1.1-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
-Installed-Size: 411
+Installed-Size: 415
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-grub/paperweight-grub_0.1.0-1_all.deb
-Size: 180604
-SHA256: 5fc47821a3ff27158719d001c5a4ff01d98356a7fca040ed35f5086e07eed824
-SHA1: 1daa0136a8e8a86cde6ba99b6f26f2211587d2c5
-MD5sum: 1868f6e0b6247f844e655db9fbe26895
+Filename: pool/main/p/paperweight-grub/paperweight-grub_0.1.1-1_all.deb
+Size: 179728
+SHA256: cfb976ae960b061933b616b0bc4f347c8bec50a85bc5780383dfad20ea0dee0a
+SHA1: f515f5a85c49d954a040ad676e2bcd48a3ca640f
+MD5sum: 00376bd4e3bd76bd95c85e48594aa4eb
 Description: PaperweightOS GRUB theme — Catppuccin Macchiato
  Installs a Catppuccin Macchiato-themed GRUB2 boot menu for PaperweightOS.
  Sets GRUB_THEME in /etc/default/grub and runs update-grub on install.
  .
  No-op if GRUB is not installed (/etc/default/grub absent).
+
+Package: paperweight-plymouth
+Version: 0.1.0-1
+Architecture: all
+Maintainer: Alex Long <johnalexanderlong@gmail.com>
+Installed-Size: 16
+Depends: plymouth, plymouth-label
+Homepage: https://github.com/jalexlong/paperweight-os
+Priority: optional
+Section: misc
+Filename: pool/main/p/paperweight-plymouth/paperweight-plymouth_0.1.0-1_all.deb
+Size: 3146
+SHA256: 8367af21950d1a9813bb6af733a908f640c6d62de0464e8cf24346c3c4d41607
+SHA1: 6e73f67cc4c335529da2cad1c6737e0ffb83b274
+MD5sum: 933b905a3402ec90dfb5ffd4fd6a68e7
+Description: PaperweightOS Plymouth theme — Catppuccin Macchiato
+ Installs a Catppuccin Macchiato-themed Plymouth boot splash for PaperweightOS.
+ Uses the script plugin: solid base (#24273a) background with a pulsing
+ centered "PaperweightOS" label.
+ .
+ Sets the Plymouth default theme and rebuilds the initramfs on install and
+ removal. On eMMC storage this may take 30-60 seconds.
 
 Package: paperweight-skel
 Version: 0.2.29-1
