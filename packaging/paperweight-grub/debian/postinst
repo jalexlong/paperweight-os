@@ -1,0 +1,20 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    configure)
+        [ -f /etc/default/grub ] || exit 0
+
+        if grep -q "^GRUB_THEME=" /etc/default/grub; then
+            sed -i 's|^GRUB_THEME=.*|GRUB_THEME=/usr/share/grub/themes/paperweight/theme.txt|' /etc/default/grub
+        else
+            echo 'GRUB_THEME=/usr/share/grub/themes/paperweight/theme.txt' >> /etc/default/grub
+        fi
+
+        if command -v update-grub > /dev/null 2>&1; then
+            update-grub || true
+        fi
+        ;;
+esac
+
+#DEBHELPER#

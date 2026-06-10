@@ -1,0 +1,11 @@
+#!/usr/bin/make -f
+%:
+	dh $@
+
+override_dh_auto_build:
+	grub-mkfont -s 14 -n "Paperweight" \
+		-o usr/share/grub/themes/paperweight/paperweight-14.pf2 \
+		../paperweight-fonts/usr/share/fonts/truetype/paperweight-os/JetBrainsMonoNerdFont-Regular.ttf
+
+override_dh_auto_clean:
+	rm -f usr/share/grub/themes/paperweight/paperweight-14.pf2

@@ -1,0 +1,17 @@
+Source: paperweight-grub
+Section: misc
+Priority: optional
+Maintainer: Alex Long <johnalexanderlong@gmail.com>
+Build-Depends: debhelper-compat (= 13), grub-common
+Standards-Version: 4.6.2
+Homepage: https://github.com/jalexlong/paperweight-os
+Rules-Requires-Root: no
+
+Package: paperweight-grub
+Architecture: all
+Depends: ${misc:Depends}
+Description: PaperweightOS GRUB theme — Catppuccin Macchiato
+ Installs a Catppuccin Macchiato-themed GRUB2 boot menu for PaperweightOS.
+ Sets GRUB_THEME in /etc/default/grub and runs update-grub on install.
+ .
+ No-op if GRUB is not installed (/etc/default/grub absent).

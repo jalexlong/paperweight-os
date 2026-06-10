@@ -20,7 +20,7 @@ jobs:
       - name: Install build dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends debhelper build-essential
+          sudo apt-get install -y --no-install-recommends debhelper build-essential grub-common
 
       - name: Build packages
         run: |

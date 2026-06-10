@@ -82,7 +82,10 @@
 
 - [ ] **Plymouth splash** — Macchiato-themed boot splash.
 
-- [ ] **GRUB theme** — match Macchiato palette.
+- [x] **GRUB theme** — `paperweight-grub`: Catppuccin Macchiato palette,
+      JetBrainsMono Nerd Font compiled to PF2, mauve selection highlight.
+      Recommended by `paperweight-desktop`. `paperweight-chromebook` sets
+      `GRUB_GFXMODE=1366x768,auto` in its postinst.
 
 - [x] **Preseed file** — `preseed/paperweight.cfg`: automates a Trixie install,
       then adds the PaperweightOS apt repo and installs `paperweight-desktop`

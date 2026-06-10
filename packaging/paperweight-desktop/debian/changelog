@@ -1,3 +1,10 @@
+paperweight-desktop (0.1.9-1) trixie; urgency=low
+
+  * debian/control: add Recommends: paperweight-grub so the GRUB theme
+    is installed by default with the desktop package.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Mon, 09 Jun 2026 00:00:00 +0000
+
 paperweight-desktop (0.1.8-1) trixie; urgency=low
 
   * Add cage to Depends — required as compositor for gtkgreet.

@@ -1,0 +1,48 @@
+# PaperweightOS GRUB theme — Catppuccin Macchiato
+# https://github.com/jalexlong/paperweight-os
+
+title-text: ""
+desktop-color: "#24273a"
+terminal-font: "Paperweight Regular 14"
+terminal-left: "0"
+terminal-top: "0"
+terminal-width: "100%"
+terminal-height: "100%"
+terminal-border: "0"
+
++ boot_menu {
+    left = 15%
+    top = 20%
+    width = 70%
+    height = 60%
+    item_font = "Paperweight Regular 14"
+    item_color = "#cad3f5"
+    selected_item_color = "#c6a0f6"
+    item_height = 30
+    item_padding = 8
+    item_spacing = 2
+    scrollbar = false
+}
+
++ progress_bar {
+    id = "__timeout__"
+    left = 15%
+    top = 83%
+    width = 70%
+    height = 16
+    show_text = false
+    fg_color = "#c6a0f6"
+    bg_color = "#363a4f"
+    border_color = "#363a4f"
+}
+
++ label {
+    top = 87%
+    left = 0
+    width = 100%
+    align = "center"
+    id = "__timeout__"
+    text = "Booting in %d seconds"
+    color = "#a5adcb"
+    font = "Paperweight Regular 14"
+}

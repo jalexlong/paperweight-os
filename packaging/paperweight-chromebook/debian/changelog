@@ -1,3 +1,12 @@
+paperweight-chromebook (0.1.10-1) trixie; urgency=low
+
+  * debian/postinst: set GRUB_GFXMODE=1366x768,auto in /etc/default/grub
+    so the GRUB theme renders at the Chromebook's native resolution.
+    Runs update-grub on install. No-op if /etc/default/grub is absent.
+  * debian/postrm: remove GRUB_GFXMODE=1366x768,auto on package removal.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Mon, 09 Jun 2026 00:00:00 +0000
+
 paperweight-chromebook (0.1.9-1) trixie; urgency=low
 
   * 20-keys.conf: bind F11 (F4 position) to fullscreen toggle, F5 (overview

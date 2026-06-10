@@ -9,6 +9,7 @@ Rules-Requires-Root: no
 
 Package: paperweight-desktop
 Architecture: all
+Recommends: paperweight-grub
 Depends:
  paperweight-skel,
  paperweight-fonts,

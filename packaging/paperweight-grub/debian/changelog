@@ -1,0 +1,7 @@
+paperweight-grub (0.1.0-1) trixie; urgency=low
+
+  * Initial packaging. Catppuccin Macchiato GRUB2 theme with JetBrainsMono
+    Nerd Font compiled to PF2. Sets GRUB_THEME in /etc/default/grub and
+    runs update-grub on install/remove.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Mon, 09 Jun 2026 00:00:00 +0000
