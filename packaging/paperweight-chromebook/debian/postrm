@@ -4,7 +4,8 @@ set -e
 case "$1" in
     remove|purge)
         if [ -f /etc/default/grub ]; then
-            sed -i '/^GRUB_GFXMODE=.*1366x768/d' /etc/default/grub
+            sed -i '/^GRUB_GFXMODE=/d' /etc/default/grub
+            sed -i '/^GRUB_GFXPAYLOAD_LINUX=/d' /etc/default/grub
             if command -v update-grub > /dev/null 2>&1; then
                 update-grub || true
             fi

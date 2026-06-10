@@ -30,7 +30,6 @@ terminal-border: "0"
     top = 83%
     width = 70%
     height = 16
-    show_text = false
     fg_color = "#c6a0f6"
     bg_color = "#363a4f"
     border_color = "#363a4f"

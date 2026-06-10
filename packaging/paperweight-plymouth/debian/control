@@ -1,0 +1,19 @@
+Source: paperweight-plymouth
+Section: misc
+Priority: optional
+Maintainer: Alex Long <johnalexanderlong@gmail.com>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.2
+Homepage: https://github.com/jalexlong/paperweight-os
+Rules-Requires-Root: no
+
+Package: paperweight-plymouth
+Architecture: all
+Depends: ${misc:Depends}, plymouth, plymouth-label
+Description: PaperweightOS Plymouth theme — Catppuccin Macchiato
+ Installs a Catppuccin Macchiato-themed Plymouth boot splash for PaperweightOS.
+ Uses the script plugin: solid base (#24273a) background with a pulsing
+ centered "PaperweightOS" label.
+ .
+ Sets the Plymouth default theme and rebuilds the initramfs on install and
+ removal. On eMMC storage this may take 30-60 seconds.

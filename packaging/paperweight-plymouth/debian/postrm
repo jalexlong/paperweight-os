@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    remove|purge)
+        if command -v plymouth-set-default-theme > /dev/null 2>&1; then
+            plymouth-set-default-theme --reset || true
+            update-initramfs -u || true
+        fi
+        ;;
+esac
+
+#DEBHELPER#

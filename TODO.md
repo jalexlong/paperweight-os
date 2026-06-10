@@ -80,7 +80,9 @@
       `paperweight-theme` updates the login screen via a sudoers-gated
       helper (`paperweight-set-greeter-theme`) on every theme switch.
 
-- [ ] **Plymouth splash** — Macchiato-themed boot splash.
+- [x] **Plymouth splash** — `paperweight-plymouth`: Catppuccin Macchiato,
+      script plugin, solid base background with pulsing centered label.
+      Recommended by `paperweight-desktop`. Rebuilds initramfs on install.
 
 - [x] **GRUB theme** — `paperweight-grub`: Catppuccin Macchiato palette,
       JetBrainsMono Nerd Font compiled to PF2, mauve selection highlight.

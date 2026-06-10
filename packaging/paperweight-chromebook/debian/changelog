@@ -1,3 +1,14 @@
+paperweight-chromebook (0.1.11-1) trixie; urgency=low
+
+  * debian/postinst: add GRUB_GFXPAYLOAD_LINUX=keep so the kernel
+    framebuffer stays at the GRUB resolution for Plymouth.
+  * debian/postrm: replace value-specific sed patterns with key-only
+    patterns (/^GRUB_GFXMODE=/d, /^GRUB_GFXPAYLOAD_LINUX=/d) so removal
+    works even if the user edited the values after install. Also remove
+    GRUB_GFXPAYLOAD_LINUX on uninstall.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Mon, 09 Jun 2026 00:00:00 +0000
+
 paperweight-chromebook (0.1.10-1) trixie; urgency=low
 
   * debian/postinst: set GRUB_GFXMODE=1366x768,auto in /etc/default/grub

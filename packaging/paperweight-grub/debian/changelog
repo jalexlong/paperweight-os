@@ -1,3 +1,13 @@
+paperweight-grub (0.1.1-1) trixie; urgency=low
+
+  * theme.txt: remove invalid show_text property from progress_bar widget.
+  * debian/postinst: replace early exit 0 with if-block so #DEBHELPER#
+    token is always reached.
+  * debian/copyright: add full OFL-1.1 license text; correct copyright
+    holder to "The JetBrains Mono Project Authors".
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Mon, 09 Jun 2026 00:00:00 +0000
+
 paperweight-grub (0.1.0-1) trixie; urgency=low
 
   * Initial packaging. Catppuccin Macchiato GRUB2 theme with JetBrainsMono

@@ -1,0 +1,23 @@
+// PaperweightOS Plymouth theme — Catppuccin Macchiato
+// https://github.com/jalexlong/paperweight-os
+
+// Background: base #24273a
+Window.SetBackgroundTopColor(0.141, 0.153, 0.227);
+Window.SetBackgroundBottomColor(0.141, 0.153, 0.227);
+
+// Label image created once; positioned per-frame after window is live
+// text #cad3f5
+logo_image = Image.Text("PaperweightOS", 0.792, 0.827, 0.961, 1);
+logo = Sprite();
+logo.SetImage(logo_image);
+
+angle = 0;
+
+fun refresh_callback() {
+    angle += 0.05;
+    logo.SetX(Window.GetX() + Window.GetWidth()  / 2 - logo_image.GetWidth()  / 2);
+    logo.SetY(Window.GetY() + Window.GetHeight() / 2 - logo_image.GetHeight() / 2);
+    logo.SetOpacity(0.6 + 0.4 * Math.Cos(angle));
+}
+
+Plymouth.SetRefreshFunction(refresh_callback);

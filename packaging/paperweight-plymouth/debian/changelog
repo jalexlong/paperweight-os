@@ -1,0 +1,12 @@
+paperweight-plymouth (0.1.0-1) trixie; urgency=low
+
+  * Initial packaging. Catppuccin Macchiato Plymouth boot splash using the
+    script plugin. Solid base background with pulsing centered label.
+    Sets default Plymouth theme and rebuilds initramfs on install/remove.
+  * debian/control: add plymouth-label to Depends — required for
+    Image.Text() in the script plugin; without it the label silently fails.
+  * paperweight.script: move logo SetX/SetY into refresh_callback so
+    centering runs after the framebuffer is live, not at script load time.
+    Remove no-op global angle declaration.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Mon, 09 Jun 2026 00:00:00 +0000

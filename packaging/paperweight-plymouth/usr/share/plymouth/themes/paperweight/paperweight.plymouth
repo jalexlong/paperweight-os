@@ -1,0 +1,8 @@
+[Plymouth Theme]
+Name=PaperweightOS
+Description=Catppuccin Macchiato boot splash for PaperweightOS
+ModuleName=script
+
+[script]
+ImageDir=/usr/share/plymouth/themes/paperweight
+ScriptFile=/usr/share/plymouth/themes/paperweight/paperweight.script
