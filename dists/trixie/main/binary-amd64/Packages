@@ -1,17 +1,17 @@
 Package: paperweight-chromebook
-Version: 0.1.9-1
+Version: 0.1.10-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
-Installed-Size: 18
+Installed-Size: 20
 Depends: paperweight-desktop, acpi, acpid, wtype
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-chromebook/paperweight-chromebook_0.1.9-1_all.deb
-Size: 3492
-SHA256: 9ccab2d2ad6950cb92ebec5cf76dbef86a19017b88c9c4c951658ba073d25186
-SHA1: fdb834ab644579eb29f88d915b32cfdd08099658
-MD5sum: 628d1ef14b9846139ff25a71ea4e6075
+Filename: pool/main/p/paperweight-chromebook/paperweight-chromebook_0.1.10-1_all.deb
+Size: 3936
+SHA256: 7c9fc52dcf40ccf2c26effc6601ca07400b1a9beb1bac4e3d34190c00e2e9429
+SHA1: 118616d9d4745f5ad035c5c75e48e5a667657a68
+MD5sum: d7e7c82c80dd3f1ea71c2974e54a0e60
 Description: PaperweightOS hardware support for Chromebook 11 (3180)
  Sway config fragments for the Dell Chromebook 11 3180 running coreboot.
  Configures the Chromebook keyboard top-row as media/utility keys by default,
@@ -22,19 +22,20 @@ Description: PaperweightOS hardware support for Chromebook 11 (3180)
  automatic composition with the base paperweight-skel configuration.
 
 Package: paperweight-desktop
-Version: 0.1.8-1
+Version: 0.1.9-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
 Installed-Size: 9
 Depends: paperweight-skel, paperweight-fonts, sway, waybar, gtklock, swayidle, sway-notification-center, wofi, foot, firefox-esr, thunar, grim, slurp, wl-clipboard, brightnessctl, playerctl, network-manager, pipewire, pipewire-pulse, wireplumber, pavucontrol, xdg-desktop-portal-wlr, mosh, xdg-user-dirs, fonts-font-awesome, fonts-noto-color-emoji, git, curl, wget, vim, neovim, hx, cava, tmux, btop, zoxide, ca-certificates, power-profiles-daemon, dconf-cli, greetd, gtkgreet, cage
+Recommends: paperweight-grub
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: metapackages
-Filename: pool/main/p/paperweight-desktop/paperweight-desktop_0.1.8-1_all.deb
-Size: 2712
-SHA256: aadcacbedce8e49b2cef08025a537c631efcfb282b6f05cbd7f7ec7abba858f4
-SHA1: 10ffef3304c312854524b4949812089937642c55
-MD5sum: dfd8ddc82471c18caff1f488c0d7c647
+Filename: pool/main/p/paperweight-desktop/paperweight-desktop_0.1.9-1_all.deb
+Size: 2804
+SHA256: add6240f3a2e6c1a5f1f35b030c0bf053953c31682da308553ff4d9ac8afbd3b
+SHA1: b9d6ee01f3dca6ff695146dc91138c519e59e9c0
+MD5sum: d337a1477f6a47bd452ae8cb2a07305e
 Description: PaperweightOS desktop environment metapackage
  Installs all packages required for the PaperweightOS Sway-based desktop
  environment on Debian Stable (Trixie). Intended for use on refurbished
@@ -63,6 +64,25 @@ Description: PaperweightOS Nerd Fonts — JetBrains Mono and Symbols
  .
  Fonts are sourced from https://github.com/ryanoasis/nerd-fonts and licensed
  under the SIL Open Font License 1.1.
+
+Package: paperweight-grub
+Version: 0.1.0-1
+Architecture: all
+Maintainer: Alex Long <johnalexanderlong@gmail.com>
+Installed-Size: 411
+Homepage: https://github.com/jalexlong/paperweight-os
+Priority: optional
+Section: misc
+Filename: pool/main/p/paperweight-grub/paperweight-grub_0.1.0-1_all.deb
+Size: 180604
+SHA256: 5fc47821a3ff27158719d001c5a4ff01d98356a7fca040ed35f5086e07eed824
+SHA1: 1daa0136a8e8a86cde6ba99b6f26f2211587d2c5
+MD5sum: 1868f6e0b6247f844e655db9fbe26895
+Description: PaperweightOS GRUB theme — Catppuccin Macchiato
+ Installs a Catppuccin Macchiato-themed GRUB2 boot menu for PaperweightOS.
+ Sets GRUB_THEME in /etc/default/grub and runs update-grub on install.
+ .
+ No-op if GRUB is not installed (/etc/default/grub absent).
 
 Package: paperweight-skel
 Version: 0.2.29-1
