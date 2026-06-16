@@ -17,6 +17,7 @@ case "$1" in
         fi
 
         chmod +x /etc/skel/.local/bin/cava-waybar \
+                 /etc/skel/.local/bin/paperweight-network \
                  /etc/skel/.local/bin/paperweight-theme \
                  /etc/skel/.local/bin/sway-wait-float \
                  /usr/bin/paperweight-set-greeter-theme \

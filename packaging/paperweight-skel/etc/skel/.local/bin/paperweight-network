@@ -1,0 +1,79 @@
+#!/bin/bash
+# paperweight-network — yad-based Wi-Fi manager wrapping nmcli.
+# Shows available networks with signal strength; connects on selection.
+# Prompts for a password when the selected network has security enabled.
+#
+# Requires: yad, nmcli (network-manager)
+# Floats automatically via the for_window [app_id="yad"] sway rule.
+
+# Build yad row data from the current NetworkManager scan cache.
+# Note: SSIDs containing colons will not parse correctly (extremely rare).
+args=()
+while IFS= read -r line; do
+    in_use="${line%%:*}"; rest="${line#*:}"
+    ssid="${rest%%:*}";    rest="${rest#*:}"
+    signal="${rest%%:*}";  security="${rest#*:}"
+    [[ -z "$ssid" ]] && continue
+
+    sig="${signal//[^0-9]/}"
+    if   (( sig >= 80 )); then bar="▂▄▆█"
+    elif (( sig >= 60 )); then bar="▂▄▆░"
+    elif (( sig >= 40 )); then bar="▂▄░░"
+    elif (( sig >= 20 )); then bar="▂░░░"
+    else                       bar="░░░░"
+    fi
+
+    active=""
+    [[ "$in_use" == "*" ]] && active="✓"
+    args+=("$active" "$ssid" "$bar $sig%" "$security")
+done < <(nmcli --escape no -t -f IN-USE,SSID,SIGNAL,SECURITY dev wifi list 2>/dev/null)
+
+if [[ ${#args[@]} -eq 0 ]]; then
+    notify-send -u critical "paperweight-network" "No Wi-Fi networks found."
+    exit 1
+fi
+
+SELECTED=$(yad --list \
+    --title="Wi-Fi Networks" \
+    --width=600 --height=420 \
+    --column="" \
+    --column="Network" \
+    --column="Signal" \
+    --column="Security" \
+    --print-column=2 \
+    "${args[@]}" 2>/dev/null | tr -d '|') || exit 0
+
+[[ -z "$SELECTED" ]] && exit 0
+
+# Determine whether this network requires a password
+security=""
+while IFS=: read -r s sec; do
+    if [[ "$s" == "$SELECTED" ]]; then
+        security="$sec"
+        break
+    fi
+done < <(nmcli --escape no -t -f SSID,SECURITY dev wifi list 2>/dev/null)
+
+PASS=""
+if [[ -n "$security" && "$security" != "--" ]]; then
+    PASS=$(yad --entry \
+        --title="Connect to $SELECTED" \
+        --text="Password for <b>$SELECTED</b>:" \
+        --hide-text \
+        --width=380 \
+        2>/dev/null) || exit 0
+fi
+
+# Connect
+connect_ok=0
+if [[ -n "$PASS" ]]; then
+    nmcli device wifi connect "$SELECTED" password "$PASS" 2>/dev/null && connect_ok=1
+else
+    nmcli device wifi connect "$SELECTED" 2>/dev/null && connect_ok=1
+fi
+
+if [[ $connect_ok -eq 1 ]]; then
+    notify-send "Wi-Fi" "Connected to $SELECTED"
+else
+    notify-send -u critical "Wi-Fi" "Failed to connect to $SELECTED — check your password."
+fi

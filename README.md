@@ -123,6 +123,7 @@ Add `Shift` to open as a floating window instead: `Super+Shift+t`, `Super+Shift+
 | `Super+Ctrl+W` | Restart waybar |
 | `Super+p` | Theme picker (wofi) |
 | `Super+w` | Wallpaper picker (yad thumbnail grid) |
+| `Super+n` | Wi-Fi network picker (yad + nmcli) |
 | `Super+Shift+N` | Toggle notification center |
 | `Super+Shift+Q` | Exit sway |
 | `Print` | Screenshot → ~/Pictures/ |

@@ -1,3 +1,16 @@
+paperweight-skel (0.2.36-1) trixie; urgency=low
+
+  * Add paperweight-network: yad-based Wi-Fi picker wrapping nmcli. Shows
+    networks with signal bars and security type; prompts for password when
+    needed; notifies on connect/fail. Bound to $mod+n.
+  * 90-theme.conf: add for_window [app_id="yad"] floating enable so all
+    yad dialogs (network picker, wallpaper picker) float on the current
+    workspace automatically.
+  * postinst: chmod +x paperweight-network alongside other skel binaries.
+  * debian/install: ship paperweight-network.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Mon, 16 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.2.35-1) trixie; urgency=low
 
   * paperweight-theme: reload waybar with SIGUSR1 instead of kill+relaunch,

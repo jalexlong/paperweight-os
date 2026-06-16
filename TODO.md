@@ -119,12 +119,10 @@ Trixie installs. See git log for details.
   it is not in Trixie. Options: pre-built .deb in the repo, or find a Trixie-native
   TUI music player to replace it (`cmus`, `musikcube`).
 
-- [ ] **`paperweight-network` script** — yad-based Wi-Fi manager wrapping
-  nmcli. Flow: `nmcli -t dev wifi list` → `yad --list` table (IN-USE,
-  SSID, signal, security columns) → on selection, `yad --entry --hide-text`
-  for password if needed → `nmcli device wifi connect`. Bind to a keybind
-  (e.g. `$mod+n`). yad is already a dep via paperweight-wallpapers so no
-  new package dependency required.
+- [x] **`paperweight-network` script** — yad Wi-Fi picker wrapping nmcli.
+  Signal bar column, password prompt for secured networks, notify-send on
+  result. Bound to `$mod+n`. All yad windows float via
+  `for_window [app_id="yad"] floating enable` in 90-theme.conf. 0.2.36-1.
 
 - [ ] **User-facing install docs** — the README has the four-line apt snippet but
   nothing covering: locale/timezone during preseed, disk partitioning choices,
