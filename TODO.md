@@ -23,10 +23,9 @@ Trixie installs. See git log for details.
   `90-theme.conf` is authoritative. Load-order dependency on `90-colors.conf`
   documented in a comment. Bumped to 0.2.32-1.
 
-- [ ] **`cava-waybar` `BARS` vs `cava/waybar-config bars` are silently coupled**
-  — both hardcode `10`. If either changes, cava emits the wrong byte count and
-  waybar output garbles. Add a comment pairing them explicitly, or derive `BARS`
-  from the config file at runtime.
+- [x] **`cava-waybar` `BARS` derived from config** — script now reads `bars`
+  from `~/.config/cava/waybar-config` via `configparser` (fallback 10).
+  Hardcoded value removed; the two can no longer silently diverge. 0.2.33-1.
 
 - [ ] **`paperweight-theme` no guard for missing per-theme CSS** — `cp
   "$SWAYNC_THEMES/$THEME.css"` and the gtklock equivalent have no `-f` guard.

@@ -1,14 +1,19 @@
 #!/usr/bin/env python3
 """Pipe cava raw output to waybar as Unicode bar characters."""
 
+import configparser
 import json
 import os
 import subprocess
 import sys
 
-BARS = 10
 BLOCKS = " ▁▂▃▄▅▆▇█"
 CONF = os.path.expanduser("~/.config/cava/waybar-config")
+
+# Read bars count from the same config cava uses so they stay in sync.
+_cfg = configparser.ConfigParser()
+_cfg.read(CONF)
+BARS = _cfg.getint("general", "bars", fallback=10)
 
 proc = subprocess.Popen(
     ["cava", "-p", CONF],

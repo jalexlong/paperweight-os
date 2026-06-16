@@ -1,3 +1,10 @@
+paperweight-skel (0.2.33-1) trixie; urgency=low
+
+  * cava-waybar: derive BARS from waybar-config at runtime via configparser
+    instead of hardcoding 10, so script and config can't silently diverge.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Mon, 16 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.2.32-1) trixie; urgency=low
 
   * sway/config: remove dead gaps/border declarations (inner 5, outer 5,
