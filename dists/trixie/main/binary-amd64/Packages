@@ -89,29 +89,32 @@ Description: PaperweightOS GRUB theme — all four Catppuccin variants
  Recommends grub-pc or grub-efi; no-op if /etc/default/grub is absent.
 
 Package: paperweight-plymouth
-Version: 0.1.1-1
+Version: 0.1.2-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
-Installed-Size: 18
+Installed-Size: 33
 Depends: plymouth, plymouth-label
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-plymouth/paperweight-plymouth_0.1.1-1_all.deb
-Size: 4446
-SHA256: 8460e1c72ce96fd6e31c3f36fdc806e67602504781e9ac82336babd46f7755be
-SHA1: 26eeed0b55e4ecc721324fed0b86f58a5d3a3f89
-MD5sum: 3051563c492f4e4b6942db7f9a0d31da
-Description: PaperweightOS Plymouth theme — Catppuccin Macchiato
- Installs a Catppuccin Macchiato-themed Plymouth boot splash for PaperweightOS.
- Uses the script plugin: solid base (#24273a) background with a pulsing
- centered "PaperweightOS" label.
+Filename: pool/main/p/paperweight-plymouth/paperweight-plymouth_0.1.2-1_all.deb
+Size: 5822
+SHA256: 0516ccff76e51e02342942fcf09acd4a416e131723628847b3709e2c243a4b56
+SHA1: 442801067b3f8976c95c2a29dd198ce923519431
+MD5sum: 38790f00b390ff0ad457148a0fa9671e
+Description: PaperweightOS Plymouth theme — all four Catppuccin variants
+ Installs a Catppuccin-themed Plymouth boot splash for PaperweightOS.
+ Ships all four variants (Macchiato, Latte, Frappé, Mocha). Defaults to
+ Macchiato on install. Uses the script plugin: solid base background with
+ a fixed wordmark and three-dot sequencing animation.
+ .
+ Switch variants with: sudo paperweight-plymouth-theme <variant>
  .
  Sets the Plymouth default theme and rebuilds the initramfs on install and
  removal. On eMMC storage this may take 30-60 seconds.
 
 Package: paperweight-skel
-Version: 0.2.40-1
+Version: 0.2.41-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
 Installed-Size: 168
@@ -119,11 +122,11 @@ Replaces: greetd
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.40-1_all.deb
-Size: 23978
-SHA256: 1270df45123d10093083220a4309d5a80e7586ea3b09f7978cbae15343c6f790
-SHA1: 9897dc08a8c8588c4f8161d6c3783443b4d5dc59
-MD5sum: e35de8207a0fa57e3105276011e95db7
+Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.41-1_all.deb
+Size: 24060
+SHA256: 728411f02bac1caf4602368d35d0d28956ea38ee50ea488ab4f6a4cfab5df287
+SHA1: 6bf7bdbe7b0590dc8db64e98c9ee909673606330
+MD5sum: 8d79128976ad5f18ca833f83359f23c9
 Description: PaperweightOS default configuration skeleton
  Provides default XDG configuration files for the PaperweightOS desktop,
  installed to /etc/skel so they are copied into new user home directories
