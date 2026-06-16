@@ -28,6 +28,7 @@ terminal-border: "0"
     item_font = "Paperweight Regular 14"
     item_color = "#a5adce"
     selected_item_color = "#ca9ee6"
+    selected_item_pixmap_style = "frappe-highlight.png*"
     item_height = 32
     item_padding = 10
     item_spacing = 4

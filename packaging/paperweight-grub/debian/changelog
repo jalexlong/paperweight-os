@@ -1,3 +1,13 @@
+paperweight-grub (0.1.5-1) trixie; urgency=low
+
+  * Add selected item background highlight to all four variant themes: a
+    solid surface1-colored pixmap (selected_item_pixmap_style) makes the
+    active boot entry visually distinct beyond text color alone.
+  * Add per-variant highlight PNGs: macchiato-highlight.png, latte-highlight.png,
+    frappe-highlight.png, mocha-highlight.png.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Mon, 16 Jun 2026 00:00:03 +0000
+
 paperweight-grub (0.1.4-1) trixie; urgency=low
 
   * Add etc/sudoers.d/paperweight-grub: allow %sudo group to run
