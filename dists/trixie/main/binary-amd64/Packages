@@ -66,7 +66,7 @@ Description: PaperweightOS Nerd Fonts — JetBrains Mono and Symbols
  under the SIL Open Font License 1.1.
 
 Package: paperweight-grub
-Version: 0.1.4-1
+Version: 0.1.5-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
 Installed-Size: 431
@@ -74,11 +74,11 @@ Recommends: grub-pc | grub-efi-amd64 | grub-efi-arm64
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-grub/paperweight-grub_0.1.4-1_all.deb
-Size: 181230
-SHA256: 5e2255d66c9dfd0fd064f4e166bcc2aa4119cc161bcb7a594fbae9574eb24016
-SHA1: 037136ac34aece24453984e36a07a4b01ed4291f
-MD5sum: 3d9d94eeca7a83d2cf2057fc48808fdc
+Filename: pool/main/p/paperweight-grub/paperweight-grub_0.1.5-1_all.deb
+Size: 180766
+SHA256: d8b2b257afdc4828735201feabd39edfbb480024d50e97837d756cfaa6a2d162
+SHA1: ee186d47bdb53fdbc0760ae0511cd5bcbb470dc8
+MD5sum: 413eea7e141349d41bae135974b274e0
 Description: PaperweightOS GRUB theme — all four Catppuccin variants
  Installs a Catppuccin-themed GRUB2 boot menu for PaperweightOS.
  Ships all four Catppuccin variants (Macchiato, Latte, Frappé, Mocha).
@@ -114,19 +114,19 @@ Description: PaperweightOS Plymouth theme — all four Catppuccin variants
  removal. On eMMC storage this may take 30-60 seconds.
 
 Package: paperweight-skel
-Version: 0.2.42-1
+Version: 0.2.43-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
-Installed-Size: 170
+Installed-Size: 176
 Replaces: greetd
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.42-1_all.deb
-Size: 24202
-SHA256: 4db4401a2456351d1cdcc46a7fc8f6d77783942d15bc2d0c924d7ceeeec138e9
-SHA1: 33dde17519450aecc30e0a1d4e4205f225c77208
-MD5sum: 3160fb8ccc5c6e56555b521ff907c1b3
+Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.43-1_all.deb
+Size: 24720
+SHA256: 9ea26b0898efe57c7e67d309e0814a5a3ffc829db56946cebd1f7d210fb1112b
+SHA1: 03207c7c9cb773c2c1fde66c9372aa99af2244a0
+MD5sum: 0419e44f09df3d416749e8f7b623d84b
 Description: PaperweightOS default configuration skeleton
  Provides default XDG configuration files for the PaperweightOS desktop,
  installed to /etc/skel so they are copied into new user home directories
@@ -137,19 +137,19 @@ Description: PaperweightOS default configuration skeleton
  and are dropped into config.d/ directories for fragment-based composition.
 
 Package: paperweight-wallpapers
-Version: 0.3.2-1
+Version: 0.3.3-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
-Installed-Size: 533
+Installed-Size: 538
 Depends: paperweight-skel, swaybg, yad
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-wallpapers/paperweight-wallpapers_0.3.2-1_all.deb
-Size: 250658
-SHA256: e553df0822fef1b0b5317d23c2e6c12aed1444042faec03231a81c43ed2d95b3
-SHA1: b000c17078bce5f11452c07408b5fc210e985a30
-MD5sum: 6a024a0e655b24c45c345673ca9c075f
+Filename: pool/main/p/paperweight-wallpapers/paperweight-wallpapers_0.3.3-1_all.deb
+Size: 251392
+SHA256: ca6a3e3c57ab0ca9dd6a32c4dbc7a4e5d4bf909b423bac9854c1cf832ca728f1
+SHA1: b05249931ae774f41505a60c8aee4e6fd3a6148a
+MD5sum: 7477b69f580d663bab0d032832e71288
 Description: PaperweightOS wallpapers — Catppuccin themed backgrounds
  Provides wallpapers for PaperweightOS, installed to
  /usr/share/paperweight-os/wallpapers/:
