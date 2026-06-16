@@ -18,10 +18,10 @@ Trixie installs. See git log for details.
   alongside swaync and gtklock. `style.css` synced to authoritative macchiato
   palette. Bumped to 0.2.31-1.
 
-- [ ] **Duplicate gap/border declarations** — `sway/config` sets
-  `gaps inner 5 / outer 5 / border pixel 2`; `90-theme.conf` overrides these
-  with different values. The base `config` values are dead. Remove them from
-  `sway/config` to avoid confusion.
+- [x] **Duplicate gap/border declarations removed** — dead `gaps inner 5`,
+  `gaps outer 5`, `default_border pixel 2` removed from `sway/config`;
+  `90-theme.conf` is authoritative. Load-order dependency on `90-colors.conf`
+  documented in a comment. Bumped to 0.2.32-1.
 
 - [ ] **`cava-waybar` `BARS` vs `cava/waybar-config bars` are silently coupled**
   — both hardcode `10`. If either changes, cava emits the wrong byte count and

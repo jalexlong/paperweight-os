@@ -13,10 +13,6 @@ set $files thunar
 set $menu wofi -S drun
 set $lock gtklock
 
-gaps inner 5
-gaps outer 5
-default_border pixel 2
-
 ### App launchers
     # $mod+t and $mod+b are overridden in config.d/40-workspaces.conf with workspace switching.
     # $mod+Return and $mod+Shift+Return stay here as workspace-agnostic fallbacks.
