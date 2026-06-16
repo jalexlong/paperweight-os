@@ -122,6 +122,7 @@ Add `Shift` to open as a floating window instead: `Super+Shift+t`, `Super+Shift+
 | `Super+Shift+R` | Reload sway config |
 | `Super+Ctrl+W` | Restart waybar |
 | `Super+p` | Theme picker (wofi) |
+| `Super+w` | Wallpaper picker (yad thumbnail grid) |
 | `Super+Shift+N` | Toggle notification center |
 | `Super+Shift+Q` | Exit sway |
 | `Print` | Screenshot → ~/Pictures/ |
@@ -139,11 +140,11 @@ lock screen). On the Chromebook, the top-row keys send these by default;
 
 | Package | Version | Description |
 |---|---|---|
-| `paperweight-skel` | 0.2.29 | Default configs installed to `/etc/skel/` |
+| `paperweight-skel` | 0.2.35 | Default configs installed to `/etc/skel/` |
 | `paperweight-desktop` | 0.1.10 | Metapackage: pulls in the full desktop stack |
 | `paperweight-fonts` | 0.1.0 | JetBrains Mono Nerd Font + Symbols Nerd Font |
-| `paperweight-wallpapers` | 0.1.0 | Catppuccin wallpapers (Latte/Frappé/Macchiato/Mocha) |
-| `paperweight-grub` | 0.1.1 | Catppuccin Macchiato GRUB2 theme |
+| `paperweight-wallpapers` | 0.3.2 | Catppuccin wallpapers + yad wallpaper picker |
+| `paperweight-grub` | 0.1.2 | Catppuccin Macchiato GRUB2 theme |
 | `paperweight-plymouth` | 0.1.0 | Catppuccin Macchiato Plymouth boot splash |
 | `paperweight-chromebook` | 0.1.11 | Dell Chromebook 11 3180 hardware support |
 

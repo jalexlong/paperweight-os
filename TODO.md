@@ -76,13 +76,12 @@ Trixie installs. See git log for details.
   those two flavours; latte and macchiato each have two JPEG artwork variants.
   Either add artwork for all four or document the asymmetry.
 
-- [ ] **README.md package table is stale** — lists `paperweight-wallpapers` at
-  `0.1.0` (current: `0.3.0`) and `paperweight-skel` at `0.2.29` (current:
-  `0.2.30`). Update to match current changelogs.
+- [x] **README.md package table updated** — all versions current; added
+  `Super+w` wallpaper picker binding to keybindings table.
 
-- [ ] **`create-packaging.sh` is stale scaffolding** — references kitty, mako,
-  nemo, and qutebrowser; none of these are in the shipped stack. Either update
-  it to reflect the real package list or delete it to avoid confusing contributors.
+- [x] **`create-packaging.sh` deleted** — stale scaffold referencing kitty,
+  mako, nemo, qutebrowser. Actual package structure in `packaging/` is
+  authoritative.
 
 ---
 
