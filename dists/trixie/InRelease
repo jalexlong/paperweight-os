@@ -4,35 +4,35 @@ Hash: SHA512
 Origin: PaperweightOS
 Label: PaperweightOS
 Codename: trixie
-Date: Tue, 16 Jun 2026 18:28:05 UTC
+Date: Tue, 16 Jun 2026 18:35:52 UTC
 Architectures: amd64
 Components: main
 Description: PaperweightOS package repository
 MD5Sum:
- faee36ba734930e5a4b50478ba30b333 7302 main/binary-amd64/Packages
- 305618931c108473e42ebcc632dff5a9 2898 main/binary-amd64/Packages.gz
+ c479f5000addc37ff2d907c772bce4c1 7302 main/binary-amd64/Packages
+ fd9ac4af85f5d8d5fd660f4e6fb152a5 2901 main/binary-amd64/Packages.gz
  2a5b562e92f35e9a3f9efbca426607d3 125 main/binary-amd64/Release
 SHA1:
- 1fdfac378c9c0607fc9fe8b1d8a92f76231967c2 7302 main/binary-amd64/Packages
- 164ddead3aef40ab1446f677c9c11aa805c37df8 2898 main/binary-amd64/Packages.gz
+ d189c82a8193fb9316a1d7a149a6cbc8029e740c 7302 main/binary-amd64/Packages
+ e70656f7b9b79dc1d4ae80d048128113ebef0bd6 2901 main/binary-amd64/Packages.gz
  0e69efac0057bcf7153e8dfb097d68bff8883215 125 main/binary-amd64/Release
 SHA256:
- dc4e054216b9079a2e66a8353e5f704258575716dec146743cb723c4a09f104e 7302 main/binary-amd64/Packages
- c2afa7b95960f90f33e139ce62fa292b2608fadf31833634e8839875fc8bc3a6 2898 main/binary-amd64/Packages.gz
+ b35797084033c18098ea31fe5f96ba7b832ca348dd03334dfe1e96a7066102e7 7302 main/binary-amd64/Packages
+ 680143539bcc954eed860168081d91942fb13fbf8d5c31edcabe45569b6024de 2901 main/binary-amd64/Packages.gz
  cc615ee67c628c10068d765690fa8ae3b374f95ee7ad42cdf14e3115f83156d8 125 main/binary-amd64/Release
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEDs/jVB4/zhMo9VsnoKUh90eAoBQFAmoxlbUACgkQoKUh90eA
-oBRAqg//d3+4mt0xqfar5OxbbVACwMP0BWXXI9FFufALbWIet2i3dzcNZ0ceiORG
-MilpVRAnzaBEYg1uHDMoMjpwlJPz5nvb6v5SRL3rwvyTiHfK8vq+laUn+dv+X1Q5
-Mq4awDe4CW5Jjdo+3AtFa/Zv1KZLkGOQLJTXZTb8QQ2GawSOtdX2T1AQhhc5YV36
-Li0gHQGNXQgn97/IjAXgP0g0VwVxb+ayLPmRK4w2KUXTdcXMSvSAJYivbMHSh2iO
-UkeHyH5eeZ/KTwGBvUEG4B4ijRYX78Yimu3nMW2L1A0VoIIoMvixrdtU7BEluAmY
-NlBgF0GQq1Oxap7hpFzqLPslmtXVgj3QE26wEs/qkLz6T1qERIszbFmkY9dezTEg
-JpEMBj5EpRlvy1cHegXh+wDwEsHPF9CjEiYCbNXcNEvTuCULbZunkUmFakdBM24m
-KtLZnGGzDDb6SLyr47AAc6yDr3F1LTFW4MlAMXnZnrFxOxVKykGR+cvvLoR+LyZa
-5Su07jahbH3Xk4RAuWtQKBrgxz2b15Yvb1KNuDNdTtFDgk7GcoS90kqVNwc6DrJe
-Qd8xAhEZK+JsyHnXJ2LlQJTN/RL+wqQcNuOXmdYZ5801i/vPW5s3qFGrAMV1pJse
-sdLTyMggpZyVkPrZeiqKPgDmJpVD5Vx+uDIs4VrCg1IET4u1LPw=
-=e28y
+iQIzBAEBCgAdFiEEDs/jVB4/zhMo9VsnoKUh90eAoBQFAmoxl4kACgkQoKUh90eA
+oBRYWRAAosotfSmmXyiebhzEXol9sb1tF477YjCW3i40FWhe6WT2AOdFGEC7bJw6
+8SODqrUR+7+I0ul6RssIizsCSidRUey9gsME/vy2AsnaSyP5NrOgkXAkiyQ5EfqH
+hFqmYpP7hDu0cXz8nqcG8QIN9KIJdjwux0JVHQj92FnPpx8l9Tu+hF604t2m2GLR
+0d1PH2HKiOV81lvt4JBm1xLrgzPfcg2+OccGhchNZGdl598tH+qP6YN0bC4fr/bD
+F/CfMhh5hrto9kjUuWWwUNXSRHLG3NuDF2IFw5ehNs+zLveNbvoPDgZun/Z8zHWG
+zuEjDmUDsfNkjVjueve4NQ85rWMHqujq7bSz5QfkvnNnZOHgVreCQ7eEJG+fHJmI
+BFJgy8GE5Q5dWn55qUkPnHkpilNhZ7bg2gN0OU+39Tv8R5w5nNQixPBeZu1prrqM
+2EJtbPR07IscAw2tye9J1YOs1UF0H380qUVT0VYSj5dlBWtAwOGxDpw+r5+1TBS3
+l8qh3EBC9708S7TtsPtH7h+uDJWaOfuprRilSq3TlHyyBn6ZHNiSd/jA2zYJ6Ol0
+6pSWvWmv7vBX4WFqHD6YmuT5xnkwEi3LdrSp5kOl0QoavlNzVGG2G78vNqmOflhq
+wBKx3GLB/QEgYj+LoBLx08wA/4fsbLIx79D/lTNzFiv0dS950/w=
+=r84X
 -----END PGP SIGNATURE-----
