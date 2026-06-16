@@ -107,7 +107,7 @@ Description: PaperweightOS Plymouth theme — Catppuccin Macchiato
  removal. On eMMC storage this may take 30-60 seconds.
 
 Package: paperweight-skel
-Version: 0.2.29-1
+Version: 0.2.30-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
 Installed-Size: 150
@@ -115,11 +115,11 @@ Replaces: greetd
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.29-1_all.deb
-Size: 20858
-SHA256: 1869c1e01954349cc4556346931c3374e32b88841fde62e8bc62b035242d4ac9
-SHA1: 75d4622454232c96f6f9d7908a5095cbb47287c7
-MD5sum: 31357b8105ea1445f565fc71c3020465
+Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.30-1_all.deb
+Size: 20982
+SHA256: 843d7c499a1ac2097486633255ce213dfb1b9f9ebefc7651bd9c2d9002a23541
+SHA1: 8843ebf26b0b98d88486437b03b16db368a3d679
+MD5sum: 8ed3d9136d253b977492e6a06a2feb01
 Description: PaperweightOS default configuration skeleton
  Provides default XDG configuration files for the PaperweightOS desktop,
  installed to /etc/skel so they are copied into new user home directories
@@ -130,23 +130,26 @@ Description: PaperweightOS default configuration skeleton
  and are dropped into config.d/ directories for fragment-based composition.
 
 Package: paperweight-wallpapers
-Version: 0.1.0-1
+Version: 0.3.0-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
-Installed-Size: 50
-Depends: paperweight-skel
+Installed-Size: 532
+Depends: paperweight-skel, waypaper
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-wallpapers/paperweight-wallpapers_0.1.0-1_all.deb
-Size: 3258
-SHA256: f6275ba39bf280da6a94103c4a4355e4a9d65ccf5ff0ee8e5aa961ed6d2fd694
-SHA1: b9a42dde9cace7c7eebd5628fe09f25039af30bd
-MD5sum: 263d6af6c428dd298061126905fb62c7
+Filename: pool/main/p/paperweight-wallpapers/paperweight-wallpapers_0.3.0-1_all.deb
+Size: 249878
+SHA256: eec84ffba1e6eccfce9cdb29d04e54dd0e813e3565f626c14e1a39027a093ad6
+SHA1: 23354b0e2392fa9dae2022a2f07c465afde18602
+MD5sum: d6c4f3841fac662fb127bac22b09445f
 Description: PaperweightOS wallpapers — Catppuccin themed backgrounds
- Provides solid-color wallpapers matching the Catppuccin palette for all
- four flavours (Latte, Frappé, Macchiato, Mocha), installed to
- /usr/share/paperweight-os/wallpapers/.
+ Provides wallpapers for PaperweightOS, installed to
+ /usr/share/paperweight-os/wallpapers/:
+ .
+  - Solid-color backgrounds for all four Catppuccin flavours (Latte,
+    Frappé, Macchiato, Mocha)
+  - Custom artwork wallpapers for Latte and Macchiato, two variants each
  .
  Also installs a sway config fragment (91-wallpaper.conf) that applies
  the active theme's wallpaper on session start and after sway reload.
