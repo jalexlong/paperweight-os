@@ -66,22 +66,25 @@ Description: PaperweightOS Nerd Fonts — JetBrains Mono and Symbols
  under the SIL Open Font License 1.1.
 
 Package: paperweight-grub
-Version: 0.1.2-1
+Version: 0.1.3-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
-Installed-Size: 415
+Installed-Size: 426
 Recommends: grub-pc | grub-efi-amd64 | grub-efi-arm64
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-grub/paperweight-grub_0.1.2-1_all.deb
-Size: 179448
-SHA256: c610ab65cf70f5b87a0f5d18e91de6e50227b2af629ebe495ce4c8a8d189aa20
-SHA1: 275048a448f9aaad5ffebf03dd5603634602653c
-MD5sum: 634d61d7d575e8050ba113f2a2221930
-Description: PaperweightOS GRUB theme — Catppuccin Macchiato
- Installs a Catppuccin Macchiato-themed GRUB2 boot menu for PaperweightOS.
+Filename: pool/main/p/paperweight-grub/paperweight-grub_0.1.3-1_all.deb
+Size: 180112
+SHA256: fbc850c26c1def5b58c8ffdd94af2929ae22a2f50de6af046e99f83c9c61ddfb
+SHA1: 8164c827293ca148394f5d41b9802dd68822c39d
+MD5sum: 080cfa9cc743a02e831bcdf11ef5e2de
+Description: PaperweightOS GRUB theme — all four Catppuccin variants
+ Installs a Catppuccin-themed GRUB2 boot menu for PaperweightOS.
+ Ships all four Catppuccin variants (Macchiato, Latte, Frappé, Mocha).
  Sets GRUB_THEME in /etc/default/grub and runs update-grub on install.
+ .
+ Switch variants with: sudo paperweight-grub-theme <macchiato|latte|frappe|mocha>
  .
  Recommends grub-pc or grub-efi; no-op if /etc/default/grub is absent.
 
