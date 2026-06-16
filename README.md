@@ -78,6 +78,55 @@ sudo apt install paperweight-desktop
 sudo apt install paperweight-chromebook
 ```
 
+Reboot after install. greetd starts automatically; log in and sway launches.
+
+---
+
+## First Boot
+
+### Brightness keys
+
+`brightnessctl` requires membership in the `video` group. The postinst adds
+this for users created *after* install via `adduser`. If your account existed
+before installing `paperweight-desktop`, add yourself manually:
+
+```bash
+sudo usermod -aG video $USER
+```
+
+Log out and back in (or reboot) for the group change to take effect. Until
+then `XF86MonBrightnessUp/Down` will silently do nothing.
+
+### Switching themes
+
+Four Catppuccin variants ship out of the box. Switch with the wofi picker
+(`Super+p`) or from a terminal:
+
+```bash
+paperweight-theme macchiato   # default
+paperweight-theme latte       # light
+paperweight-theme frappe
+paperweight-theme mocha
+```
+
+The active theme is remembered across reboots in
+`~/.config/paperweight-os/active-theme`.
+
+### Music
+
+`cmus` is installed but has no dedicated launcher keybind. Go to workspace 4
+(`Super+4`), open a terminal (`Super+t`), and run `cmus`. On first launch,
+press `5` to open the file browser and add your music library.
+
+### Discord / Vesktop
+
+Neither is in Debian repos. Install the `.deb` manually:
+
+- **Vesktop** (recommended — better Wayland support): [vencord.dev/download](https://vencord.dev/download)
+- **Discord** (official): [discord.com/download](https://discord.com/download)
+
+Once installed, `Super+c` will open it on workspace 5 automatically.
+
 ---
 
 ## Key Bindings
@@ -168,24 +217,61 @@ bash publish.sh
 
 ## Automated Install (Preseed)
 
-`preseed/paperweight.cfg` automates a Debian Trixie install and bootstraps the desktop:
+`preseed/paperweight.cfg` automates a Debian Trixie install and bootstraps the desktop.
 
-1. Edit the file — set `partman-auto/disk`, locale, timezone, and the password hash.
-2. Boot a Debian Trixie netinstall ISO with the preseed file on a USB stick:
-   ```
-   auto=true priority=critical file=/cdrom/preseed.cfg
-   ```
-   Or serve it over HTTP and pass `url=http://<server>/paperweight.cfg`.
+### Customize before use
 
-   **virt-manager note:** use the virbr0 gateway IP (`192.168.122.1` by default),
-   not your host's physical IP — the VM can't reach the physical interface through
-   libvirt NAT. Serve with `python3 -m http.server 8080` from the repo root, then:
-   ```
-   auto=true priority=critical url=http://192.168.122.1:8080/preseed/paperweight.cfg
-   ```
+Open `preseed/paperweight.cfg` and set these three things:
 
-The `late_command` adds the PaperweightOS apt repo and runs
-`apt-get install -y paperweight-desktop` inside the target system.
+**1. Target disk** (line `partman-auto/disk`) — the file auto-detects the first
+available disk, but verify it matches your hardware:
+
+| Hardware | Device |
+|---|---|
+| SATA / NVMe laptop | `/dev/sda` or `/dev/nvme0n1` |
+| Dell Chromebook 11 3180 (eMMC) | `/dev/mmcblk0` |
+| libvirt VM (virtio) | `/dev/vda` |
+
+**2. Locale and timezone:**
+```
+d-i debian-installer/locale string en_US.UTF-8
+d-i keyboard-configuration/xkb-keymap select us
+d-i time/zone string UTC
+```
+
+**3. Username and password** — default user is `user` with password `paperweight`.
+Generate a new hash:
+```bash
+printf 'yourpassword' | mkpasswd -s -m sha-512
+```
+Paste the output into the `passwd/user-password-crypted` line.
+
+### Run the install
+
+Boot a [Debian Trixie netinstall ISO](https://www.debian.org/devel/debian-installer/)
+and pass the preseed at the boot prompt.
+
+**From USB stick** (place `preseed.cfg` in the root of the stick):
+```
+auto=true priority=critical file=/cdrom/preseed.cfg
+```
+
+**Over HTTP** (serve from another machine):
+```
+auto=true priority=critical url=http://<server-ip>:8080/preseed/paperweight.cfg
+```
+
+**virt-manager:** use the virbr0 gateway (`192.168.122.1` by default), not your
+host's physical IP — the VM can't reach it through libvirt NAT:
+```bash
+# On host, from repo root:
+python3 -m http.server 8080
+# Boot parameter in the VM:
+auto=true priority=critical url=http://192.168.122.1:8080/preseed/paperweight.cfg
+```
+
+The `late_command` adds the PaperweightOS apt repo and installs `paperweight-desktop`
+inside the target system. After reboot, complete [First Boot](#first-boot) setup.
 
 ---
 

@@ -123,15 +123,16 @@ Trixie installs. See git log for details.
   result. Bound to `$mod+n`. All yad windows float via
   `for_window [app_id="yad"] floating enable` in 90-theme.conf. 0.2.36-1.
 
-- [ ] **User-facing install docs** — the README has the four-line apt snippet but
-  nothing covering: locale/timezone during preseed, disk partitioning choices,
-  post-install first-boot steps, or how to add `video` group membership for
-  existing users (currently documented only in CLAUDE.md Known Issues).
+- [x] **User-facing install docs** — README now has a First Boot section
+  (video group, theme switching, cmus, Discord) and an expanded Preseed
+  section (disk selection table, locale/timezone, password hash, HTTP/USB
+  boot instructions, virt-manager note).
 
-- [ ] **Theme authoring guide** — CLAUDE.md documents the five per-theme files
-  but `wofi/themes/` doesn't exist yet (see bug above), and gtkgreet themes live
-  under `/etc/greetd/themes/` (system) not skel. Reconcile the guide with reality
-  once wofi theming is fixed.
+- [ ] **Theme authoring guide** — CLAUDE.md documents the six per-theme files
+  (sway, waybar palette+waybar, swaync, gtklock, wofi). gtkgreet themes live
+  under `/etc/greetd/themes/` (system, installed by paperweight-skel postinst)
+  and are not part of the per-user theme switcher. Write a guide covering
+  all six files + how to register a new theme with paperweight-theme.
 
 - [ ] **Additional themes beyond Catppuccin** — the architecture supports arbitrary
   themes but only Catppuccin variants exist. A Nord or Dracula variant would
