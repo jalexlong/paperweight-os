@@ -1,0 +1,28 @@
+#!/bin/sh
+set -e
+
+THEME_DIR=/usr/share/grub/themes/paperweight
+VARIANTS="macchiato latte frappe mocha"
+
+usage() {
+    echo "Usage: paperweight-grub-theme <variant>"
+    echo "Variants: $VARIANTS"
+    exit 1
+}
+
+[ $# -eq 1 ] || usage
+
+VARIANT="$1"
+case "$VARIANT" in
+    macchiato|latte|frappe|mocha) ;;
+    *) echo "Unknown variant: $VARIANT" >&2; usage ;;
+esac
+
+if [ "$(id -u)" -ne 0 ]; then
+    echo "paperweight-grub-theme: must run as root" >&2
+    exit 1
+fi
+
+cp "$THEME_DIR/$VARIANT.txt" "$THEME_DIR/theme.txt"
+update-grub
+echo "GRUB theme set to: $VARIANT"

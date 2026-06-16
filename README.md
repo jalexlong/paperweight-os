@@ -112,6 +112,15 @@ paperweight-theme mocha
 The active theme is remembered across reboots in
 `~/.config/paperweight-os/active-theme`.
 
+To match the GRUB boot menu to your chosen variant, run once as root:
+
+```bash
+sudo paperweight-grub-theme macchiato   # default
+sudo paperweight-grub-theme latte
+sudo paperweight-grub-theme frappe
+sudo paperweight-grub-theme mocha
+```
+
 ### Music
 
 `cmus` is installed but has no dedicated launcher keybind. Go to workspace 4
@@ -193,7 +202,7 @@ lock screen). On the Chromebook, the top-row keys send these by default;
 | `paperweight-desktop` | 0.1.11 | Metapackage: pulls in the full desktop stack |
 | `paperweight-fonts` | 0.1.0 | JetBrains Mono Nerd Font + Symbols Nerd Font |
 | `paperweight-wallpapers` | 0.3.2 | Catppuccin wallpapers + yad wallpaper picker |
-| `paperweight-grub` | 0.1.2 | Catppuccin Macchiato GRUB2 theme |
+| `paperweight-grub` | 0.1.3 | Catppuccin GRUB2 theme — all four variants |
 | `paperweight-plymouth` | 0.1.1 | Catppuccin Macchiato Plymouth boot splash |
 | `paperweight-chromebook` | 0.1.11 | Dell Chromebook 11 3180 hardware support |
 

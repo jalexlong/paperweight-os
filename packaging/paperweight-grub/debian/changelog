@@ -1,3 +1,19 @@
+paperweight-grub (0.1.3-1) trixie; urgency=low
+
+  * Add all four Catppuccin variant themes: macchiato.txt, latte.txt,
+    frappe.txt, mocha.txt. Each applies per-variant palette for background,
+    item text, selected highlight (mauve), progress bar, and timeout label.
+  * Add paperweight-grub-theme helper: copies selected variant to theme.txt
+    and runs update-grub. Usage: sudo paperweight-grub-theme <variant>.
+  * theme.txt: improved layout — narrower 60% menu (was 70%), thinner 4px
+    progress bar (was 16px), header 'paperweight' label at 8% top in overlay0.
+    Defaults to Macchiato on fresh install.
+  * debian/install: add all four variant .txt files and usr/bin helper.
+  * debian/control: update description to mention all four variants and the
+    paperweight-grub-theme switcher.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 16 Jun 2026 00:00:01 +0000
+
 paperweight-grub (0.1.2-1) trixie; urgency=low
 
   * control: add Recommends: grub-pc | grub-efi-amd64 | grub-efi-arm64.

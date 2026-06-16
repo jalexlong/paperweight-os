@@ -1,5 +1,4 @@
-# PaperweightOS GRUB theme — Catppuccin Macchiato (active)
-# Switch variants: sudo paperweight-grub-theme <macchiato|latte|frappe|mocha>
+# PaperweightOS GRUB theme — Catppuccin Macchiato
 # https://github.com/jalexlong/paperweight-os
 
 title-text: ""

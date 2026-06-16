@@ -11,8 +11,11 @@ Package: paperweight-grub
 Architecture: all
 Depends: ${misc:Depends}
 Recommends: grub-pc | grub-efi-amd64 | grub-efi-arm64
-Description: PaperweightOS GRUB theme — Catppuccin Macchiato
- Installs a Catppuccin Macchiato-themed GRUB2 boot menu for PaperweightOS.
+Description: PaperweightOS GRUB theme — all four Catppuccin variants
+ Installs a Catppuccin-themed GRUB2 boot menu for PaperweightOS.
+ Ships all four Catppuccin variants (Macchiato, Latte, Frappé, Mocha).
  Sets GRUB_THEME in /etc/default/grub and runs update-grub on install.
+ .
+ Switch variants with: sudo paperweight-grub-theme <macchiato|latte|frappe|mocha>
  .
  Recommends grub-pc or grub-efi; no-op if /etc/default/grub is absent.
