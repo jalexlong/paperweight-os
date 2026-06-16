@@ -1,3 +1,12 @@
+paperweight-skel (0.2.43-1) trixie; urgency=low
+
+  * foot: split colors into ~/.config/foot/colors.ini included from foot.ini;
+    add per-theme color files under ~/.config/foot/themes/<name>.ini.
+    paperweight-theme now copies the active theme's colors.ini on every switch,
+    so new foot windows inherit the current theme without manual edits.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Mon, 16 Jun 2026 00:00:07 +0000
+
 paperweight-skel (0.2.42-1) trixie; urgency=low
 
   * paperweight-theme: gate system-surface updates (gtkgreet, GRUB, Plymouth)

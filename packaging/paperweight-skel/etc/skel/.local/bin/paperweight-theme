@@ -8,6 +8,7 @@
 #   ~/.config/waybar/themes/<name>-waybar.css  ← waybar module styles
 #   ~/.config/swaync/themes/<name>.css
 #   ~/.config/gtklock/themes/<name>.css
+#   ~/.config/foot/themes/<name>.ini
 #
 # With no argument, prompts via wofi.
 
@@ -16,6 +17,7 @@ WAYBAR_THEMES="$HOME/.config/waybar/themes"
 SWAYNC_THEMES="$HOME/.config/swaync/themes"
 GTKLOCK_THEMES="$HOME/.config/gtklock/themes"
 WOFI_THEMES="$HOME/.config/wofi/themes"
+FOOT_THEMES="$HOME/.config/foot/themes"
 
 list_themes() {
     for f in "$SWAY_THEMES"/*.conf; do
@@ -40,7 +42,8 @@ for f in \
     "$WAYBAR_THEMES/$THEME-waybar.css" \
     "$SWAYNC_THEMES/$THEME.css" \
     "$GTKLOCK_THEMES/$THEME.css" \
-    "$WOFI_THEMES/$THEME.css"
+    "$WOFI_THEMES/$THEME.css" \
+    "$FOOT_THEMES/$THEME.ini"
 do
     [ -f "$f" ] || missing="$missing\n  $f"
 done
@@ -57,10 +60,11 @@ cp "$SWAY_THEMES/$THEME.conf" "$HOME/.config/sway/config.d/90-colors.conf"
 printf '@import url("./themes/%s-palette.css");\n@import url("./themes/%s-waybar.css");\n' \
     "$THEME" "$THEME" > "$HOME/.config/waybar/style.css"
 
-# Apply swaync, gtklock, and wofi
+# Apply swaync, gtklock, wofi, and foot (new foot windows pick up the colors)
 cp "$SWAYNC_THEMES/$THEME.css"  "$HOME/.config/swaync/style.css"
 cp "$GTKLOCK_THEMES/$THEME.css" "$HOME/.config/gtklock/style.css"
 cp "$WOFI_THEMES/$THEME.css"    "$HOME/.config/wofi/style.css"
+cp "$FOOT_THEMES/$THEME.ini"    "$HOME/.config/foot/colors.ini"
 
 # Record active theme
 mkdir -p "$HOME/.config/paperweight-os"
