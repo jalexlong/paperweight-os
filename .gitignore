@@ -1,4 +1,11 @@
 # Debian build artifacts
+# Root-level: apt-get download / dpkg-source scratch files
+/*.deb
+/*.dsc
+/*.buildinfo
+/*.changes
+/*.xz
+/*.gz
 packaging/**/*.deb
 packaging/**/*.buildinfo
 packaging/**/*.changes
