@@ -14,3 +14,6 @@ while [ "$i" -lt 30 ]; do
     sleep 0.2
     i=$((i + 1))
 done
+
+notify-send -u low "sway-wait-float" "Window '$app_id' never appeared (timed out after 6s)"
+exit 1

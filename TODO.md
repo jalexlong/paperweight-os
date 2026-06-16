@@ -35,9 +35,8 @@ Trixie installs. See git log for details.
   waybar &` with `pkill -SIGUSR1 waybar || waybar &`. Graceful reload, no
   double-instance race. Matches the `$mod+Ctrl+w` keybind pattern. 0.2.35-1.
 
-- [ ] **`sway-wait-float` exits silently on timeout** — after 30 polls (6 s) with
-  no match it exits 0 with no feedback. Add a `notify-send` or stderr message on
-  timeout so the user knows the float never appeared.
+- [x] **`sway-wait-float` exits silently on timeout** — now emits a `notify-send`
+  on timeout and exits 1. 0.2.37-1.
 
 - [ ] **`90-theme.conf` depends on `90-colors.conf` load order** — `output * bg
   $base solid_color` requires `$base` from `90-colors.conf`, which sorts earlier
