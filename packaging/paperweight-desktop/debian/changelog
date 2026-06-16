@@ -3,26 +3,26 @@ paperweight-desktop (0.1.10-1) trixie; urgency=low
   * debian/control: add paperweight-plymouth to Recommends so the Plymouth
     boot splash is installed by default with the desktop package.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Mon, 09 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 09 Jun 2026 00:00:01 +0000
 
 paperweight-desktop (0.1.9-1) trixie; urgency=low
 
   * debian/control: add Recommends: paperweight-grub so the GRUB theme
     is installed by default with the desktop package.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Mon, 09 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 09 Jun 2026 00:00:00 +0000
 
 paperweight-desktop (0.1.8-1) trixie; urgency=low
 
   * Add cage to Depends — required as compositor for gtkgreet.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:01 +0000
 
 paperweight-desktop (0.1.7-1) trixie; urgency=low
 
   * Add greetd and gtkgreet to Depends for the login screen.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:00 +0000
 
 paperweight-desktop (0.1.6-1) trixie; urgency=low
 
@@ -30,31 +30,31 @@ paperweight-desktop (0.1.6-1) trixie; urgency=low
     Remove ncspot (not available in Trixie); install manually via cargo or
     a third-party .deb if desired.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:05 +0000
 
 paperweight-desktop (0.1.5-1) trixie; urgency=low
 
   * Add dconf-cli to Depends (required for gsettings dark mode enforcement)
 
- -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:04 +0000
 
 paperweight-desktop (0.1.4-1) trixie; urgency=low
 
   * Replace qutebrowser with firefox-esr (GTK, reliable YouTube/Wayland)
 
- -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:03 +0000
 
 paperweight-desktop (0.1.3-1) trixie; urgency=low
 
   * Add qutebrowser and thunar to Depends
 
- -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:02 +0000
 
 paperweight-desktop (0.1.2-1) trixie; urgency=low
 
   * Replace kitty with foot (lighter, no GPU required)
 
- -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:01 +0000
 
 paperweight-desktop (0.1.1-1) trixie; urgency=low
 
@@ -66,4 +66,4 @@ paperweight-desktop (0.1.0-1) trixie; urgency=low
 
   * Initial packaging. Metapackage for PaperweightOS Sway desktop stack.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Wed, 04 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 04 Jun 2026 00:00:00 +0000

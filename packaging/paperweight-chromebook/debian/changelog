@@ -7,7 +7,7 @@ paperweight-chromebook (0.1.11-1) trixie; urgency=low
     works even if the user edited the values after install. Also remove
     GRUB_GFXPAYLOAD_LINUX on uninstall.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Mon, 09 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 09 Jun 2026 00:00:02 +0000
 
 paperweight-chromebook (0.1.10-1) trixie; urgency=low
 
@@ -16,7 +16,7 @@ paperweight-chromebook (0.1.10-1) trixie; urgency=low
     Runs update-grub on install. No-op if /etc/default/grub is absent.
   * debian/postrm: remove GRUB_GFXMODE=1366x768,auto on package removal.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Mon, 09 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 09 Jun 2026 00:00:01 +0000
 
 paperweight-chromebook (0.1.9-1) trixie; urgency=low
 
@@ -25,7 +25,7 @@ paperweight-chromebook (0.1.9-1) trixie; urgency=low
     into the focused window via wtype.
   * debian/control: add wtype to Depends.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Mon, 09 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 09 Jun 2026 00:00:00 +0000
 
 paperweight-chromebook (0.1.8-1) trixie; urgency=low
 
@@ -33,13 +33,13 @@ paperweight-chromebook (0.1.8-1) trixie; urgency=low
     cursor theme to Adwaita-dark. Loads after skel's generic 10-input.conf
     so only Chromebook-specific values are overridden.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sun, 08 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Mon, 08 Jun 2026 00:00:00 +0000
 
 paperweight-chromebook (0.1.7-1) trixie; urgency=low
 
   * Rebuild; no functional changes.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:01 +0000
 
 paperweight-chromebook (0.1.6-1) trixie; urgency=low
 
@@ -47,7 +47,7 @@ paperweight-chromebook (0.1.6-1) trixie; urgency=low
     Version bumped past 0.1.5 to supersede the old package in the apt repo.
   * Drop brightnessctl from Depends: already pulled in by paperweight-desktop.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:00 +0000
 
 paperweight-chromebook (0.1.0-1) trixie; urgency=low
 

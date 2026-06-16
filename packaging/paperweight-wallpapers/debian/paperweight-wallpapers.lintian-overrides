@@ -1,0 +1,2 @@
+# paperweight-wallpapers ships wallpaper config fragments to /etc/skel by design.
+package-contains-file-in-etc-skel

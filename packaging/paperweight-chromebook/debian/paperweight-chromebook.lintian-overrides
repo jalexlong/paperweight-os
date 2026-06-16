@@ -1,0 +1,2 @@
+# paperweight-chromebook ships Chromebook-specific skel fragments by design.
+package-contains-file-in-etc-skel

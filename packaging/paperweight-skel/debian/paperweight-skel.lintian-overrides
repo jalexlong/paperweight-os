@@ -1,0 +1,2 @@
+# paperweight-skel exists specifically to populate /etc/skel — that is its stated purpose.
+package-contains-file-in-etc-skel

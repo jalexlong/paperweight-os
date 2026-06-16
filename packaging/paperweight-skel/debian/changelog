@@ -9,7 +9,7 @@ paperweight-skel (0.2.36-1) trixie; urgency=low
   * postinst: chmod +x paperweight-network alongside other skel binaries.
   * debian/install: ship paperweight-network.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Mon, 16 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 16 Jun 2026 00:00:06 +0000
 
 paperweight-skel (0.2.35-1) trixie; urgency=low
 
@@ -17,7 +17,7 @@ paperweight-skel (0.2.35-1) trixie; urgency=low
     eliminating the race where two instances briefly coexist. Falls back to
     launching waybar if it isn't running.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Mon, 16 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 16 Jun 2026 00:00:05 +0000
 
 paperweight-skel (0.2.34-1) trixie; urgency=low
 
@@ -25,14 +25,14 @@ paperweight-skel (0.2.34-1) trixie; urgency=low
     changes. Lists every missing file in the error notification so partial
     or user-created themes fail cleanly instead of leaving inconsistent state.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Mon, 16 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 16 Jun 2026 00:00:04 +0000
 
 paperweight-skel (0.2.33-1) trixie; urgency=low
 
   * cava-waybar: derive BARS from waybar-config at runtime via configparser
     instead of hardcoding 10, so script and config can't silently diverge.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Mon, 16 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 16 Jun 2026 00:00:03 +0000
 
 paperweight-skel (0.2.32-1) trixie; urgency=low
 
@@ -40,7 +40,7 @@ paperweight-skel (0.2.32-1) trixie; urgency=low
     border pixel 2) — overridden by 90-theme.conf (inner 6, outer 3, pixel 2).
   * 90-theme.conf: document load-order dependency on 90-colors.conf.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Mon, 16 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 16 Jun 2026 00:00:02 +0000
 
 paperweight-skel (0.2.31-1) trixie; urgency=low
 
@@ -52,7 +52,7 @@ paperweight-skel (0.2.31-1) trixie; urgency=low
     wofi/themes/<name>.css → wofi/style.css alongside swaync/gtklock).
   * debian/install: ship wofi/themes/ directory.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Mon, 16 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 16 Jun 2026 00:00:01 +0000
 
 paperweight-skel (0.2.30-1) trixie; urgency=low
 
@@ -60,7 +60,7 @@ paperweight-skel (0.2.30-1) trixie; urgency=low
     (~/.config/paperweight-os/wallpapers/<theme>) before falling back to
     artwork default and then solid-color PNG.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Mon, 16 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 16 Jun 2026 00:00:00 +0000
 
 paperweight-skel (0.2.29-1) trixie; urgency=low
 
@@ -68,7 +68,7 @@ paperweight-skel (0.2.29-1) trixie; urgency=low
     not support max-height and rejects the entire stylesheet when it sees it.
     The remaining min-height/opacity/padding/margin properties are sufficient.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sun, 08 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Mon, 08 Jun 2026 00:00:00 +0000
 
 paperweight-skel (0.2.28-1) trixie; urgency=low
 
@@ -77,7 +77,7 @@ paperweight-skel (0.2.28-1) trixie; urgency=low
     the entire stylesheet to fall back to Adwaita default. The remaining
     opacity/min-height/max-height/padding/margin properties are sufficient.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:24 +0000
 
 paperweight-skel (0.2.27-1) trixie; urgency=low
 
@@ -86,7 +86,7 @@ paperweight-skel (0.2.27-1) trixie; urgency=low
     font-size: 0). The combobox is unused since gtkgreet in Trixie does
     not populate it from wayland-sessions; hiding it keeps the UI clean.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:23 +0000
 
 paperweight-skel (0.2.26-1) trixie; urgency=low
 
@@ -97,7 +97,7 @@ paperweight-skel (0.2.26-1) trixie; urgency=low
     The session-selector dropdown is unused — this version of gtkgreet
     in Trixie does not populate it from wayland-sessions at all.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:22 +0000
 
 paperweight-skel (0.2.25-1) trixie; urgency=low
 
@@ -109,7 +109,7 @@ paperweight-skel (0.2.25-1) trixie; urgency=low
     consecutive all-zero frames (~1 s). Waybar json modules with empty
     text are hidden automatically.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:21 +0000
 
 paperweight-skel (0.2.24-1) trixie; urgency=low
 
@@ -119,7 +119,7 @@ paperweight-skel (0.2.24-1) trixie; urgency=low
     background/color/shadow properties matching the window background
     to suppress the headerbar visually without breaking CSS parsing.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:20 +0000
 
 paperweight-skel (0.2.23-1) trixie; urgency=low
 
@@ -127,7 +127,7 @@ paperweight-skel (0.2.23-1) trixie; urgency=low
     the GTK4 CSD "Greeter" titlebar that appears without -l.
     (-f/--fullscreen is not supported by the Trixie gtkgreet build.)
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:19 +0000
 
 paperweight-skel (0.2.22-1) trixie; urgency=low
 
@@ -136,7 +136,7 @@ paperweight-skel (0.2.22-1) trixie; urgency=low
     causing login failures when the field is left empty. Without -l,
     gtkgreet reads sway.desktop and shows "Sway" in a proper dropdown.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:18 +0000
 
 paperweight-skel (0.2.21-1) trixie; urgency=low
 
@@ -144,7 +144,7 @@ paperweight-skel (0.2.21-1) trixie; urgency=low
     rootless mode; cage -s (VT switching) with libseat/logind is correct.
     Also set GDK_BACKEND=wayland to force GTK4 Wayland backend.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:17 +0000
 
 paperweight-skel (0.2.20-1) trixie; urgency=low
 
@@ -153,7 +153,7 @@ paperweight-skel (0.2.20-1) trixie; urgency=low
   * start-greeter: add debug logging to /tmp/greeter-debug.log so cage
     environment and gtkgreet errors survive after VT switch kills cage.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:16 +0000
 
 paperweight-skel (0.2.19-1) trixie; urgency=low
 
@@ -163,7 +163,7 @@ paperweight-skel (0.2.19-1) trixie; urgency=low
   * postinst: add greeter user to video and input groups so cage -r can
     open /dev/dri/card0 and /dev/input/event* without seat management.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:15 +0000
 
 paperweight-skel (0.2.18-1) trixie; urgency=low
 
@@ -172,7 +172,7 @@ paperweight-skel (0.2.18-1) trixie; urgency=low
     with "No such file or directory" without it.
   * start-greeter: cd to $HOME (or /tmp fallback) before exec cage.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:14 +0000
 
 paperweight-skel (0.2.17-1) trixie; urgency=low
 
@@ -182,7 +182,7 @@ paperweight-skel (0.2.17-1) trixie; urgency=low
   * etc/greetd/config.toml: use start-greeter instead of calling cage
     directly.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:13 +0000
 
 paperweight-skel (0.2.16-1) trixie; urgency=low
 
@@ -190,7 +190,7 @@ paperweight-skel (0.2.16-1) trixie; urgency=low
     Wayland client and needs a compositor; without cage it exits immediately
     causing greetd to hit the restart limit.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:12 +0000
 
 paperweight-skel (0.2.15-1) trixie; urgency=low
 
@@ -198,7 +198,7 @@ paperweight-skel (0.2.15-1) trixie; urgency=low
     should do this but install ordering can cause a race; greetd fails
     to start with "configured default session user 'greeter' not found".
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:11 +0000
 
 paperweight-skel (0.2.14-1) trixie; urgency=low
 
@@ -206,14 +206,14 @@ paperweight-skel (0.2.14-1) trixie; urgency=low
     paperweight-desktop depends on both paperweight-skel and greetd.
     Replaces: greetd alone is sufficient to allow overwriting config.toml.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:10 +0000
 
 paperweight-skel (0.2.13-1) trixie; urgency=low
 
   * debian/control: add Replaces/Breaks: greetd to allow paperweight-skel
     to overwrite /etc/greetd/config.toml shipped by the greetd package.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:09 +0000
 
 paperweight-skel (0.2.12-1) trixie; urgency=low
 
@@ -221,7 +221,7 @@ paperweight-skel (0.2.12-1) trixie; urgency=low
     order relative to paperweight-skel is not guaranteed, so the postinst
     was failing when dconf wasn't yet available.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:08 +0000
 
 paperweight-skel (0.2.11-1) trixie; urgency=low
 
@@ -235,7 +235,7 @@ paperweight-skel (0.2.11-1) trixie; urgency=low
   * paperweight-theme: call paperweight-set-greeter-theme via sudo on switch.
   * postinst: chmod 0440 sudoers file; chmod +x greeter theme helper.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:07 +0000
 
 paperweight-skel (0.2.10-1) trixie; urgency=low
 
@@ -245,7 +245,7 @@ paperweight-skel (0.2.10-1) trixie; urgency=low
   * postinst: chmod +x paperweight-theme and sway-wait-float (were missing).
   * postinst: add #DEBHELPER# token.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:06 +0000
 
 paperweight-skel (0.2.9-1) trixie; urgency=low
 
@@ -253,14 +253,14 @@ paperweight-skel (0.2.9-1) trixie; urgency=low
     by config.d/40-workspaces.conf (which adds workspace switching).
   * sway/config: bind XF86AudioPlay/Stop/Prev/Next to playerctl.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:05 +0000
 
 paperweight-skel (0.2.8-1) trixie; urgency=low
 
   * paperweight-theme: apply wallpaper immediately via swaymsg when
     paperweight-wallpapers is installed (before sway reload fires).
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:04 +0000
 
 paperweight-skel (0.2.7-1) trixie; urgency=low
 
@@ -268,7 +268,7 @@ paperweight-skel (0.2.7-1) trixie; urgency=low
   * Add Catppuccin Frappé theme (medium dark variant).
     Activate with: paperweight-theme mocha  or  paperweight-theme frappe
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:03 +0000
 
 paperweight-skel (0.2.6-1) trixie; urgency=low
 
@@ -278,7 +278,7 @@ paperweight-skel (0.2.6-1) trixie; urgency=low
     gtklock/themes/latte.css.
     Activate with: paperweight-theme latte
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:02 +0000
 
 paperweight-skel (0.2.5-1) trixie; urgency=low
 
@@ -295,7 +295,7 @@ paperweight-skel (0.2.5-1) trixie; urgency=low
     Prompts via wofi when called with no argument.
   * 40-workspaces.conf: bind $mod+p to paperweight-theme.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:01 +0000
 
 paperweight-skel (0.2.4-1) trixie; urgency=low
 
@@ -306,7 +306,7 @@ paperweight-skel (0.2.4-1) trixie; urgency=low
     floating/resize/center. Replaces the sleep 2 hack in 40-workspaces.conf.
   * 40-workspaces.conf: use sway-wait-float for $mod+Shift+c Discord float.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:00 +0000
 
 paperweight-skel (0.2.3-1) trixie; urgency=low
 
@@ -314,7 +314,7 @@ paperweight-skel (0.2.3-1) trixie; urgency=low
     $mod+Shift+c (sway reload) moved to $mod+Shift+r.
     $mod+Shift+b (waybar restart) moved to $mod+Ctrl+w.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:13 +0000
 
 paperweight-skel (0.2.3-1) trixie; urgency=low
 
@@ -323,13 +323,13 @@ paperweight-skel (0.2.3-1) trixie; urgency=low
     waybar restart moved from $mod+Shift+b to $mod+Ctrl+w.
   * Fix debian/copyright: correct license from GPL-3.0-or-later to MIT.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:12 +0000
 
 paperweight-skel (0.2.2-1) trixie; urgency=low
 
   * waybar: update workspace 4 icon to music note (󰎵) to match its role.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:11 +0000
 
 paperweight-skel (0.2.1-1) trixie; urgency=low
 
@@ -340,7 +340,7 @@ paperweight-skel (0.2.1-1) trixie; urgency=low
     waybar/config.jsonc: custom/cava in modules-left after memory.
     macchiato-waybar.css: @teal pill with 11px font and 1px letter-spacing.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:10 +0000
 
 paperweight-skel (0.2.0-1) trixie; urgency=low
 
@@ -351,14 +351,14 @@ paperweight-skel (0.2.0-1) trixie; urgency=low
     MOZ_APP_REMOTINGNAME trick for floating Firefox with distinct app_id.
   * Remove $mod+c clipboard-clear binding; reassigned to chat (workspace 5).
 
- -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:09 +0000
 
 paperweight-skel (0.1.9-1) trixie; urgency=low
 
   * 90-theme.conf: set solid Macchiato base color as sway background
     fallback until paperweight-wallpapers is available.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:08 +0000
 
 paperweight-skel (0.1.8-1) trixie; urgency=low
 
@@ -367,14 +367,14 @@ paperweight-skel (0.1.8-1) trixie; urgency=low
   * postinst: enable ADD_EXTRA_GROUPS and add 'video' to EXTRA_GROUPS in
     /etc/adduser.conf so new users can use brightnessctl without sudo.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:07 +0000
 
 paperweight-skel (0.1.7-1) trixie; urgency=low
 
   * Run xdg-user-dirs-update on session start so ~/Pictures, ~/Downloads
     etc. exist before screenshot and other keybinds need them.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:06 +0000
 
 paperweight-skel (0.1.6-1) trixie; urgency=low
 
@@ -382,20 +382,20 @@ paperweight-skel (0.1.6-1) trixie; urgency=low
   * Add postinst to run dconf update on install
   * Remove exec_always gsettings workaround from session config
 
- -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:05 +0000
 
 paperweight-skel (0.1.5-1) trixie; urgency=low
 
   * Add GTK3/GTK4 settings.ini enforcing dark theme
   * Run gsettings color-scheme prefer-dark on session start
 
- -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:04 +0000
 
 paperweight-skel (0.1.4-1) trixie; urgency=low
 
   * Switch $browser from qutebrowser to firefox-esr
 
- -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:03 +0000
 
 paperweight-skel (0.1.3-1) trixie; urgency=low
 
@@ -405,7 +405,7 @@ paperweight-skel (0.1.3-1) trixie; urgency=low
   * Add foot skel config with Catppuccin Macchiato theme
   * Add $browser and $files variables to sway config
 
- -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:02 +0000
 
 paperweight-skel (0.1.2-1) trixie; urgency=low
 
@@ -413,7 +413,7 @@ paperweight-skel (0.1.2-1) trixie; urgency=low
   * Add foot skel config with Catppuccin Macchiato theme
   * Add app_id float rule for foot floating terminal
 
- -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 05 Jun 2026 00:00:01 +0000
 
 paperweight-skel (0.1.1-1) trixie; urgency=low
 
@@ -427,4 +427,4 @@ paperweight-skel (0.1.0-1) trixie; urgency=low
 
   * Initial packaging. Default config skeleton for PaperweightOS desktop.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Wed, 04 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 04 Jun 2026 00:00:00 +0000

@@ -6,7 +6,7 @@ paperweight-wallpapers (0.3.2-1) trixie; urgency=low
     retained. Replaces zenity dep with yad; script upgraded to bash for
     array support.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Mon, 16 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 16 Jun 2026 00:00:03 +0000
 
 paperweight-wallpapers (0.3.1-1) trixie; urgency=low
 
@@ -15,7 +15,7 @@ paperweight-wallpapers (0.3.1-1) trixie; urgency=low
     with a wofi dmenu fallback. Drops waypaper dep (not in Trixie); adds zenity
     and swaybg to Depends.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Mon, 16 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 16 Jun 2026 00:00:02 +0000
 
 paperweight-wallpapers (0.3.0-1) trixie; urgency=low
 
@@ -27,14 +27,14 @@ paperweight-wallpapers (0.3.0-1) trixie; urgency=low
     color fallback chain on session start and sway reload.
   * Add waypaper to Depends.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Mon, 16 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 16 Jun 2026 00:00:01 +0000
 
 paperweight-wallpapers (0.2.0-1) trixie; urgency=low
 
   * Add custom artwork wallpapers (JPEG) for Latte and Macchiato themes,
     two variants each.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Mon, 16 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 16 Jun 2026 00:00:00 +0000
 
 paperweight-wallpapers (0.1.0-1) trixie; urgency=low
 
@@ -42,4 +42,4 @@ paperweight-wallpapers (0.1.0-1) trixie; urgency=low
     Macchiato, and Mocha. Includes 91-wallpaper.conf skel fragment to apply
     the active theme's wallpaper on session start and sway reload.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Sat, 07 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 07 Jun 2026 00:00:00 +0000

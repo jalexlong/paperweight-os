@@ -4,7 +4,7 @@ paperweight-grub (0.1.2-1) trixie; urgency=low
   * rules: fail fast with a clear error if paperweight-fonts hasn't been
     built first (font not found at expected relative path).
 
- -- Alex Long <johnalexanderlong@gmail.com>  Mon, 16 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 16 Jun 2026 00:00:00 +0000
 
 paperweight-grub (0.1.1-1) trixie; urgency=low
 
@@ -14,7 +14,7 @@ paperweight-grub (0.1.1-1) trixie; urgency=low
   * debian/copyright: add full OFL-1.1 license text; correct copyright
     holder to "The JetBrains Mono Project Authors".
 
- -- Alex Long <johnalexanderlong@gmail.com>  Mon, 09 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 09 Jun 2026 00:00:01 +0000
 
 paperweight-grub (0.1.0-1) trixie; urgency=low
 
@@ -22,4 +22,4 @@ paperweight-grub (0.1.0-1) trixie; urgency=low
     Nerd Font compiled to PF2. Sets GRUB_THEME in /etc/default/grub and
     runs update-grub on install/remove.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Mon, 09 Jun 2026 00:00:00 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 09 Jun 2026 00:00:00 +0000
