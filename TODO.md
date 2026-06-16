@@ -114,9 +114,9 @@ Trixie installs. See git log for details.
   tested as a target. Document which generic x86 laptops work out of the box and
   what (if anything) breaks on non-Chromebook targets.
 
-- [ ] **ncspot in the personal apt repo** — `$mod+s` silently fails without it and
-  it is not in Trixie. Options: pre-built .deb in the repo, or find a Trixie-native
-  TUI music player to replace it (`cmus`, `musikcube`).
+- [x] **ncspot replaced with cmus** — `cmus` added to `paperweight-desktop` Depends.
+  `$mod+s` repurposed as layout toggle (tabbed / splith). Workspace 4 still
+  reserved for music; launch cmus from a foot terminal. 0.1.11-1 / 0.2.38-1.
 
 - [x] **`paperweight-network` script** — yad Wi-Fi picker wrapping nmcli.
   Signal bar column, password prompt for secured networks, notify-send on

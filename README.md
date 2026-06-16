@@ -30,7 +30,7 @@ Installing `paperweight-desktop` pulls in:
 
 **Media**
 - **cava** — audio visualizer (integrated into waybar)
-- **ncspot** — lightweight TUI Spotify client (requires Premium) — *not in Trixie; install via `cargo install ncspot`*
+- **cmus** — lightweight TUI music player; launch from a terminal on workspace 4
 - **playerctl** — media key control
 
 **Development**
@@ -89,7 +89,7 @@ sudo apt install paperweight-chromebook
 | `Super+t` | Terminal (foot) — workspace 1 |
 | `Super+b` | Browser (Firefox) — workspace 2 |
 | `Super+e` | Editor (Helix) — workspace 3 |
-| `Super+s` | Music (ncspot) — workspace 4 — *ncspot must be installed manually* |
+| `Super+s` | Toggle layout (tabbed / split) |
 | `Super+c` | Chat (Discord/Vesktop) — workspace 5 |
 | `Super+g` | Games — workspace 6 |
 | `Super+f` | Files (Thunar) |
@@ -105,7 +105,6 @@ Add `Shift` to open as a floating window instead: `Super+Shift+t`, `Super+Shift+
 | `Super+q` | Close window |
 | `Super+Space` | Toggle floating |
 | `Super+m` | Fullscreen |
-| `Super+F5` | Toggle layout (tabbed / split) |
 | `Super+r` | Resize mode |
 | `Super+h/j/k/l` | Focus left/down/up/right |
 | `Super+Shift+h/j/k/l` | Move window |
@@ -141,8 +140,8 @@ lock screen). On the Chromebook, the top-row keys send these by default;
 
 | Package | Version | Description |
 |---|---|---|
-| `paperweight-skel` | 0.2.35 | Default configs installed to `/etc/skel/` |
-| `paperweight-desktop` | 0.1.10 | Metapackage: pulls in the full desktop stack |
+| `paperweight-skel` | 0.2.38 | Default configs installed to `/etc/skel/` |
+| `paperweight-desktop` | 0.1.11 | Metapackage: pulls in the full desktop stack |
 | `paperweight-fonts` | 0.1.0 | JetBrains Mono Nerd Font + Symbols Nerd Font |
 | `paperweight-wallpapers` | 0.3.2 | Catppuccin wallpapers + yad wallpaper picker |
 | `paperweight-grub` | 0.1.2 | Catppuccin Macchiato GRUB2 theme |

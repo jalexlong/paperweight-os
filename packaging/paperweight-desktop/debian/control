@@ -43,6 +43,7 @@ Depends:
  neovim,
  hx,
  cava,
+ cmus,
  tmux,
  btop,
  zoxide,

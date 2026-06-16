@@ -1,3 +1,11 @@
+paperweight-skel (0.2.38-1) trixie; urgency=low
+
+  * 40-workspaces.conf: remove ncspot keybinds ($mod+s, $mod+Shift+s).
+    Bind $mod+s to layout toggle (tabbed / splith) instead.
+    Workspace 4 still exists for music; use cmus from a foot terminal.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 16 Jun 2026 00:00:08 +0000
+
 paperweight-skel (0.2.37-1) trixie; urgency=low
 
   * sway-wait-float: notify-send on timeout instead of silently exiting 0;

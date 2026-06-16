@@ -1,3 +1,10 @@
+paperweight-desktop (0.1.11-1) trixie; urgency=low
+
+  * Add cmus to Depends. Replaces ncspot (not in Trixie) as the default
+    TUI music player. Launch from a foot terminal on workspace 4.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 16 Jun 2026 00:00:02 +0000
+
 paperweight-desktop (0.1.10-1) trixie; urgency=low
 
   * debian/control: add paperweight-plymouth to Recommends so the Plymouth
