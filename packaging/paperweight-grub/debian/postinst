@@ -3,6 +3,8 @@ set -e
 
 case "$1" in
     configure)
+        chmod 0440 /etc/sudoers.d/paperweight-grub
+
         if [ -f /etc/default/grub ]; then
             if grep -q "^GRUB_THEME=" /etc/default/grub; then
                 sed -i 's|^GRUB_THEME=.*|GRUB_THEME=/usr/share/grub/themes/paperweight/theme.txt|' /etc/default/grub

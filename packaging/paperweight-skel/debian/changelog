@@ -1,3 +1,13 @@
+paperweight-skel (0.2.39-1) trixie; urgency=low
+
+  * paperweight-theme: after reloading sway/waybar/swaync, show a yad
+    dialog offering to also update the GRUB boot menu to the selected
+    Catppuccin variant. Calls sudo paperweight-grub-theme (NOPASSWD via
+    /etc/sudoers.d/paperweight-grub). Skips silently if paperweight-grub
+    or yad is not installed, or if no matching GRUB variant file exists.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 16 Jun 2026 00:00:03 +0000
+
 paperweight-skel (0.2.38-1) trixie; urgency=low
 
   * 40-workspaces.conf: remove ncspot keybinds ($mod+s, $mod+Shift+s).

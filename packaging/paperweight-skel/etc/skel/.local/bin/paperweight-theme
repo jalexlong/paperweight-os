@@ -84,3 +84,20 @@ sudo paperweight-set-greeter-theme "$THEME" 2>/dev/null || true
 swaymsg reload
 pkill -SIGUSR1 waybar 2>/dev/null || waybar &
 swaync-client -rs 2>/dev/null || { pkill -x swaync 2>/dev/null; swaync & }
+
+# Offer to also switch GRUB boot menu if the variant file exists
+if command -v paperweight-grub-theme >/dev/null 2>&1 && \
+   command -v yad >/dev/null 2>&1 && \
+   [ -f "/usr/share/grub/themes/paperweight/$THEME.txt" ]; then
+    if yad --question \
+            --title "GRUB Theme" \
+            --text "Also update GRUB boot menu to <b>$THEME</b>?\n\nTakes effect on next boot." \
+            --button="Update GRUB:0" \
+            --button="Skip:1" \
+            --width=320 \
+            --center 2>/dev/null; then
+        sudo paperweight-grub-theme "$THEME" 2>/dev/null || \
+            notify-send -u normal "GRUB Theme" \
+                "Could not switch GRUB to $THEME"
+    fi
+fi

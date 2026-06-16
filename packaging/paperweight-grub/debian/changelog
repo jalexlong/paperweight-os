@@ -1,3 +1,13 @@
+paperweight-grub (0.1.4-1) trixie; urgency=low
+
+  * Add etc/sudoers.d/paperweight-grub: allow %sudo group to run
+    paperweight-grub-theme NOPASSWD. Enables one-click GRUB variant
+    switching from the paperweight-theme yad dialog without a password prompt.
+  * debian/postinst: chmod 0440 /etc/sudoers.d/paperweight-grub on configure.
+  * debian/install: add etc/sudoers.d/paperweight-grub.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 16 Jun 2026 00:00:02 +0000
+
 paperweight-grub (0.1.3-1) trixie; urgency=low
 
   * Add all four Catppuccin variant themes: macchiato.txt, latte.txt,
