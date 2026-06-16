@@ -20,7 +20,24 @@ jobs:
       - name: Install build dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y --no-install-recommends debhelper build-essential grub-common
+          # Parse Build-Depends from all control files and install them.
+          # debhelper-compat is a virtual; map it to debhelper.
+          build_deps=$(python3 -c "
+          import re, glob
+          deps = {'build-essential', 'lintian', 'debconf-utils'}
+          for f in sorted(glob.glob('packaging/*/debian/control')):
+              for line in open(f):
+                  if line.startswith('Build-Depends:'):
+                      pkgs = re.sub(r'\s*\([^)]*\)', '', line.split(':',1)[1])
+                      deps.update(p.strip() for p in pkgs.split(',') if p.strip())
+          deps.discard('debhelper-compat')
+          deps.add('debhelper')
+          print(' '.join(sorted(deps)))
+          ")
+          sudo apt-get install -y --no-install-recommends $build_deps
+
+      - name: Validate preseed file
+        run: debconf-set-selections --checkonly preseed/paperweight.cfg
 
       - name: Build packages
         run: |
@@ -29,6 +46,9 @@ jobs:
             echo "==> Building $(basename "$pkg_dir")..."
             (cd "$pkg_dir" && dpkg-buildpackage -us -uc -b)
           done
+
+      - name: Lint packages
+        run: lintian --fail-on error packaging/*.deb
 
       - name: Upload debs
         uses: actions/upload-artifact@v4
@@ -76,8 +96,6 @@ jobs:
             | base64 -d \
             | gpg --batch --yes --import \
                   --passphrase "$GPG_PASSPHRASE" --pinentry-mode loopback
-          # Pre-cache the passphrase in the agent so reprepro can sign
-          # without interactive prompting.
           echo "$GPG_PASSPHRASE" \
             | gpg --batch --yes --pinentry-mode loopback --passphrase-fd 0 \
                   -u "$GPG_KEY_ID" --sign --output /dev/null /dev/null
@@ -98,6 +116,10 @@ jobs:
           mkdir -p gh-pages-dir/conf
           cp apt-repo/conf/* gh-pages-dir/conf/
 
+          published=0
+          skipped=0
+          published_tags=""
+
           for deb in packaging/*.deb; do
             [ -f "$deb" ] || continue
             pkg_name="$(dpkg-deb -f "$deb" Package)"
@@ -105,11 +127,22 @@ jobs:
             pool_ver="$(reprepro --basedir gh-pages-dir list trixie "$pkg_name" 2>/dev/null | awk '{print $NF}')"
             if [ "$pool_ver" = "$deb_ver" ]; then
               echo "  Skipping $pkg_name $deb_ver (already in pool)"
+              skipped=$((skipped + 1))
               continue
             fi
             echo "  Including $(basename "$deb")..."
             reprepro --basedir gh-pages-dir includedeb trixie "$deb"
+            published=$((published + 1))
+            published_tags="$published_tags ${pkg_name}/${deb_ver}"
           done
+
+          echo "published=$published"   >> "$GITHUB_ENV"
+          echo "skipped=$skipped"       >> "$GITHUB_ENV"
+          echo "published_tags=$published_tags" >> "$GITHUB_ENV"
+
+          if [ "$published" -eq 0 ]; then
+            echo "::notice::All packages already at current version in the apt repo. Did you forget to bump changelogs?"
+          fi
 
       - name: Export public key
         run: |
@@ -123,3 +156,16 @@ jobs:
             -m "Publish packages $(date -u +%Y-%m-%dT%H:%M:%SZ)" \
             || echo "(nothing changed)"
           git -C gh-pages-dir push origin gh-pages
+
+      - name: Tag published versions
+        if: env.published != '0'
+        run: |
+          for tag in ${{ env.published_tags }}; do
+            if git tag -l "$tag" | grep -q .; then
+              echo "  Tag $tag already exists — skipping"
+            else
+              git tag "$tag"
+              echo "  Tagged $tag"
+            fi
+          done
+          git push origin --tags

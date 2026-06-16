@@ -87,27 +87,21 @@ Trixie installs. See git log for details.
 
 ## CI / Pipeline
 
-- [ ] **No version bump guard** — pushing to `main` without bumping the changelog
-  version causes `reprepro` to skip the package silently. Nothing warns that the
-  publish was a no-op. Add a pre-publish check that errors if the `.deb` version
-  already exists in the pool.
+- [x] **Version bump notice added** — publish job tracks published vs skipped
+  counts; emits a `::notice::` if all packages were skipped (version not bumped).
 
-- [ ] **No lintian run in CI** — packages are built with `-us -uc` but never
-  lintian-checked. Add a `lintian --fail-on error *.deb` step to the `build` job.
+- [x] **Lintian added to CI** — `lintian --fail-on error packaging/*.deb` runs
+  in the `build` job after building.
 
-- [ ] **No git tags on published versions** — after a successful publish there is
-  no durable mark in git. Tag each published version (e.g. `paperweight-skel/0.2.30`)
-  so the apt repo state is always traceable to a commit.
+- [x] **Git tags on published versions** — publish job tags each newly included
+  package as `<package>/<version>` and pushes tags to origin.
 
-- [ ] **`build` job apt-installs are not declarative** — currently hardcodes
-  `debhelper build-essential grub-common`. New build-dep additions require a
-  manual CI edit. Consider auto-parsing `Build-Depends` from each `debian/control`
-  and installing them, or at least add `plymouth` tools now that
-  `paperweight-plymouth` is in the tree.
+- [x] **Build-Depends now declarative** — CI parses `Build-Depends` from all
+  `debian/control` files at runtime and installs them. `lintian` and
+  `debconf-utils` added as fixed extras. No more manual apt list maintenance.
 
-- [ ] **`preseed/paperweight.cfg` is never validated in CI** — syntax errors only
-  surface at install time. Add a `debconf-set-selections --checkonly` or
-  `preseed-verify` step to the `build` job.
+- [x] **Preseed validated in CI** — `debconf-set-selections --checkonly
+  preseed/paperweight.cfg` runs in the `build` job.
 
 ---
 
