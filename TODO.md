@@ -13,10 +13,10 @@ Trixie installs. See git log for details.
 
 ## Bugs / Correctness
 
-- [ ] **wofi colors not updated by theme switcher** — `wofi/style.css` has
-  `@define-color` values hardcoded to Macchiato. `paperweight-theme` updates
-  waybar, swaync, and gtklock but skips wofi. Latte (light) will look wrong.
-  Fix: add a `wofi/themes/<name>.css` set and copy in `paperweight-theme`.
+- [x] **wofi theming wired up** — `wofi/themes/` ships all four Catppuccin
+  variants; `paperweight-theme` copies the active theme to `wofi/style.css`
+  alongside swaync and gtklock. `style.css` synced to authoritative macchiato
+  palette. Bumped to 0.2.31-1.
 
 - [ ] **Duplicate gap/border declarations** — `sway/config` sets
   `gaps inner 5 / outer 5 / border pixel 2`; `90-theme.conf` overrides these

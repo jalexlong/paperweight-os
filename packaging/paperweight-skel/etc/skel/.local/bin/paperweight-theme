@@ -15,6 +15,7 @@ SWAY_THEMES="$HOME/.config/sway/themes"
 WAYBAR_THEMES="$HOME/.config/waybar/themes"
 SWAYNC_THEMES="$HOME/.config/swaync/themes"
 GTKLOCK_THEMES="$HOME/.config/gtklock/themes"
+WOFI_THEMES="$HOME/.config/wofi/themes"
 
 list_themes() {
     for f in "$SWAY_THEMES"/*.conf; do
@@ -43,9 +44,10 @@ cp "$SWAY_THEMES/$THEME.conf" "$HOME/.config/sway/config.d/90-colors.conf"
 printf '@import url("./themes/%s-palette.css");\n@import url("./themes/%s-waybar.css");\n' \
     "$THEME" "$THEME" > "$HOME/.config/waybar/style.css"
 
-# Apply swaync and gtklock
+# Apply swaync, gtklock, and wofi
 cp "$SWAYNC_THEMES/$THEME.css"  "$HOME/.config/swaync/style.css"
 cp "$GTKLOCK_THEMES/$THEME.css" "$HOME/.config/gtklock/style.css"
+cp "$WOFI_THEMES/$THEME.css"    "$HOME/.config/wofi/style.css"
 
 # Record active theme
 mkdir -p "$HOME/.config/paperweight-os"
