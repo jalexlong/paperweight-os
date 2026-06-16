@@ -107,19 +107,19 @@ Description: PaperweightOS Plymouth theme — Catppuccin Macchiato
  removal. On eMMC storage this may take 30-60 seconds.
 
 Package: paperweight-skel
-Version: 0.2.31-1
+Version: 0.2.35-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
-Installed-Size: 160
+Installed-Size: 162
 Replaces: greetd
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.31-1_all.deb
-Size: 21396
-SHA256: 79308837ee998d8aac5a7a40d6e284aa936546e0e80cec13da8f4078d0c5b5e6
-SHA1: ba717bc7802a4f3c2159c0eb915d3c77d3eb6372
-MD5sum: fd75fc1c1d91f413d4049b90c4727900
+Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.35-1_all.deb
+Size: 21994
+SHA256: 03562adb0f5112f75bbc4f5d716b56f99a5908ef070d86ee723e252e849f3baf
+SHA1: fe1efee2564a0341223a4ad2d8cdf062b07a45d6
+MD5sum: a38239f5a113bed2abdf1415edb92a89
 Description: PaperweightOS default configuration skeleton
  Provides default XDG configuration files for the PaperweightOS desktop,
  installed to /etc/skel so they are copied into new user home directories
