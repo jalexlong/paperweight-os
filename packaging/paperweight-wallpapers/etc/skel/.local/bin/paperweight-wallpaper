@@ -1,0 +1,34 @@
+#!/bin/sh
+# Graphical wallpaper picker for PaperweightOS.
+# Opens waypaper and saves the chosen wallpaper to the active theme's config,
+# so each theme remembers its own wallpaper independently.
+#
+# The saved path is read by paperweight-theme and 91-wallpaper.conf on
+# theme switches and session start. Third-party wallpapers are fully supported.
+
+THEME=$(cat "$HOME/.config/paperweight-os/active-theme" 2>/dev/null || echo macchiato)
+THEME_WP_DIR="$HOME/.config/paperweight-os/wallpapers"
+WAYPAPER_CONF="$HOME/.config/waypaper/config.ini"
+
+# Seed waypaper config with our wallpapers dir and swaybg backend on first run
+if [ ! -f "$WAYPAPER_CONF" ]; then
+    mkdir -p "$(dirname "$WAYPAPER_CONF")"
+    printf '[Settings]\nfolder = /usr/share/paperweight-os/wallpapers\nbackend = swaybg\n' \
+        > "$WAYPAPER_CONF"
+fi
+
+waypaper
+
+# waypaper applies wallpapers live on click; whatever is in its config on exit
+# is what is currently displayed.
+SELECTED=$(python3 -c "
+import configparser, os
+c = configparser.ConfigParser()
+c.read(os.path.expanduser('~/.config/waypaper/config.ini'))
+print(c.get('Settings', 'wallpaper', fallback=''))
+" 2>/dev/null)
+
+[ -z "$SELECTED" ] && exit 0
+
+mkdir -p "$THEME_WP_DIR"
+printf '%s\n' "$SELECTED" > "$THEME_WP_DIR/$THEME"

@@ -51,8 +51,15 @@ cp "$GTKLOCK_THEMES/$THEME.css" "$HOME/.config/gtklock/style.css"
 mkdir -p "$HOME/.config/paperweight-os"
 printf '%s\n' "$THEME" > "$HOME/.config/paperweight-os/active-theme"
 
-# Apply wallpaper immediately if paperweight-wallpapers is installed
-WP="/usr/share/paperweight-os/wallpapers/$THEME.png"
+# Apply wallpaper: per-theme user override > artwork default > solid color fallback
+THEME_WP_FILE="$HOME/.config/paperweight-os/wallpapers/$THEME"
+if [ -f "$THEME_WP_FILE" ]; then
+    WP=$(cat "$THEME_WP_FILE")
+elif [ -f "/usr/share/paperweight-os/wallpapers/${THEME}-wallpaper1.jpg" ]; then
+    WP="/usr/share/paperweight-os/wallpapers/${THEME}-wallpaper1.jpg"
+else
+    WP="/usr/share/paperweight-os/wallpapers/${THEME}.png"
+fi
 [ -f "$WP" ] && swaymsg "output * bg $WP fill"
 
 # Update gtkgreet login screen theme (requires sudo; skips silently if unavailable)

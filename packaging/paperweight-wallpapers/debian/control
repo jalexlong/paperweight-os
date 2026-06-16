@@ -9,11 +9,14 @@ Rules-Requires-Root: no
 
 Package: paperweight-wallpapers
 Architecture: all
-Depends: paperweight-skel, ${misc:Depends}
+Depends: paperweight-skel, waypaper, ${misc:Depends}
 Description: PaperweightOS wallpapers — Catppuccin themed backgrounds
- Provides solid-color wallpapers matching the Catppuccin palette for all
- four flavours (Latte, Frappé, Macchiato, Mocha), installed to
- /usr/share/paperweight-os/wallpapers/.
+ Provides wallpapers for PaperweightOS, installed to
+ /usr/share/paperweight-os/wallpapers/:
+ .
+  - Solid-color backgrounds for all four Catppuccin flavours (Latte,
+    Frappé, Macchiato, Mocha)
+  - Custom artwork wallpapers for Latte and Macchiato, two variants each
  .
  Also installs a sway config fragment (91-wallpaper.conf) that applies
  the active theme's wallpaper on session start and after sway reload.

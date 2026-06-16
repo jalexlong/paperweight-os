@@ -1,3 +1,22 @@
+paperweight-wallpapers (0.3.0-1) trixie; urgency=low
+
+  * Add paperweight-wallpaper: waypaper wrapper that saves chosen wallpaper
+    to the active theme's config (~/.config/paperweight-os/wallpapers/<theme>)
+    so each theme remembers its own wallpaper independently.
+  * Add 92-wallpaper-picker.conf: binds $mod+w to paperweight-wallpaper.
+  * Update 91-wallpaper.conf: per-theme override > artwork default > solid
+    color fallback chain on session start and sway reload.
+  * Add waypaper to Depends.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Mon, 16 Jun 2026 00:00:00 +0000
+
+paperweight-wallpapers (0.2.0-1) trixie; urgency=low
+
+  * Add custom artwork wallpapers (JPEG) for Latte and Macchiato themes,
+    two variants each.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Mon, 16 Jun 2026 00:00:00 +0000
+
 paperweight-wallpapers (0.1.0-1) trixie; urgency=low
 
   * Initial release. Solid-color wallpapers for Catppuccin Latte, Frappé,
