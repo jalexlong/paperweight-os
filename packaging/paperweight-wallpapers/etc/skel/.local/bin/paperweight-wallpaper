@@ -1,34 +1,63 @@
-#!/bin/sh
+#!/bin/bash
 # Graphical wallpaper picker for PaperweightOS.
-# Opens waypaper and saves the chosen wallpaper to the active theme's config,
-# so each theme remembers its own wallpaper independently.
+# Uses yad --list with image thumbnails if available, falls back to
+# wofi dmenu. Saves the chosen wallpaper per active theme so each theme
+# remembers its own wallpaper independently.
 #
+# Scans /usr/share/paperweight-os/wallpapers/ and ~/Pictures/ (if present).
 # The saved path is read by paperweight-theme and 91-wallpaper.conf on
-# theme switches and session start. Third-party wallpapers are fully supported.
+# theme switches and session start. Third-party wallpapers are supported.
 
+WALLPAPER_DIR="/usr/share/paperweight-os/wallpapers"
 THEME=$(cat "$HOME/.config/paperweight-os/active-theme" 2>/dev/null || echo macchiato)
 THEME_WP_DIR="$HOME/.config/paperweight-os/wallpapers"
-WAYPAPER_CONF="$HOME/.config/waypaper/config.ini"
 
-# Seed waypaper config with our wallpapers dir and swaybg backend on first run
-if [ ! -f "$WAYPAPER_CONF" ]; then
-    mkdir -p "$(dirname "$WAYPAPER_CONF")"
-    printf '[Settings]\nfolder = /usr/share/paperweight-os/wallpapers\nbackend = swaybg\n' \
-        > "$WAYPAPER_CONF"
+pick_with_yad() {
+    local args=()
+    local scan_dirs=("$WALLPAPER_DIR")
+    [ -d "$HOME/Pictures" ] && scan_dirs+=("$HOME/Pictures")
+
+    for dir in "${scan_dirs[@]}"; do
+        while IFS= read -r f; do
+            local name
+            name=$(basename "${f%.*}" | tr '-_' '  ')
+            args+=("$f" "$name" "$f")
+        done < <(find "$dir" -maxdepth 1 -type f \
+            \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.webp" \) | sort)
+    done
+
+    [[ ${#args[@]} -eq 0 ]] && return 1
+
+    yad --list \
+        --title="Select Wallpaper" \
+        --width=800 --height=540 \
+        --column="Preview:IMG" \
+        --column="Name" \
+        --column="Path:HD" \
+        --print-column=3 \
+        "${args[@]}" 2>/dev/null | sed 's/|$//'
+}
+
+pick_with_wofi() {
+    find "$WALLPAPER_DIR" -maxdepth 1 -type f \
+        \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.webp" \) |
+        sort | wofi --dmenu --prompt "Wallpaper:" 2>/dev/null
+}
+
+if command -v yad >/dev/null 2>&1; then
+    SELECTED=$(pick_with_yad) || exit 0
+elif command -v wofi >/dev/null 2>&1; then
+    SELECTED=$(pick_with_wofi) || exit 0
+else
+    notify-send -u critical "paperweight-wallpaper" \
+        "No wallpaper picker available — install yad or wofi"
+    exit 1
 fi
 
-waypaper
-
-# waypaper applies wallpapers live on click; whatever is in its config on exit
-# is what is currently displayed.
-SELECTED=$(python3 -c "
-import configparser, os
-c = configparser.ConfigParser()
-c.read(os.path.expanduser('~/.config/waypaper/config.ini'))
-print(c.get('Settings', 'wallpaper', fallback=''))
-" 2>/dev/null)
-
 [ -z "$SELECTED" ] && exit 0
+[ -f "$SELECTED" ] || { notify-send "paperweight-wallpaper" "File not found: $SELECTED"; exit 1; }
+
+swaymsg "output * bg $SELECTED fill"
 
 mkdir -p "$THEME_WP_DIR"
 printf '%s\n' "$SELECTED" > "$THEME_WP_DIR/$THEME"

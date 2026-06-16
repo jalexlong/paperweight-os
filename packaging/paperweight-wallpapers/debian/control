@@ -9,7 +9,7 @@ Rules-Requires-Root: no
 
 Package: paperweight-wallpapers
 Architecture: all
-Depends: paperweight-skel, waypaper, ${misc:Depends}
+Depends: paperweight-skel, swaybg, yad, ${misc:Depends}
 Description: PaperweightOS wallpapers — Catppuccin themed backgrounds
  Provides wallpapers for PaperweightOS, installed to
  /usr/share/paperweight-os/wallpapers/:
@@ -19,5 +19,11 @@ Description: PaperweightOS wallpapers — Catppuccin themed backgrounds
   - Custom artwork wallpapers for Latte and Macchiato, two variants each
  .
  Also installs a sway config fragment (91-wallpaper.conf) that applies
- the active theme's wallpaper on session start and after sway reload.
- The active theme is read from ~/.config/paperweight-os/active-theme.
+ the active theme's wallpaper on session start and after sway reload,
+ and a wallpaper picker (paperweight-wallpaper, bound to $mod+w) that
+ saves the chosen wallpaper per active theme.
+ .
+ The picker uses yad --list with image thumbnail previews (scanning
+ /usr/share/paperweight-os/wallpapers/ and ~/Pictures/ if present),
+ with a wofi dmenu fallback. The active theme is read from
+ ~/.config/paperweight-os/active-theme.

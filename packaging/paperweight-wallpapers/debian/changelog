@@ -1,3 +1,22 @@
+paperweight-wallpapers (0.3.2-1) trixie; urgency=low
+
+  * Convert wallpaper picker to yad: paperweight-wallpaper now uses
+    yad --list with IMG thumbnail column (Preview/Name/Path columns,
+    scanning system wallpapers dir and ~/Pictures/). Wofi dmenu fallback
+    retained. Replaces zenity dep with yad; script upgraded to bash for
+    array support.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Mon, 16 Jun 2026 00:00:00 +0000
+
+paperweight-wallpapers (0.3.1-1) trixie; urgency=low
+
+  * Replace waypaper with a zenity+wofi wallpaper picker: paperweight-wallpaper
+    now uses zenity --file-selection (GTK file chooser with image thumbnails)
+    with a wofi dmenu fallback. Drops waypaper dep (not in Trixie); adds zenity
+    and swaybg to Depends.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Mon, 16 Jun 2026 00:00:00 +0000
+
 paperweight-wallpapers (0.3.0-1) trixie; urgency=low
 
   * Add paperweight-wallpaper: waypaper wrapper that saves chosen wallpaper

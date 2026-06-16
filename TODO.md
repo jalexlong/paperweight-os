@@ -1,100 +1,154 @@
 # PaperweightOS — TODO
 
-## Blocking (required before any real install works)
+---
 
-- [x] **Nerd Font package** — `paperweight-fonts` ships JetBrainsMono NF +
-      Symbols Nerd Font under SIL OFL 1.1. Builds and installs cleanly.
+## Completed (summary)
 
-- [x] **GPG key + apt repo publish** — repo live at
-      `https://jalexlong.github.io/paperweight-os`. Binary key export fixed.
-
-- [x] **GitHub repo + Pages** — `jalexlong/paperweight-os` published,
-      gh-pages branch serving the apt repo.
-
-- [x] **First working VM install** — paperweight-desktop installs and sway
-      launches on a fresh Debian Trixie VM. Waybar, swaync, wofi all working.
-
-- [x] **Verify gtklock is in Trixie** — confirmed at version 4.0.0-1.
-
-- [x] **Wallpaper fallback** — `output * bg $base solid_color` added to
-      90-theme.conf; sway shows Macchiato base (#24273a) until a wallpaper
-      package is available.
-
-- [x] **Keybinding audit** — all bindings verified against Depends. Fixed:
-      removed duplicate $mod+t/$mod+b from base config (superseded by
-      config.d/40-workspaces.conf); added XF86AudioPlay/Stop/Prev/Next
-      via playerctl. Known silent failures: $mod+s (ncspot), $mod+c (discord).
+All blocking items are done. The apt repo is live, CI publishes on push to main,
+greetd/gtkgreet/Plymouth/GRUB are packaged, all four Catppuccin variants ship,
+the theme switcher works end-to-end, and a preseed file exists for semi-automated
+Trixie installs. See git log for details.
 
 ---
 
-## Near-term (next few sessions)
+## Bugs / Correctness
 
-- [x] **`paperweight-chromebook` source package** — full source tree created at
-      `packaging/paperweight-chromebook/`. Keyboard (1:1:AT_Translated_Set_2_keyboard)
-      uses xkb_model "chromebook"; output (eDP-1) set to 1366x768@60Hz.
+- [ ] **wofi colors not updated by theme switcher** — `wofi/style.css` has
+  `@define-color` values hardcoded to Macchiato. `paperweight-theme` updates
+  waybar, swaync, and gtklock but skips wofi. Latte (light) will look wrong.
+  Fix: add a `wofi/themes/<name>.css` set and copy in `paperweight-theme`.
 
-- [x] **`40-workspaces.conf`** — workspace assignments and app-launch keybinds.
-      ws1 terminal, ws2 browser, ws3 helix, ws4 ncspot, ws5 chat, ws6 games.
-      Floating variants via $mod+Shift+key. helix/ncspot/cava added to deps.
+- [ ] **Duplicate gap/border declarations** — `sway/config` sets
+  `gaps inner 5 / outer 5 / border pixel 2`; `90-theme.conf` overrides these
+  with different values. The base `config` values are dead. Remove them from
+  `sway/config` to avoid confusion.
 
-- [x] **brightnessctl udev rule** — 70-paperweight-backlight.rules grants
-      video group write access to brightness sysfs on device discovery.
-      postinst enables ADD_EXTRA_GROUPS and adds 'video' to EXTRA_GROUPS
-      in /etc/adduser.conf so new users land in the group automatically.
+- [ ] **`cava-waybar` `BARS` vs `cava/waybar-config bars` are silently coupled**
+  — both hardcode `10`. If either changes, cava emits the wrong byte count and
+  waybar output garbles. Add a comment pairing them explicitly, or derive `BARS`
+  from the config file at runtime.
 
-- [x] **xdg-user-dirs on session start** — `exec xdg-user-dirs-update` added
-      to 50-desktop-session.conf; runs as user on sway startup.
+- [ ] **`paperweight-theme` no guard for missing per-theme CSS** — `cp
+  "$SWAYNC_THEMES/$THEME.css"` and the gtklock equivalent have no `-f` guard.
+  A partial or user-created theme leaves an inconsistent state after `90-colors.conf`
+  is already overwritten. Add `[ -f ... ] || { echo "missing CSS"; exit 1; }` guards.
 
-- [x] **CI publishing** — GitHub Actions builds all packages on every push/PR
-      and publishes to gh-pages on push to main. `bash publish.sh` is still
-      available for local publishing with the GPG key.
+- [ ] **`paperweight-theme` waybar restart is racy** — uses `pkill -x waybar; waybar &`
+  instead of `pkill -SIGUSR1 waybar` (the graceful reload bound to `$mod+Ctrl+w`).
+  Can briefly result in two waybar instances during a theme switch.
 
-- [x] **Verify ncspot, helix, cava in Trixie** — cava ✓ (0.10.4+dfsg-1),
-      helix ✓ (package name is `hx`, fixed in control), ncspot ✗ not in Trixie.
-      ncspot removed from Depends; install manually via `cargo install ncspot`
-      or a third-party .deb. ws4 `$mod+s` keybind will silently fail without it.
+- [ ] **`sway-wait-float` exits silently on timeout** — after 30 polls (6 s) with
+  no match it exits 0 with no feedback. Add a `notify-send` or stderr message on
+  timeout so the user knows the float never appeared.
 
-- [x] **Discord/Vesktop floating hack** — replaced `sleep 2` with
-      `~/.local/bin/sway-wait-float`: polls sway IPC every 0.2s (6s max)
-      and applies floating only once the window actually appears.
+- [ ] **`90-theme.conf` depends on `90-colors.conf` load order** — `output * bg
+  $base solid_color` requires `$base` from `90-colors.conf`, which sorts earlier
+  alphabetically. This is correct today but breaks silently if either file is
+  renamed. Add a comment documenting the dependency.
 
 ---
 
-## Polish / Roadmap
+## Packaging
 
-- [x] **Theme switcher** — `~/.local/bin/paperweight-theme` applies a named
-      theme atomically: sway colors, waybar imports, swaync CSS, gtklock CSS.
-      Prompts via wofi with no args. Bound to `$mod+p`.
+- [x] **`waypaper` replaced with yad+wofi picker** — `paperweight-wallpaper`
+  now uses `yad --list` with an IMG thumbnail column (scanning system wallpapers
+  and `~/Pictures/`) with a `wofi --dmenu` fallback. `waypaper` dep dropped;
+  `yad` + `swaybg` added to Depends. Bumped to 0.3.2-1.
 
-- [x] **All four Catppuccin variants** — Latte (light), Frappé, Macchiato, Mocha.
-      All five per-theme files wired up for each variant.
+- [ ] **`swaybg` undeclared in `paperweight-wallpapers`** — pulled in transitively
+  by sway but not listed in `Depends`. Low risk; add it for correctness.
 
-- [x] **`paperweight-wallpapers` package** — solid-color Catppuccin wallpapers
-      (Latte, Frappé, Macchiato, Mocha) in `/usr/share/paperweight-os/wallpapers/`.
-      Includes `91-wallpaper.conf` skel fragment; `paperweight-theme` applies
-      wallpaper immediately via swaymsg when the package is installed.
+- [ ] **`paperweight-grub` missing `grub-pc | grub-efi-amd64 | grub2` dependency**
+  — installs silently on non-GRUB systems. The postinst `/etc/default/grub` guard
+  is safe but misleading. Add a soft dependency or a postinst warning.
 
-- [x] **Display manager** — greetd + gtkgreet; GTK4 greeter themed with
-      Catppuccin CSS. `/etc/greetd/themes/` holds per-variant CSS files.
-      `paperweight-theme` updates the login screen via a sudoers-gated
-      helper (`paperweight-set-greeter-theme`) on every theme switch.
+- [ ] **`paperweight-grub` implicit build-time dep on `paperweight-fonts`** —
+  `debian/rules` hardcodes `../paperweight-fonts/usr/share/fonts/...`. Works today
+  because alphabetical glob order puts fonts before grub, but will silently break
+  if a new package sorts between them. Fix: vendor the TTF into `paperweight-grub`
+  or add an explicit check at the top of the build target.
 
-- [x] **Plymouth splash** — `paperweight-plymouth`: Catppuccin Macchiato,
-      script plugin, solid base background with pulsing centered label.
-      Recommended by `paperweight-desktop`. Rebuilds initramfs on install.
+- [ ] **No prerm/postrm for system-level changes** — `postinst` masks
+  `getty@tty1`, creates the `greeter` user, and patches `adduser.conf`. None of
+  these are undone on `apt remove` or `apt purge`. Acceptable for a personal
+  distro today; required before submitting to any archive.
 
-- [x] **GRUB theme** — `paperweight-grub`: Catppuccin Macchiato palette,
-      JetBrainsMono Nerd Font compiled to PF2, mauve selection highlight.
-      Recommended by `paperweight-desktop`. `paperweight-chromebook` sets
-      `GRUB_GFXMODE=1366x768,auto` in its postinst.
+- [ ] **`Replaces: greetd` has no version ceiling** — applies to all past and
+  future greetd versions. Add `Replaces: greetd (<< <next-breaking-version>)`
+  once greetd stabilizes in Trixie.
 
-- [x] **Preseed file** — `preseed/paperweight.cfg`: automates a Trixie install,
-      then adds the PaperweightOS apt repo and installs `paperweight-desktop`
-      via `late_command`. Customize disk, locale, and password before use.
+- [ ] **frappe and mocha have no artwork wallpapers** — only solid PNGs ship for
+  those two flavours; latte and macchiato each have two JPEG artwork variants.
+  Either add artwork for all four or document the asymmetry.
 
-- [x] **CI via GitHub Actions** — `.github/workflows/build-and-publish.yml` builds
-      all packages on every push/PR; publishes to `gh-pages` on push to `main`
-      (requires `GPG_PRIVATE_KEY` + `GPG_PASSPHRASE` secrets in repo settings).
+- [ ] **README.md package table is stale** — lists `paperweight-wallpapers` at
+  `0.1.0` (current: `0.3.0`) and `paperweight-skel` at `0.2.29` (current:
+  `0.2.30`). Update to match current changelogs.
 
-- [ ] **`live-build` ISO** — long term, after .debs are solid and the apt repo
-      is stable.
+- [ ] **`create-packaging.sh` is stale scaffolding** — references kitty, mako,
+  nemo, and qutebrowser; none of these are in the shipped stack. Either update
+  it to reflect the real package list or delete it to avoid confusing contributors.
+
+---
+
+## CI / Pipeline
+
+- [ ] **No version bump guard** — pushing to `main` without bumping the changelog
+  version causes `reprepro` to skip the package silently. Nothing warns that the
+  publish was a no-op. Add a pre-publish check that errors if the `.deb` version
+  already exists in the pool.
+
+- [ ] **No lintian run in CI** — packages are built with `-us -uc` but never
+  lintian-checked. Add a `lintian --fail-on error *.deb` step to the `build` job.
+
+- [ ] **No git tags on published versions** — after a successful publish there is
+  no durable mark in git. Tag each published version (e.g. `paperweight-skel/0.2.30`)
+  so the apt repo state is always traceable to a commit.
+
+- [ ] **`build` job apt-installs are not declarative** — currently hardcodes
+  `debhelper build-essential grub-common`. New build-dep additions require a
+  manual CI edit. Consider auto-parsing `Build-Depends` from each `debian/control`
+  and installing them, or at least add `plymouth` tools now that
+  `paperweight-plymouth` is in the tree.
+
+- [ ] **`preseed/paperweight.cfg` is never validated in CI** — syntax errors only
+  surface at install time. Add a `debconf-set-selections --checkonly` or
+  `preseed-verify` step to the `build` job.
+
+---
+
+## Roadmap — Path to Full Distro Status
+
+- [ ] **`live-build` ISO** — long term, after the apt repo is stable and
+  installation has been verified on real hardware. Start with a netinstall ISO
+  that downloads packages; full offline ISO later.
+
+- [ ] **Hardware test matrix** — only the Dell Chromebook 11 (coreboot) has been
+  tested as a target. Document which generic x86 laptops work out of the box and
+  what (if anything) breaks on non-Chromebook targets.
+
+- [ ] **ncspot in the personal apt repo** — `$mod+s` silently fails without it and
+  it is not in Trixie. Options: pre-built .deb in the repo, or find a Trixie-native
+  TUI music player to replace it (`cmus`, `musikcube`).
+
+- [ ] **`paperweight-network` script** — yad-based Wi-Fi manager wrapping
+  nmcli. Flow: `nmcli -t dev wifi list` → `yad --list` table (IN-USE,
+  SSID, signal, security columns) → on selection, `yad --entry --hide-text`
+  for password if needed → `nmcli device wifi connect`. Bind to a keybind
+  (e.g. `$mod+n`). yad is already a dep via paperweight-wallpapers so no
+  new package dependency required.
+
+- [ ] **User-facing install docs** — the README has the four-line apt snippet but
+  nothing covering: locale/timezone during preseed, disk partitioning choices,
+  post-install first-boot steps, or how to add `video` group membership for
+  existing users (currently documented only in CLAUDE.md Known Issues).
+
+- [ ] **Theme authoring guide** — CLAUDE.md documents the five per-theme files
+  but `wofi/themes/` doesn't exist yet (see bug above), and gtkgreet themes live
+  under `/etc/greetd/themes/` (system) not skel. Reconcile the guide with reality
+  once wofi theming is fixed.
+
+- [ ] **Additional themes beyond Catppuccin** — the architecture supports arbitrary
+  themes but only Catppuccin variants exist. A Nord or Dracula variant would
+  validate that the theme switcher works across palette families (especially
+  important for the Latte → dark-theme contrast path).
