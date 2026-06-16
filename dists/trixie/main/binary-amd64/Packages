@@ -130,19 +130,19 @@ Description: PaperweightOS default configuration skeleton
  and are dropped into config.d/ directories for fragment-based composition.
 
 Package: paperweight-wallpapers
-Version: 0.3.0-1
+Version: 0.3.2-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
-Installed-Size: 532
-Depends: paperweight-skel, waypaper
+Installed-Size: 533
+Depends: paperweight-skel, swaybg, yad
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-wallpapers/paperweight-wallpapers_0.3.0-1_all.deb
-Size: 249878
-SHA256: eec84ffba1e6eccfce9cdb29d04e54dd0e813e3565f626c14e1a39027a093ad6
-SHA1: 23354b0e2392fa9dae2022a2f07c465afde18602
-MD5sum: d6c4f3841fac662fb127bac22b09445f
+Filename: pool/main/p/paperweight-wallpapers/paperweight-wallpapers_0.3.2-1_all.deb
+Size: 250658
+SHA256: e553df0822fef1b0b5317d23c2e6c12aed1444042faec03231a81c43ed2d95b3
+SHA1: b000c17078bce5f11452c07408b5fc210e985a30
+MD5sum: 6a024a0e655b24c45c345673ca9c075f
 Description: PaperweightOS wallpapers — Catppuccin themed backgrounds
  Provides wallpapers for PaperweightOS, installed to
  /usr/share/paperweight-os/wallpapers/:
@@ -152,6 +152,12 @@ Description: PaperweightOS wallpapers — Catppuccin themed backgrounds
   - Custom artwork wallpapers for Latte and Macchiato, two variants each
  .
  Also installs a sway config fragment (91-wallpaper.conf) that applies
- the active theme's wallpaper on session start and after sway reload.
- The active theme is read from ~/.config/paperweight-os/active-theme.
+ the active theme's wallpaper on session start and after sway reload,
+ and a wallpaper picker (paperweight-wallpaper, bound to $mod+w) that
+ saves the chosen wallpaper per active theme.
+ .
+ The picker uses yad --list with image thumbnail previews (scanning
+ /usr/share/paperweight-os/wallpapers/ and ~/Pictures/ if present),
+ with a wofi dmenu fallback. The active theme is read from
+ ~/.config/paperweight-os/active-theme.
 
