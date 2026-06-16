@@ -1,3 +1,12 @@
+paperweight-skel (0.2.40-1) trixie; urgency=low
+
+  * paperweight-theme: drop yad dialog for GRUB switching. Since
+    paperweight-grub-theme is NOPASSWD via sudoers, run it as a silent
+    background step alongside paperweight-set-greeter-theme — no user
+    interaction needed. Skips silently if not installed.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 16 Jun 2026 00:00:04 +0000
+
 paperweight-skel (0.2.39-1) trixie; urgency=low
 
   * paperweight-theme: after reloading sway/waybar/swaync, show a yad

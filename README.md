@@ -112,9 +112,8 @@ paperweight-theme mocha
 The active theme is remembered across reboots in
 `~/.config/paperweight-os/active-theme`.
 
-When you switch themes, a dialog appears asking if you also want to update
-the GRUB boot menu. Click **Update GRUB** — no password required. The change
-takes effect on next boot.
+Switching themes automatically updates the GRUB boot menu to match — no
+password prompt, takes effect on next boot.
 
 To switch the GRUB theme independently (e.g. after a manual install):
 
@@ -202,7 +201,7 @@ lock screen). On the Chromebook, the top-row keys send these by default;
 
 | Package | Version | Description |
 |---|---|---|
-| `paperweight-skel` | 0.2.39 | Default configs installed to `/etc/skel/` |
+| `paperweight-skel` | 0.2.40 | Default configs installed to `/etc/skel/` |
 | `paperweight-desktop` | 0.1.11 | Metapackage: pulls in the full desktop stack |
 | `paperweight-fonts` | 0.1.0 | JetBrains Mono Nerd Font + Symbols Nerd Font |
 | `paperweight-wallpapers` | 0.3.2 | Catppuccin wallpapers + yad wallpaper picker |
