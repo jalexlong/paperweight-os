@@ -66,23 +66,24 @@ Description: PaperweightOS Nerd Fonts — JetBrains Mono and Symbols
  under the SIL Open Font License 1.1.
 
 Package: paperweight-grub
-Version: 0.1.1-1
+Version: 0.1.2-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
 Installed-Size: 415
+Recommends: grub-pc | grub-efi-amd64 | grub-efi-arm64
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-grub/paperweight-grub_0.1.1-1_all.deb
-Size: 179728
-SHA256: cfb976ae960b061933b616b0bc4f347c8bec50a85bc5780383dfad20ea0dee0a
-SHA1: f515f5a85c49d954a040ad676e2bcd48a3ca640f
-MD5sum: 00376bd4e3bd76bd95c85e48594aa4eb
+Filename: pool/main/p/paperweight-grub/paperweight-grub_0.1.2-1_all.deb
+Size: 179448
+SHA256: c610ab65cf70f5b87a0f5d18e91de6e50227b2af629ebe495ce4c8a8d189aa20
+SHA1: 275048a448f9aaad5ffebf03dd5603634602653c
+MD5sum: 634d61d7d575e8050ba113f2a2221930
 Description: PaperweightOS GRUB theme — Catppuccin Macchiato
  Installs a Catppuccin Macchiato-themed GRUB2 boot menu for PaperweightOS.
  Sets GRUB_THEME in /etc/default/grub and runs update-grub on install.
  .
- No-op if GRUB is not installed (/etc/default/grub absent).
+ Recommends grub-pc or grub-efi; no-op if /etc/default/grub is absent.
 
 Package: paperweight-plymouth
 Version: 0.1.0-1
