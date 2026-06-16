@@ -1,3 +1,11 @@
+paperweight-grub (0.1.2-1) trixie; urgency=low
+
+  * control: add Recommends: grub-pc | grub-efi-amd64 | grub-efi-arm64.
+  * rules: fail fast with a clear error if paperweight-fonts hasn't been
+    built first (font not found at expected relative path).
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Mon, 16 Jun 2026 00:00:00 +0000
+
 paperweight-grub (0.1.1-1) trixie; urgency=low
 
   * theme.txt: remove invalid show_text property from progress_bar widget.

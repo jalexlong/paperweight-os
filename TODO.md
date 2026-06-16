@@ -53,18 +53,15 @@ Trixie installs. See git log for details.
   and `~/Pictures/`) with a `wofi --dmenu` fallback. `waypaper` dep dropped;
   `yad` + `swaybg` added to Depends. Bumped to 0.3.2-1.
 
-- [ ] **`swaybg` undeclared in `paperweight-wallpapers`** — pulled in transitively
-  by sway but not listed in `Depends`. Low risk; add it for correctness.
+- [x] **`swaybg` declared in `paperweight-wallpapers`** — already added with
+  the yad change (0.3.2-1). No further action needed.
 
-- [ ] **`paperweight-grub` missing `grub-pc | grub-efi-amd64 | grub2` dependency**
-  — installs silently on non-GRUB systems. The postinst `/etc/default/grub` guard
-  is safe but misleading. Add a soft dependency or a postinst warning.
+- [x] **`paperweight-grub` GRUB Recommends added** — `Recommends: grub-pc |
+  grub-efi-amd64 | grub-efi-arm64` added to control. 0.1.2-1.
 
-- [ ] **`paperweight-grub` implicit build-time dep on `paperweight-fonts`** —
-  `debian/rules` hardcodes `../paperweight-fonts/usr/share/fonts/...`. Works today
-  because alphabetical glob order puts fonts before grub, but will silently break
-  if a new package sorts between them. Fix: vendor the TTF into `paperweight-grub`
-  or add an explicit check at the top of the build target.
+- [x] **`paperweight-grub` build-time dep made explicit** — `debian/rules` now
+  fails fast with a clear error if `paperweight-fonts` hasn't been built first,
+  rather than passing a missing path to grub-mkfont. 0.1.2-1.
 
 - [ ] **No prerm/postrm for system-level changes** — `postinst` masks
   `getty@tty1`, creates the `greeter` user, and patches `adduser.conf`. None of
