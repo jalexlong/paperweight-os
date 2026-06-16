@@ -3,6 +3,9 @@ set -e
 
 case "$1" in
     configure)
+        chmod 0440 /etc/sudoers.d/paperweight-plymouth
+        chmod +x /usr/bin/paperweight-plymouth-theme
+
         if command -v plymouth-set-default-theme > /dev/null 2>&1; then
             plymouth-set-default-theme paperweight
             update-initramfs -u || true

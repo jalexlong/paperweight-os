@@ -77,9 +77,10 @@ else
 fi
 [ -f "$WP" ] && swaymsg "output * bg $WP fill"
 
-# Update gtkgreet and GRUB theme (both NOPASSWD; skip silently if unavailable)
+# Update gtkgreet, GRUB, and Plymouth (all NOPASSWD; skip silently if unavailable)
 sudo paperweight-set-greeter-theme "$THEME" 2>/dev/null || true
 sudo paperweight-grub-theme "$THEME" 2>/dev/null || true
+sudo paperweight-plymouth-theme "$THEME" 2>/dev/null || true
 
 # Reload: sway first (color vars), then waybar, then swaync
 swaymsg reload

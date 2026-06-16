@@ -1,3 +1,11 @@
+paperweight-skel (0.2.41-1) trixie; urgency=low
+
+  * paperweight-theme: add sudo paperweight-plymouth-theme as a silent
+    background step alongside gtkgreet and GRUB. Switching themes now
+    updates all four system surfaces in one command.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 16 Jun 2026 00:00:05 +0000
+
 paperweight-skel (0.2.40-1) trixie; urgency=low
 
   * paperweight-theme: drop yad dialog for GRUB switching. Since

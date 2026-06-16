@@ -201,12 +201,12 @@ lock screen). On the Chromebook, the top-row keys send these by default;
 
 | Package | Version | Description |
 |---|---|---|
-| `paperweight-skel` | 0.2.40 | Default configs installed to `/etc/skel/` |
+| `paperweight-skel` | 0.2.41 | Default configs installed to `/etc/skel/` |
 | `paperweight-desktop` | 0.1.11 | Metapackage: pulls in the full desktop stack |
 | `paperweight-fonts` | 0.1.0 | JetBrains Mono Nerd Font + Symbols Nerd Font |
 | `paperweight-wallpapers` | 0.3.2 | Catppuccin wallpapers + yad wallpaper picker |
 | `paperweight-grub` | 0.1.4 | Catppuccin GRUB2 theme — all four variants |
-| `paperweight-plymouth` | 0.1.1 | Catppuccin Macchiato Plymouth boot splash |
+| `paperweight-plymouth` | 0.1.2 | Catppuccin Plymouth boot splash — all four variants |
 | `paperweight-chromebook` | 0.1.11 | Dell Chromebook 11 3180 hardware support |
 
 ---

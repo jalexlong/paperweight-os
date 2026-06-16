@@ -1,3 +1,18 @@
+paperweight-plymouth (0.1.2-1) trixie; urgency=low
+
+  * Add all four Catppuccin variant scripts: macchiato.script, latte.script,
+    frappe.script, mocha.script — each with correct per-variant palette for
+    background, wordmark (subtext0), and dots (mauve/lavender accent).
+  * Add paperweight-plymouth-theme helper: copies selected variant script to
+    paperweight.script and runs update-initramfs -u. Defaults to macchiato.
+    Usage: sudo paperweight-plymouth-theme <variant>.
+  * Add etc/sudoers.d/paperweight-plymouth: NOPASSWD for %sudo group so
+    paperweight-theme can switch Plymouth silently alongside GRUB and gtkgreet.
+  * debian/postinst: chmod 0440 sudoers drop-in and +x helper on configure.
+  * debian/control: update description to mention all four variants.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 16 Jun 2026 00:00:02 +0000
+
 paperweight-plymouth (0.1.1-1) trixie; urgency=low
 
   * postinst: add 'quiet splash' to GRUB_CMDLINE_LINUX_DEFAULT if absent,

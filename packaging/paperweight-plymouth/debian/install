@@ -1,2 +1,8 @@
-usr/share/plymouth/themes/paperweight/paperweight.plymouth  usr/share/plymouth/themes/paperweight/
-usr/share/plymouth/themes/paperweight/paperweight.script    usr/share/plymouth/themes/paperweight/
+etc/sudoers.d/paperweight-plymouth                                    etc/sudoers.d/
+usr/bin/paperweight-plymouth-theme                                    usr/bin/
+usr/share/plymouth/themes/paperweight/paperweight.plymouth            usr/share/plymouth/themes/paperweight/
+usr/share/plymouth/themes/paperweight/paperweight.script              usr/share/plymouth/themes/paperweight/
+usr/share/plymouth/themes/paperweight/macchiato.script                usr/share/plymouth/themes/paperweight/
+usr/share/plymouth/themes/paperweight/latte.script                    usr/share/plymouth/themes/paperweight/
+usr/share/plymouth/themes/paperweight/frappe.script                   usr/share/plymouth/themes/paperweight/
+usr/share/plymouth/themes/paperweight/mocha.script                    usr/share/plymouth/themes/paperweight/

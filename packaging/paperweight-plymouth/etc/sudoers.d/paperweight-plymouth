@@ -1,0 +1,4 @@
+# Allow sudo-group users to switch the Plymouth boot splash variant
+# without a password. The helper only copies within /usr/share/plymouth/themes/paperweight/
+# and runs update-initramfs -u.
+%sudo ALL=(root) NOPASSWD: /usr/bin/paperweight-plymouth-theme

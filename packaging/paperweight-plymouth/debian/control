@@ -10,10 +10,13 @@ Rules-Requires-Root: no
 Package: paperweight-plymouth
 Architecture: all
 Depends: ${misc:Depends}, plymouth, plymouth-label
-Description: PaperweightOS Plymouth theme — Catppuccin Macchiato
- Installs a Catppuccin Macchiato-themed Plymouth boot splash for PaperweightOS.
- Uses the script plugin: solid base (#24273a) background with a pulsing
- centered "PaperweightOS" label.
+Description: PaperweightOS Plymouth theme — all four Catppuccin variants
+ Installs a Catppuccin-themed Plymouth boot splash for PaperweightOS.
+ Ships all four variants (Macchiato, Latte, Frappé, Mocha). Defaults to
+ Macchiato on install. Uses the script plugin: solid base background with
+ a fixed wordmark and three-dot sequencing animation.
+ .
+ Switch variants with: sudo paperweight-plymouth-theme <variant>
  .
  Sets the Plymouth default theme and rebuilds the initramfs on install and
  removal. On eMMC storage this may take 30-60 seconds.
