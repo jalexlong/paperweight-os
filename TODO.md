@@ -27,10 +27,9 @@ Trixie installs. See git log for details.
   from `~/.config/cava/waybar-config` via `configparser` (fallback 10).
   Hardcoded value removed; the two can no longer silently diverge. 0.2.33-1.
 
-- [ ] **`paperweight-theme` no guard for missing per-theme CSS** — `cp
-  "$SWAYNC_THEMES/$THEME.css"` and the gtklock equivalent have no `-f` guard.
-  A partial or user-created theme leaves an inconsistent state after `90-colors.conf`
-  is already overwritten. Add `[ -f ... ] || { echo "missing CSS"; exit 1; }` guards.
+- [x] **`paperweight-theme` validates all theme files upfront** — checks all
+  six files (sway, waybar palette+waybar, swaync, gtklock, wofi) before
+  touching anything. Lists missing files in the error notification. 0.2.34-1.
 
 - [ ] **`paperweight-theme` waybar restart is racy** — uses `pkill -x waybar; waybar &`
   instead of `pkill -SIGUSR1 waybar` (the graceful reload bound to `$mod+Ctrl+w`).

@@ -32,8 +32,21 @@ fi
 
 [ -z "$THEME" ] && exit 0
 
-if [ ! -f "$SWAY_THEMES/$THEME.conf" ]; then
-    notify-send -u critical "paperweight-theme" "Unknown theme: $THEME"
+# Validate all theme files exist before touching anything — prevents partial state.
+missing=""
+for f in \
+    "$SWAY_THEMES/$THEME.conf" \
+    "$WAYBAR_THEMES/$THEME-palette.css" \
+    "$WAYBAR_THEMES/$THEME-waybar.css" \
+    "$SWAYNC_THEMES/$THEME.css" \
+    "$GTKLOCK_THEMES/$THEME.css" \
+    "$WOFI_THEMES/$THEME.css"
+do
+    [ -f "$f" ] || missing="$missing\n  $f"
+done
+if [ -n "$missing" ]; then
+    notify-send -u critical "paperweight-theme" \
+        "Theme '$THEME' is incomplete — missing:$missing"
     exit 1
 fi
 
