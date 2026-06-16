@@ -7,6 +7,25 @@ case "$1" in
             plymouth-set-default-theme paperweight
             update-initramfs -u || true
         fi
+
+        # Ensure 'splash' is in GRUB_CMDLINE_LINUX_DEFAULT so Plymouth
+        # actually renders. Without it the kernel never hands off to Plymouth.
+        if [ -f /etc/default/grub ]; then
+            if grep -q "^GRUB_CMDLINE_LINUX_DEFAULT=" /etc/default/grub; then
+                # Extract current value (strip surrounding quotes)
+                current=$(sed -n 's/^GRUB_CMDLINE_LINUX_DEFAULT="\(.*\)"/\1/p' /etc/default/grub)
+                # Add 'quiet' and 'splash' only if not already present
+                new="$current"
+                echo "$new" | grep -qw "quiet"  || new="$new quiet"
+                echo "$new" | grep -qw "splash" || new="$new splash"
+                new=$(echo "$new" | sed 's/^ //')
+                sed -i "s|^GRUB_CMDLINE_LINUX_DEFAULT=.*|GRUB_CMDLINE_LINUX_DEFAULT=\"$new\"|" \
+                    /etc/default/grub
+            else
+                echo 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"' >> /etc/default/grub
+            fi
+            command -v update-grub > /dev/null 2>&1 && update-grub || true
+        fi
         ;;
 esac
 

@@ -7,6 +7,13 @@ case "$1" in
             plymouth-set-default-theme --reset || true
             update-initramfs -u || true
         fi
+
+        # Remove 'splash' from GRUB_CMDLINE_LINUX_DEFAULT on purge.
+        # Leave 'quiet' in place — that's unrelated to Plymouth.
+        if [ "$1" = "purge" ] && [ -f /etc/default/grub ]; then
+            sed -i 's/\bsplash\b//g;s/  */ /g;s/" /"/;s/ "/"/g' /etc/default/grub
+            command -v update-grub > /dev/null 2>&1 && update-grub || true
+        fi
         ;;
 esac
 

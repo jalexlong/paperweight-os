@@ -1,3 +1,18 @@
+paperweight-plymouth (0.1.1-1) trixie; urgency=low
+
+  * postinst: add 'quiet splash' to GRUB_CMDLINE_LINUX_DEFAULT if absent,
+    then run update-grub. Without 'splash' the kernel never activates
+    Plymouth and the theme never appears — this was the root cause of the
+    boot splash not showing at all.
+  * postrm: remove 'splash' from GRUB_CMDLINE_LINUX_DEFAULT on purge.
+  * paperweight.script: replace pulsing wordmark with three-dot terminal
+    sequence. Fixed 'paperweight' wordmark in $subtext0 (#a5adcb); three
+    $lavender (#b7bdf8) dots below cycle opacity with 120° phase offsets
+    to sequence left-to-right. Consistent with the keyboard-driven dev
+    machine identity.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 16 Jun 2026 00:00:01 +0000
+
 paperweight-plymouth (0.1.0-1) trixie; urgency=low
 
   * Initial packaging. Catppuccin Macchiato Plymouth boot splash using the

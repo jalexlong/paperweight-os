@@ -194,7 +194,7 @@ lock screen). On the Chromebook, the top-row keys send these by default;
 | `paperweight-fonts` | 0.1.0 | JetBrains Mono Nerd Font + Symbols Nerd Font |
 | `paperweight-wallpapers` | 0.3.2 | Catppuccin wallpapers + yad wallpaper picker |
 | `paperweight-grub` | 0.1.2 | Catppuccin Macchiato GRUB2 theme |
-| `paperweight-plymouth` | 0.1.0 | Catppuccin Macchiato Plymouth boot splash |
+| `paperweight-plymouth` | 0.1.1 | Catppuccin Macchiato Plymouth boot splash |
 | `paperweight-chromebook` | 0.1.11 | Dell Chromebook 11 3180 hardware support |
 
 ---
