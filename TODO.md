@@ -31,9 +31,9 @@ Trixie installs. See git log for details.
   six files (sway, waybar palette+waybar, swaync, gtklock, wofi) before
   touching anything. Lists missing files in the error notification. 0.2.34-1.
 
-- [ ] **`paperweight-theme` waybar restart is racy** — uses `pkill -x waybar; waybar &`
-  instead of `pkill -SIGUSR1 waybar` (the graceful reload bound to `$mod+Ctrl+w`).
-  Can briefly result in two waybar instances during a theme switch.
+- [x] **`paperweight-theme` waybar reload fixed** — replaced `pkill -x waybar;
+  waybar &` with `pkill -SIGUSR1 waybar || waybar &`. Graceful reload, no
+  double-instance race. Matches the `$mod+Ctrl+w` keybind pattern. 0.2.35-1.
 
 - [ ] **`sway-wait-float` exits silently on timeout** — after 30 polls (6 s) with
   no match it exits 0 with no feedback. Add a `notify-send` or stderr message on

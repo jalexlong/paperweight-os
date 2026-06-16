@@ -82,5 +82,5 @@ sudo paperweight-set-greeter-theme "$THEME" 2>/dev/null || true
 
 # Reload: sway first (color vars), then waybar, then swaync
 swaymsg reload
-pkill -x waybar 2>/dev/null; waybar &
+pkill -SIGUSR1 waybar 2>/dev/null || waybar &
 swaync-client -rs 2>/dev/null || { pkill -x swaync 2>/dev/null; swaync & }
