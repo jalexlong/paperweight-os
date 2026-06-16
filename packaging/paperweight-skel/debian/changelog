@@ -1,3 +1,11 @@
+paperweight-skel (0.2.42-1) trixie; urgency=low
+
+  * paperweight-theme: gate system-surface updates (gtkgreet, GRUB, Plymouth)
+    on sudo group membership. Non-sudo users get full user-space theming
+    (sway, waybar, swaync, gtklock, wofi, wallpaper) without any sudo calls.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 16 Jun 2026 00:00:06 +0000
+
 paperweight-skel (0.2.41-1) trixie; urgency=low
 
   * paperweight-theme: add sudo paperweight-plymouth-theme as a silent

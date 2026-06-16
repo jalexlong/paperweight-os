@@ -201,7 +201,7 @@ lock screen). On the Chromebook, the top-row keys send these by default;
 
 | Package | Version | Description |
 |---|---|---|
-| `paperweight-skel` | 0.2.41 | Default configs installed to `/etc/skel/` |
+| `paperweight-skel` | 0.2.42 | Default configs installed to `/etc/skel/` |
 | `paperweight-desktop` | 0.1.11 | Metapackage: pulls in the full desktop stack |
 | `paperweight-fonts` | 0.1.0 | JetBrains Mono Nerd Font + Symbols Nerd Font |
 | `paperweight-wallpapers` | 0.3.2 | Catppuccin wallpapers + yad wallpaper picker |

@@ -77,10 +77,14 @@ else
 fi
 [ -f "$WP" ] && swaymsg "output * bg $WP fill"
 
-# Update gtkgreet, GRUB, and Plymouth (all NOPASSWD; skip silently if unavailable)
-sudo paperweight-set-greeter-theme "$THEME" 2>/dev/null || true
-sudo paperweight-grub-theme "$THEME" 2>/dev/null || true
-sudo paperweight-plymouth-theme "$THEME" 2>/dev/null || true
+# Update system surfaces (gtkgreet, GRUB, Plymouth) — only if user is in the
+# sudo group, since all three helpers require NOPASSWD sudo. Non-sudo users
+# get full user-space theming; system surfaces are just left unchanged.
+if id -nG 2>/dev/null | tr ' ' '\n' | grep -qx 'sudo'; then
+    sudo paperweight-set-greeter-theme "$THEME" 2>/dev/null || true
+    sudo paperweight-grub-theme "$THEME" 2>/dev/null || true
+    sudo paperweight-plymouth-theme "$THEME" 2>/dev/null || true
+fi
 
 # Reload: sway first (color vars), then waybar, then swaync
 swaymsg reload
