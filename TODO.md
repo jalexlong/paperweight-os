@@ -34,6 +34,14 @@ Trixie installs. See git log for details.
 - [x] **`paperweight-theme` waybar reload fixed** — replaced `pkill -x waybar;
   waybar &` with `pkill -SIGUSR1 waybar || waybar &`. Graceful reload, no
   double-instance race. Matches the `$mod+Ctrl+w` keybind pattern. 0.2.35-1.
+  _(Partially fixed — see 0.2.47 below.)_
+
+- [x] **`paperweight-theme` waybar crash on theme switch fixed** — `swaymsg reload`
+  is synchronous and causes sway to kill+relaunch waybar (sway-managed bar); the
+  `pkill -SIGUSR1 waybar` on the next line then hit the freshly started process
+  during initialization, crashing it. Removed the redundant SIGUSR1 line entirely.
+  Also made `waybar/style.css` write atomic (tmp file + `mv`) so waybar can't read
+  a truncated file during its restart window. 0.2.47-1.
 
 - [x] **`sway-wait-float` exits silently on timeout** — now emits a `notify-send`
   on timeout and exits 1. 0.2.37-1.
