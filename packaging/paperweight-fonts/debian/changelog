@@ -1,3 +1,12 @@
+paperweight-fonts (0.1.1-1) trixie; urgency=low
+
+  * Add fonts-symbola dependency: covers Unicode Miscellaneous Technical
+    block (U+2300–U+23FF), which Nerd Fonts omit. Required for correct
+    rendering of mode indicator glyphs in Claude Code and similar tools.
+  * Update package description to document fonts-symbola inclusion.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Wed, 17 Jun 2026 00:00:00 +0000
+
 paperweight-fonts (0.1.0-1) trixie; urgency=medium
 
   * Initial packaging: JetBrains Mono Nerd Font (Regular, Bold, Italic,

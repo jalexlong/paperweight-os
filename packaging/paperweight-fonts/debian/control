@@ -9,11 +9,15 @@ Rules-Requires-Root: no
 
 Package: paperweight-fonts
 Architecture: all
-Depends: ${misc:Depends}
-Description: PaperweightOS Nerd Fonts — JetBrains Mono and Symbols
+Depends: ${misc:Depends}, fonts-symbola
+Description: PaperweightOS Nerd Fonts — JetBrains Mono, Symbols, and Symbola
  Ships JetBrains Mono Nerd Font (Regular, Bold, Italic, BoldItalic, Medium,
  SemiBold, and Mono variants) and the Nerd Fonts Symbols-Only font, providing
  full Nerd Font glyph coverage for terminals, waybar, and editors.
  .
- Fonts are sourced from https://github.com/ryanoasis/nerd-fonts and licensed
- under the SIL Open Font License 1.1.
+ Depends on fonts-symbola to cover Unicode Miscellaneous Technical symbols
+ (U+2300–U+23FF) that Nerd Fonts omit, including characters used by tools
+ such as Claude Code for mode indicators.
+ .
+ Nerd fonts are sourced from https://github.com/ryanoasis/nerd-fonts and
+ licensed under the SIL Open Font License 1.1.

@@ -1,3 +1,12 @@
+paperweight-skel (0.2.48-1) trixie; urgency=low
+
+  * foot.ini: add Symbola as font fallback after JetBrains Mono Nerd Font,
+    covering Unicode Miscellaneous Technical symbols (U+23F5 etc.) used by
+    Claude Code mode indicators and other tools. postinst propagates this
+    to existing users on upgrade.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Wed, 17 Jun 2026 00:00:00 +0000
+
 paperweight-skel (0.2.47-1) trixie; urgency=low
 
   * paperweight-theme: remove redundant pkill -SIGUSR1 waybar after
