@@ -63,8 +63,11 @@ case "$1" in
                     cp /etc/skel/.local/bin/paperweight-theme \
                        "$TARGET_HOME/.local/bin/paperweight-theme"
                     chmod +x "$TARGET_HOME/.local/bin/paperweight-theme"
+                    cp /etc/skel/.config/waybar/config.jsonc \
+                       "$TARGET_HOME/.config/waybar/config.jsonc"
                     chown -R "${TARGET_USER}:" \
                         "$TARGET_HOME/.config/foot" \
+                        "$TARGET_HOME/.config/waybar/config.jsonc" \
                         "$TARGET_HOME/.config/wofi/themes" \
                         "$TARGET_HOME/.local/bin/paperweight-theme" \
                         2>/dev/null || true

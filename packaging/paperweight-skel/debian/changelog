@@ -1,3 +1,9 @@
+paperweight-skel (0.2.46-1) trixie; urgency=low
+
+  * postinst: on upgrade, overwrite waybar/config.jsonc for existing users.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Mon, 16 Jun 2026 00:00:10 +0000
+
 paperweight-skel (0.2.45-1) trixie; urgency=low
 
   * waybar: move custom/music module to modules-left, immediately after
