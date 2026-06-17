@@ -28,7 +28,7 @@ terminal-border: "0"
     item_font = "Paperweight Regular 14"
     item_color = "#6c6f85"
     selected_item_color = "#8839ef"
-    selected_item_pixmap_style = "latte-highlight.png*"
+    selected_item_pixmap_style = "latte-highlight.png"
     item_height = 32
     item_padding = 10
     item_spacing = 4

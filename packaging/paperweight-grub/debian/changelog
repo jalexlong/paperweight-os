@@ -1,3 +1,12 @@
+paperweight-grub (0.1.6-1) trixie; urgency=high
+
+  * Fix GRUB rescue shell on boot: remove trailing '*' from
+    selected_item_pixmap_style in all five theme files. GRUB interprets
+    "name.png*" as a 9-patch tile set and aborts when the tiles are absent;
+    "name.png" loads the solid PNG as a simple stretched background instead.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 17 Jun 2026 00:00:00 +0000
+
 paperweight-grub (0.1.5-1) trixie; urgency=low
 
   * Add selected item background highlight to all four variant themes: a

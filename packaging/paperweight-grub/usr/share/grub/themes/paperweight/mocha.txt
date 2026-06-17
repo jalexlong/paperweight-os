@@ -28,7 +28,7 @@ terminal-border: "0"
     item_font = "Paperweight Regular 14"
     item_color = "#a6adc8"
     selected_item_color = "#cba4f7"
-    selected_item_pixmap_style = "mocha-highlight.png*"
+    selected_item_pixmap_style = "mocha-highlight.png"
     item_height = 32
     item_padding = 10
     item_spacing = 4
