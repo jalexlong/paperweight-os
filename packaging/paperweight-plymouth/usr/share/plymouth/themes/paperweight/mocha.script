@@ -17,6 +17,17 @@ rock2 = Sprite(); rock2.SetImage(rock_image);
 rock3 = Sprite(); rock3.SetImage(rock_image);
 rock4 = Sprite(); rock4.SetImage(rock_image);
 
+tick = 0;
+step = 0;
+
+fun set_rock_opacities() {
+    if (step > 0) rock0.SetOpacity(1.0); else rock0.SetOpacity(0.0);
+    if (step > 1) rock1.SetOpacity(1.0); else rock1.SetOpacity(0.0);
+    if (step > 2) rock2.SetOpacity(1.0); else rock2.SetOpacity(0.0);
+    if (step > 3) rock3.SetOpacity(1.0); else rock3.SetOpacity(0.0);
+    if (step > 4) rock4.SetOpacity(1.0); else rock4.SetOpacity(0.0);
+}
+
 fun refresh_callback() {
     cx = Window.GetX() + Window.GetWidth()  / 2;
     cy = Window.GetY() + Window.GetHeight() / 2;
@@ -36,12 +47,15 @@ fun refresh_callback() {
     rock3.SetX(cx +  56 - rock_image.GetWidth() / 2); rock3.SetY(rock_y);
     rock4.SetX(cx + 112 - rock_image.GetWidth() / 2); rock4.SetY(rock_y);
 
-    visible = Math.Int(Plymouth.GetTime()) % 6;
-    rock0.SetOpacity(0 < visible ? 1.0 : 0.0);
-    rock1.SetOpacity(1 < visible ? 1.0 : 0.0);
-    rock2.SetOpacity(2 < visible ? 1.0 : 0.0);
-    rock3.SetOpacity(3 < visible ? 1.0 : 0.0);
-    rock4.SetOpacity(4 < visible ? 1.0 : 0.0);
+    tick = tick + 1;
+    if (tick >= 50) {
+        tick = 0;
+        step = step + 1;
+        if (step >= 6)
+            step = 0;
+    }
+
+    set_rock_opacities();
 }
 
 Plymouth.SetRefreshFunction(refresh_callback);
