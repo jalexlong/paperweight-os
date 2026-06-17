@@ -2,46 +2,44 @@
 Window.SetBackgroundTopColor(0.141, 0.153, 0.227);
 Window.SetBackgroundBottomColor(0.141, 0.153, 0.227);
 
-wordmark_image = Image.Text("paperweight", 0.647, 0.678, 0.796, 1);
-wordmark = Sprite();
-wordmark.SetImage(wordmark_image);
+logo_image = Image("logo.png");
+logo = Sprite();
+logo.SetImage(logo_image);
 
-dot1_image = Image.Text("●", 0.718, 0.741, 0.973, 1);
-dot2_image = Image.Text("●", 0.718, 0.741, 0.973, 1);
-dot3_image = Image.Text("●", 0.718, 0.741, 0.973, 1);
-dot1 = Sprite(); dot1.SetImage(dot1_image);
-dot2 = Sprite(); dot2.SetImage(dot2_image);
-dot3 = Sprite(); dot3.SetImage(dot3_image);
+label_image = Image.Text("PaperweightOS", 0.647, 0.678, 0.796, 1);
+label = Sprite();
+label.SetImage(label_image);
 
-angle = 0;
-pi = 3.14159265;
-
-fun clamp(v, lo, hi) {
-    if (v < lo) return lo;
-    if (v > hi) return hi;
-    return v;
-}
-
-fun dot_opacity(phase) {
-    raw = Math.Sin(angle * 2 + phase);
-    return clamp(0.575 + 0.425 * raw, 0.15, 1.0);
-}
+rock_image = Image("rock.png");
+rock0 = Sprite(); rock0.SetImage(rock_image);
+rock1 = Sprite(); rock1.SetImage(rock_image);
+rock2 = Sprite(); rock2.SetImage(rock_image);
+rock3 = Sprite(); rock3.SetImage(rock_image);
+rock4 = Sprite(); rock4.SetImage(rock_image);
 
 fun refresh_callback() {
-    angle += 0.07;
     cx = Window.GetX() + Window.GetWidth()  / 2;
     cy = Window.GetY() + Window.GetHeight() / 2;
-    wordmark.SetX(cx - wordmark_image.GetWidth()  / 2);
-    wordmark.SetY(cy - wordmark_image.GetHeight() / 2 - 24);
-    dot_y = cy + wordmark_image.GetHeight() / 2 - 8;
-    spacing = 20;
-    dot1.SetX(cx - spacing - dot1_image.GetWidth() / 2);
-    dot2.SetX(cx             - dot2_image.GetWidth() / 2);
-    dot3.SetX(cx + spacing   - dot3_image.GetWidth() / 2);
-    dot1.SetY(dot_y); dot2.SetY(dot_y); dot3.SetY(dot_y);
-    dot1.SetOpacity(dot_opacity(0));
-    dot2.SetOpacity(dot_opacity(2 * pi / 3));
-    dot3.SetOpacity(dot_opacity(4 * pi / 3));
+
+    logo.SetX(cx - logo_image.GetWidth()  / 2);
+    logo.SetY(cy - logo_image.GetHeight() / 2 - 60);
+
+    label.SetX(cx - label_image.GetWidth() / 2);
+    label.SetY(logo.GetY() + logo_image.GetHeight() + 16);
+
+    rock_y = label.GetY() + label_image.GetHeight() + 16;
+    rock0.SetX(cx - 112 - rock_image.GetWidth() / 2); rock0.SetY(rock_y);
+    rock1.SetX(cx -  56 - rock_image.GetWidth() / 2); rock1.SetY(rock_y);
+    rock2.SetX(cx        - rock_image.GetWidth() / 2); rock2.SetY(rock_y);
+    rock3.SetX(cx +  56 - rock_image.GetWidth() / 2); rock3.SetY(rock_y);
+    rock4.SetX(cx + 112 - rock_image.GetWidth() / 2); rock4.SetY(rock_y);
+
+    visible = Math.Int(Plymouth.GetTime()) % 6;
+    rock0.SetOpacity(0 < visible ? 1.0 : 0.0);
+    rock1.SetOpacity(1 < visible ? 1.0 : 0.0);
+    rock2.SetOpacity(2 < visible ? 1.0 : 0.0);
+    rock3.SetOpacity(3 < visible ? 1.0 : 0.0);
+    rock4.SetOpacity(4 < visible ? 1.0 : 0.0);
 }
 
 Plymouth.SetRefreshFunction(refresh_callback);
