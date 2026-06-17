@@ -86,13 +86,17 @@ user-local fragments also work without modifying the skel defaults.
 
 ## Skel Config Structure
 
-Files shipped in `paperweight-skel` land in `/etc/skel/.config/` and are
-copied to new user home dirs automatically by `adduser`.
+Files shipped in `paperweight-skel` land in `/etc/skel/` and `/etc/skel/.config/`
+and are copied to new user home dirs automatically by `adduser`.
+
+**Important:** every file must be listed in `packaging/paperweight-skel/debian/install`
+or `dh_install` will silently omit it from the built `.deb`.
 
 ```
+.bashrc                        — color prompt + grep/ls aliases enabled (force_color_prompt=yes)
 sway/config                    — base keybindings, bar, includes
 sway/config.d/
-  10-input.conf                — generic touchpad + keyboard tuning
+  10-input.conf                — generic touchpad + keyboard tuning (repeat_delay 500, repeat_rate 35)
   30-idle.conf                 — swayidle → gtklock (750s lock, 900s display off)
   40-workspaces.conf           — workspace assignments + app-launch keybinds
   50-desktop-session.conf      — exec swaync; xdg-user-dirs-update on start
@@ -111,7 +115,10 @@ swaync/
   style.css                    — Macchiato-themed notification + panel CSS
 wofi/style.css                 — launcher styles using @define-color variables
 gtklock/style.css              — lock screen: Macchiato, clock, pill entry
-foot/foot.ini                  — terminal: Macchiato colors, JetBrainsMono NF 11pt
+foot/foot.ini                  — terminal: JetBrainsMono NF 11pt; includes colors.ini then
+                                  overrides alpha=0.88 + background=crust in a [colors] block
+foot/colors.ini                — active theme's 16 ANSI colors + foreground (written by paperweight-theme)
+foot/themes/<name>.ini         — per-theme color files; background = that theme's crust color
 .local/bin/
   cava-waybar                  — Python3: pipes cava frames → waybar JSON (Unicode blocks)
 ```
@@ -127,6 +134,7 @@ Per-theme files live in four directories under `~/.config/`:
 | `waybar/themes/<name>-waybar.css` | waybar module styles (can reuse `macchiato-waybar.css` for Catppuccin variants) |
 | `swaync/themes/<name>.css` | swaync notification + panel CSS |
 | `gtklock/themes/<name>.css` | gtklock screen-locker CSS |
+| `foot/themes/<name>.ini` | foot terminal 16 ANSI colors; set `background` to that theme's `crust` color |
 
 To add a theme:
 1. Create the five files above under `packaging/paperweight-skel/etc/skel/`
