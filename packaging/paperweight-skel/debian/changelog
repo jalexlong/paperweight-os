@@ -1,3 +1,13 @@
+paperweight-skel (0.2.52-1) trixie; urgency=low
+
+  * Ship ~/.config/paperweight-os/bashrc.d/10-colors.sh: color prompt,
+    ls/grep color aliases, and ll/la/l shortcuts as a drop-in fragment.
+  * postinst: append a bashrc.d source loop to ~/.bashrc on install and
+    upgrade — idempotent, works on any .bashrc including stripped ones.
+    On upgrade, also propagate 10-colors.sh to the existing user's home.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Wed, 17 Jun 2026 19:00:00 +0000
+
 paperweight-skel (0.2.51-1) trixie; urgency=low
 
   * debian/install: remove etc/skel/.bashrc — bash already owns

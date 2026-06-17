@@ -49,7 +49,8 @@ case "$1" in
                     # package-maintained scripts that must stay in sync.
                     install -d -m 755 \
                         "$TARGET_HOME/.config/foot/themes" \
-                        "$TARGET_HOME/.config/wofi/themes"
+                        "$TARGET_HOME/.config/wofi/themes" \
+                        "$TARGET_HOME/.config/paperweight-os/bashrc.d"
                     cp -n /etc/skel/.config/foot/themes/* \
                           "$TARGET_HOME/.config/foot/themes/" 2>/dev/null || true
                     cp -n /etc/skel/.config/wofi/themes/* \
@@ -65,12 +66,24 @@ case "$1" in
                     chmod +x "$TARGET_HOME/.local/bin/paperweight-theme"
                     cp /etc/skel/.config/waybar/config.jsonc \
                        "$TARGET_HOME/.config/waybar/config.jsonc"
+                    cp /etc/skel/.config/paperweight-os/bashrc.d/10-colors.sh \
+                       "$TARGET_HOME/.config/paperweight-os/bashrc.d/10-colors.sh"
                     chown -R "${TARGET_USER}:" \
                         "$TARGET_HOME/.config/foot" \
                         "$TARGET_HOME/.config/waybar/config.jsonc" \
                         "$TARGET_HOME/.config/wofi/themes" \
                         "$TARGET_HOME/.local/bin/paperweight-theme" \
+                        "$TARGET_HOME/.config/paperweight-os/bashrc.d" \
                         2>/dev/null || true
+                fi
+
+                # Wire up bashrc.d source loop — works on any .bashrc, including
+                # stripped ones. The grep guard makes this idempotent on upgrades.
+                if [ -f "$TARGET_HOME/.bashrc" ] && \
+                   ! grep -q "paperweight-os/bashrc.d" "$TARGET_HOME/.bashrc"; then
+                    printf '\n# PaperweightOS bash fragments\nfor _pw in ~/.config/paperweight-os/bashrc.d/*.sh; do [ -f "$_pw" ] && . "$_pw"; done\nunset _pw\n' \
+                        >> "$TARGET_HOME/.bashrc"
+                    chown "${TARGET_USER}:" "$TARGET_HOME/.bashrc" 2>/dev/null || true
                 fi
             fi
         fi

@@ -27,6 +27,7 @@ etc/skel/.config/sway/config.d/90-colors.conf             etc/skel/.config/sway/
 etc/skel/.config/sway/themes/                             etc/skel/.config/sway/
 etc/skel/.config/swaync/themes/                           etc/skel/.config/swaync/
 etc/skel/.config/gtklock/themes/                          etc/skel/.config/gtklock/
+etc/skel/.config/paperweight-os/bashrc.d/                 etc/skel/.config/paperweight-os/
 usr/lib/udev/rules.d/70-paperweight-backlight.rules       usr/lib/udev/rules.d/
 etc/greetd/config.toml                                    etc/greetd/
 etc/greetd/gtkgreet.css                                   etc/greetd/
