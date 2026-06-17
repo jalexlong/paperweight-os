@@ -8,7 +8,7 @@ paperweight-plymouth (0.1.6-1) trixie; urgency=high
     leaving the dark background visible. All five variant scripts updated.
     Also replace UTF-8 em-dash in comments with ASCII hyphen for safety.
 
- -- Alex Long <johnalexanderlong@gmail.com>  Tue, 17 Jun 2026 00:00:04 +0000
+ -- Alex Long <johnalexanderlong@gmail.com>  Wed, 17 Jun 2026 00:00:04 +0000
 
 paperweight-plymouth (0.1.5-1) trixie; urgency=high
 
