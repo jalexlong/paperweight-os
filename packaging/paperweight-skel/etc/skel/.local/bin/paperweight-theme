@@ -91,7 +91,9 @@ if id -nG 2>/dev/null | tr ' ' '\n' | grep -qx 'sudo'; then
     sudo paperweight-plymouth-theme "$THEME" 2>/dev/null || true
 fi
 
-# Reload: sway first (color vars) — sway owns waybar and restarts it on reload.
-# Sending SIGUSR1 after swaymsg reload races against sway's own waybar relaunch.
+# Reload: sway picks up 90-colors.conf (borders, title bar colors).
+# Then explicitly reload waybar so the new style.css is applied.
+# SIGUSR1 triggers a config+style refresh; fall back to a fresh start if not running.
 swaymsg reload
+pkill -SIGUSR1 waybar 2>/dev/null || waybar &
 swaync-client -rs 2>/dev/null || { pkill -x swaync 2>/dev/null; swaync & }
