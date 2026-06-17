@@ -58,7 +58,8 @@ cp "$SWAY_THEMES/$THEME.conf" "$HOME/.config/sway/config.d/90-colors.conf"
 
 # Apply waybar palette + module styles
 printf '@import url("./themes/%s-palette.css");\n@import url("./themes/%s-waybar.css");\n' \
-    "$THEME" "$THEME" > "$HOME/.config/waybar/style.css"
+    "$THEME" "$THEME" > "$HOME/.config/waybar/style.css.tmp" \
+    && mv "$HOME/.config/waybar/style.css.tmp" "$HOME/.config/waybar/style.css"
 
 # Apply swaync, gtklock, wofi, and foot (new foot windows pick up the colors)
 cp "$SWAYNC_THEMES/$THEME.css"  "$HOME/.config/swaync/style.css"
@@ -90,7 +91,7 @@ if id -nG 2>/dev/null | tr ' ' '\n' | grep -qx 'sudo'; then
     sudo paperweight-plymouth-theme "$THEME" 2>/dev/null || true
 fi
 
-# Reload: sway first (color vars), then waybar, then swaync
+# Reload: sway first (color vars) — sway owns waybar and restarts it on reload.
+# Sending SIGUSR1 after swaymsg reload races against sway's own waybar relaunch.
 swaymsg reload
-pkill -SIGUSR1 waybar 2>/dev/null || waybar &
 swaync-client -rs 2>/dev/null || { pkill -x swaync 2>/dev/null; swaync & }

@@ -1,3 +1,13 @@
+paperweight-skel (0.2.47-1) trixie; urgency=low
+
+  * paperweight-theme: remove redundant pkill -SIGUSR1 waybar after
+    swaymsg reload — sway owns waybar and restarts it; the extra signal
+    raced against sway's relaunch and caused crashes.
+  * paperweight-theme: write waybar/style.css atomically via tmp+mv to
+    prevent waybar reading a truncated file during its restart window.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Mon, 16 Jun 2026 00:00:11 +0000
+
 paperweight-skel (0.2.46-1) trixie; urgency=low
 
   * postinst: on upgrade, overwrite waybar/config.jsonc for existing users.
