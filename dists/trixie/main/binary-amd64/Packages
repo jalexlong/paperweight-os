@@ -89,7 +89,7 @@ Description: PaperweightOS GRUB theme — all four Catppuccin variants
  Recommends grub-pc or grub-efi; no-op if /etc/default/grub is absent.
 
 Package: paperweight-plymouth
-Version: 0.1.4-1
+Version: 0.1.5-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
 Installed-Size: 52
@@ -97,11 +97,11 @@ Depends: plymouth, plymouth-label
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-plymouth/paperweight-plymouth_0.1.4-1_all.deb
-Size: 23586
-SHA256: cb3ccc72919dca0c63e5809e0089dfe99c2d9c0ec9dc5744d11ddbd2175db97a
-SHA1: fadf7c5a4cc1278cfec4cf222a4ee5b222021d3f
-MD5sum: 81ef3ea3687370e9bbfdb6f7797308a7
+Filename: pool/main/p/paperweight-plymouth/paperweight-plymouth_0.1.5-1_all.deb
+Size: 23828
+SHA256: 580a2a573b4ac18afeaa16b9c07a075790945c259c1d13e1f279f6ef2fbe1e29
+SHA1: 997e745ae4a8a4c3f8100a82a871f2017ab8b111
+MD5sum: 79e5eec1baa8bb2676e7cda12c1c9ae3
 Description: PaperweightOS Plymouth theme — all four Catppuccin variants
  Installs a Catppuccin-themed Plymouth boot splash for PaperweightOS.
  Ships all four variants (Macchiato, Latte, Frappé, Mocha). Defaults to
