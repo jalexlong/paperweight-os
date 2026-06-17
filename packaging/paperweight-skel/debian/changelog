@@ -1,3 +1,10 @@
+paperweight-skel (0.2.51-1) trixie; urgency=low
+
+  * debian/install: remove etc/skel/.bashrc — bash already owns
+    /etc/skel/.bashrc and dpkg refuses to install conflicting files.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Wed, 17 Jun 2026 18:45:00 +0000
+
 paperweight-skel (0.2.50-1) trixie; urgency=low
 
   * paperweight-theme: explicitly reload waybar (SIGUSR1) after swaymsg reload
