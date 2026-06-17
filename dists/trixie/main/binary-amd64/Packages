@@ -45,25 +45,30 @@ Description: PaperweightOS desktop environment metapackage
  defaults are provided by the paperweight-skel package.
 
 Package: paperweight-fonts
-Version: 0.1.0-1
+Version: 0.1.1-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
 Installed-Size: 33826
+Depends: fonts-symbola
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: fonts
-Filename: pool/main/p/paperweight-fonts/paperweight-fonts_0.1.0-1_all.deb
-Size: 5279968
-SHA256: 516b935f6d523a9b6d87d96f0b68fc3fe06cf972f11300cca6657f3f2e2f24f5
-SHA1: bde4d034687e73262383de5041cfd7c2caa07093
-MD5sum: c6671a3fc6b23df5a3c878830de5ba03
-Description: PaperweightOS Nerd Fonts — JetBrains Mono and Symbols
+Filename: pool/main/p/paperweight-fonts/paperweight-fonts_0.1.1-1_all.deb
+Size: 5280288
+SHA256: c17e3ee598bef5206206299d2c419eed68ccfaa2dcd87407cbaae7d73d467ca0
+SHA1: 2f522d196c8336e9c62bc78565b88e4fab4fc64b
+MD5sum: 329e5695309309d3e0c47950b2bb70c0
+Description: PaperweightOS Nerd Fonts — JetBrains Mono, Symbols, and Symbola
  Ships JetBrains Mono Nerd Font (Regular, Bold, Italic, BoldItalic, Medium,
  SemiBold, and Mono variants) and the Nerd Fonts Symbols-Only font, providing
  full Nerd Font glyph coverage for terminals, waybar, and editors.
  .
- Fonts are sourced from https://github.com/ryanoasis/nerd-fonts and licensed
- under the SIL Open Font License 1.1.
+ Depends on fonts-symbola to cover Unicode Miscellaneous Technical symbols
+ (U+2300–U+23FF) that Nerd Fonts omit, including characters used by tools
+ such as Claude Code for mode indicators.
+ .
+ Nerd fonts are sourced from https://github.com/ryanoasis/nerd-fonts and
+ licensed under the SIL Open Font License 1.1.
 
 Package: paperweight-grub
 Version: 0.1.6-1
@@ -114,7 +119,7 @@ Description: PaperweightOS Plymouth theme — all four Catppuccin variants
  removal. On eMMC storage this may take 30-60 seconds.
 
 Package: paperweight-skel
-Version: 0.2.47-1
+Version: 0.2.48-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
 Installed-Size: 177
@@ -122,11 +127,11 @@ Replaces: greetd
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.47-1_all.deb
-Size: 25332
-SHA256: 6a677584e19a9aaa2d0b73f4375aa7a62a14b58379afec68957c8cebc4b8e9ff
-SHA1: 3f1063a7628c96310f33b0ff14bbbcd5e3dfbbae
-MD5sum: 441a0ad23606ea2f4671bd71db19018e
+Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.48-1_all.deb
+Size: 25466
+SHA256: c3cb8088c16feab73274996b642653a31003a0b22a1a295784de21894bc27bf5
+SHA1: 6a419e11acfa816245866480fabdeb011b775584
+MD5sum: eedcd6ddf27f845ce1db08c12a22ccd0
 Description: PaperweightOS default configuration skeleton
  Provides default XDG configuration files for the PaperweightOS desktop,
  installed to /etc/skel so they are copied into new user home directories
