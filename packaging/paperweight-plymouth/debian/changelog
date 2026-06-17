@@ -1,3 +1,15 @@
+paperweight-plymouth (0.1.6-1) trixie; urgency=high
+
+  * Fix black screen: pre-compute image dimensions at script init time with
+    null guards, eliminating the crash in refresh_callback when Image() or
+    Image.Text() returns undefined (e.g. file missing from initramfs or
+    label-pango.so absent). Previously calling .GetWidth()/.GetHeight() on
+    undefined inside the 50Hz callback silently killed the renderer while
+    leaving the dark background visible. All five variant scripts updated.
+    Also replace UTF-8 em-dash in comments with ASCII hyphen for safety.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Tue, 17 Jun 2026 00:00:04 +0000
+
 paperweight-plymouth (0.1.5-1) trixie; urgency=high
 
   * Fix black screen: replace Plymouth.GetTime() and ternary operators with

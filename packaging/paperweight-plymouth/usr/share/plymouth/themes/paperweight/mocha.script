@@ -1,21 +1,32 @@
-// PaperweightOS Plymouth theme — Catppuccin Mocha
-Window.SetBackgroundTopColor(0.118, 0.118, 0.180);
-Window.SetBackgroundBottomColor(0.118, 0.118, 0.180);
+// PaperweightOS Plymouth theme - Catppuccin Mocha
+Window.SetBackgroundTopColor(0.118, 0.118, 0.18);
+Window.SetBackgroundBottomColor(0.118, 0.118, 0.18);
 
 logo_image = Image("logo.png");
-logo = Sprite();
-logo.SetImage(logo_image);
-
-label_image = Image.Text("PaperweightOS", 0.651, 0.678, 0.784, 1);
-label = Sprite();
-label.SetImage(label_image);
-
 rock_image = Image("rock.png");
-rock0 = Sprite(); rock0.SetImage(rock_image);
-rock1 = Sprite(); rock1.SetImage(rock_image);
-rock2 = Sprite(); rock2.SetImage(rock_image);
-rock3 = Sprite(); rock3.SetImage(rock_image);
-rock4 = Sprite(); rock4.SetImage(rock_image);
+label_image = Image.Text("PaperweightOS", 0.651, 0.678, 0.784, 1);
+
+logo_w = 0;
+logo_h = 0;
+rock_w = 0;
+label_w = 0;
+label_h = 0;
+
+if (logo_image)  { logo_w = logo_image.GetWidth();  logo_h = logo_image.GetHeight(); }
+if (rock_image)  { rock_w = rock_image.GetWidth(); }
+if (label_image) { label_w = label_image.GetWidth(); label_h = label_image.GetHeight(); }
+
+logo = Sprite();
+if (logo_image)  { logo.SetImage(logo_image); }
+
+label = Sprite();
+if (label_image) { label.SetImage(label_image); }
+
+rock0 = Sprite(); if (rock_image) { rock0.SetImage(rock_image); }
+rock1 = Sprite(); if (rock_image) { rock1.SetImage(rock_image); }
+rock2 = Sprite(); if (rock_image) { rock2.SetImage(rock_image); }
+rock3 = Sprite(); if (rock_image) { rock3.SetImage(rock_image); }
+rock4 = Sprite(); if (rock_image) { rock4.SetImage(rock_image); }
 
 tick = 0;
 step = 0;
@@ -32,20 +43,20 @@ fun refresh_callback() {
     cx = Window.GetX() + Window.GetWidth()  / 2;
     cy = Window.GetY() + Window.GetHeight() / 2;
 
-    logo_y = cy - logo_image.GetHeight() / 2 - 60;
-    logo.SetX(cx - logo_image.GetWidth()  / 2);
+    logo_y = cy - logo_h / 2 - 60;
+    logo.SetX(cx - logo_w / 2);
     logo.SetY(logo_y);
 
-    label_y = logo_y + logo_image.GetHeight() + 16;
-    label.SetX(cx - label_image.GetWidth() / 2);
+    label_y = logo_y + logo_h + 16;
+    label.SetX(cx - label_w / 2);
     label.SetY(label_y);
 
-    rock_y = label_y + label_image.GetHeight() + 16;
-    rock0.SetX(cx - 112 - rock_image.GetWidth() / 2); rock0.SetY(rock_y);
-    rock1.SetX(cx -  56 - rock_image.GetWidth() / 2); rock1.SetY(rock_y);
-    rock2.SetX(cx        - rock_image.GetWidth() / 2); rock2.SetY(rock_y);
-    rock3.SetX(cx +  56 - rock_image.GetWidth() / 2); rock3.SetY(rock_y);
-    rock4.SetX(cx + 112 - rock_image.GetWidth() / 2); rock4.SetY(rock_y);
+    rock_y = label_y + label_h + 16;
+    rock0.SetX(cx - 112 - rock_w / 2); rock0.SetY(rock_y);
+    rock1.SetX(cx -  56 - rock_w / 2); rock1.SetY(rock_y);
+    rock2.SetX(cx        - rock_w / 2); rock2.SetY(rock_y);
+    rock3.SetX(cx +  56 - rock_w / 2); rock3.SetY(rock_y);
+    rock4.SetX(cx + 112 - rock_w / 2); rock4.SetY(rock_y);
 
     tick = tick + 1;
     if (tick >= 50) {
