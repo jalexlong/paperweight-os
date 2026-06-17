@@ -1,3 +1,12 @@
+paperweight-skel (0.2.44-1) trixie; urgency=low
+
+  * postinst: on upgrade, propagate new theme directories (foot/themes/,
+    wofi/themes/) and foot/colors.ini to existing users with cp -n; always
+    overwrite foot/foot.ini and paperweight-theme so they stay in sync with
+    the installed package version.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Mon, 16 Jun 2026 00:00:08 +0000
+
 paperweight-skel (0.2.43-1) trixie; urgency=low
 
   * foot: split colors into ~/.config/foot/colors.ini included from foot.ini;

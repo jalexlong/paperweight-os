@@ -24,25 +24,50 @@ case "$1" in
                  /usr/lib/paperweight-os/start-greeter
         chmod 0440 /etc/sudoers.d/paperweight-greeter
 
-        # Apply skel configs to the real user on fresh install (not upgrade).
-        # $SUDO_USER is set when running interactive `sudo apt install`.
+        # Resolve the target user for skel propagation.
+        # $SUDO_USER is set for interactive `sudo apt install`.
         # Fall back to UID 1000 for preseed/unattended installs.
-        if [ -z "$2" ]; then
-            TARGET_USER=""
-            if [ -n "${SUDO_USER:-}" ] && [ "$SUDO_USER" != "root" ]; then
-                TARGET_USER="$SUDO_USER"
-            else
-                TARGET_USER=$(getent passwd 1000 2>/dev/null | cut -d: -f1 || true)
-            fi
+        TARGET_USER=""
+        if [ -n "${SUDO_USER:-}" ] && [ "$SUDO_USER" != "root" ]; then
+            TARGET_USER="$SUDO_USER"
+        else
+            TARGET_USER=$(getent passwd 1000 2>/dev/null | cut -d: -f1 || true)
+        fi
 
-            if [ -n "$TARGET_USER" ]; then
-                TARGET_HOME=$(getent passwd "$TARGET_USER" | cut -d: -f6)
-                if [ -d "$TARGET_HOME" ]; then
+        if [ -n "$TARGET_USER" ]; then
+            TARGET_HOME=$(getent passwd "$TARGET_USER" | cut -d: -f6)
+            if [ -d "$TARGET_HOME" ]; then
+                if [ -z "$2" ]; then
+                    # Fresh install: copy everything from skel (no-clobber).
                     echo "paperweight-skel: applying configs to $TARGET_HOME"
                     cp -rn /etc/skel/. "$TARGET_HOME/"
                     chown -R "${TARGET_USER}:" \
                         "$TARGET_HOME/.config" \
                         "$TARGET_HOME/.local" 2>/dev/null || true
+                else
+                    # Upgrade: propagate new theme directories and update
+                    # package-maintained scripts that must stay in sync.
+                    install -d -m 755 \
+                        "$TARGET_HOME/.config/foot/themes" \
+                        "$TARGET_HOME/.config/wofi/themes"
+                    cp -n /etc/skel/.config/foot/themes/* \
+                          "$TARGET_HOME/.config/foot/themes/" 2>/dev/null || true
+                    cp -n /etc/skel/.config/wofi/themes/* \
+                          "$TARGET_HOME/.config/wofi/themes/" 2>/dev/null || true
+                    cp -n /etc/skel/.config/foot/colors.ini \
+                          "$TARGET_HOME/.config/foot/" 2>/dev/null || true
+                    # Always overwrite package-maintained files so they stay
+                    # in sync with the installed version.
+                    cp /etc/skel/.config/foot/foot.ini \
+                       "$TARGET_HOME/.config/foot/foot.ini"
+                    cp /etc/skel/.local/bin/paperweight-theme \
+                       "$TARGET_HOME/.local/bin/paperweight-theme"
+                    chmod +x "$TARGET_HOME/.local/bin/paperweight-theme"
+                    chown -R "${TARGET_USER}:" \
+                        "$TARGET_HOME/.config/foot" \
+                        "$TARGET_HOME/.config/wofi/themes" \
+                        "$TARGET_HOME/.local/bin/paperweight-theme" \
+                        2>/dev/null || true
                 fi
             fi
         fi
