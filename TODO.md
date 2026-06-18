@@ -78,9 +78,9 @@ Trixie installs. See git log for details.
 - [x] **`Replaces: greetd` has no version ceiling** — capped at `(<< 1.0)`;
   greetd in Trixie is 0.10.3-4. Will need revisiting if greetd hits 1.0.
 
-- [ ] **frappe and mocha have no artwork wallpapers** — only solid PNGs ship for
-  those two flavours; latte and macchiato each have two JPEG artwork variants.
-  Either add artwork for all four or document the asymmetry.
+- [x] **frappe and mocha have no artwork wallpapers** — frappe-wallpaper1.jpg
+  and mocha-wallpaper1.jpg added (placeholder artwork). All four variants now
+  have at least one JPEG alongside their solid-color PNG.
 
 - [x] **README.md package table updated** — all versions current; added
   `Super+w` wallpaper picker binding to keybindings table.

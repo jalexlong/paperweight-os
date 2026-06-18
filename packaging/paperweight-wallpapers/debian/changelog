@@ -1,3 +1,13 @@
+paperweight-wallpapers (0.3.4-1) trixie; urgency=low
+
+  * Add frappe-wallpaper1.jpg and mocha-wallpaper1.jpg — placeholder artwork
+    for the two remaining themes. All four Catppuccin variants now have at
+    least one JPEG artwork wallpaper alongside their solid-color PNG.
+    (frappe source filename had an accent; normalized to frappe-wallpaper1.jpg
+    to match the theme name used throughout the codebase.)
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 18 Jun 2026 09:28:13 -0500
+
 paperweight-wallpapers (0.3.3-1) trixie; urgency=low
 
   * postinst: on fresh install, copy 91-wallpaper.conf, 92-wallpaper-picker.conf,
