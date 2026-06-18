@@ -1,0 +1,18 @@
+#!/bin/sh
+set -e
+lb config \
+  --mode debian \
+  --architecture amd64 \
+  --distribution trixie \
+  --archive-areas "main contrib non-free non-free-firmware" \
+  --debian-installer live \
+  --debian-installer-gui false \
+  --bootloaders grub-efi,grub-pc \
+  --iso-application "PaperweightOS" \
+  --iso-volume "PaperweightOS" \
+  --binary-images iso-hybrid \
+  --apt-indices false \
+  --memtest none \
+  --hostname paperweight \
+  --username user \
+  "${@}"

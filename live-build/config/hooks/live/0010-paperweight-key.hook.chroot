@@ -1,0 +1,4 @@
+#!/bin/sh
+set -e
+wget -q -O /etc/apt/trusted.gpg.d/paperweight-os.gpg \
+    https://jalexlong.github.io/paperweight-os/pubkey.gpg

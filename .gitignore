@@ -19,6 +19,17 @@ packaging/**/debian/paperweight-*/
 # reprepro generated output (lives on gh-pages branch, not main)
 gh-pages/
 
+# live-build working directories and output (large, generated)
+live-build/binary/
+live-build/chroot/
+live-build/cache/
+live-build/.build/
+live-build/config/binary
+live-build/config/chroot
+live-build/config/common
+live-build/config/source
+*.iso
+
 # GPG secrets — never commit these
 *.asc
 *.gpg.bak

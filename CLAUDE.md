@@ -3,7 +3,7 @@
 ## What This Is
 
 A Debian Blend targeting resource-limited x86 laptops (any crappy laptop → usable dev machine).
-Ships as metapackages + a personal apt repo, not a custom ISO (yet).
+Ships as metapackages + a personal apt repo; live-build ISO in progress (see `live-build/`).
 First real hardware target: Dell Chromebook 11 with coreboot ("Paperweight Pro").
 Also well-suited for SSH-heavy server work out of the box.
 
@@ -24,6 +24,10 @@ paperweight-os/
 │   ├── paperweight-grub/        # Catppuccin Macchiato GRUB2 theme
 │   ├── paperweight-plymouth/    # Catppuccin Macchiato Plymouth boot splash
 │   └── paperweight-chromebook/  # Hardware add-on for Chromebook/coreboot
+├── live-build/                  # live-build ISO config (Phase 1: netinstall)
+│   ├── auto/                    # lb config/build/clean scripts
+│   ├── config/                  # archives, hooks, includes, package-lists, preseed
+│   └── build.sh                 # local build helper: sudo lb clean && config && build
 ├── apt-repo/
 │   └── conf/                    # reprepro config (SignWith key must be set)
 ├── publish.sh                   # Build all .debs → sign → push gh-pages
@@ -192,6 +196,29 @@ bash publish.sh
 ```
 
 GitHub Pages must be enabled on the repo (Settings → Pages → gh-pages branch, root).
+
+### live-build ISO
+
+Requires `live-build` installed (`sudo apt install live-build`). Must run as root.
+
+```bash
+# Local build (from repo root — takes 15-30 min)
+bash live-build/build.sh
+
+# Or step by step
+cd live-build
+sudo lb clean && sudo lb config && sudo lb build
+# Output: live-build/*.iso (~2 GB hybrid ISO)
+
+# Test in QEMU
+qemu-system-x86_64 -m 2G -enable-kvm -cdrom live-build/*.iso -boot d
+```
+
+CI: trigger manually via `Actions → Build ISO → Run workflow`, or push a `v*` tag.
+ISO artifacts are uploaded to GitHub Releases on tags, or as build artifacts (14-day retention) on manual trigger.
+
+**live-build working directories** (`binary/`, `chroot/`, `cache/`) are gitignored —
+they are large and can be regenerated. Never commit them.
 
 Users add the repo with:
 ```bash

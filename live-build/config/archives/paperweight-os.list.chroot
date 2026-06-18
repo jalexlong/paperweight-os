@@ -1,0 +1,1 @@
+deb [signed-by=/etc/apt/trusted.gpg.d/paperweight-os.gpg] https://jalexlong.github.io/paperweight-os trixie main
