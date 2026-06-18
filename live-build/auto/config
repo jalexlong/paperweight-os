@@ -2,7 +2,7 @@
 set -e
 lb config noauto \
   --mode debian \
-  --debootstrap-include ca-certificates \
+  --debootstrap-options "--include=ca-certificates" \
   --architecture amd64 \
   --distribution trixie \
   --archive-areas "main contrib non-free non-free-firmware" \
