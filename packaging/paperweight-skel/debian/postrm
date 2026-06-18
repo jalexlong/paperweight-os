@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    remove|purge)
+        # postinst masked getty@tty1 so greetd could own VT1. Restore it on
+        # removal so the user gets a console login prompt back.
+        systemctl unmask getty@tty1.service 2>/dev/null || true
+        ;;
+esac
+
+case "$1" in
+    purge)
+        # Remove the greeter system user created by postinst, but only if
+        # greetd is also gone — we created it as a race-condition workaround
+        # and greetd may still need it.
+        if ! dpkg -l greetd 2>/dev/null | grep -q '^ii'; then
+            userdel --remove greeter 2>/dev/null || true
+        fi
+        ;;
+esac
+
+#DEBHELPER#

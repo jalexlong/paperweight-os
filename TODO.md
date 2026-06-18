@@ -46,10 +46,9 @@ Trixie installs. See git log for details.
 - [x] **`sway-wait-float` exits silently on timeout** — now emits a `notify-send`
   on timeout and exits 1. 0.2.37-1.
 
-- [ ] **`90-theme.conf` depends on `90-colors.conf` load order** — `output * bg
-  $base solid_color` requires `$base` from `90-colors.conf`, which sorts earlier
-  alphabetically. This is correct today but breaks silently if either file is
-  renamed. Add a comment documenting the dependency.
+- [x] **`90-theme.conf` depends on `90-colors.conf` load order** — comment
+  already present in the file header; documents the alphabetical load-order
+  dependency and the requirement that 90-colors.conf sorts first.
 
 ---
 
@@ -70,14 +69,14 @@ Trixie installs. See git log for details.
   fails fast with a clear error if `paperweight-fonts` hasn't been built first,
   rather than passing a missing path to grub-mkfont. 0.1.2-1.
 
-- [ ] **No prerm/postrm for system-level changes** — `postinst` masks
-  `getty@tty1`, creates the `greeter` user, and patches `adduser.conf`. None of
-  these are undone on `apt remove` or `apt purge`. Acceptable for a personal
-  distro today; required before submitting to any archive.
+- [x] **No prerm/postrm for system-level changes** — `postrm` now unmasks
+  `getty@tty1` on remove/purge and removes the `greeter` system user on purge
+  (only if greetd is also gone). `adduser.conf` EXTRA_GROUPS change is
+  intentionally left in place — stripping video group from existing users
+  on uninstall is too invasive.
 
-- [ ] **`Replaces: greetd` has no version ceiling** — applies to all past and
-  future greetd versions. Add `Replaces: greetd (<< <next-breaking-version>)`
-  once greetd stabilizes in Trixie.
+- [x] **`Replaces: greetd` has no version ceiling** — capped at `(<< 1.0)`;
+  greetd in Trixie is 0.10.3-4. Will need revisiting if greetd hits 1.0.
 
 - [ ] **frappe and mocha have no artwork wallpapers** — only solid PNGs ship for
   those two flavours; latte and macchiato each have two JPEG artwork variants.

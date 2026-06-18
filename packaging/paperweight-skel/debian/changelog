@@ -1,3 +1,14 @@
+paperweight-skel (0.2.55-1) trixie; urgency=low
+
+  * debian/postrm: unmask getty@tty1 on remove/purge so the console login
+    prompt is restored after uninstall; remove greeter system user on purge
+    if greetd is also removed.
+  * debian/control: cap Replaces: greetd at (<< 1.0); greetd in Trixie is
+    0.10.3-4 and the ceiling prevents the Replaces from applying to unknown
+    future major versions.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 18 Jun 2026 08:31:10 -0500
+
 paperweight-skel (0.2.54-1) trixie; urgency=low
 
   * paperweight-theme: flock-based concurrency guard — only one theme switch
