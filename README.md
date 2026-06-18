@@ -80,6 +80,10 @@ sudo apt install paperweight-chromebook
 
 Reboot after install. greetd starts automatically; log in and sway launches.
 
+See [HARDWARE.md](HARDWARE.md) for the hardware compatibility matrix, known
+issues on generic x86 laptops, and instructions for adding support for new
+hardware targets.
+
 ---
 
 ## First Boot

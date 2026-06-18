@@ -117,9 +117,10 @@ Trixie installs. See git log for details.
   installation has been verified on real hardware. Start with a netinstall ISO
   that downloads packages; full offline ISO later.
 
-- [ ] **Hardware test matrix** — only the Dell Chromebook 11 (coreboot) has been
-  tested as a target. Document which generic x86 laptops work out of the box and
-  what (if anything) breaks on non-Chromebook targets.
+- [x] **Hardware test matrix** — HARDWARE.md written. Covers the Dell Chromebook
+  11 3180 as the primary confirmed target, generic x86 compatibility by category
+  (GPU, input, audio, WiFi, power, storage), known issues (NVIDIA, Broadcom,
+  HiDPI), and the pattern for adding new hardware packages. Linked from README.
 
 - [x] **ncspot replaced with cmus** — `cmus` added to `paperweight-desktop` Depends.
   `$mod+s` repurposed as layout toggle (tabbed / splith). Workspace 4 still
