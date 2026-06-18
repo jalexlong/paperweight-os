@@ -18,8 +18,8 @@ case "$1" in
 
         chmod +x /etc/skel/.local/bin/cava-waybar \
                  /etc/skel/.local/bin/paperweight-network \
-                 /etc/skel/.local/bin/paperweight-theme \
                  /etc/skel/.local/bin/sway-wait-float \
+                 /usr/bin/paperweight-theme \
                  /usr/bin/paperweight-set-greeter-theme \
                  /usr/lib/paperweight-os/start-greeter
         chmod 0440 /etc/sudoers.d/paperweight-greeter
@@ -61,18 +61,17 @@ case "$1" in
                     # in sync with the installed version.
                     cp /etc/skel/.config/foot/foot.ini \
                        "$TARGET_HOME/.config/foot/foot.ini"
-                    cp /etc/skel/.local/bin/paperweight-theme \
-                       "$TARGET_HOME/.local/bin/paperweight-theme"
-                    chmod +x "$TARGET_HOME/.local/bin/paperweight-theme"
                     cp /etc/skel/.config/waybar/config.jsonc \
                        "$TARGET_HOME/.config/waybar/config.jsonc"
                     cp /etc/skel/.config/paperweight-os/bashrc.d/10-colors.sh \
                        "$TARGET_HOME/.config/paperweight-os/bashrc.d/10-colors.sh"
+                    # Remove stale skel copy of paperweight-theme — it now lives
+                    # in /usr/bin/ and is managed by dpkg directly.
+                    rm -f "$TARGET_HOME/.local/bin/paperweight-theme"
                     chown -R "${TARGET_USER}:" \
                         "$TARGET_HOME/.config/foot" \
                         "$TARGET_HOME/.config/waybar/config.jsonc" \
                         "$TARGET_HOME/.config/wofi/themes" \
-                        "$TARGET_HOME/.local/bin/paperweight-theme" \
                         "$TARGET_HOME/.config/paperweight-os/bashrc.d" \
                         2>/dev/null || true
                 fi
