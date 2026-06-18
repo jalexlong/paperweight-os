@@ -25,7 +25,9 @@ LOG_DIR="$HOME/.local/share/paperweight-os"
 LOG="$LOG_DIR/theme-switch.log"
 LOCK="$LOG_DIR/theme-switch.lock"
 PENDING="$LOG_DIR/theme-switch.pending"
+STATUS="$LOG_DIR/theme-switch.status"
 mkdir -p "$LOG_DIR"
+trap 'rm -f "$STATUS"' EXIT
 log() { printf '[%s] %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*" | tee -a "$LOG"; }
 ms()  { date +%s%3N; }
 
@@ -69,6 +71,8 @@ fi
 # the lock will overwrite this, so the last-requested theme always wins.
 printf '%s\n' "$THEME" > "$PENDING"
 
+printf 'switching:%s\n' "$THEME" > "$STATUS"
+notify-send -u low "paperweight-theme" "Switching to '$THEME'…"
 log "applying theme: $THEME"
 
 # Validate all theme files exist before touching anything — prevents partial state.
@@ -200,9 +204,10 @@ else
     fi
 fi
 
+rm -f "$STATUS"
 elapsed=$(( $(ms) - t_start ))
 log "theme '$THEME' applied in ${elapsed}ms"
-notify-send "paperweight-theme" "Theme '$THEME' applied"
+notify-send "paperweight-theme" "Theme '$THEME' applied — ready."
 
 # Last-write-wins: if a newer theme was requested while we ran, apply it now.
 # exec 9>&- closes fd 9, releasing the flock before the re-invocation acquires it.

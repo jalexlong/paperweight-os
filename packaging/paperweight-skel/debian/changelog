@@ -1,3 +1,21 @@
+paperweight-skel (0.2.56-1) trixie; urgency=low
+
+  * paperweight-theme: write theme-switch.status on lock acquire; remove it
+    before success notification via explicit rm + EXIT trap so the spinner
+    disappears at the right moment even on unhandled exits.
+  * paperweight-theme: send "Switching to '$THEME'…" notification at start;
+    update success notification text to "Theme '$THEME' applied — ready."
+  * Add waybar-theme-status: polls theme-switch.status every 1 s; outputs a
+    cycling braille spinner (⣾⣽⣻⢿⡿⣟⣯⣷) with class=theme-switching when a
+    switch is in progress; outputs empty JSON when idle so the module is
+    invisible. Installs to /usr/bin/.
+  * waybar/config.jsonc: add custom/theme-status module (interval 1, JSON)
+    to modules-right between battery and clock.
+  * waybar/themes/*-waybar.css: add #custom-theme-status + .theme-switching
+    CSS to all four Catppuccin variant files (color: @peach while spinning).
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 18 Jun 2026 12:59:52 -0500
+
 paperweight-skel (0.2.55-1) trixie; urgency=low
 
   * debian/postrm: unmask getty@tty1 on remove/purge so the console login

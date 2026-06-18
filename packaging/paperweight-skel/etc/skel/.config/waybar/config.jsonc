@@ -28,8 +28,17 @@
         "pulseaudio",
         "backlight",
         "battery",
+        "custom/theme-status",
         "clock"
     ],
+
+    "custom/theme-status": {
+        "exec": "waybar-theme-status",
+        "return-type": "json",
+        "interval": 1,
+        "format": "{}",
+        "tooltip": true
+    },
 
     "custom/cava": {
         "exec": "$HOME/.local/bin/cava-waybar",

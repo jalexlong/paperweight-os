@@ -1,0 +1,16 @@
+#!/bin/sh
+STATUS="$HOME/.local/share/paperweight-os/theme-switch.status"
+
+if [ ! -f "$STATUS" ]; then
+    printf '{"text": "", "class": ""}\n'
+    exit 0
+fi
+
+case $(( $(date +%s) % 8 )) in
+    0) FRAME="⣾" ;; 1) FRAME="⣽" ;; 2) FRAME="⣻" ;; 3) FRAME="⢿" ;;
+    4) FRAME="⡿" ;; 5) FRAME="⣟" ;; 6) FRAME="⣯" ;; 7) FRAME="⣷" ;;
+esac
+
+THEME=$(cut -d: -f2- "$STATUS")
+printf '{"text": "%s", "tooltip": "Switching to: %s", "class": "theme-switching"}\n' \
+    "$FRAME" "$THEME"

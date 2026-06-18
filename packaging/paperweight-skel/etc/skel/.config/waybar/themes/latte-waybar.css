@@ -193,3 +193,11 @@ window#waybar {
   border-radius: 0 1rem 1rem 0;
   margin-right: 1rem;
 }
+
+#custom-theme-status {
+  padding: 0 6px;
+}
+
+#custom-theme-status.theme-switching {
+  color: @peach;
+}
