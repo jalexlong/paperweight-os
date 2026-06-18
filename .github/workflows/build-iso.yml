@@ -28,6 +28,9 @@ jobs:
             -O /tmp/live-build.deb
           sudo dpkg -i /tmp/live-build.deb
           lb --version
+          # Note: PaperweightOS GPG key is committed at
+          # live-build/config/archives/paperweight-os.key.chroot
+          # lb installs it to /etc/apt/trusted.gpg.d/ before apt-get update
 
       - name: Build ISO
         run: |
