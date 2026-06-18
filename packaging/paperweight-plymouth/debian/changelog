@@ -1,3 +1,15 @@
+paperweight-plymouth (0.1.7-1) trixie; urgency=high
+
+  * paperweight-plymouth-theme: idempotency check — skip update-initramfs
+    entirely if the target variant is already active (cmp -s).
+  * paperweight-plymouth-theme: exclusive flock on /run/lock (tmpfs) prevents
+    concurrent update-initramfs races that can corrupt the initramfs.
+  * paperweight-plymouth-theme: back up initramfs before rebuild; verify
+    output size after rebuild and auto-restore backup if corrupt. Backup
+    retained at /boot/initrd.img-<ver>.bak for GRUB-shell recovery.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 18 Jun 2026 08:08:19 -0500
+
 paperweight-plymouth (0.1.6-1) trixie; urgency=high
 
   * Fix black screen: pre-compute image dimensions at script init time with

@@ -3,6 +3,7 @@ set -e
 
 THEME_DIR=/usr/share/plymouth/themes/paperweight
 VARIANTS="macchiato latte frappe mocha"
+LOCK=/run/lock/paperweight-plymouth.lock
 
 usage() {
     echo "Usage: paperweight-plymouth-theme <variant>"
@@ -23,6 +24,41 @@ if [ "$(id -u)" -ne 0 ]; then
     exit 1
 fi
 
+# Idempotency: skip rebuild entirely if the target variant is already active.
+# This is the primary guard against unnecessary update-initramfs runs — most
+# rapid theme-switch invocations hit this and exit before touching any boot file.
+if cmp -s "$THEME_DIR/$VARIANT.script" "$THEME_DIR/paperweight.script"; then
+    echo "Plymouth variant already $VARIANT — nothing to do"
+    exit 0
+fi
+
+# Exclusive lock on /run/lock (tmpfs — zero eMMC wear, auto-cleared on reboot).
+# Blocks concurrent callers rather than letting them race on the initramfs.
+exec 9>"$LOCK"
+flock -x 9
+
+# Back up the current initramfs before rebuilding. If update-initramfs produces
+# corrupt output, the backup is restorable from the GRUB command line without
+# needing a live USB (initrd /boot/initrd.img-<ver>.bak).
+KERNEL=$(uname -r)
+INITRD="/boot/initrd.img-$KERNEL"
+BAK="${INITRD}.bak"
+if [ -f "$INITRD" ]; then
+    cp "$INITRD" "$BAK"
+fi
+
 cp "$THEME_DIR/$VARIANT.script" "$THEME_DIR/paperweight.script"
 update-initramfs -u
-echo "Plymouth theme set to: $VARIANT"
+
+# Verify the rebuilt initramfs is plausible. A valid initramfs on any modern
+# system is well above 1 MB; zero or near-zero means the rebuild failed silently.
+NEW_SIZE=$(stat -c%s "$INITRD" 2>/dev/null || echo 0)
+if [ "$NEW_SIZE" -lt 1048576 ]; then
+    echo "ERROR: update-initramfs produced suspect output (${NEW_SIZE} bytes)" >&2
+    echo "Restoring backup from $BAK" >&2
+    mv "$BAK" "$INITRD"
+    exit 1
+fi
+
+echo "Plymouth variant set to: $VARIANT"
+echo "Backup initramfs retained at: $BAK"

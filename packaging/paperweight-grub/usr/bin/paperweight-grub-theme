@@ -3,6 +3,7 @@ set -e
 
 THEME_DIR=/usr/share/grub/themes/paperweight
 VARIANTS="macchiato latte frappe mocha"
+LOCK=/run/lock/paperweight-grub.lock
 
 usage() {
     echo "Usage: paperweight-grub-theme <variant>"
@@ -22,6 +23,16 @@ if [ "$(id -u)" -ne 0 ]; then
     echo "paperweight-grub-theme: must run as root" >&2
     exit 1
 fi
+
+# Idempotency: skip update-grub if the target variant is already active.
+if cmp -s "$THEME_DIR/$VARIANT.txt" "$THEME_DIR/theme.txt"; then
+    echo "GRUB variant already $VARIANT — nothing to do"
+    exit 0
+fi
+
+# Exclusive lock on /run/lock (tmpfs — zero eMMC wear, auto-cleared on reboot).
+exec 9>"$LOCK"
+flock -x 9
 
 cp "$THEME_DIR/$VARIANT.txt" "$THEME_DIR/theme.txt"
 update-grub

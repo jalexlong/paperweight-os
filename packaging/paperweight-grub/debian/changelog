@@ -1,3 +1,12 @@
+paperweight-grub (0.1.7-1) trixie; urgency=high
+
+  * paperweight-grub-theme: idempotency check — skip update-grub entirely
+    if the target variant is already active (cmp -s).
+  * paperweight-grub-theme: exclusive flock on /run/lock (tmpfs) prevents
+    concurrent update-grub races.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 18 Jun 2026 08:08:19 -0500
+
 paperweight-grub (0.1.6-1) trixie; urgency=high
 
   * Fix GRUB rescue shell on boot: remove trailing '*' from
