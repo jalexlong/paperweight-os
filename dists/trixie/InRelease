@@ -4,35 +4,35 @@ Hash: SHA512
 Origin: PaperweightOS
 Label: PaperweightOS
 Codename: trixie
-Date: Thu, 18 Jun 2026 00:44:14 UTC
+Date: Thu, 18 Jun 2026 01:06:58 UTC
 Architectures: amd64
 Components: main
 Description: PaperweightOS package repository
 MD5Sum:
- 88417c88cdddbdd3bf0665dc8044d94b 7854 main/binary-amd64/Packages
- bf0d3245a3efc30514226fd2e3c771d3 3115 main/binary-amd64/Packages.gz
+ d88bb6242071479da59b8224305484d5 7854 main/binary-amd64/Packages
+ 819e50f2aa0621654f70319e4d73a47a 3114 main/binary-amd64/Packages.gz
  2a5b562e92f35e9a3f9efbca426607d3 125 main/binary-amd64/Release
 SHA1:
- 38383556057b5db8a422e8b73a604e796cb44465 7854 main/binary-amd64/Packages
- d0d192681ce2dd640ff2452351917fb708a12cc0 3115 main/binary-amd64/Packages.gz
+ db11f7b71ca781de08f19501b744cfc4f6f0868c 7854 main/binary-amd64/Packages
+ 23f58091b1faa701f688c2ab5a2c92f4f179b896 3114 main/binary-amd64/Packages.gz
  0e69efac0057bcf7153e8dfb097d68bff8883215 125 main/binary-amd64/Release
 SHA256:
- 6ff55fd97a3ef41f8f06737e88b81fb90ff7279a9484531a4358a57dcc8a3ef3 7854 main/binary-amd64/Packages
- 4dfe8642ff33b18223974f6cd35dbf6d7503668c9e7deab18852e84849eb9532 3115 main/binary-amd64/Packages.gz
+ a7b6fbc4b09a830d1882c0ada19da585dca1bc0d46366cee77fc8e50c3a5131f 7854 main/binary-amd64/Packages
+ e678bef44723d03fe6f6d57225040483d1caa58c3e384de0aba9b03ed8f8208f 3114 main/binary-amd64/Packages.gz
  cc615ee67c628c10068d765690fa8ae3b374f95ee7ad42cdf14e3115f83156d8 125 main/binary-amd64/Release
 -----BEGIN PGP SIGNATURE-----
 
-iQIzBAEBCgAdFiEEDs/jVB4/zhMo9VsnoKUh90eAoBQFAmozP14ACgkQoKUh90eA
-oBTctQ/+NTaCM+hJeo1kkrNw8FI/r9s2M0q4rJVH3l+Hmf9W/Z13OeDwyDNu1sKS
-9tThOVhx6DLaQzS34dYdcJoda/owo8SWHBISsxHYidJpwHRFpfjlJJeLWGMafR46
-Zsdq9CqbUckD3WnfAa+xIle1rS4CIXgrEd28Ua46K6aII8KDH1GSl1Bf1jsBHfmv
-LqIsgFH2VZ6k1T3Qll3BcCSZ7C30zLadhBWKA1urHYM5YMJz04ERBUa5jCAr+MHH
-Lxa0hy//tOLEFlZli4LLjlEVOrBhc8OsZqH2DweTKE/6PzR4IN0meuHHjh2xmthg
-lFuPinf/S84QmiXh+kz2gMP9BR/jt7jdjqUBU6OgdyLriO+O6qFXve92WPuQsWPK
-v2WHIdjBDGXNdDy5UCsgyaI4g87cHsZikeORbmxV4ZDSifj8kREZzOPJa31RkrOP
-8RDYosJpCiMT5V/ByaecGCUHz4h0li6L20sOH7fdn1mClTmYPewkrtmy4AHIkyaf
-EuVs8nz8jSW3Ws0oH4yrR8mCuXGK60delxSw5axWVcn8DPcDq8uxc5F82EyI6kDl
-FImvJdmJEdiHTjjAwfDw/MrW2wYjRlJfkk4qcXhzL9GnDL9OWU9Bhc/SfzK3vrhG
-3tz8TkOmoA5Mv5bMlVgM8dnhUvV6MwJ+uYCaohLZZxTJ1SIr8N4=
-=rqHg
+iQIzBAEBCgAdFiEEDs/jVB4/zhMo9VsnoKUh90eAoBQFAmozRLMACgkQoKUh90eA
+oBT0QA//eg1TQF2IikipW4HNepsCUnN9zHAVN50BYuqky0NptfZ8aPIx0alva8dg
+luIyweLV9sXKWGot09Ibcspg/B2tFMz+W/CC/f118Ci1V9vpDj00hL0HbjefQmPI
+unNRtPw5Ej+iiZIC4rKdfme/OhuAKNisDheh2V/l15XaLfPrsRwrbzMlah3DEVw1
+CpEsD2tv5O1CjmZEbEglw1wFNm29KidWTRFx51eZJj024L2ToXKhkOQpYkwQlYbs
+Z3oozwrliL26/CYhP558emyYXq19g60/Rr7yVTjI6i+XQ/TEvYqJJJ36HE2+JdEz
+OH3rNYqBhlbJQ0rNBmYGpjR667dQsizl58QTTDLGneToeSozWC7vvbQUqKew1N/D
+s5gw1d2ekyQVuASJ6UULpd3WnfOGkZRzqkT3SnFIzJeL3skSOz4Mfn3OZ+l18xvT
+Yb8a1MwAgPqraHxspVu4GXF2LJ/HxhkrcTydQlxbL+HGQeADq2bCoqGo+K0xzR3y
+m/iICaOBYEnBJwlNFWhTjZtC7yFivWTpmUcahb/LHLSYaNfTIpJrGJx9ibG9Z9kt
+L6VHKREu6VPqdRfZmAu01xsGCTdCcVyo7uPHnfF+zAR5iNG6LbAg7jauSSqGc6bU
+rSyH5CswliLOGAYT0OBOQsISb7EkkaHmM2tNvqpf+1YGjs/7bxA=
+=ZTgV
 -----END PGP SIGNATURE-----
