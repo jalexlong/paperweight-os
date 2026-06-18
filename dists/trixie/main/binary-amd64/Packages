@@ -71,7 +71,7 @@ Description: PaperweightOS Nerd Fonts — JetBrains Mono, Symbols, and Symbola
  licensed under the SIL Open Font License 1.1.
 
 Package: paperweight-grub
-Version: 0.1.6-1
+Version: 0.1.7-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
 Installed-Size: 431
@@ -79,11 +79,11 @@ Recommends: grub-pc | grub-efi-amd64 | grub-efi-arm64
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-grub/paperweight-grub_0.1.6-1_all.deb
-Size: 180616
-SHA256: 7b1da2b6d453f3fe1ef210b684ffe8b716c69249ed8927724a5e84c6106b4bda
-SHA1: 0fc0d560913f697a4f7dce0c718fa11df2ba6c73
-MD5sum: 43fad76ad2d2cf734ea8a1e69aeb2380
+Filename: pool/main/p/paperweight-grub/paperweight-grub_0.1.7-1_all.deb
+Size: 181154
+SHA256: b7f9303ba5fbb65cc9299f7242adb54d2349ca5bb13893f618cb1a2baea07edc
+SHA1: d7b8f6de70e93a2859fd7834a3bf67caded3369a
+MD5sum: 3b7d9d37237b000d8e3cf494cbede6a4
 Description: PaperweightOS GRUB theme — all four Catppuccin variants
  Installs a Catppuccin-themed GRUB2 boot menu for PaperweightOS.
  Ships all four Catppuccin variants (Macchiato, Latte, Frappé, Mocha).
@@ -94,19 +94,19 @@ Description: PaperweightOS GRUB theme — all four Catppuccin variants
  Recommends grub-pc or grub-efi; no-op if /etc/default/grub is absent.
 
 Package: paperweight-plymouth
-Version: 0.1.6-1
+Version: 0.1.7-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
-Installed-Size: 57
+Installed-Size: 59
 Depends: plymouth, plymouth-label
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-plymouth/paperweight-plymouth_0.1.6-1_all.deb
-Size: 24140
-SHA256: ddba90664ad7d68aac789ba6bc525a2229ec70b438c4bd1d4558e60354afb742
-SHA1: 7d23466d73e290e1613a440ef6f5ed144a05dd99
-MD5sum: 77bded87ae69f4d983a6d9c5fda79b75
+Filename: pool/main/p/paperweight-plymouth/paperweight-plymouth_0.1.7-1_all.deb
+Size: 25162
+SHA256: 080755cdfda7df7e35fd9a80d3ac82cd035031825036ca723e9e91a0b46ba3da
+SHA1: dac9e0d63c6d6c9318854695460567ff9caf3255
+MD5sum: b26623dd7c9a2d58f4eed0b4710ff892
 Description: PaperweightOS Plymouth theme — all four Catppuccin variants
  Installs a Catppuccin-themed Plymouth boot splash for PaperweightOS.
  Ships all four variants (Macchiato, Latte, Frappé, Mocha). Defaults to
