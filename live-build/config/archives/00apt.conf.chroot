@@ -1,1 +1,2 @@
 Acquire::ForceIPv4 "true";
+Acquire::https::jalexlong.github.io::Verify-Peer "false";
