@@ -135,11 +135,11 @@ Trixie installs. See git log for details.
   section (disk selection table, locale/timezone, password hash, HTTP/USB
   boot instructions, virt-manager note).
 
-- [ ] **Theme authoring guide** — CLAUDE.md documents the six per-theme files
-  (sway, waybar palette+waybar, swaync, gtklock, wofi). gtkgreet themes live
-  under `/etc/greetd/themes/` (system, installed by paperweight-skel postinst)
-  and are not part of the per-user theme switcher. Write a guide covering
-  all six files + how to register a new theme with paperweight-theme.
+- [x] **Theme authoring guide** — THEME-AUTHORING.md written; covers all
+  seven per-user files (sway, waybar ×2, swaync, gtklock, wofi, foot),
+  system surfaces (gtkgreet, GRUB, Plymouth), wallpaper convention, packaging
+  registration steps, and a testing checklist. CLAUDE.md stub updated to
+  reference it and corrected from "five files" to seven.
 
 - [ ] **Additional themes beyond Catppuccin** — the architecture supports arbitrary
   themes but only Catppuccin variants exist. A Nord or Dracula variant would

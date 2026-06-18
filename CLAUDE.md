@@ -125,24 +125,23 @@ foot/themes/<name>.ini         — per-theme color files; background = that them
 
 ### Adding a new theme
 
-Per-theme files live in four directories under `~/.config/`:
+See **[THEME-AUTHORING.md](THEME-AUTHORING.md)** for the full guide.
 
-| File | Purpose |
-|---|---|
-| `sway/themes/<name>.conf` | `set $var #hex` color variables for sway |
-| `waybar/themes/<name>-palette.css` | `@define-color` CSS variables for waybar |
-| `waybar/themes/<name>-waybar.css` | waybar module styles (can reuse `macchiato-waybar.css` for Catppuccin variants) |
-| `swaync/themes/<name>.css` | swaync notification + panel CSS |
-| `gtklock/themes/<name>.css` | gtklock screen-locker CSS |
-| `foot/themes/<name>.ini` | foot terminal 16 ANSI colors; set `background` to that theme's `crust` color |
+Quick reference — seven files required per theme (all under
+`packaging/paperweight-skel/etc/skel/.config/`):
 
-To add a theme:
-1. Create the five files above under `packaging/paperweight-skel/etc/skel/`
-2. Run `paperweight-theme <name>` to activate it
+| File | Format | Purpose |
+|---|---|---|
+| `sway/themes/<name>.conf` | `set $var #hex` | sway color variables |
+| `waybar/themes/<name>-palette.css` | `@define-color` | waybar CSS palette |
+| `waybar/themes/<name>-waybar.css` | CSS | waybar module styles |
+| `swaync/themes/<name>.css` | CSS (hardcoded hex) | notification center |
+| `gtklock/themes/<name>.css` | CSS (hardcoded hex) | screen locker |
+| `wofi/themes/<name>.css` | `@define-color` + CSS | app launcher |
+| `foot/themes/<name>.ini` | `[colors]` hex (no `#`) | terminal palette |
 
-`~/.local/bin/paperweight-theme` handles activation: copies palette to
-`sway/config.d/90-colors.conf`, writes `waybar/style.css` imports, copies
-swaync/gtklock CSS, then reloads sway, waybar, and swaync.
+Also add `etc/greetd/themes/<name>.css` for the gtkgreet login screen.
+`debian/install` uses directory globs — no manifest changes needed.
 `$mod+p` opens the wofi theme picker.
 
 ---
