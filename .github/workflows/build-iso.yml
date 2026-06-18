@@ -19,7 +19,7 @@ jobs:
           sudo apt-get install -y \
             debootstrap squashfs-tools xorriso \
             grub-pc-bin grub-efi-amd64-bin isolinux \
-            dosfstools mtools
+            dosfstools mtools debian-archive-keyring
 
       - name: Install Debian live-build (not Ubuntu's ancient 3.x fork)
         run: |
