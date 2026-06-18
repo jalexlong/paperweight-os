@@ -1,3 +1,16 @@
+paperweight-skel (0.2.54-1) trixie; urgency=low
+
+  * paperweight-theme: flock-based concurrency guard — only one theme switch
+    runs at a time; rapid subsequent calls write a pending file and exit
+    immediately (last-write-wins), preventing CPU thrashing on eMMC hardware.
+  * paperweight-theme: per-phase millisecond benchmarks logged for sway reload,
+    waybar restart, and swaync reload.
+  * paperweight-theme: log rotation at 1000 lines (keeps last 800) to bound
+    disk use on eMMC without an external logrotate dependency.
+  * paperweight-theme: total elapsed time now reported in milliseconds.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Wed, 17 Jun 2026 20:04:17 -0500
+
 paperweight-skel (0.2.53-1) trixie; urgency=low
 
   * paperweight-theme: move from /etc/skel/.local/bin/ to /usr/bin/ so apt

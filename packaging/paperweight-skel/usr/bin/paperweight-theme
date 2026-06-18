@@ -23,10 +23,20 @@ FOOT_THEMES="$HOME/.config/foot/themes"
 # and stdout (so interactive runs show progress).
 LOG_DIR="$HOME/.local/share/paperweight-os"
 LOG="$LOG_DIR/theme-switch.log"
+LOCK="$LOG_DIR/theme-switch.lock"
+PENDING="$LOG_DIR/theme-switch.pending"
 mkdir -p "$LOG_DIR"
 log() { printf '[%s] %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*" | tee -a "$LOG"; }
+ms()  { date +%s%3N; }
 
-t_start=$(date +%s)
+# Log rotation: keep last 800 lines when file exceeds 1000 — bounds disk use
+# on eMMC without external logrotate. wc -l is a read; mv is one metadata write.
+if [ -f "$LOG" ] && [ "$(wc -l < "$LOG")" -gt 1000 ]; then
+    tail -n 800 "$LOG" > "$LOG.tmp" && mv "$LOG.tmp" "$LOG"
+    log "log rotated (kept last 800 lines)"
+fi
+
+t_start=$(ms)
 
 list_themes() {
     for f in "$SWAY_THEMES"/*.conf; do
@@ -42,6 +52,22 @@ else
 fi
 
 [ -z "$THEME" ] && exit 0
+
+# Concurrency guard: only one theme switch at a time.
+# If the lock is held by another instance, write our theme as pending (so the
+# running instance will apply it when it finishes) and exit immediately.
+# This prevents CPU thrashing from stacked reloads on resource-constrained hardware.
+exec 9>"$LOCK"
+if ! flock -n 9; then
+    printf '%s\n' "$THEME" > "$PENDING"
+    log "switch in progress; '$THEME' queued"
+    notify-send -u low "paperweight-theme" \
+        "Switch in progress — '$THEME' queued"
+    exit 0
+fi
+# Record our theme as the current pending intent; concurrent callers that lose
+# the lock will overwrite this, so the last-requested theme always wins.
+printf '%s\n' "$THEME" > "$PENDING"
 
 log "applying theme: $THEME"
 
@@ -119,7 +145,7 @@ if id -nG 2>/dev/null | tr ' ' '\n' | grep -qx 'sudo'; then
     sudo paperweight-plymouth-theme "$THEME" 2>/dev/null || true
 fi
 
-# --- Reload sequence ---
+# --- Reload sequence (benchmarked) ---
 
 # Kill waybar before swaymsg reload so sway's bar{swaybar_command} restart is
 # the only actor — prevents a race where pkill hits the dying instance and the
@@ -134,44 +160,59 @@ fi
 # Reload sway: picks up 90-colors.conf, 91-wallpaper.conf (or its removal),
 # and 90-theme.conf in alphabetical order.
 log "reloading sway..."
+_t=$(ms)
 if swaymsg reload; then
-    log "sway reload OK"
+    log "sway reload: $(( $(ms) - _t ))ms OK"
 else
-    log "ERROR: swaymsg reload failed (exit $?)"
+    log "ERROR: swaymsg reload failed (exit $?) — $(( $(ms) - _t ))ms"
     notify-send -u critical "paperweight-theme" "swaymsg reload failed"
 fi
 
 # Wait for sway to settle and for bar{swaybar_command waybar} to start waybar.
 sleep 0.5
 
+_t=$(ms)
 if pgrep -x waybar > /dev/null; then
-    log "waybar running (started by sway)"
+    log "waybar up: $(( $(ms) - _t ))ms (started by sway)"
 else
     log "waybar not running after reload; starting manually..."
     waybar &
     sleep 0.5
     if pgrep -x waybar > /dev/null; then
-        log "waybar started manually OK"
+        log "waybar up: $(( $(ms) - _t ))ms (started manually)"
     else
-        log "ERROR: waybar failed to start"
+        log "ERROR: waybar failed to start — $(( $(ms) - _t ))ms"
         notify-send -u critical "paperweight-theme" "waybar failed to start after reload"
     fi
 fi
 
 # Reload swaync style; restart if not running.
-log "reloading swaync..."
+_t=$(ms)
 if swaync-client -rs 2>/dev/null; then
-    log "swaync style reloaded"
+    log "swaync reload: $(( $(ms) - _t ))ms"
 else
     if pkill -x swaync 2>/dev/null; then
         swaync &
-        log "swaync restarted"
+        log "swaync restarted: $(( $(ms) - _t ))ms"
     else
         swaync &
-        log "swaync started"
+        log "swaync started: $(( $(ms) - _t ))ms"
     fi
 fi
 
-elapsed=$(( $(date +%s) - t_start ))
-log "theme '$THEME' applied in ${elapsed}s"
+elapsed=$(( $(ms) - t_start ))
+log "theme '$THEME' applied in ${elapsed}ms"
 notify-send "paperweight-theme" "Theme '$THEME' applied"
+
+# Last-write-wins: if a newer theme was requested while we ran, apply it now.
+# exec 9>&- closes fd 9, releasing the flock before the re-invocation acquires it.
+if [ -f "$PENDING" ]; then
+    NEXT=$(cat "$PENDING")
+    rm -f "$PENDING"
+    if [ -n "$NEXT" ] && [ "$NEXT" != "$THEME" ]; then
+        log "pending theme: applying '$NEXT'"
+        exec 9>&-
+        exec "$0" "$NEXT"
+    fi
+fi
+rm -f "$PENDING"
