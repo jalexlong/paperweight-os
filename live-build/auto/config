@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-lb config \
+lb config noauto \
   --mode debian \
   --architecture amd64 \
   --distribution trixie \
