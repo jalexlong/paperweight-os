@@ -142,19 +142,19 @@ Description: PaperweightOS default configuration skeleton
  and are dropped into config.d/ directories for fragment-based composition.
 
 Package: paperweight-wallpapers
-Version: 0.3.3-1
+Version: 0.3.4-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
-Installed-Size: 538
+Installed-Size: 746
 Depends: paperweight-skel, swaybg, yad
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-wallpapers/paperweight-wallpapers_0.3.3-1_all.deb
-Size: 251392
-SHA256: ca6a3e3c57ab0ca9dd6a32c4dbc7a4e5d4bf909b423bac9854c1cf832ca728f1
-SHA1: b05249931ae774f41505a60c8aee4e6fd3a6148a
-MD5sum: 7477b69f580d663bab0d032832e71288
+Filename: pool/main/p/paperweight-wallpapers/paperweight-wallpapers_0.3.4-1_all.deb
+Size: 383592
+SHA256: cd35dd3a5f25ab31698e66a4d50a9c934a5c2a882102a565b6df6fab7fa07496
+SHA1: bba48e8ba34d5b4175d489d351ac95cdf582820a
+MD5sum: d1fb86af01f2ee1ce18890de8145e5de
 Description: PaperweightOS wallpapers — Catppuccin themed backgrounds
  Provides wallpapers for PaperweightOS, installed to
  /usr/share/paperweight-os/wallpapers/:
