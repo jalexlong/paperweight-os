@@ -19,7 +19,7 @@ case "$LB_VERSION" in
 esac
 
 cd "$(dirname "$0")"
-sudo lb clean
+sudo lb clean --all
 sudo lb config
 sudo lb build
 echo "ISO: $(ls *.iso 2>/dev/null || echo 'not found — check build output')"
