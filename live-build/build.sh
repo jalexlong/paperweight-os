@@ -18,7 +18,7 @@ case "$LB_VERSION" in
         ;;
 esac
 
-cd "$(dirname "$0")/live-build"
+cd "$(dirname "$0")"
 sudo lb clean
 sudo lb config
 sudo lb build
