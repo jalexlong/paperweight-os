@@ -19,6 +19,15 @@ GTKLOCK_THEMES="$HOME/.config/gtklock/themes"
 WOFI_THEMES="$HOME/.config/wofi/themes"
 FOOT_THEMES="$HOME/.config/foot/themes"
 
+# Logging: timestamped lines to ~/.local/share/paperweight-os/theme-switch.log
+# and stdout (so interactive runs show progress).
+LOG_DIR="$HOME/.local/share/paperweight-os"
+LOG="$LOG_DIR/theme-switch.log"
+mkdir -p "$LOG_DIR"
+log() { printf '[%s] %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*" | tee -a "$LOG"; }
+
+t_start=$(date +%s)
+
 list_themes() {
     for f in "$SWAY_THEMES"/*.conf; do
         [ -f "$f" ] || continue
@@ -34,6 +43,8 @@ fi
 
 [ -z "$THEME" ] && exit 0
 
+log "applying theme: $THEME"
+
 # Validate all theme files exist before touching anything — prevents partial state.
 missing=""
 for f in \
@@ -48,6 +59,7 @@ do
     [ -f "$f" ] || missing="$missing\n  $f"
 done
 if [ -n "$missing" ]; then
+    log "ERROR: theme '$THEME' incomplete — missing:$missing"
     notify-send -u critical "paperweight-theme" \
         "Theme '$THEME' is incomplete — missing:$missing"
     exit 1
@@ -55,32 +67,48 @@ fi
 
 # Apply sway color variables
 cp "$SWAY_THEMES/$THEME.conf" "$HOME/.config/sway/config.d/90-colors.conf"
+log "sway colors: 90-colors.conf"
 
 # Apply waybar palette + module styles
 printf '@import url("./themes/%s-palette.css");\n@import url("./themes/%s-waybar.css");\n' \
     "$THEME" "$THEME" > "$HOME/.config/waybar/style.css.tmp" \
     && mv "$HOME/.config/waybar/style.css.tmp" "$HOME/.config/waybar/style.css"
+log "waybar style: $THEME-palette.css + $THEME-waybar.css"
 
 # Apply swaync, gtklock, wofi, and foot (new foot windows pick up the colors)
 cp "$SWAYNC_THEMES/$THEME.css"  "$HOME/.config/swaync/style.css"
 cp "$GTKLOCK_THEMES/$THEME.css" "$HOME/.config/gtklock/style.css"
 cp "$WOFI_THEMES/$THEME.css"    "$HOME/.config/wofi/style.css"
 cp "$FOOT_THEMES/$THEME.ini"    "$HOME/.config/foot/colors.ini"
+log "swaync, gtklock, wofi, foot: applied"
 
 # Record active theme
 mkdir -p "$HOME/.config/paperweight-os"
 printf '%s\n' "$THEME" > "$HOME/.config/paperweight-os/active-theme"
 
-# Apply wallpaper: per-theme user override > artwork default > solid color fallback
+# Wallpaper: write path into a sway config fragment so it persists through
+# every swaymsg reload and reboot. 91-wallpaper.conf sorts after 90-theme.conf,
+# so its `output * bg … fill` overrides the solid-color fallback in 90-theme.conf.
+# If no wallpaper exists for this theme the fragment is removed, leaving
+# 90-theme.conf's solid_color in effect.
+SWAY_WP_CONF="$HOME/.config/sway/config.d/91-wallpaper.conf"
 THEME_WP_FILE="$HOME/.config/paperweight-os/wallpapers/$THEME"
+WP=""
 if [ -f "$THEME_WP_FILE" ]; then
     WP=$(cat "$THEME_WP_FILE")
 elif [ -f "/usr/share/paperweight-os/wallpapers/${THEME}-wallpaper1.jpg" ]; then
     WP="/usr/share/paperweight-os/wallpapers/${THEME}-wallpaper1.jpg"
-else
+elif [ -f "/usr/share/paperweight-os/wallpapers/${THEME}.png" ]; then
     WP="/usr/share/paperweight-os/wallpapers/${THEME}.png"
 fi
-[ -f "$WP" ] && swaymsg "output * bg $WP fill"
+
+if [ -f "$WP" ]; then
+    printf 'output * bg %s fill\n' "$WP" > "$SWAY_WP_CONF"
+    log "wallpaper: $WP → 91-wallpaper.conf"
+else
+    rm -f "$SWAY_WP_CONF"
+    log "no wallpaper for '$THEME'; solid color from 90-theme.conf"
+fi
 
 # Update system surfaces (gtkgreet, GRUB, Plymouth) — only if user is in the
 # sudo group, since all three helpers require NOPASSWD sudo. Non-sudo users
@@ -91,9 +119,59 @@ if id -nG 2>/dev/null | tr ' ' '\n' | grep -qx 'sudo'; then
     sudo paperweight-plymouth-theme "$THEME" 2>/dev/null || true
 fi
 
-# Reload: sway picks up 90-colors.conf (borders, title bar colors).
-# Then explicitly reload waybar so the new style.css is applied.
-# SIGUSR1 triggers a config+style refresh; fall back to a fresh start if not running.
-swaymsg reload
-pkill -SIGUSR1 waybar 2>/dev/null || waybar &
-swaync-client -rs 2>/dev/null || { pkill -x swaync 2>/dev/null; swaync & }
+# --- Reload sequence ---
+
+# Kill waybar before swaymsg reload so sway's bar{swaybar_command} restart is
+# the only actor — prevents a race where pkill hits the dying instance and the
+# fallback `|| waybar &` spawns a duplicate alongside sway's own restart.
+log "stopping waybar..."
+if pkill -x waybar 2>/dev/null; then
+    log "waybar stopped"
+else
+    log "waybar was not running"
+fi
+
+# Reload sway: picks up 90-colors.conf, 91-wallpaper.conf (or its removal),
+# and 90-theme.conf in alphabetical order.
+log "reloading sway..."
+if swaymsg reload; then
+    log "sway reload OK"
+else
+    log "ERROR: swaymsg reload failed (exit $?)"
+    notify-send -u critical "paperweight-theme" "swaymsg reload failed"
+fi
+
+# Wait for sway to settle and for bar{swaybar_command waybar} to start waybar.
+sleep 0.5
+
+if pgrep -x waybar > /dev/null; then
+    log "waybar running (started by sway)"
+else
+    log "waybar not running after reload; starting manually..."
+    waybar &
+    sleep 0.5
+    if pgrep -x waybar > /dev/null; then
+        log "waybar started manually OK"
+    else
+        log "ERROR: waybar failed to start"
+        notify-send -u critical "paperweight-theme" "waybar failed to start after reload"
+    fi
+fi
+
+# Reload swaync style; restart if not running.
+log "reloading swaync..."
+if swaync-client -rs 2>/dev/null; then
+    log "swaync style reloaded"
+else
+    if pkill -x swaync 2>/dev/null; then
+        swaync &
+        log "swaync restarted"
+    else
+        swaync &
+        log "swaync started"
+    fi
+fi
+
+elapsed=$(( $(date +%s) - t_start ))
+log "theme '$THEME' applied in ${elapsed}s"
+notify-send "paperweight-theme" "Theme '$THEME' applied"
