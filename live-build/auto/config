@@ -13,6 +13,4 @@ lb config noauto \
   --binary-images iso-hybrid \
   --apt-indices false \
   --memtest none \
-  --hostname paperweight \
-  --username user \
   "${@}"
