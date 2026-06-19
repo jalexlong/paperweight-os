@@ -3,7 +3,7 @@
 ## What This Is
 
 A Debian Blend targeting resource-limited x86 laptops (any crappy laptop → usable dev machine).
-Ships as metapackages + a personal apt repo; live-build ISO in progress (see `live-build/`).
+Ships as metapackages + a personal apt repo; live-build ISO available (see `live-build/`).
 First real hardware target: Dell Chromebook 11 with coreboot ("Paperweight Pro").
 Also well-suited for SSH-heavy server work out of the box.
 
@@ -83,7 +83,7 @@ user-local fragments also work without modifying the skel defaults.
 | Audio | PipeWire + pipewire-pulse + WirePlumber | Modern stack, PulseAudio compat |
 | Default theme | Catppuccin Macchiato | First theme; more + theme switcher planned |
 | Font | JetBrains Mono Nerd Font | Monospace + icons in one font |
-| Distribution model | Debian Blend (metapackages + apt repo) | No ISO until .debs are solid |
+| Distribution model | Debian Blend (metapackages + apt repo) | ISO via live-build/ (hybrid ISO, installs paperweight-desktop via late_command) |
 | Config target | General x86 laptop | Chromebook = optional module, not the default |
 
 ---
@@ -210,8 +210,14 @@ cd live-build
 sudo lb clean && sudo lb config && sudo lb build
 # Output: live-build/*.iso (~2 GB hybrid ISO)
 
-# Test in QEMU
-qemu-system-x86_64 -m 2G -enable-kvm -cdrom live-build/*.iso -boot d
+# After editing preseed/paperweight.cfg only (fast, ~2 min, uses cached chroot):
+cd live-build
+sudo bash rebuild-preseed.sh
+
+# Test in QEMU (virtio-vga required for KMS/Wayland)
+qemu-system-x86_64 -m 2G -enable-kvm \
+  -cdrom live-build/*.iso -boot d \
+  -device virtio-vga -display gtk,gl=on
 ```
 
 CI: trigger manually via `Actions → Build ISO → Run workflow`, or push a `v*` tag.

@@ -237,7 +237,7 @@ bash publish.sh
 
 ### Customize before use
 
-Open `preseed/paperweight.cfg` and set these three things:
+Open `preseed/paperweight.cfg` and set these two things:
 
 **1. Target disk** (line `partman-auto/disk`) — the file auto-detects the first
 available disk, but verify it matches your hardware:
@@ -255,12 +255,7 @@ d-i keyboard-configuration/xkb-keymap select us
 d-i time/zone string UTC
 ```
 
-**3. Username and password** — default user is `user` with password `paperweight`.
-Generate a new hash:
-```bash
-printf 'yourpassword' | mkpasswd -s -m sha-512
-```
-Paste the output into the `passwd/user-password-crypted` line.
+Username and password are entered interactively during install — no preseed changes needed.
 
 ### Run the install
 
