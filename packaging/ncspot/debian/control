@@ -1,0 +1,17 @@
+Source: ncspot
+Section: sound
+Priority: optional
+Maintainer: Alex Long <johnalexanderlong@gmail.com>
+Build-Depends: debhelper-compat (= 13), curl, libpulse-dev
+Standards-Version: 4.6.2
+Homepage: https://github.com/hrkfdn/ncspot
+Rules-Requires-Root: no
+
+Package: ncspot
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: ncurses Spotify client (upstream binary repack)
+ ncspot is a cross-platform ncurses Spotify client written in Rust,
+ inspired by ncmpc. Requires a Spotify Premium account.
+ .
+ This package repackages the upstream pre-built binary release.

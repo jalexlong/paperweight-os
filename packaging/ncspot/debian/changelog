@@ -1,0 +1,5 @@
+ncspot (1.3.4-1) trixie; urgency=medium
+
+  * Rename source/binary package from paperweight-ncspot to ncspot.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Fri, 19 Jun 2026 13:15:11 -0500
