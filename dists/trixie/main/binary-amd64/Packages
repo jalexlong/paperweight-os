@@ -193,3 +193,26 @@ Description: PaperweightOS wallpapers — Catppuccin themed backgrounds
  with a wofi dmenu fallback. The active theme is read from
  ~/.config/paperweight-os/active-theme.
 
+Package: paperweight-yazi
+Version: 26.5.6-1
+Architecture: amd64
+Maintainer: Alex Long <johnalexanderlong@gmail.com>
+Installed-Size: 25957
+Recommends: file, chafa, ffmpegthumbnailer, poppler-utils, fd-find, ripgrep, fzf, zoxide
+Homepage: https://github.com/sxyazi/yazi
+Priority: optional
+Section: utils
+Filename: pool/main/p/paperweight-yazi/paperweight-yazi_26.5.6-1_amd64.deb
+Size: 7884708
+SHA256: eabe10ea89d66d9afe963b7eadb44f92f3f2af96549c35d61ce59b5050112850
+SHA1: a5cf7a48b37bb5b1688d7e25cd9e8d9e0389eab3
+MD5sum: 85cb4c552c47799896b434f9a02dc491
+Description: Blazing fast terminal file manager (upstream binary repack)
+ Yazi is a terminal file manager written in Rust, based on async I/O.
+ Ships yazi (main UI) and ya (CLI helper / package manager).
+ .
+ Optional tools for preview support: chafa (images), ffmpegthumbnailer
+ (video), poppler-utils (PDF), fd-find, ripgrep, fzf, zoxide.
+ .
+ This package repackages the upstream musl pre-built binary release.
+
