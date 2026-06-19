@@ -9,6 +9,8 @@
 packaging/**/*.deb
 packaging/**/*.buildinfo
 packaging/paperweight-ncspot/ncspot
+packaging/paperweight-yazi/yazi-upstream.deb
+packaging/paperweight-yazi/upstream-extract/
 packaging/**/*.changes
 packaging/**/debian/.debhelper/
 packaging/**/debian/debhelper-build-stamp

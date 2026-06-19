@@ -1,0 +1,21 @@
+Source: paperweight-yazi
+Section: utils
+Priority: optional
+Maintainer: Alex Long <johnalexanderlong@gmail.com>
+Build-Depends: debhelper-compat (= 13), curl
+Standards-Version: 4.6.2
+Homepage: https://github.com/sxyazi/yazi
+Rules-Requires-Root: no
+
+Package: paperweight-yazi
+Architecture: amd64
+Depends: ${misc:Depends}
+Recommends: file, chafa, ffmpegthumbnailer, poppler-utils, fd-find, ripgrep, fzf, zoxide
+Description: Blazing fast terminal file manager (upstream binary repack)
+ Yazi is a terminal file manager written in Rust, based on async I/O.
+ Ships yazi (main UI) and ya (CLI helper / package manager).
+ .
+ Optional tools for preview support: chafa (images), ffmpegthumbnailer
+ (video), poppler-utils (PDF), fd-find, ripgrep, fzf, zoxide.
+ .
+ This package repackages the upstream musl pre-built binary release.

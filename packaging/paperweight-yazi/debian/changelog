@@ -1,0 +1,5 @@
+paperweight-yazi (26.5.6-1) trixie; urgency=medium
+
+  * Package upstream musl binary release v26.5.6.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Fri, 19 Jun 2026 13:03:03 -0500
