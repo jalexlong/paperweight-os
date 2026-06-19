@@ -8,6 +8,7 @@
 /*.gz
 packaging/**/*.deb
 packaging/**/*.buildinfo
+packaging/paperweight-ncspot/ncspot
 packaging/**/*.changes
 packaging/**/debian/.debhelper/
 packaging/**/debian/debhelper-build-stamp
