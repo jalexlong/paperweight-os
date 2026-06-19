@@ -24,10 +24,14 @@ paperweight-os/
 │   ├── paperweight-grub/        # Catppuccin Macchiato GRUB2 theme
 │   ├── paperweight-plymouth/    # Catppuccin Macchiato Plymouth boot splash
 │   └── paperweight-chromebook/  # Hardware add-on for Chromebook/coreboot
-├── live-build/                  # live-build ISO config (Phase 1: netinstall)
+├── live-build/                  # live-build ISO config
 │   ├── auto/                    # lb config/build/clean scripts
-│   ├── config/                  # archives, hooks, includes, package-lists, preseed
-│   └── build.sh                 # local build helper: sudo lb clean && config && build
+│   ├── config/
+│   │   ├── hooks/normal/0100-install-preseed.hook.binary  # copies preseed/paperweight.cfg → binary/install/
+│   │   ├── bootloaders/grub-pc/ # grub.cfg with lb template markers
+│   │   └── package-lists/       # chroot package lists
+│   ├── build.sh                 # full build helper: sudo lb clean --all && lb config && lb build
+│   └── rebuild-preseed.sh       # fast preseed-only rebuild (clears binary_hooks stage, reruns lb binary)
 ├── apt-repo/
 │   └── conf/                    # reprepro config (SignWith key must be set)
 ├── publish.sh                   # Build all .debs → sign → push gh-pages
@@ -199,26 +203,30 @@ GitHub Pages must be enabled on the repo (Settings → Pages → gh-pages branch
 
 ### live-build ISO
 
-Requires `live-build` installed (`sudo apt install live-build`). Must run as root.
+Requires Debian's `live-build` (not Ubuntu's ancient 3.x fork). Must run as root.
 
 ```bash
-# Local build (from repo root — takes 15-30 min)
+# Full build from repo root (15-30 min, requires internet)
 bash live-build/build.sh
-
-# Or step by step
-cd live-build
-sudo lb clean && sudo lb config && sudo lb build
-# Output: live-build/*.iso (~2 GB hybrid ISO)
+# Output: live-build/live-image-amd64.hybrid.iso (~2 GB hybrid ISO)
 
 # After editing preseed/paperweight.cfg only (fast, ~2 min, uses cached chroot):
-cd live-build
-sudo bash rebuild-preseed.sh
+bash live-build/rebuild-preseed.sh
 
 # Test in QEMU (virtio-vga required for KMS/Wayland)
 qemu-system-x86_64 -m 2G -enable-kvm \
-  -cdrom live-build/*.iso -boot d \
+  -cdrom live-build/live-image-amd64.hybrid.iso -boot d \
   -device virtio-vga -display gtk,gl=on
 ```
+
+**Preseed delivery:** `preseed/paperweight.cfg` is placed into the ISO at
+`install/preseed.cfg` by a binary hook (`config/hooks/normal/0100-install-preseed.hook.binary`).
+Do NOT put installer preseeds in `config/preseed/` — lb's `chroot_preseed` stage
+processes that directory as debconf input and fails on d-i-owned questions.
+
+**Preseed-only rebuild:** `rebuild-preseed.sh` clears the `binary_hooks`,
+`binary_checksums`, and `binary_iso` stage files and reruns `lb binary`.
+No chroot rebuild needed. Requires a prior full build.
 
 CI: trigger manually via `Actions → Build ISO → Run workflow`, or push a `v*` tag.
 ISO artifacts are uploaded to GitHub Releases on tags, or as build artifacts (14-day retention) on manual trigger.
