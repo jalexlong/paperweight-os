@@ -1,0 +1,5 @@
+vesktop (1.6.5-1) trixie; urgency=medium
+
+  * Initial packaging of Vesktop 1.6.5 upstream binary repack.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Fri, 19 Jun 2026 14:51:27 -0500

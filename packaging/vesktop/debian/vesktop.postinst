@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = "configure" ]; then
+    # Set chrome-sandbox permissions based on kernel user namespace support.
+    # SUID is needed on systems where unprivileged user namespaces are disabled.
+    if ! { [ -L /proc/self/ns/user ] && unshare --user true; } 2>/dev/null; then
+        chmod 4755 /opt/Vesktop/chrome-sandbox || true
+    else
+        chmod 0755 /opt/Vesktop/chrome-sandbox || true
+    fi
+
+    if hash update-desktop-database 2>/dev/null; then
+        update-desktop-database /usr/share/applications || true
+    fi
+fi

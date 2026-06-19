@@ -1,0 +1,80 @@
+#!/bin/bash
+# Migrate /home to an inserted SD card.
+# The internal eMMC is /dev/mmcblk0; the SD reader typically shows up as /dev/mmcblk1.
+# Run lsblk with and without the SD card inserted to confirm the device path
+# on your specific Chromebook model before running this script.
+
+set -euo pipefail
+
+SD_DEV="${1:-/dev/mmcblk1}"
+
+die() { echo "ERROR: $*" >&2; exit 1; }
+
+[ "$EUID" -eq 0 ] || die "Run as root: sudo paperweight-expand-home"
+[ -b "$SD_DEV" ] || die "SD card not found at $SD_DEV. Insert a card (32 GB+ recommended) and try again."
+
+CURRENT_HOME=$(findmnt -n -o SOURCE /home 2>/dev/null || true)
+if echo "$CURRENT_HOME" | grep -q "^${SD_DEV}"; then
+    die "/home is already on $SD_DEV ($CURRENT_HOME). Nothing to do."
+fi
+
+SD_SIZE=$(lsblk -n -d -o SIZE "$SD_DEV")
+HOME_USED=$(du -sh /home 2>/dev/null | cut -f1)
+SD_PART="${SD_DEV}p1"
+
+cat <<EOF
+
+  SD card:    $SD_DEV  ($SD_SIZE)
+  /home used: $HOME_USED
+
+  This will:
+    1. Erase and repartition $SD_DEV as a single ext4 partition
+    2. Copy all of /home to the SD card
+    3. Add a UUID-based /home entry to /etc/fstab
+
+  ALL EXISTING DATA ON $SD_DEV WILL BE LOST.
+
+EOF
+read -r -p "Type YES to proceed: " CONFIRM
+[ "$CONFIRM" = "YES" ] || { echo "Aborted."; exit 1; }
+
+echo ""
+echo "==> Partitioning $SD_DEV..."
+sgdisk --zap-all "$SD_DEV"
+sgdisk -n 1:0:0 -t 1:8300 -c 1:paperweight-home "$SD_DEV"
+blockdev --rereadpt "$SD_DEV" 2>/dev/null || true
+
+echo "==> Waiting for $SD_PART..."
+for i in $(seq 1 20); do
+    [ -b "$SD_PART" ] && break
+    sleep 0.5
+done
+[ -b "$SD_PART" ] || die "$SD_PART did not appear after partitioning. Reboot and try again."
+
+echo "==> Formatting $SD_PART as ext4..."
+mkfs.ext4 -L paperweight-home "$SD_PART"
+
+UUID=$(blkid -s UUID -o value "$SD_PART")
+echo "    UUID: $UUID"
+
+TMPMT=$(mktemp -d)
+cleanup() { umount "$TMPMT" 2>/dev/null || true; rmdir "$TMPMT" 2>/dev/null || true; }
+trap cleanup EXIT
+
+echo "==> Copying /home to SD card..."
+mount "$SD_PART" "$TMPMT"
+rsync -a --info=progress2 /home/ "$TMPMT/"
+umount "$TMPMT"
+rmdir "$TMPMT"
+trap - EXIT
+
+if grep -q "UUID=$UUID" /etc/fstab; then
+    echo "==> UUID already in /etc/fstab — skipping."
+else
+    printf 'UUID=%s\t/home\text4\tdefaults,noatime\t0\t2\n' "$UUID" >> /etc/fstab
+    echo "==> Added to /etc/fstab."
+fi
+
+echo ""
+echo "Done. Reboot to mount the SD card as /home."
+echo "After rebooting, verify with: findmnt /home"

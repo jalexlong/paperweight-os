@@ -1,0 +1,25 @@
+#!/usr/bin/make -f
+
+VESKTOP_VERSION = 1.6.5
+URL = https://github.com/Vencord/Vesktop/releases/download/v$(VESKTOP_VERSION)/vesktop_$(VESKTOP_VERSION)_amd64.deb
+
+%:
+	dh $@
+
+override_dh_auto_configure:
+
+override_dh_auto_build:
+	curl -fsSL $(URL) -o vesktop-upstream.deb
+	dpkg-deb --extract vesktop-upstream.deb upstream-extract
+
+override_dh_auto_test:
+
+override_dh_auto_install:
+	cp -a upstream-extract/opt debian/vesktop/
+	install -Dm644 upstream-extract/usr/share/applications/vesktop.desktop \
+		debian/vesktop/usr/share/applications/vesktop.desktop
+	install -Dm644 upstream-extract/usr/share/icons/hicolor/scalable/apps/vesktop.svg \
+		debian/vesktop/usr/share/icons/hicolor/scalable/apps/vesktop.svg
+
+override_dh_shlibdeps:
+	# Electron binary with bundled .so files — skip auto-generated shlib deps

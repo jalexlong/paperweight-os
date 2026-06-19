@@ -14,7 +14,7 @@ set $menu wofi -S drun
 set $lock gtklock
 
 ### App launchers
-    # $mod+t and $mod+b are overridden in config.d/40-workspaces.conf with workspace switching.
+    # $mod+b is overridden in config.d/40-workspaces.conf with workspace switching.
     # $mod+Return and $mod+Shift+Return stay here as workspace-agnostic fallbacks.
     bindsym $mod+Return exec $term
     bindsym $mod+Shift+Return exec $term --title floating-terminal
@@ -22,11 +22,11 @@ set $lock gtklock
     for_window [app_id="floating-terminal"] floating enable, resize set width 900 px height 500 px, move position center
 
     bindsym $mod+f exec $files
-    bindsym $mod+d exec $menu
+    bindsym $mod+space exec $menu
 
 ### Window management
     bindsym $mod+q kill
-    bindsym $mod+space floating toggle
+    bindsym $mod+g floating toggle
     bindsym $mod+Shift+space focus mode_toggle
     bindsym $mod+m fullscreen
 

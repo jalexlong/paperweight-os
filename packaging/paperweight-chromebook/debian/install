@@ -1,3 +1,4 @@
 etc/skel/.config/sway/config.d/20-keys.conf                 etc/skel/.config/sway/config.d/
 etc/skel/.config/sway/config.d/50-chromebook-output.conf    etc/skel/.config/sway/config.d/
 etc/skel/.config/sway/config.d/15-chromebook-input.conf     etc/skel/.config/sway/config.d/
+usr/local/bin/paperweight-expand-home                       usr/local/bin/

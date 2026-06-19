@@ -1,3 +1,11 @@
+paperweight-chromebook (0.1.12-1) trixie; urgency=low
+
+  * Add paperweight-expand-home: post-install script that migrates /home to an
+    inserted SD card (partitions, formats ext4, rsyncs, writes /etc/fstab entry).
+  * debian/control: add gdisk and rsync to Depends.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Fri, 19 Jun 2026 14:51:27 -0500
+
 paperweight-chromebook (0.1.11-1) trixie; urgency=low
 
   * debian/postinst: add GRUB_GFXPAYLOAD_LINUX=keep so the kernel

@@ -157,24 +157,21 @@ Also add `etc/greetd/themes/<name>.css` for the gtkgreet login screen.
 ## Sway Keybindings
 
 App-launch bindings (from `40-workspaces.conf`) switch to the workspace and open the app.
-`$mod+Shift+key` opens the same app as a floating window.
 
 | Binding | Action |
 |---|---|
-| `$mod+t` | Terminal (foot) → workspace 1 |
-| `$mod+Return` | Terminal (foot) — alias |
+| `$mod+Return` | Terminal (foot) |
 | `$mod+Shift+Return` | Floating terminal |
+| `$mod+Shift+t` | Floating terminal (alias) |
 | `$mod+b` | Browser (firefox-esr) → workspace 2 |
-| `$mod+e` | Editor (helix) → workspace 3 |
-| `$mod+s` | Music (ncspot) → workspace 4 |
-| `$mod+c` | Chat (discord/vesktop) → workspace 5 |
-| `$mod+g` | Games → workspace 6 |
+| `$mod+e` | Editor (neovim) → workspace 3 |
+| `$mod+d` | Chat (vesktop) → workspace 4 |
+| `$mod+s` | Toggle layout (tabbed / splith) |
 | `$mod+f` | Files (thunar) |
-| `$mod+d` | App launcher (wofi) |
+| `$mod+space` | App launcher (wofi) |
 | `$mod+q` | Kill window |
-| `$mod+space` | Toggle floating |
+| `$mod+g` | Toggle floating / tiled |
 | `$mod+m` | Fullscreen |
-| `$mod+F5` | Toggle layout (tabbed / splith) |
 | `$mod+Ctrl+l` | Lock (gtklock) |
 | `$mod+Shift+r` | Reload sway config |
 | `$mod+Shift+n` | Toggle notification center |
@@ -248,12 +245,11 @@ sudo apt update && sudo apt install paperweight-desktop
 ## Known Issues / Watchpoints
 
 - **ncspot**: Not in Debian Trixie repos — removed from `paperweight-desktop` Depends.
-  Install manually via `cargo install ncspot`. The `$mod+s` keybind silently fails
-  without it.
+  Install manually via `cargo install ncspot`. Workspace 4 has no default app bound;
+  use `$mod+4` to switch there and launch a music client manually.
 
-- **Discord / Vesktop**: Not in Debian repos — must be installed manually as a `.deb`
-  from discord.com/download or vencord.dev. The `$mod+Shift+c` floating variant uses
-  `sway-wait-float` (polls sway IPC until the window appears) rather than a fixed sleep.
+- **Vesktop**: Available via the paperweight apt repo (`apt install vesktop`).
+  A `discord` symlink is also installed at `/usr/bin/discord` pointing to Vesktop.
 
 - **existing users and `video` group**: The postinst patches `/etc/adduser.conf` so
   new users land in the `video` group for brightnessctl. Users who already exist at
