@@ -28,6 +28,12 @@ live-build/config/binary
 live-build/config/chroot
 live-build/config/common
 live-build/config/source
+live-build/binary.modified_timestamps
+live-build/chroot.files
+live-build/chroot.packages.*
+live-build/live-image-amd64.contents
+live-build/live-image-amd64.files
+live-build/live-image-amd64.packages
 *.iso
 
 # GPG secrets — never commit these
