@@ -1,0 +1,6 @@
+#!/bin/sh
+# Place the installer preseed into the binary image.
+# lb runs binary hooks from live-build/binary/ — ../../ reaches the repo root.
+set -e
+mkdir -p install
+cp ../../preseed/paperweight.cfg install/preseed.cfg
