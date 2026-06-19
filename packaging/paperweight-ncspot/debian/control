@@ -2,7 +2,7 @@ Source: paperweight-ncspot
 Section: sound
 Priority: optional
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
-Build-Depends: debhelper-compat (= 13), curl
+Build-Depends: debhelper-compat (= 13), curl, libpulse-dev
 Standards-Version: 4.6.2
 Homepage: https://github.com/hrkfdn/ncspot
 Rules-Requires-Root: no
