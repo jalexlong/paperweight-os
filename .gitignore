@@ -17,7 +17,7 @@ packaging/**/debian/debhelper-build-stamp
 packaging/**/debian/files
 packaging/**/debian/*.substvars
 packaging/**/debian/tmp/
-packaging/**/debian/paperweight-*/
+packaging/**/debian/*/
 
 # reprepro generated output (lives on gh-pages branch, not main)
 gh-pages/
