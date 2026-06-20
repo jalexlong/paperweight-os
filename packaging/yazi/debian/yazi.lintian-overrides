@@ -1,0 +1,5 @@
+# Upstream ships a musl-linked static binary — no dynamic library prerequisites needed.
+shared-library-lacks-prerequisites
+
+# Personal apt repo — no Debian bug to reference in initial upload.
+initial-upload-closes-no-bugs

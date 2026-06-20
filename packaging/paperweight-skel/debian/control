@@ -9,7 +9,7 @@ Rules-Requires-Root: no
 
 Package: paperweight-skel
 Architecture: all
-Depends: ${misc:Depends}
+Depends: ${misc:Depends}, python3
 Replaces: greetd (<< 1.0)
 Description: PaperweightOS default configuration skeleton
  Provides default XDG configuration files for the PaperweightOS desktop,

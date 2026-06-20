@@ -1,2 +1,11 @@
 # paperweight-skel exists specifically to populate /etc/skel — that is its stated purpose.
 package-contains-file-in-etc-skel
+
+# "mocha" is a Catppuccin color variant name, not the Mocha JS test framework.
+embedded-javascript-library
+
+# systemctl is needed to enable/reload the greetd display manager unit on install/remove.
+maintainer-script-calls-systemctl
+
+# chown -R is scoped to the specific user's home directory during adduser migration only.
+recursive-privilege-change

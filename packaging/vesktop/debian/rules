@@ -22,6 +22,9 @@ override_dh_auto_install:
 	install -Dm644 upstream-extract/usr/share/icons/hicolor/scalable/apps/vesktop.svg \
 		debian/vesktop/usr/share/icons/hicolor/scalable/apps/vesktop.svg
 
+override_dh_makeshlibs:
+	# Electron .so files in /opt/ are not system libraries — skip shlibs + ldconfig trigger
+
 override_dh_dwz:
 	# Pre-built upstream binaries have no DWARF debug info — skip dwz
 
