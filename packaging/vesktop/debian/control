@@ -10,6 +10,7 @@ Rules-Requires-Root: no
 Package: vesktop
 Architecture: amd64
 Depends: ${misc:Depends},
+ libc6,
  libgtk-3-0,
  libnotify4,
  libnss3,
@@ -20,9 +21,9 @@ Depends: ${misc:Depends},
  libuuid1,
  libsecret-1-0
 Recommends: libappindicator3-1
-Description: Vesktop Discord client (upstream binary repack)
- Vesktop is a custom Discord desktop app built on top of Vencord,
- providing client-side modifications, a built-in plugin system,
- and improved Wayland/Linux support over the official Discord client.
+Description: Custom Discord client with Vencord modifications (upstream binary repack)
+ A custom Discord desktop app built on top of Vencord, providing
+ client-side modifications, a built-in plugin system, and improved
+ Wayland/Linux support over the official Discord client.
  .
  This package repackages the upstream pre-built binary release.

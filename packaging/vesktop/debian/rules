@@ -15,7 +15,8 @@ override_dh_auto_build:
 override_dh_auto_test:
 
 override_dh_auto_install:
-	cp -a upstream-extract/opt debian/vesktop/
+	mkdir -p debian/vesktop/opt
+	cp -a upstream-extract/opt/Vesktop debian/vesktop/opt/
 	install -Dm644 upstream-extract/usr/share/applications/vesktop.desktop \
 		debian/vesktop/usr/share/applications/vesktop.desktop
 	install -Dm644 upstream-extract/usr/share/icons/hicolor/scalable/apps/vesktop.svg \
