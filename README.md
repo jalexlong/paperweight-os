@@ -30,12 +30,16 @@ Installing `paperweight-desktop` pulls in:
 
 **Media**
 - **cava** — audio visualizer (integrated into waybar)
-- **cmus** — lightweight TUI music player; launch from a terminal on workspace 4
+- **cmus** — lightweight TUI music player for local audio files
+- **ncspot** — TUI Spotify client (Spotify Premium required)
 - **playerctl** — media key control
 
+**Chat**
+- **Vesktop** — Discord client with Vencord modifications and improved Wayland support; workspace 4 (`Super+d`). Also symlinked as `/usr/bin/discord`
+
 **Development**
-- **Helix** — modern modal text editor with built-in LSP and tree-sitter
-- **Neovim, Vim** — terminal editors
+- **Helix, Neovim, Vim** — terminal editors
+- **yazi** — fast TUI file manager (alongside Thunar for GUI)
 - **tmux, mosh, btop, zoxide** — terminal multiplexer, SSH, process monitor, smart cd
 - **git, curl, wget, ca-certificates** — essentials
 
@@ -45,13 +49,6 @@ Installing `paperweight-desktop` pulls in:
 
 Default configs land in `/etc/skel/.config/` via `paperweight-skel` and are
 copied to new user home directories automatically.
-
-### Manual installs (not in Debian repos)
-
-These can't be pulled in via apt and need to be installed separately:
-
-- **Vesktop** (recommended) — open-source Discord client with better Wayland support; `.deb` available at [vencord.dev/download](https://vencord.dev/download)
-- **Discord** — official `.deb` at [discord.com/download](https://discord.com/download)
 
 ---
 
@@ -130,51 +127,50 @@ sudo paperweight-grub-theme mocha
 
 ### Music
 
-`cmus` is installed but has no dedicated launcher keybind. Go to workspace 4
-(`Super+4`), open a terminal (`Super+t`), and run `cmus`. On first launch,
-press `5` to open the file browser and add your music library.
+`cmus` (local audio) and `ncspot` (Spotify TUI) are both installed. Launch either
+from a terminal (`Super+Return`). For cmus, press `5` on first launch to open the
+file browser and add your library. ncspot requires a Spotify Premium account.
 
 ### Discord / Vesktop
 
-Neither is in Debian repos. Install the `.deb` manually:
-
-- **Vesktop** (recommended — better Wayland support): [vencord.dev/download](https://vencord.dev/download)
-- **Discord** (official): [discord.com/download](https://discord.com/download)
-
-Once installed, `Super+c` will open it on workspace 5 automatically.
+Vesktop is included in `paperweight-desktop` (as a Recommended package) and ships
+in the paperweight apt repo. `Super+d` launches it on workspace 4 automatically.
 
 ---
 
 ## Key Bindings
 
-### App launch — switch to workspace and open app
+### App launch
 
 | Binding | Action |
 |---|---|
-| `Super+t` | Terminal (foot) — workspace 1 |
-| `Super+b` | Browser (Firefox) — workspace 2 |
-| `Super+e` | Editor (Helix) — workspace 3 |
-| `Super+s` | Toggle layout (tabbed / split) |
-| `Super+c` | Chat (Discord/Vesktop) — workspace 5 |
-| `Super+g` | Games — workspace 6 |
+| `Super+Return` | Terminal (foot) |
+| `Super+Shift+t` | Floating terminal |
+| `Super+b` | Browser (Firefox ESR) — workspace 2 |
+| `Super+e` | Editor (Neovim) — workspace 3 |
+| `Super+d` | Chat (Vesktop) — workspace 4 |
 | `Super+f` | Files (Thunar) |
-| `Super+d` | App launcher (wofi) |
-| `Super+Return` | Terminal (alias) |
+| `Super+Space` | App launcher (wofi) |
 
-Add `Shift` to open as a floating window instead: `Super+Shift+t`, `Super+Shift+b`, etc.
+### Layout
+
+| Binding | Action |
+|---|---|
+| `Super+s` | Toggle layout (tabbed / split) |
+| `Super+1–0` | Switch workspace |
+| `Super+Shift+1–0` | Move window to workspace |
 
 ### Window management
 
 | Binding | Action |
 |---|---|
 | `Super+q` | Close window |
-| `Super+Space` | Toggle floating |
+| `Super+g` | Toggle floating / tiled |
+| `Super+Shift+Space` | Toggle focus between floating/tiled |
 | `Super+m` | Fullscreen |
 | `Super+r` | Resize mode |
 | `Super+h/j/k/l` | Focus left/down/up/right |
-| `Super+Shift+h/j/k/l` | Move window |
-| `Super+1–0` | Switch workspace |
-| `Super+Shift+1–0` | Move window to workspace |
+| `Super+Shift+h/j/k/l` | Move window left/down/up/right |
 | `Super+minus` | Show scratchpad |
 | `Super+Shift+minus` | Send to scratchpad |
 
@@ -184,12 +180,11 @@ Add `Shift` to open as a floating window instead: `Super+Shift+t`, `Super+Shift+
 |---|---|
 | `Super+Ctrl+L` | Lock screen (gtklock) |
 | `Super+Shift+R` | Reload sway config |
-| `Super+Ctrl+W` | Restart waybar |
-| `Super+p` | Theme picker (wofi) |
-| `Super+w` | Wallpaper picker (yad thumbnail grid) |
-| `Super+n` | Wi-Fi network picker (yad + nmcli) |
-| `Super+Shift+N` | Toggle notification center |
 | `Super+Shift+Q` | Exit sway |
+| `Super+Ctrl+W` | Restart waybar |
+| `Super+p` | Theme picker |
+| `Super+n` | Wi-Fi network picker |
+| `Super+Shift+N` | Toggle notification center |
 | `Print` | Screenshot → ~/Pictures/ |
 | `Super+Print` | Region screenshot |
 
@@ -205,13 +200,16 @@ lock screen). On the Chromebook, the top-row keys send these by default;
 
 | Package | Version | Description |
 |---|---|---|
-| `paperweight-skel` | 0.2.42 | Default configs installed to `/etc/skel/` |
-| `paperweight-desktop` | 0.1.11 | Metapackage: pulls in the full desktop stack |
-| `paperweight-fonts` | 0.1.0 | JetBrains Mono Nerd Font + Symbols Nerd Font |
-| `paperweight-wallpapers` | 0.3.2 | Catppuccin wallpapers + yad wallpaper picker |
-| `paperweight-grub` | 0.1.4 | Catppuccin GRUB2 theme — all four variants |
-| `paperweight-plymouth` | 0.1.2 | Catppuccin Plymouth boot splash — all four variants |
-| `paperweight-chromebook` | 0.1.11 | Dell Chromebook 11 3180 hardware support |
+| `paperweight-desktop` | 0.1.12 | Metapackage: pulls in the full desktop stack |
+| `paperweight-skel` | 0.2.57 | Default configs installed to `/etc/skel/` |
+| `paperweight-fonts` | 0.1.1 | JetBrains Mono Nerd Font + Symbols Nerd Font |
+| `paperweight-grub` | 0.1.7 | Catppuccin GRUB2 theme — all four variants |
+| `paperweight-plymouth` | 0.1.7 | Catppuccin Plymouth boot splash — all four variants |
+| `paperweight-chromebook` | 0.1.12 | Dell Chromebook 11 hardware support |
+| `ncspot` | 1.3.4 | TUI Spotify client (upstream binary repack) |
+| `yazi` | 26.5.6 | Fast TUI file manager (upstream musl binary repack) |
+| `vesktop` | 1.6.5 | Discord client with Vencord (upstream binary repack) |
+| `paperweight-wallpapers` | 0.3.2 | Catppuccin wallpapers |
 
 ---
 

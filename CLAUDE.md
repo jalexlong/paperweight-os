@@ -169,6 +169,8 @@ App-launch bindings (from `40-workspaces.conf`) switch to the workspace and open
 | `$mod+s` | Toggle layout (tabbed / splith) |
 | `$mod+f` | Files (thunar) |
 | `$mod+space` | App launcher (wofi) |
+| `$mod+p` | Theme picker (paperweight-theme) |
+| `$mod+n` | Network picker (paperweight-network) |
 | `$mod+q` | Kill window |
 | `$mod+g` | Toggle floating / tiled |
 | `$mod+m` | Fullscreen |
@@ -177,6 +179,7 @@ App-launch bindings (from `40-workspaces.conf`) switch to the workspace and open
 | `$mod+Shift+n` | Toggle notification center |
 | `$mod+Ctrl+w` | Restart waybar |
 | `$mod+r` | Resize mode |
+| `$mod+Shift+q` | Exit sway (confirmation dialog) |
 | `Print` | Screenshot → ~/Pictures/ |
 | `$mod+Print` | Region screenshot |
 
