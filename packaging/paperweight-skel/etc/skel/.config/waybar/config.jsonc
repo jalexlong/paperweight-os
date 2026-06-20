@@ -5,6 +5,8 @@
     "position": "top",
     "height": 40,
     "spacing": 0,
+    "margin-left": 8,
+    "margin-right": 8,
 
     "modules-left": [
         "custom/launcher",

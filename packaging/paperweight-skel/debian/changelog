@@ -1,3 +1,15 @@
+paperweight-skel (0.2.63-1) trixie; urgency=low
+
+  * waybar/config.jsonc: add margin-left/right 8px so the bar surface is
+    inset from screen edges, preventing end modules from being clipped.
+  * sway/config: $mod+Return now switches to workspace 1 before launching
+    terminal; floating terminal uses --app-id instead of --title so it
+    isn't caught by the foot workspace assign.
+  * 40-workspaces.conf: add assign [app_id="foot"] workspace 1; change
+    $mod+d to launch $chat only if not already running (pgrep -x $chat).
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sat, 20 Jun 2026 12:24:43 -0500
+
 paperweight-skel (0.2.62-1) trixie; urgency=low
 
   * sway/config: remove stale $music variable (music workspace dropped).

@@ -15,11 +15,9 @@ set $menu wofi -S drun
 set $lock gtklock
 
 ### App launchers
-    # $mod+b is overridden in config.d/40-workspaces.conf with workspace switching.
-    # $mod+Return and $mod+Shift+Return stay here as workspace-agnostic fallbacks.
-    bindsym $mod+Return exec $term
-    bindsym $mod+Shift+Return exec $term --title floating-terminal
-    for_window [title="floating-terminal"] floating enable, resize set width 900 px height 500 px, move position center
+    # $mod+b/$mod+d are overridden in config.d/40-workspaces.conf with workspace switching.
+    bindsym $mod+Return exec "swaymsg workspace 1 && $term"
+    bindsym $mod+Shift+Return exec $term --app-id floating-terminal
     for_window [app_id="floating-terminal"] floating enable, resize set width 900 px height 500 px, move position center
 
     bindsym $mod+f exec $files
