@@ -9,6 +9,7 @@
 packaging/**/*.deb
 packaging/**/*.buildinfo
 packaging/ncspot/ncspot
+packaging/paperweight-grub/**/*.pf2
 packaging/yazi/yazi-upstream.deb
 packaging/yazi/upstream-extract/
 packaging/**/*.changes
