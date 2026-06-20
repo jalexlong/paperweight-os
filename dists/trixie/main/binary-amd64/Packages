@@ -65,19 +65,19 @@ Description: PaperweightOS desktop environment metapackage
  defaults are provided by the paperweight-skel package.
 
 Package: paperweight-fonts
-Version: 0.1.1-1
+Version: 0.1.1-2
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
-Installed-Size: 33826
+Installed-Size: 33824
 Depends: fonts-symbola
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: fonts
-Filename: pool/main/p/paperweight-fonts/paperweight-fonts_0.1.1-1_all.deb
-Size: 5280288
-SHA256: c17e3ee598bef5206206299d2c419eed68ccfaa2dcd87407cbaae7d73d467ca0
-SHA1: 2f522d196c8336e9c62bc78565b88e4fab4fc64b
-MD5sum: 329e5695309309d3e0c47950b2bb70c0
+Filename: pool/main/p/paperweight-fonts/paperweight-fonts_0.1.1-2_all.deb
+Size: 5304706
+SHA256: ae3f70b6cc6a59c56e5641c6c083078a00be3063625b1ba5d6dec2a90d5f89d5
+SHA1: 4eeade7d5932744bcf3d369fd71c084bb7b98f3c
+MD5sum: f8a372518feb1ab67503102007e8c243
 Description: PaperweightOS Nerd Fonts — JetBrains Mono, Symbols, and Symbola
  Ships JetBrains Mono Nerd Font (Regular, Bold, Italic, BoldItalic, Medium,
  SemiBold, and Mono variants) and the Nerd Fonts Symbols-Only font, providing
@@ -91,7 +91,7 @@ Description: PaperweightOS Nerd Fonts — JetBrains Mono, Symbols, and Symbola
  licensed under the SIL Open Font License 1.1.
 
 Package: paperweight-grub
-Version: 0.1.7-2
+Version: 0.1.7-3
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
 Installed-Size: 434
@@ -99,17 +99,18 @@ Recommends: grub-pc | grub-efi-amd64 | grub-efi-arm64
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-grub/paperweight-grub_0.1.7-2_all.deb
-Size: 182444
-SHA256: 5a7ce92f235787a8b1abc225492499859489cfb4fde2362597b5b4059f0a8c18
-SHA1: c248e41439b97bde1d5b631b3e10b30623b4d99b
-MD5sum: af96173c582711726f68c94aa60162c8
+Filename: pool/main/p/paperweight-grub/paperweight-grub_0.1.7-3_all.deb
+Size: 181934
+SHA256: 97f6f380000109f3be443a1b2bc3b56959ed2326b9504be1ad4d4639028c025f
+SHA1: 8963d8626cd3d785c855db4e54e24ae72f8133c7
+MD5sum: d48429b050af90545d7c09429bb91f21
 Description: PaperweightOS GRUB theme — all four Catppuccin variants
  Installs a Catppuccin-themed GRUB2 boot menu for PaperweightOS.
  Ships all four Catppuccin variants (Macchiato, Latte, Frappé, Mocha).
  Sets GRUB_THEME in /etc/default/grub and runs update-grub on install.
  .
- Switch variants with: sudo paperweight-grub-theme <macchiato|latte|frappe|mocha>
+ Switch variants with paperweight-grub-theme(8). Available variants:
+ macchiato, latte, frappe, mocha.
  .
  Recommends grub-pc or grub-efi; no-op if /etc/default/grub is absent.
 
