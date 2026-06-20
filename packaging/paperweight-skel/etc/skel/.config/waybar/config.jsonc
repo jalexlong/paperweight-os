@@ -7,10 +7,10 @@
     "spacing": 0,
 
     "modules-left": [
+        "custom/launcher",
         "cpu",
         "memory",
         "custom/cava",
-        "custom/music",
         "sway/mode",
         "sway/scratchpad"
     ],
@@ -21,7 +21,6 @@
 
     "modules-right": [
         "tray",
-        "custom/notification",
         "idle_inhibitor",
         "network",
         "power-profiles-daemon",
@@ -29,7 +28,9 @@
         "backlight",
         "battery",
         "custom/theme-status",
-        "clock"
+        "clock",
+        "custom/notification",
+        "custom/power"
     ],
 
     "custom/theme-status": {
@@ -88,10 +89,9 @@
         "format-icons": {
             "1": "󰆍",
             "2": "󰖟",
-            "3": "♪",
-            "4": "󰍦",
+            "3": "󰍦",
             "urgent": "󰀪",
-            "default": "󰊠"
+            "default": "●"
         }
     },
 
@@ -129,17 +129,6 @@
         },
         "tooltip-format-activated": "Idle inhibitor on",
         "tooltip-format-deactivated": "Idle inhibitor off"
-    },
-
-    "custom/music": {
-        "format": "󰎵 {}",
-        "escape": true,
-        "interval": 5,
-        "tooltip": false,
-        "exec": "playerctl metadata --format='{{ artist }} - {{ title }}' 2>/dev/null || echo ''",
-        "exec-if": "playerctl status 2>/dev/null | grep -q Playing",
-        "on-click": "playerctl play-pause",
-        "max-length": 40
     },
 
     "network": {
@@ -217,5 +206,17 @@
     "clock": {
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "format": "{:%H:%M %d/%m/%y}"
+    },
+
+    "custom/launcher": {
+        "format": "󰣥",
+        "tooltip": false,
+        "on-click": "wofi --show drun"
+    },
+
+    "custom/power": {
+        "format": "⏻",
+        "tooltip": false,
+        "on-click": "paperweight-power"
     }
 }

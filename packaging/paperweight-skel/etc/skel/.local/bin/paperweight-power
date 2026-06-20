@@ -1,0 +1,15 @@
+#!/bin/bash
+LOCK="󰌾  Lock"
+LOGOUT="󰍃  Logout"
+RESTART="󰑓  Restart"
+SHUTDOWN="󰐥  Shutdown"
+
+choice=$(printf "%s\n%s\n%s\n%s" "$LOCK" "$LOGOUT" "$RESTART" "$SHUTDOWN" \
+    | wofi --dmenu --prompt "Power:" --lines 4 --width 220 --hide-scroll)
+
+case "$choice" in
+    "$LOCK")     gtklock ;;
+    "$LOGOUT")   swaymsg exit ;;
+    "$RESTART")  systemctl reboot ;;
+    "$SHUTDOWN") systemctl poweroff ;;
+esac

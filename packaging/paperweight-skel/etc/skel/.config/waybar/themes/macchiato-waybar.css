@@ -60,8 +60,7 @@ window#waybar {
 #backlight,
 #battery,
 #clock,
-#power-profiles-daemon,
-#custom-music {
+#power-profiles-daemon {
   background-color: alpha(@surface0, 0.92);
   padding: 0.45rem 0.85rem;
   margin: 5px 0;
@@ -144,12 +143,6 @@ window#waybar {
   color: @surface2;
 }
 
-#custom-music {
-  color: @mauve;
-  border-radius: 1rem;
-  margin: 5px 0.5rem;
-}
-
 #network {
   color: @lavender;
 }
@@ -200,4 +193,32 @@ window#waybar {
 
 #custom-theme-status.theme-switching {
   color: @peach;
+}
+
+/* ── Launcher (far left) ──────────────────────────────── */
+
+#custom-launcher {
+  color: @mauve;
+  background-color: alpha(@surface0, 0.92);
+  border-radius: 1rem;
+  padding: 0.45rem 0.85rem;
+  margin: 5px 0.5rem 5px 1rem;
+}
+
+#custom-launcher:hover {
+  color: @lavender;
+}
+
+/* ── Power menu (far right) ───────────────────────────── */
+
+#custom-power {
+  color: @red;
+  background-color: alpha(@surface0, 0.92);
+  border-radius: 1rem;
+  padding: 0.45rem 0.85rem;
+  margin: 5px 1rem 5px 0.25rem;
+}
+
+#custom-power:hover {
+  color: @maroon;
 }

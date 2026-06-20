@@ -163,7 +163,7 @@ App-launch bindings (from `40-workspaces.conf`) switch to the workspace and open
 | `$mod+Return` | Terminal (foot) — workspace 1 |
 | `$mod+Shift+Return` | Floating terminal |
 | `$mod+b` | Browser ($browser) → workspace 2 |
-| `$mod+d` | Chat ($chat) → workspace 4 |
+| `$mod+d` | Chat ($chat) → workspace 3 |
 | `$mod+s` | Toggle layout (tabbed / splith) |
 | `$mod+f` | Files (thunar) |
 | `$mod+space` | App launcher (wofi) |
@@ -254,7 +254,7 @@ sudo apt update && sudo apt install paperweight-desktop
 
 - **Vesktop**: Available via the paperweight apt repo; included in
   `paperweight-desktop` Recommends. A `/usr/bin/discord` symlink points to it.
-  Workspace 4 is bound to `$mod+d`.
+  Workspace 3 is bound to `$mod+d`.
 
 - **existing users and `video` group**: The postinst patches `/etc/adduser.conf` so
   new users land in the `video` group for brightnessctl. Users who already exist at

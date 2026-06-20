@@ -1,3 +1,17 @@
+paperweight-skel (0.2.59-1) trixie; urgency=low
+
+  * 40-workspaces.conf: drop WS3 music workspace; renumber chat WS4 → WS3.
+  * waybar/config.jsonc: add custom/launcher (Debian logo, opens wofi drun)
+    to far left; add custom/power (power menu) to far right; move
+    custom/notification to sit next to power; remove custom/music module;
+    update workspace icons — WS3 now chat (󰍦), default icon ● (was ghost 󰊠).
+  * .local/bin/paperweight-power: new wofi dmenu script — Lock, Logout,
+    Restart, Shutdown.
+  * waybar/themes/*.css: remove #custom-music; add #custom-launcher and
+    #custom-power styles (all four themes).
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sat, 20 Jun 2026 07:59:46 -0500
+
 paperweight-skel (0.2.58-1) trixie; urgency=low
 
   * sway/config: add $music (ncspot) and $chat (vesktop) role variables.
