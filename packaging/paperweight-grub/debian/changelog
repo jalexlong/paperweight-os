@@ -1,3 +1,9 @@
+paperweight-grub (0.1.7-3) trixie; urgency=low
+
+  * debian/control: wrap long description line (was 81 chars).
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Fri, 19 Jun 2026 20:23:30 -0500
+
 paperweight-grub (0.1.7-2) trixie; urgency=low
 
   * Add paperweight-grub-theme(8) man page.
