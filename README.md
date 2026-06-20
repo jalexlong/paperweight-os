@@ -45,7 +45,7 @@ Installing `paperweight-desktop` pulls in:
 
 **Fonts & Theme**
 - **JetBrains Mono Nerd Font** — monospace font with full icon glyph support
-- **Catppuccin themes** — all four variants (Latte, Frappé, Macchiato, Mocha); switch with `Super+p` or `paperweight-theme <name>`
+- **Catppuccin themes** — all four variants (Latte, Frappé, Macchiato, Mocha); switch with `Super+t` or `paperweight-theme <name>`
 
 Default configs land in `/etc/skel/.config/` via `paperweight-skel` and are
 copied to new user home directories automatically.
@@ -101,7 +101,7 @@ then `XF86MonBrightnessUp/Down` will silently do nothing.
 ### Switching themes
 
 Four Catppuccin variants ship out of the box. Switch with the wofi picker
-(`Super+p`) or from a terminal:
+(`Super+t`) or from a terminal:
 
 ```bash
 paperweight-theme macchiato   # default
@@ -144,13 +144,14 @@ in the paperweight apt repo. `Super+d` launches it on workspace 4 automatically.
 
 | Binding | Action |
 |---|---|
-| `Super+Return` | Terminal (foot) |
-| `Super+Shift+t` | Floating terminal |
+| `Super+Return` | Terminal (foot) — workspace 1 |
+| `Super+Shift+Return` | Floating terminal |
 | `Super+b` | Browser (Firefox ESR) — workspace 2 |
-| `Super+e` | Editor (Neovim) — workspace 3 |
 | `Super+d` | Chat (Vesktop) — workspace 4 |
 | `Super+f` | Files (Thunar) |
 | `Super+Space` | App launcher (wofi) |
+
+Music (workspace 3) is terminal-launched — `Super+3`, open a terminal, run `ncspot` or `cmus`.
 
 ### Layout
 
@@ -182,7 +183,7 @@ in the paperweight apt repo. `Super+d` launches it on workspace 4 automatically.
 | `Super+Shift+R` | Reload sway config |
 | `Super+Shift+Q` | Exit sway |
 | `Super+Ctrl+W` | Restart waybar |
-| `Super+p` | Theme picker |
+| `Super+t` | Theme picker |
 | `Super+n` | Wi-Fi network picker |
 | `Super+Shift+N` | Toggle notification center |
 | `Print` | Screenshot → ~/Pictures/ |

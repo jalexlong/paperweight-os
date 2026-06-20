@@ -160,16 +160,14 @@ App-launch bindings (from `40-workspaces.conf`) switch to the workspace and open
 
 | Binding | Action |
 |---|---|
-| `$mod+Return` | Terminal (foot) |
+| `$mod+Return` | Terminal (foot) — workspace 1 |
 | `$mod+Shift+Return` | Floating terminal |
-| `$mod+Shift+t` | Floating terminal (alias) |
-| `$mod+b` | Browser (firefox-esr) → workspace 2 |
-| `$mod+e` | Editor (neovim) → workspace 3 |
-| `$mod+d` | Chat (vesktop) → workspace 4 |
+| `$mod+b` | Browser ($browser) → workspace 2 |
+| `$mod+d` | Chat ($chat) → workspace 4 |
 | `$mod+s` | Toggle layout (tabbed / splith) |
 | `$mod+f` | Files (thunar) |
 | `$mod+space` | App launcher (wofi) |
-| `$mod+p` | Theme picker (paperweight-theme) |
+| `$mod+t` | Theme picker (paperweight-theme) |
 | `$mod+n` | Network picker (paperweight-network) |
 | `$mod+q` | Kill window |
 | `$mod+g` | Toggle floating / tiled |
