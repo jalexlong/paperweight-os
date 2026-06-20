@@ -150,7 +150,7 @@ Quick reference — seven files required per theme (all under
 
 Also add `etc/greetd/themes/<name>.css` for the gtkgreet login screen.
 `debian/install` uses directory globs — no manifest changes needed.
-`$mod+p` opens the wofi theme picker.
+`$mod+t` opens the wofi theme picker.
 
 ---
 
