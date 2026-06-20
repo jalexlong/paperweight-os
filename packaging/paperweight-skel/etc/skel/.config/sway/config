@@ -10,7 +10,6 @@ set $right l
 set $term foot
 set $browser firefox-esr
 set $files thunar
-set $music ncspot
 set $chat  vesktop
 set $menu wofi -S drun
 set $lock gtklock

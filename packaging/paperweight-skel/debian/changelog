@@ -1,3 +1,18 @@
+paperweight-skel (0.2.62-1) trixie; urgency=low
+
+  * sway/config: remove stale $music variable (music workspace dropped).
+  * 40-workspaces.conf: remove $music reference from top comment.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sat, 20 Jun 2026 11:33:34 -0500
+
+paperweight-skel (0.2.61-1) trixie; urgency=low
+
+  * Sync debian/paperweight-skel staging tree: 40-workspaces.conf,
+    waybar/config.jsonc, all four theme CSS files, and paperweight-power
+    were stale (still at pre-WS3-renumber state).
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sat, 20 Jun 2026 11:32:34 -0500
+
 paperweight-skel (0.2.60-1) trixie; urgency=low
 
   * waybar/themes/*.css: attach custom/notification and custom/power to the
