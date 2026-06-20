@@ -1,0 +1,52 @@
+.TH YAZI 1 "2026-06-19" "yazi 26.5.6" "User Commands"
+.SH NAME
+yazi \- terminal file manager
+.SH SYNOPSIS
+.B yazi
+.RI [ directory ]
+.SH DESCRIPTION
+.B yazi
+is a fast terminal file manager written in Rust with a focus on
+asynchronous I/O performance.
+It provides a three-pane Miller-column layout, file previews
+(including images, archives, and documents via adapters),
+and a plugin system for extensibility.
+.PP
+An optional
+.I directory
+argument opens yazi in that path instead of the current directory.
+.PP
+This package is a repack of the upstream pre-built musl binary release.
+.SH KEYBINDINGS
+.TP
+.BR h " / " j " / " k " / " l
+Navigate (parent / down / up / enter directory)
+.TP
+.BR Enter
+Open file with default application
+.TP
+.BR Space
+Toggle selection
+.TP
+.BR y
+Yank (copy) selected files
+.TP
+.BR d
+Cut selected files
+.TP
+.BR p
+Paste
+.TP
+.BR D
+Delete to trash
+.TP
+.BR /
+Search by name
+.TP
+.BR q
+Quit
+.SH SEE ALSO
+.BR ya (1),
+.PP
+Full documentation at
+.IR https://yazi-rs.github.io .

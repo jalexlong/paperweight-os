@@ -1,0 +1,71 @@
+.TH PAPERWEIGHT\-EXPAND\-HOME 8 "2026-06-19" "paperweight-chromebook 0.1.12" "System Administration"
+.SH NAME
+paperweight\-expand\-home \- migrate /home to an SD card
+.SH SYNOPSIS
+.B paperweight\-expand\-home
+.RI [ device ]
+.SH DESCRIPTION
+.B paperweight\-expand\-home
+partitions and formats an SD card as a single ext4 partition, copies
+the existing
+.I /home
+tree to it, and adds a UUID-based entry to
+.I /etc/fstab
+so that
+.I /home
+mounts from the SD card on subsequent boots.
+.PP
+On supported Chromebook models the internal eMMC is
+.I /dev/mmcblk0
+and the SD reader appears as
+.IR /dev/mmcblk1 ,
+which is the default device.
+Run
+.BR lsblk (8)
+with and without the SD card inserted to confirm the device path on
+your specific model before running this script.
+.PP
+The optional
+.I device
+argument overrides the default
+.IR /dev/mmcblk1 .
+.PP
+Must be run as root.
+All existing data on the target device will be erased.
+The script prompts for explicit confirmation before making any changes.
+.SH OPTIONS
+.TP
+.I device
+Block device path for the SD card (default:
+.IR /dev/mmcblk1 ).
+.SH STEPS
+.IP 1. 4
+Erase and repartition the SD card as GPT with a single Linux data partition.
+.IP 2. 4
+Format the partition as ext4 with label
+.IR paperweight-home .
+.IP 3. 4
+Copy all of
+.I /home
+to the new partition using
+.BR rsync (1).
+.IP 4. 4
+Append a
+.B UUID=
+entry for
+.I /home
+to
+.IR /etc/fstab .
+.SH DEPENDENCIES
+Requires
+.BR sgdisk (8),
+.BR mkfs.ext4 (8),
+.BR rsync (1),
+and
+.BR blkid (8).
+.SH SEE ALSO
+.BR lsblk (8),
+.BR sgdisk (8),
+.BR mkfs.ext4 (8),
+.BR rsync (1),
+.BR fstab (5)

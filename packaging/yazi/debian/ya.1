@@ -1,0 +1,28 @@
+.TH YA 1 "2026-06-19" "yazi 26.5.6" "User Commands"
+.SH NAME
+ya \- yazi command-line helper
+.SH SYNOPSIS
+.B ya
+.I <subcommand>
+.RI [ options ]
+.SH DESCRIPTION
+.B ya
+is the command-line companion to
+.BR yazi (1).
+It provides subcommands for managing yazi packages, emitting yazi events
+from shell scripts, and other auxiliary operations.
+.SH SUBCOMMANDS
+.TP
+.B ya pack
+Manage yazi plugins and themes (install, update, remove).
+.TP
+.B ya pub
+Publish a DDS (data-distribution service) event to a running yazi instance.
+.TP
+.B ya pub-static
+Publish a static event that persists across yazi restarts.
+.SH SEE ALSO
+.BR yazi (1),
+.PP
+Full documentation at
+.IR https://yazi-rs.github.io .

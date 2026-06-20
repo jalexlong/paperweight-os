@@ -1,3 +1,9 @@
+paperweight-plymouth (0.1.7-2) trixie; urgency=low
+
+  * Add paperweight-plymouth-theme(8) man page.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Fri, 19 Jun 2026 20:23:30 -0500
+
 paperweight-plymouth (0.1.7-1) trixie; urgency=high
 
   * paperweight-plymouth-theme: idempotency check — skip update-initramfs

@@ -1,0 +1,41 @@
+.TH WAYBAR\-THEME\-STATUS 1 "2026-06-19" "paperweight-skel 0.2.57" "User Commands"
+.SH NAME
+waybar\-theme\-status \- waybar custom module for theme-switch status
+.SH SYNOPSIS
+.B waybar\-theme\-status
+.SH DESCRIPTION
+.B waybar\-theme\-status
+is a waybar
+.I custom/exec
+module that emits a JSON status object.
+.PP
+When no theme switch is in progress it outputs an empty JSON object so
+the module shows nothing.
+When
+.BR paperweight-theme (1)
+is running, it outputs a Braille spinner frame and the target theme name
+as a tooltip, allowing waybar to display a visual indicator during the
+switch.
+.SH OUTPUT
+JSON with the following keys:
+.TP
+.B text
+Empty string when idle; a Braille spinner character while switching.
+.TP
+.B tooltip
+Empty string when idle;
+.RI \*(lq Switching\ to:\ <theme> \*(rq
+while switching.
+.TP
+.B class
+Empty string when idle;
+.I theme-switching
+while switching (for CSS targeting in waybar).
+.SH FILES
+.TP
+.I ~/.local/share/paperweight-os/theme-switch.status
+Written by
+.BR paperweight-theme (1)
+while a switch is in progress; removed on completion.
+.SH SEE ALSO
+.BR paperweight-theme (1)

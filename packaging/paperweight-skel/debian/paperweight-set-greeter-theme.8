@@ -1,0 +1,37 @@
+.TH PAPERWEIGHT\-SET\-GREETER\-THEME 8 "2026-06-19" "paperweight-skel 0.2.57" "System Administration"
+.SH NAME
+paperweight\-set\-greeter\-theme \- apply a CSS theme to the gtkgreet login screen
+.SH SYNOPSIS
+.B paperweight\-set\-greeter\-theme
+.I theme
+.SH DESCRIPTION
+.B paperweight\-set\-greeter\-theme
+copies the CSS file for the named theme from
+.I /etc/greetd/themes/
+to
+.IR /etc/greetd/gtkgreet.css ,
+making it the active theme for the
+.BR gtkgreet (1)
+login screen.
+.PP
+Must be run as root.
+Normally invoked automatically by
+.BR paperweight-theme (1)
+when the user has sudo privileges.
+.SH ARGUMENTS
+.TP
+.I theme
+Name of the theme to apply.
+The corresponding file
+.I /etc/greetd/themes/<theme>.css
+must exist.
+.SH FILES
+.TP
+.I /etc/greetd/themes/
+Directory containing per-theme CSS files for gtkgreet.
+.TP
+.I /etc/greetd/gtkgreet.css
+Active gtkgreet stylesheet, overwritten by this command.
+.SH SEE ALSO
+.BR paperweight-theme (1),
+.BR gtkgreet (1)

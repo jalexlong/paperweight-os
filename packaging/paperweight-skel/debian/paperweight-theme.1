@@ -1,0 +1,67 @@
+.TH PAPERWEIGHT\-THEME 1 "2026-06-19" "paperweight-skel 0.2.57" "User Commands"
+.SH NAME
+paperweight\-theme \- apply a PaperweightOS color theme
+.SH SYNOPSIS
+.B paperweight\-theme
+.RI [ theme ]
+.SH DESCRIPTION
+.B paperweight\-theme
+switches the active color theme across all desktop components atomically:
+sway colors, waybar styles, swaync, gtklock, wofi, and the foot terminal.
+.PP
+With no argument, a
+.BR wofi (1)
+picker lists the available themes for interactive selection.
+.PP
+Only one theme switch runs at a time.
+If a switch is already in progress when
+.B paperweight\-theme
+is called again, the new theme name is queued and applied after the running
+switch completes.
+.PP
+When the invoking user is in the
+.B sudo
+group, the login screen (gtkgreet), GRUB, and Plymouth themes are also
+updated via
+.BR paperweight-set-greeter-theme (8),
+.BR paperweight-grub-theme (8),
+and
+.BR paperweight-plymouth-theme (8)
+respectively.
+.SH ARGUMENTS
+.TP
+.I theme
+Name of the theme to apply.
+If omitted, a wofi picker is shown.
+.SH FILES
+.TP
+.I ~/.config/sway/themes/
+Sway color variable files
+.RI ( <name>.conf ).
+.TP
+.I ~/.config/waybar/themes/
+Waybar CSS palette and module style files.
+.TP
+.I ~/.config/swaync/themes/
+Swaync notification center CSS files.
+.TP
+.I ~/.config/gtklock/themes/
+Gtklock screen locker CSS files.
+.TP
+.I ~/.config/wofi/themes/
+Wofi launcher CSS files.
+.TP
+.I ~/.config/foot/themes/
+Foot terminal color INI files.
+.TP
+.I ~/.config/paperweight-os/active-theme
+Records the name of the currently active theme.
+.TP
+.I ~/.local/share/paperweight-os/theme-switch.log
+Timestamped log of all theme switch operations.
+.SH SEE ALSO
+.BR paperweight-set-greeter-theme (8),
+.BR paperweight-grub-theme (8),
+.BR paperweight-plymouth-theme (8),
+.BR waybar-theme-status (1),
+.BR wofi (1)

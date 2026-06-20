@@ -1,0 +1,39 @@
+.TH PAPERWEIGHT\-GRUB\-THEME 8 "2026-06-19" "paperweight-grub 0.1.7" "System Administration"
+.SH NAME
+paperweight\-grub\-theme \- switch the PaperweightOS GRUB theme variant
+.SH SYNOPSIS
+.B paperweight\-grub\-theme
+.I variant
+.SH DESCRIPTION
+.B paperweight\-grub\-theme
+activates a Catppuccin color variant for the PaperweightOS GRUB2 theme
+by replacing the active
+.I theme.txt
+with the named variant file and running
+.BR update-grub (8).
+.PP
+The change takes effect on the next boot.
+If the requested variant is already active, the command exits without
+running
+.BR update-grub .
+.PP
+Must be run as root.
+Normally invoked automatically by
+.BR paperweight-theme (1)
+when the user has sudo privileges.
+.SH VARIANTS
+.TP
+.B macchiato
+Catppuccin Macchiato (default)
+.TP
+.B latte
+Catppuccin Latte (light)
+.TP
+.B frappe
+Catppuccin Frappé
+.TP
+.B mocha
+Catppuccin Mocha
+.SH SEE ALSO
+.BR paperweight-theme (1),
+.BR update-grub (8)

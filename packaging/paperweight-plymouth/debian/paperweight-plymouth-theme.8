@@ -1,0 +1,48 @@
+.TH PAPERWEIGHT\-PLYMOUTH\-THEME 8 "2026-06-19" "paperweight-plymouth 0.1.7" "System Administration"
+.SH NAME
+paperweight\-plymouth\-theme \- switch the PaperweightOS Plymouth boot splash variant
+.SH SYNOPSIS
+.B paperweight\-plymouth\-theme
+.I variant
+.SH DESCRIPTION
+.B paperweight\-plymouth\-theme
+activates a Catppuccin color variant for the PaperweightOS Plymouth boot
+splash by copying the named variant script into place and running
+.BR update-initramfs (8).
+.PP
+Before rebuilding the initramfs, the current
+.I /boot/initrd.img-<kernel>
+is backed up to
+.I /boot/initrd.img-<kernel>.bak
+so it can be restored from the GRUB command line if needed.
+.PP
+If the requested variant is already active, the command exits without
+rebuilding the initramfs.
+.PP
+Must be run as root.
+Normally invoked automatically by
+.BR paperweight-theme (1)
+when the user has sudo privileges.
+.SH VARIANTS
+.TP
+.B macchiato
+Catppuccin Macchiato (default)
+.TP
+.B latte
+Catppuccin Latte (light)
+.TP
+.B frappe
+Catppuccin Frappé
+.TP
+.B mocha
+Catppuccin Mocha
+.SH FILES
+.TP
+.I /usr/share/plymouth/themes/paperweight/
+Theme variant script files.
+.TP
+.I /boot/initrd.img-<kernel>.bak
+Backup of the previous initramfs, retained after each successful update.
+.SH SEE ALSO
+.BR paperweight-theme (1),
+.BR update-initramfs (8)

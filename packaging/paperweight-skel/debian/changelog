@@ -1,3 +1,10 @@
+paperweight-skel (0.2.57-1) trixie; urgency=low
+
+  * Add man pages: paperweight-theme(1), waybar-theme-status(1),
+    paperweight-set-greeter-theme(8).
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Fri, 19 Jun 2026 20:23:30 -0500
+
 paperweight-skel (0.2.56-1) trixie; urgency=low
 
   * paperweight-theme: write theme-switch.status on lock acquire; remove it

@@ -1,3 +1,10 @@
+yazi (26.5.6-2) trixie; urgency=low
+
+  * Add copyright year (2023-2024) to debian/copyright.
+  * Add yazi(1) and ya(1) man pages.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Fri, 19 Jun 2026 20:23:30 -0500
+
 yazi (26.5.6-1) trixie; urgency=medium
 
   * Rename source/binary package from paperweight-yazi to yazi.

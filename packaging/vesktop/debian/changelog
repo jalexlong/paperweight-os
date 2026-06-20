@@ -1,5 +1,8 @@
 vesktop (1.6.5-1) trixie; urgency=medium
 
   * Initial packaging of Vesktop 1.6.5 upstream binary repack.
+  * Add copyright year (2023-2024) to debian/copyright.
+  * Add vesktop(1) and discord(1) man pages.
+  * Add /usr/bin/discord symlink to vesktop.
 
  -- Alex Long <johnalexanderlong@gmail.com>  Fri, 19 Jun 2026 14:51:27 -0500
