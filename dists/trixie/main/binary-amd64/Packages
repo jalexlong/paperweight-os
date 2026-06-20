@@ -42,20 +42,20 @@ Description: PaperweightOS hardware support for Chromebook 11 (3180)
  automatic composition with the base paperweight-skel configuration.
 
 Package: paperweight-desktop
-Version: 0.1.12-1
+Version: 0.1.13-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
 Installed-Size: 9
-Depends: paperweight-skel, paperweight-fonts, sway, waybar, gtklock, swayidle, sway-notification-center, wofi, foot, firefox-esr, thunar, grim, slurp, wl-clipboard, brightnessctl, playerctl, network-manager, pipewire, pipewire-pulse, wireplumber, pavucontrol, xdg-desktop-portal-wlr, mosh, xdg-user-dirs, fonts-font-awesome, fonts-noto-color-emoji, git, curl, wget, vim, neovim, hx, cava, cmus, ncspot, yazi, tmux, btop, zoxide, ca-certificates, power-profiles-daemon, dconf-cli, greetd, gtkgreet, cage
+Depends: paperweight-skel, paperweight-fonts, sway, waybar, gtklock, swayidle, sway-notification-center, wofi, foot, firefox-esr, thunar, grim, slurp, wl-clipboard, brightnessctl, playerctl, network-manager, pipewire, pipewire-pulse, wireplumber, pavucontrol, xdg-desktop-portal-wlr, mosh, xdg-user-dirs, fonts-font-awesome, fonts-noto-color-emoji, git, curl, wget, vim, neovim, hx, cava, cmus, ncspot, yazi, tmux, btop, zoxide, ncdu, fzf, ripgrep, bat, tig, mtr-tiny, iotop, nethogs, lnav, ca-certificates, power-profiles-daemon, dconf-cli, greetd, gtkgreet, cage
 Recommends: paperweight-grub, paperweight-plymouth, vesktop
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: metapackages
-Filename: pool/main/p/paperweight-desktop/paperweight-desktop_0.1.12-1_all.deb
-Size: 3052
-SHA256: e59ab701094a11457b68bdacabc0c2c986456c939ac56538ea61f1a9abb8ed3a
-SHA1: aa75d13b27c2a236959bcf8a022942557b7e3c6f
-MD5sum: 28a92a9ec9723bae63530c901cde99e8
+Filename: pool/main/p/paperweight-desktop/paperweight-desktop_0.1.13-1_all.deb
+Size: 3178
+SHA256: f955755c06d845145320644f3510c2b6ffd2c967d61494f3580c6c2043012ce7
+SHA1: 0be77b1df31d8c33ceaf3c7fc838aac0e458e278
+MD5sum: 0363550916e05a8a6ed049c348a2087f
 Description: PaperweightOS desktop environment metapackage
  Installs all packages required for the PaperweightOS Sway-based desktop
  environment on Debian Stable (Trixie). Intended for use on refurbished
@@ -160,7 +160,7 @@ Description: PaperweightOS Plymouth theme — all four Catppuccin variants
  removal. On eMMC storage this may take 30-60 seconds.
 
 Package: paperweight-skel
-Version: 0.2.57-1
+Version: 0.2.58-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
 Installed-Size: 195
@@ -169,11 +169,11 @@ Replaces: greetd (<< 1.0)
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.57-1_all.deb
-Size: 31780
-SHA256: 89c2381c0f9b25cdb1ea178807c5460d12652bf0035fe5c2dc5ef7b8f7541de5
-SHA1: 64b43dc25fac976c794b775cfd67e92342c2d4d3
-MD5sum: 856849dbd33225cc0be0840b6cd1f791
+Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.58-1_all.deb
+Size: 32014
+SHA256: 43a30ab5fc30609249a1c0bd1aaf70f7745d697b92490c429633742a6e027406
+SHA1: c4af3760516112da71c6ce1bb80b9f525dce4226
+MD5sum: 3e56393f52d3b1eb38d1ff9156cf8c95
 Description: PaperweightOS default configuration skeleton
  Provides default XDG configuration files for the PaperweightOS desktop,
  installed to /etc/skel so they are copied into new user home directories
