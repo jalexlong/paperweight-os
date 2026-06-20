@@ -42,20 +42,20 @@ Description: PaperweightOS hardware support for Chromebook 11 (3180)
  automatic composition with the base paperweight-skel configuration.
 
 Package: paperweight-desktop
-Version: 0.1.11-1
+Version: 0.1.12-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
 Installed-Size: 9
-Depends: paperweight-skel, paperweight-fonts, sway, waybar, gtklock, swayidle, sway-notification-center, wofi, foot, firefox-esr, thunar, grim, slurp, wl-clipboard, brightnessctl, playerctl, network-manager, pipewire, pipewire-pulse, wireplumber, pavucontrol, xdg-desktop-portal-wlr, mosh, xdg-user-dirs, fonts-font-awesome, fonts-noto-color-emoji, git, curl, wget, vim, neovim, hx, cava, cmus, tmux, btop, zoxide, ca-certificates, power-profiles-daemon, dconf-cli, greetd, gtkgreet, cage
-Recommends: paperweight-grub, paperweight-plymouth
+Depends: paperweight-skel, paperweight-fonts, sway, waybar, gtklock, swayidle, sway-notification-center, wofi, foot, firefox-esr, thunar, grim, slurp, wl-clipboard, brightnessctl, playerctl, network-manager, pipewire, pipewire-pulse, wireplumber, pavucontrol, xdg-desktop-portal-wlr, mosh, xdg-user-dirs, fonts-font-awesome, fonts-noto-color-emoji, git, curl, wget, vim, neovim, hx, cava, cmus, ncspot, yazi, tmux, btop, zoxide, ca-certificates, power-profiles-daemon, dconf-cli, greetd, gtkgreet, cage
+Recommends: paperweight-grub, paperweight-plymouth, vesktop
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: metapackages
-Filename: pool/main/p/paperweight-desktop/paperweight-desktop_0.1.11-1_all.deb
-Size: 2954
-SHA256: b1f54dca7b0775c15726978f359b49520f511298b19ff79102e14e24c7955d4d
-SHA1: b14775348f4f2b5e13ad0c546e4a6917c3dab1bc
-MD5sum: d2fb9195197154087c90fe14902b189b
+Filename: pool/main/p/paperweight-desktop/paperweight-desktop_0.1.12-1_all.deb
+Size: 3052
+SHA256: e59ab701094a11457b68bdacabc0c2c986456c939ac56538ea61f1a9abb8ed3a
+SHA1: aa75d13b27c2a236959bcf8a022942557b7e3c6f
+MD5sum: 28a92a9ec9723bae63530c901cde99e8
 Description: PaperweightOS desktop environment metapackage
  Installs all packages required for the PaperweightOS Sway-based desktop
  environment on Debian Stable (Trixie). Intended for use on refurbished
