@@ -1,3 +1,11 @@
+paperweight-desktop (0.1.12-1) trixie; urgency=low
+
+  * Add ncspot and yazi to Depends: both are now available via the
+    paperweight apt repo (not in Debian Trixie).
+  * Add vesktop to Recommends: Discord client, workspace 4 ($mod+d).
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Fri, 19 Jun 2026 21:19:31 -0500
+
 paperweight-desktop (0.1.11-1) trixie; urgency=low
 
   * Add cmus to Depends. Replaces ncspot (not in Trixie) as the default

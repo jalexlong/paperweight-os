@@ -244,12 +244,16 @@ sudo apt update && sudo apt install paperweight-desktop
 
 ## Known Issues / Watchpoints
 
-- **ncspot**: Not in Debian Trixie repos — removed from `paperweight-desktop` Depends.
-  Install manually via `cargo install ncspot`. Workspace 4 has no default app bound;
-  use `$mod+4` to switch there and launch a music client manually.
+- **ncspot**: Not in Debian Trixie repos — shipped in the paperweight apt repo and
+  included in `paperweight-desktop` Depends. Spotify Premium required for playback.
 
-- **Vesktop**: Available via the paperweight apt repo (`apt install vesktop`).
-  A `discord` symlink is also installed at `/usr/bin/discord` pointing to Vesktop.
+- **yazi**: Not in Debian Trixie repos — shipped in the paperweight apt repo and
+  included in `paperweight-desktop` Depends. Provides a TUI file manager alongside
+  Thunar.
+
+- **Vesktop**: Available via the paperweight apt repo; included in
+  `paperweight-desktop` Recommends. A `/usr/bin/discord` symlink points to it.
+  Workspace 4 is bound to `$mod+d`.
 
 - **existing users and `video` group**: The postinst patches `/etc/adduser.conf` so
   new users land in the `video` group for brightnessctl. Users who already exist at

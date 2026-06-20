@@ -44,6 +44,8 @@ Depends:
  hx,
  cava,
  cmus,
+ ncspot,
+ yazi,
  tmux,
  btop,
  zoxide,
@@ -53,7 +55,7 @@ Depends:
  greetd,
  gtkgreet,
  cage,
-Recommends: paperweight-grub, paperweight-plymouth
+Recommends: paperweight-grub, paperweight-plymouth, vesktop
 Description: PaperweightOS desktop environment metapackage
  Installs all packages required for the PaperweightOS Sway-based desktop
  environment on Debian Stable (Trixie). Intended for use on refurbished
