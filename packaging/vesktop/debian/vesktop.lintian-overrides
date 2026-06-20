@@ -1,8 +1,11 @@
-# Electron bundles these libraries internally — intentional for self-contained distribution
-embedded-library freetype [opt/Vesktop/vesktop]
-embedded-library lcms2 [opt/Vesktop/vesktop]
-embedded-library libjpeg [opt/Vesktop/vesktop]
-embedded-library libjsoncpp [opt/Vesktop/vesktop]
-embedded-library openjpeg [opt/Vesktop/vesktop]
-embedded-library srtp [opt/Vesktop/vesktop]
-embedded-library tiff [opt/Vesktop/vesktop]
+# Electron app ships in /opt/ by upstream convention — acceptable for a personal repo
+dir-or-file-in-opt
+
+# Electron bundles these libraries internally; intentional for self-contained distribution
+embedded-library freetype
+embedded-library lcms2
+embedded-library libjpeg
+embedded-library libjsoncpp
+embedded-library openjpeg
+embedded-library srtp
+embedded-library tiff
