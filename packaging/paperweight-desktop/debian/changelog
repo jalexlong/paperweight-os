@@ -1,3 +1,10 @@
+paperweight-desktop (0.1.13-1) trixie; urgency=low
+
+  * Add TUI system utilities to Depends: ncdu, fzf, ripgrep, bat, tig,
+    mtr-tiny, iotop, nethogs, lnav.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Fri, 19 Jun 2026 23:31:25 -0500
+
 paperweight-desktop (0.1.12-1) trixie; urgency=low
 
   * Add ncspot and yazi to Depends: both are now available via the

@@ -1,3 +1,17 @@
+paperweight-skel (0.2.58-1) trixie; urgency=low
+
+  * sway/config: add $music (ncspot) and $chat (vesktop) role variables.
+  * 40-workspaces.conf: rework workspace scheme to Option B (WS3=music,
+    WS4=chat); use $music/$chat variables; add assign blocks for all known
+    apps per role (brave, midori, discord); remove $mod+e editor binding;
+    remove $mod+Shift+t floating-terminal alias (consolidated to
+    $mod+Shift+Return in base config); change theme picker from $mod+p to
+    $mod+t.
+  * waybar/config.jsonc: update workspace icons — WS1 console (󰆍), WS3
+    music (♪), WS4 chat (󰍦); remove stale WS5 icon.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Fri, 19 Jun 2026 23:31:25 -0500
+
 paperweight-skel (0.2.57-1) trixie; urgency=low
 
   * Add man pages: paperweight-theme(1), waybar-theme-status(1),
