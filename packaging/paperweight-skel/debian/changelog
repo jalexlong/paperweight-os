@@ -1,3 +1,10 @@
+paperweight-skel (0.2.64-1) trixie; urgency=low
+
+  * 90-theme.conf: float nmtui window (900x600, centered) when launched
+    from the waybar network module on-click action.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Mon, 06 Jul 2026 07:33:47 -0500
+
 paperweight-skel (0.2.63-1) trixie; urgency=low
 
   * waybar/config.jsonc: add margin-left/right 8px so the bar surface is
