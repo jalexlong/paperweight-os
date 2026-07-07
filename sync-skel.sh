@@ -5,6 +5,7 @@ set -euo pipefail
 
 REPO_DIR="$(cd "$(dirname "$(realpath "$0")")" && pwd)"
 SKEL="$REPO_DIR/packaging/paperweight-skel/etc/skel/.config"
+SKEL_LOCAL_BIN="$REPO_DIR/packaging/paperweight-skel/etc/skel/.local/bin"
 
 if [ ! -d "$SKEL" ]; then
     echo "error: skel .config directory not found at $SKEL" >&2
@@ -20,6 +21,14 @@ rsync -av --exclude='foot/colors.ini' \
     "$SKEL/" "$HOME/.config/"
 
 echo
+
+if [ -d "$SKEL_LOCAL_BIN" ]; then
+    echo "Syncing skel scripts from: $SKEL_LOCAL_BIN"
+    echo "Destination: $HOME/.local/bin"
+    echo
+    rsync -av "$SKEL_LOCAL_BIN/" "$HOME/.local/bin/"
+    echo
+fi
 
 if [ -n "${SWAYSOCK:-}" ]; then
     echo "Reloading sway config..."

@@ -1,0 +1,11 @@
+#!/bin/bash
+sink="@DEFAULT_AUDIO_SINK@"
+
+if wpctl get-volume "$sink" | grep -q MUTED; then
+    wpctl set-mute "$sink" 0
+fi
+
+case "$1" in
+    up)   wpctl set-volume -l 2.0 "$sink" 5%+ ;;
+    down) wpctl set-volume "$sink" 5%- ;;
+esac

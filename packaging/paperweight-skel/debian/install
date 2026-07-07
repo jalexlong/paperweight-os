@@ -23,6 +23,7 @@ etc/skel/.local/bin/cava-waybar                           etc/skel/.local/bin/
 etc/skel/.local/bin/paperweight-network                   etc/skel/.local/bin/
 etc/skel/.local/bin/sway-wait-float                       etc/skel/.local/bin/
 etc/skel/.local/bin/paperweight-power                     etc/skel/.local/bin/
+etc/skel/.local/bin/paperweight-volume                    etc/skel/.local/bin/
 usr/bin/paperweight-theme                                  usr/bin/
 usr/bin/waybar-theme-status                                usr/bin/
 etc/skel/.config/sway/config.d/90-colors.conf             etc/skel/.config/sway/config.d/
