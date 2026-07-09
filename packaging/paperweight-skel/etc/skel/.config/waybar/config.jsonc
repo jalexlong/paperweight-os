@@ -197,7 +197,7 @@
             "critical": 15
         },
         "format": "{icon}",
-        "format-alt": "{capacity}% {icon}",
+        "format-alt": "{icon} {capacity}%",
         "format-charging": "{icon}󱐋",
         "format-plugged": "󰚥",
         "format-full": "󰁹",
@@ -207,7 +207,8 @@
 
     "clock": {
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
-        "format": "{:%H:%M %d/%m/%y}"
+        "format": "{:%H:%M}",
+        "format-alt": "{:%H:%M %d/%m/%y}"
     },
 
     "custom/launcher": {
