@@ -1,3 +1,11 @@
+paperweight-skel (0.2.65-1) trixie; urgency=low
+
+  * waybar/config.jsonc: battery format-alt now shows icon before
+    percentage to match the right-side module convention; clock format
+    shows time only by default, with date moved to format-alt.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Wed, 08 Jul 2026 19:06:48 -0500
+
 paperweight-skel (0.2.64-1) trixie; urgency=low
 
   * 90-theme.conf: float nmtui window (900x600, centered) when launched
