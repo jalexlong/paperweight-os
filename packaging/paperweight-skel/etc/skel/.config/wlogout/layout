@@ -1,0 +1,30 @@
+{
+	"label" : "lock",
+	"action" : "gtklock",
+	"text" : "󰌾  Lock",
+	"keybind" : "l"
+}
+{
+	"label" : "logout",
+	"action" : "swaymsg exit",
+	"text" : "󰍃  Logout",
+	"keybind" : "e"
+}
+{
+	"label" : "suspend",
+	"action" : "systemctl suspend",
+	"text" : "󰤄  Suspend",
+	"keybind" : "s"
+}
+{
+	"label" : "reboot",
+	"action" : "systemctl reboot",
+	"text" : "󰑓  Restart",
+	"keybind" : "r"
+}
+{
+	"label" : "shutdown",
+	"action" : "systemctl poweroff",
+	"text" : "󰐥  Shutdown",
+	"keybind" : "u"
+}

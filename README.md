@@ -186,6 +186,7 @@ Music (workspace 3) is terminal-launched — `Super+3`, open a terminal, run `nc
 | `Super+t` | Theme picker |
 | `Super+n` | Wi-Fi network picker |
 | `Super+Shift+N` | Toggle notification center |
+| `Ctrl+Alt+Delete` / `Ctrl+Alt+BackSpace` | Power menu (wlogout) — lock/logout/suspend/restart/shutdown (BackSpace covers Chromebook keyboards) |
 | `Print` | Screenshot → ~/Pictures/ |
 | `Super+Print` | Region screenshot |
 

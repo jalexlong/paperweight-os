@@ -18,6 +18,7 @@ Depends:
  swayidle,
  sway-notification-center,
  wofi,
+ wlogout,
  foot,
  firefox-esr,
  thunar,

@@ -37,6 +37,10 @@ set $lock gtklock
     bindsym $mod+Shift+q exec swaynag -t warning \
         -m 'Exit sway? This will end your Wayland session.' \
         -B 'Yes, exit' 'swaymsg exit'
+    bindsym Ctrl+Alt+Delete exec wlogout --buttons-per-row 5
+    # Chromebook keyboards have no Delete key (BackSpace sits where Delete
+    # would be), so bind the same action there too.
+    bindsym Ctrl+Alt+BackSpace exec wlogout --buttons-per-row 5
 
 ### Utilities
     bindsym $mod+ctrl+w exec sh -c 'pkill -SIGUSR1 waybar || waybar'

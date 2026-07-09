@@ -1,0 +1,65 @@
+/* Catppuccin Latte */
+@define-color rosewater #dc8a78;
+@define-color flamingo  #dd7878;
+@define-color pink      #ea76cb;
+@define-color mauve     #8839ef;
+@define-color red       #d20f39;
+@define-color maroon    #e64553;
+@define-color peach     #fe640b;
+@define-color yellow    #df8e1d;
+@define-color green     #40a02b;
+@define-color teal      #179299;
+@define-color sky       #04a5e5;
+@define-color sapphire  #209fb5;
+@define-color blue      #1e66f5;
+@define-color lavender  #7287fd;
+@define-color text      #4c4f69;
+@define-color subtext1  #5c5f77;
+@define-color subtext0  #6c6f85;
+@define-color overlay2  #7c7f93;
+@define-color overlay1  #8c8fa1;
+@define-color overlay0  #9ca0b0;
+@define-color surface2  #acb0be;
+@define-color surface1  #bcc0cc;
+@define-color surface0  #ccd0da;
+@define-color base      #eff1f5;
+@define-color mantle    #e6e8ef;
+@define-color crust     #dce0e8;
+
+* {
+  background-image: none;
+  box-shadow: none;
+}
+
+window {
+  background-color: alpha(@crust, 0.85);
+}
+
+/* GTK3 CSS has no height/width/max-height property (setting one can make
+   wlogout reject the whole stylesheet) and valign/halign aren't CSS-able
+   either, so margin is the only way to shrink a button that otherwise
+   stretches to fill its full grid-cell height. Tall top/bottom margin,
+   modest left/right margin, keeps buttons short and wide. */
+button {
+  color: @text;
+  background-color: @surface0;
+  border: 2px solid @surface1;
+  border-radius: 16px;
+  margin: 180px 16px;
+  font-family: "JetBrainsMono Nerd Font", monospace;
+  font-size: 20px;
+  font-weight: bold;
+  transition: all 0.2s ease-in-out;
+}
+
+button:focus,
+button:active,
+button:hover {
+  background-color: @surface1;
+}
+
+#lock:hover     { border-color: @lavender; color: @lavender; }
+#logout:hover   { border-color: @yellow;   color: @yellow; }
+#suspend:hover  { border-color: @sapphire; color: @sapphire; }
+#reboot:hover   { border-color: @peach;    color: @peach; }
+#shutdown:hover { border-color: @red;      color: @red; }

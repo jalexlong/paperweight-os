@@ -1,3 +1,11 @@
+paperweight-desktop (0.1.14-1) trixie; urgency=low
+
+  * Add wlogout to Depends: powers the new session dialog (lock/logout/
+    suspend/restart/shutdown) bound to the waybar power button and
+    Ctrl+Alt+Delete, replacing the broken paperweight-power wofi menu.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Wed, 08 Jul 2026 20:00:00 -0500
+
 paperweight-desktop (0.1.13-1) trixie; urgency=low
 
   * Add TUI system utilities to Depends: ncdu, fzf, ripgrep, bat, tig,

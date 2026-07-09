@@ -17,9 +17,10 @@ case "$1" in
         fi
 
         chmod +x /etc/skel/.local/bin/cava-waybar \
-                 /etc/skel/.local/bin/paperweight-network \
                  /etc/skel/.local/bin/sway-wait-float \
                  /usr/bin/paperweight-theme \
+                 /usr/bin/paperweight-network \
+                 /usr/bin/paperweight-volume \
                  /usr/bin/paperweight-set-greeter-theme \
                  /usr/lib/paperweight-os/start-greeter
         chmod 0440 /etc/sudoers.d/paperweight-greeter
@@ -50,6 +51,7 @@ case "$1" in
                     install -d -m 755 \
                         "$TARGET_HOME/.config/foot/themes" \
                         "$TARGET_HOME/.config/wofi/themes" \
+                        "$TARGET_HOME/.config/wlogout/themes" \
                         "$TARGET_HOME/.config/paperweight-os/bashrc.d"
                     cp -n /etc/skel/.config/foot/themes/* \
                           "$TARGET_HOME/.config/foot/themes/" 2>/dev/null || true
@@ -57,6 +59,14 @@ case "$1" in
                           "$TARGET_HOME/.config/wofi/themes/" 2>/dev/null || true
                     cp -n /etc/skel/.config/foot/colors.ini \
                           "$TARGET_HOME/.config/foot/" 2>/dev/null || true
+                    # wlogout config is new — existing users won't have any of
+                    # it yet, unlike foot/wofi which just gain new theme files.
+                    cp -n /etc/skel/.config/wlogout/themes/* \
+                          "$TARGET_HOME/.config/wlogout/themes/" 2>/dev/null || true
+                    cp -n /etc/skel/.config/wlogout/layout \
+                          "$TARGET_HOME/.config/wlogout/" 2>/dev/null || true
+                    cp -n /etc/skel/.config/wlogout/style.css \
+                          "$TARGET_HOME/.config/wlogout/" 2>/dev/null || true
                     # Always overwrite package-maintained files so they stay
                     # in sync with the installed version.
                     cp /etc/skel/.config/foot/foot.ini \
@@ -65,13 +75,18 @@ case "$1" in
                        "$TARGET_HOME/.config/waybar/config.jsonc"
                     cp /etc/skel/.config/paperweight-os/bashrc.d/10-colors.sh \
                        "$TARGET_HOME/.config/paperweight-os/bashrc.d/10-colors.sh"
-                    # Remove stale skel copy of paperweight-theme — it now lives
-                    # in /usr/bin/ and is managed by dpkg directly.
-                    rm -f "$TARGET_HOME/.local/bin/paperweight-theme"
+                    # Remove stale skel copies of scripts that now live in
+                    # /usr/bin/ (dpkg-managed) or have been retired outright.
+                    # paperweight-power is gone: wlogout replaces it.
+                    rm -f "$TARGET_HOME/.local/bin/paperweight-theme" \
+                          "$TARGET_HOME/.local/bin/paperweight-network" \
+                          "$TARGET_HOME/.local/bin/paperweight-volume" \
+                          "$TARGET_HOME/.local/bin/paperweight-power"
                     chown -R "${TARGET_USER}:" \
                         "$TARGET_HOME/.config/foot" \
                         "$TARGET_HOME/.config/waybar/config.jsonc" \
                         "$TARGET_HOME/.config/wofi/themes" \
+                        "$TARGET_HOME/.config/wlogout" \
                         "$TARGET_HOME/.config/paperweight-os/bashrc.d" \
                         2>/dev/null || true
                 fi

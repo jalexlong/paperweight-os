@@ -220,6 +220,6 @@
     "custom/power": {
         "format": "⏻",
         "tooltip": false,
-        "on-click": "paperweight-power"
+        "on-click": "wlogout --buttons-per-row 5"
     }
 }

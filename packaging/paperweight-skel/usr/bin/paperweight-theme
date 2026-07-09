@@ -9,6 +9,7 @@
 #   ~/.config/swaync/themes/<name>.css
 #   ~/.config/gtklock/themes/<name>.css
 #   ~/.config/foot/themes/<name>.ini
+#   ~/.config/wlogout/themes/<name>.css
 #
 # With no argument, prompts via wofi.
 
@@ -18,6 +19,7 @@ SWAYNC_THEMES="$HOME/.config/swaync/themes"
 GTKLOCK_THEMES="$HOME/.config/gtklock/themes"
 WOFI_THEMES="$HOME/.config/wofi/themes"
 FOOT_THEMES="$HOME/.config/foot/themes"
+WLOGOUT_THEMES="$HOME/.config/wlogout/themes"
 
 # Logging: timestamped lines to ~/.local/share/paperweight-os/theme-switch.log
 # and stdout (so interactive runs show progress).
@@ -84,7 +86,8 @@ for f in \
     "$SWAYNC_THEMES/$THEME.css" \
     "$GTKLOCK_THEMES/$THEME.css" \
     "$WOFI_THEMES/$THEME.css" \
-    "$FOOT_THEMES/$THEME.ini"
+    "$FOOT_THEMES/$THEME.ini" \
+    "$WLOGOUT_THEMES/$THEME.css"
 do
     [ -f "$f" ] || missing="$missing\n  $f"
 done
@@ -105,12 +108,14 @@ printf '@import url("./themes/%s-palette.css");\n@import url("./themes/%s-waybar
     && mv "$HOME/.config/waybar/style.css.tmp" "$HOME/.config/waybar/style.css"
 log "waybar style: $THEME-palette.css + $THEME-waybar.css"
 
-# Apply swaync, gtklock, wofi, and foot (new foot windows pick up the colors)
+# Apply swaync, gtklock, wofi, foot (new foot windows pick up the colors),
+# and wlogout (picked up next time the session dialog is opened)
 cp "$SWAYNC_THEMES/$THEME.css"  "$HOME/.config/swaync/style.css"
 cp "$GTKLOCK_THEMES/$THEME.css" "$HOME/.config/gtklock/style.css"
 cp "$WOFI_THEMES/$THEME.css"    "$HOME/.config/wofi/style.css"
 cp "$FOOT_THEMES/$THEME.ini"    "$HOME/.config/foot/colors.ini"
-log "swaync, gtklock, wofi, foot: applied"
+cp "$WLOGOUT_THEMES/$THEME.css" "$HOME/.config/wlogout/style.css"
+log "swaync, gtklock, wofi, foot, wlogout: applied"
 
 # Record active theme
 mkdir -p "$HOME/.config/paperweight-os"

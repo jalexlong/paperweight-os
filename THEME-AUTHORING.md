@@ -4,9 +4,9 @@
 
 The theme system has two independent layers:
 
-**Per-user theme** — seven files in `~/.config/`, switched live with
+**Per-user theme** — eight files in `~/.config/`, switched live with
 `paperweight-theme <name>`. No sudo required. Covers sway window borders,
-waybar, swaync, gtklock, wofi, and foot.
+waybar, swaync, gtklock, wofi, foot, and wlogout.
 
 **System surfaces** — gtkgreet (login screen), GRUB boot menu, and Plymouth
 boot splash. Each has its own `sudo` helper. These are separate from the
@@ -18,10 +18,10 @@ is in the `sudo` group.
 ## Naming rules
 
 - Lowercase ASCII only — no spaces, no accents, no special characters.
-- The name is used verbatim as a filename component across all seven files and
+- The name is used verbatim as a filename component across all eight files and
   two directories. A typo or non-ASCII character (e.g. `frappé` instead of
   `frappe`) will silently break validation.
-- `paperweight-theme` validates that all seven files exist before touching
+- `paperweight-theme` validates that all eight files exist before touching
   anything. A partial set of files will produce an error and leave the active
   theme unchanged.
 
@@ -50,7 +50,7 @@ the rest.
 
 ## Per-user theme files
 
-All seven files live under `~/.config/` on the installed system. In the
+All eight files live under `~/.config/` on the installed system. In the
 packaging tree they live under:
 `packaging/paperweight-skel/etc/skel/.config/`
 
@@ -175,6 +175,49 @@ bright7=a5adcb    # bright white
 `foot/colors.ini` is the active theme file written by `paperweight-theme`.
 `foot/foot.ini` includes it with `include=~/.config/foot/colors.ini`.
 
+### 8. `wlogout/themes/<name>.css`
+
+CSS for the wlogout session dialog (lock/logout/suspend/restart/shutdown —
+bound to the waybar power button and `Ctrl+Alt+Delete`). Starts with
+`@define-color` palette declarations (same 26 names, wlogout is GTK3 like
+wofi so this works the same way), then styles the button row. There are no
+icon image assets — the Nerd Font glyph is baked directly into each button's
+`text` field in `wlogout/layout` (a single static file, not themed), the
+same icon+label-in-one-string convention `paperweight-power` used to use.
+
+```css
+@define-color base #hexhex;
+/* … palette … */
+
+button {
+  color: @text;
+  background-color: @surface0;
+  border: 2px solid @surface1;
+  border-radius: 16px;
+  font-family: "JetBrainsMono Nerd Font", monospace;
+}
+button:hover { background-color: @surface1; }
+#shutdown:hover { border-color: @red; color: @red; }
+```
+
+Key selectors: `window`, `button` (base state), `button:hover`/`:focus`/
+`:active`, and per-button hover accents keyed by the `label` field in
+`layout` — `#lock`, `#logout`, `#suspend`, `#reboot`, `#shutdown`.
+
+**Sizing gotcha**: buttons stretch to fill their full grid-cell height by
+default (there's one row, so that's the whole screen height). GTK3 CSS has
+no `height`/`width`/`max-height` property — the `wlogout` layout JSON's own
+`height`/`width` fields (0.0–1.0) only position the *text* inside the
+button, not the button's own size — and `valign`/`halign` aren't CSS-able
+either. The only reliable lever is `margin` (`min-height`/`min-width` only
+set a floor, not a ceiling, so they don't shrink a fill-expanded widget).
+Setting `height`/`width` directly on `button` is known to make GTK3 reject
+the whole stylesheet, the same failure mode noted for gtkgreet CSS above —
+don't do it. Use a tall top/bottom margin and a modest left/right margin
+instead (see `margin: 220px 16px;` in the shipped themes).
+
+`wlogout/style.css` is the active theme file written by `paperweight-theme`.
+
 ---
 
 ## Wallpaper (optional)
@@ -253,7 +296,7 @@ output. See the script itself for details.
 
 ### Minimal path (per-user only, Catppuccin variant)
 
-1. Create all seven files in the packaging tree:
+1. Create all eight files in the packaging tree:
    ```
    packaging/paperweight-skel/etc/skel/.config/sway/themes/<name>.conf
    packaging/paperweight-skel/etc/skel/.config/waybar/themes/<name>-palette.css
@@ -262,6 +305,7 @@ output. See the script itself for details.
    packaging/paperweight-skel/etc/skel/.config/gtklock/themes/<name>.css
    packaging/paperweight-skel/etc/skel/.config/wofi/themes/<name>.css
    packaging/paperweight-skel/etc/skel/.config/foot/themes/<name>.ini
+   packaging/paperweight-skel/etc/skel/.config/wlogout/themes/<name>.css
    ```
 2. No changes to `debian/install` — the `themes/` directory globs pick up
    new files automatically.

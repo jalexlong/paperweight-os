@@ -1,3 +1,36 @@
+paperweight-skel (0.2.66-1) trixie; urgency=low
+
+  * Replace the broken waybar power button with wlogout: the old
+    paperweight-power wofi menu lived in ~/.local/bin, which is never on
+    PATH for waybar/sway-spawned processes, so it silently did nothing.
+    wlogout ships as a real /usr/bin binary and renders a themed row of
+    icon buttons (lock/logout/suspend/restart/shutdown), matching the
+    XFCE-style Ctrl+Alt+Delete session dialog. Bound to both the waybar
+    power button and new Ctrl+Alt+Delete / Ctrl+Alt+BackSpace sway
+    keybindings (BackSpace covers Chromebook keyboards, which have no
+    dedicated Delete key).
+  * wlogout/layout: fixed "Invalid JSON Data" hang on open — wlogout's
+    config parser expects a bare sequence of concatenated JSON objects,
+    not a JSON array; the file was wrapped in [ ... ] with commas, which
+    is valid JSON generally but not what wlogout's own parser accepts.
+  * wlogout is now the 8th per-user theme file, wired into
+    paperweight-theme (~/.config/wlogout/{layout,style.css,themes/}) —
+    see THEME-AUTHORING.md.
+  * wlogout/themes/*.css: buttons were stretching to fill the full screen
+    height (single row, and GTK3 CSS has no height/width/max-height
+    property to cap it). Shrunk via a tall top/bottom margin instead —
+    the only sizing lever GTK3 CSS actually supports for a fill-expanded
+    widget.
+  * Fix the same ~/.local/bin PATH bug for paperweight-network ($mod+n)
+    and paperweight-volume (media keys) by moving both to /usr/bin,
+    following the precedent already set for paperweight-theme (0.2.53).
+  * debian/postinst: chmod +x list and upgrade-path cleanup/propagation
+    updated to match — stale ~/.local/bin copies of paperweight-power,
+    paperweight-network, and paperweight-volume are removed on upgrade;
+    ~/.config/wlogout/ is populated for existing users.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Wed, 08 Jul 2026 20:00:00 -0500
+
 paperweight-skel (0.2.65-1) trixie; urgency=low
 
   * waybar/config.jsonc: battery format-alt now shows icon before

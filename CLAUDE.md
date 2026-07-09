@@ -127,6 +127,11 @@ foot/foot.ini                  — terminal: JetBrainsMono NF 11pt; includes col
                                   overrides alpha=0.88 + background=crust in a [colors] block
 foot/colors.ini                — active theme's 16 ANSI colors + foreground (written by paperweight-theme)
 foot/themes/<name>.ini         — per-theme color files; background = that theme's crust color
+wlogout/
+  layout                       — static button list (lock/logout/suspend/reboot/shutdown);
+                                  Nerd Font glyph baked into each entry's "text" field
+  style.css                    — active theme (Macchiato, Mocha, Latte, or Frappé)
+  themes/<name>.css            — per-theme button styles, written by paperweight-theme
 .local/bin/
   cava-waybar                  — Python3: pipes cava frames → waybar JSON (Unicode blocks)
 ```
@@ -135,7 +140,7 @@ foot/themes/<name>.ini         — per-theme color files; background = that them
 
 See **[THEME-AUTHORING.md](THEME-AUTHORING.md)** for the full guide.
 
-Quick reference — seven files required per theme (all under
+Quick reference — eight files required per theme (all under
 `packaging/paperweight-skel/etc/skel/.config/`):
 
 | File | Format | Purpose |
@@ -147,6 +152,7 @@ Quick reference — seven files required per theme (all under
 | `gtklock/themes/<name>.css` | CSS (hardcoded hex) | screen locker |
 | `wofi/themes/<name>.css` | `@define-color` + CSS | app launcher |
 | `foot/themes/<name>.ini` | `[colors]` hex (no `#`) | terminal palette |
+| `wlogout/themes/<name>.css` | `@define-color` + CSS | power/session dialog |
 
 Also add `etc/greetd/themes/<name>.css` for the gtkgreet login screen.
 `debian/install` uses directory globs — no manifest changes needed.
@@ -178,6 +184,7 @@ App-launch bindings (from `40-workspaces.conf`) switch to the workspace and open
 | `$mod+Ctrl+w` | Restart waybar |
 | `$mod+r` | Resize mode |
 | `$mod+Shift+q` | Exit sway (confirmation dialog) |
+| `Ctrl+Alt+Delete` / `Ctrl+Alt+BackSpace` | Power menu (wlogout) — lock/logout/suspend/restart/shutdown (BackSpace binding covers Chromebook keyboards, which lack a Delete key) |
 | `Print` | Screenshot → ~/Pictures/ |
 | `$mod+Print` | Region screenshot |
 
