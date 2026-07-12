@@ -38,7 +38,7 @@ Installing `paperweight-desktop` pulls in:
 - **Vesktop** — Discord client with Vencord modifications and improved Wayland support; workspace 4 (`Super+d`). Also symlinked as `/usr/bin/discord`
 
 **Development**
-- **Helix, Neovim, Vim** — terminal editors
+- **Neovim, Vim** — terminal editors
 - **yazi** — fast TUI file manager (alongside Thunar for GUI)
 - **tmux, mosh, btop, zoxide** — terminal multiplexer, SSH, process monitor, smart cd
 - **git, curl, wget, ca-certificates** — essentials

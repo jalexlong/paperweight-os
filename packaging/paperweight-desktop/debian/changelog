@@ -1,3 +1,12 @@
+paperweight-desktop (0.1.15-1) trixie; urgency=low
+
+  * Remove hx (Helix) from Depends: standardizing on neovim as the
+    terminal editor. paperweight-skel now registers neovim (launched in
+    a foot terminal) as the default handler for text files, replacing
+    Helix's desktop-file MIME associations.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Fri, 10 Jul 2026 00:00:00 -0500
+
 paperweight-desktop (0.1.14-1) trixie; urgency=low
 
   * Add wlogout to Depends: powers the new session dialog (lock/logout/

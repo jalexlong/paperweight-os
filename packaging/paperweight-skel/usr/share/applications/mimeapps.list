@@ -1,0 +1,21 @@
+[Default Applications]
+text/plain=paperweight-nvim.desktop
+text/x-makefile=paperweight-nvim.desktop
+text/x-c=paperweight-nvim.desktop
+text/x-c++=paperweight-nvim.desktop
+text/x-c++hdr=paperweight-nvim.desktop
+text/x-c++src=paperweight-nvim.desktop
+text/x-chdr=paperweight-nvim.desktop
+text/x-csrc=paperweight-nvim.desktop
+text/x-java=paperweight-nvim.desktop
+text/x-python=paperweight-nvim.desktop
+text/x-shellscript=paperweight-nvim.desktop
+application/x-shellscript=paperweight-nvim.desktop
+text/x-tcl=paperweight-nvim.desktop
+text/x-tex=paperweight-nvim.desktop
+text/markdown=paperweight-nvim.desktop
+application/json=paperweight-nvim.desktop
+text/x-yaml=paperweight-nvim.desktop
+text/csv=paperweight-nvim.desktop
+text/x-log=paperweight-nvim.desktop
+text/x-config=paperweight-nvim.desktop

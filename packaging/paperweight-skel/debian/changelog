@@ -1,3 +1,16 @@
+paperweight-skel (0.2.67-1) trixie; urgency=low
+
+  * Add usr/share/applications/paperweight-nvim.desktop and mimeapps.list:
+    registers neovim (opened via `foot -e nvim %F`) as the default
+    handler for text/plain and common source MIME types, so double-
+    clicking a text file in Thunar opens a foot terminal running nvim.
+    Previously this fell through to hx's own MimeType associations
+    (Helix.desktop, shipped by the now-removed hx package); Terminal=false
+    is set because Exec already launches foot directly rather than relying
+    on xdg-terminal-exec.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Fri, 10 Jul 2026 00:00:00 -0500
+
 paperweight-skel (0.2.66-1) trixie; urgency=low
 
   * Replace the broken waybar power button with wlogout: the old

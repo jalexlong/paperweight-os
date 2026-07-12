@@ -42,7 +42,6 @@ Depends:
  wget,
  vim,
  neovim,
- hx,
  cava,
  cmus,
  ncspot,
