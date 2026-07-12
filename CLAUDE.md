@@ -20,7 +20,7 @@ paperweight-os/
 │   ├── paperweight-skel/        # Ships /etc/skel configs; no binary deps
 │   ├── paperweight-desktop/     # Pure metapackage: Depends on full stack
 │   ├── paperweight-fonts/       # JetBrains Mono Nerd Font + Symbols NF
-│   ├── paperweight-wallpapers/  # Catppuccin solid-color wallpapers (PNG)
+│   ├── paperweight-wallpapers/  # Per-theme wallpaper art (JPG) + solid-color PNG fallback + picker
 │   ├── paperweight-grub/        # Catppuccin Macchiato GRUB2 theme
 │   ├── paperweight-plymouth/    # Catppuccin Macchiato Plymouth boot splash
 │   └── paperweight-chromebook/  # Hardware add-on for Chromebook/coreboot
@@ -81,8 +81,8 @@ user-local fragments also work without modifying the skel defaults.
 |---|---|---|
 | Base distro | Debian Stable (Trixie) | Stability over features |
 | Compositor | Sway (Wayland) | Lightweight, keyboard-driven |
-| Display manager | greetd + gtkgreet | Wayland-native, GTK4, CSS-themed; same pattern as gtklock |
-| Screen locker | gtklock | Better GTK CSS theming than swaylock |
+| Display manager | greetd + gtkgreet | Wayland-native, GTK4, CSS-themed |
+| Screen locker | gtklock | Better GTK CSS theming than swaylock; links GTK3, not GTK4 like gtkgreet — its CSS isn't subject to the GTK4 restrictions noted below |
 | Notification daemon | sway-notification-center (swaync) | Notification center panel, more usable than mako |
 | Browser | Firefox ESR | GTK3, first-class Wayland support, reliable |
 | App launcher | wofi | Lightweight, Wayland-native |
@@ -115,18 +115,29 @@ sway/config.d/
   50-systemd-user.conf         — D-Bus / systemd user env import
   90-theme.conf                — Catppuccin Macchiato palette, output bg, float rules
 waybar/
-  config.jsonc                 — modules: cava+cpu+mem left, workspaces center, status right
+  config.jsonc                 — modules: cava+cpu+mem left, workspaces center, status right;
+                                  launcher is an `image#launcher` module (not `custom/`) since it
+                                  shows the PaperweightOS rock logo, not a Nerd Font glyph — the
+                                  image module's "path" key doesn't expand $HOME/~, so it uses
+                                  "exec": "echo $HOME/..." instead, which does run through a shell
+  paperweight-logo.png          — rock.png (same asset fastfetch uses), 20px in the bar
   style.css                    — @import only; real styles in themes/
   themes/
-    catppuccin-macchiato.css   — @define-color variables (the palette)
-    macchiato-waybar.css       — actual module styles referencing those variables
+    macchiato-palette.css      — @define-color variables (the palette)
+    macchiato-waybar.css       — actual module styles referencing those variables; launcher pill
+                                  selector is `#launcher` (CSS id waybar assigns to `image#launcher`
+                                  isn't documented, so the stylesheet also matches `#image.launcher`
+                                  and `image#launcher` to be safe)
 cava/
   waybar-config                — cava visualizer: 10 bars, raw 8-bit output via pulse
 swaync/
   config.json                  — notification center layout + widgets
   style.css                    — Macchiato-themed notification + panel CSS
 wofi/style.css                 — launcher styles using @define-color variables
-gtklock/style.css              — lock screen: Macchiato, clock, pill entry
+gtklock/style.css              — lock screen: Macchiato, clock, pill entry, branded wallpaper
+                                  (background-image, hardcoded per theme — see THEME-AUTHORING.md).
+                                  gtklock links GTK3, not GTK4, so none of the gtkgreet GTK4
+                                  CSS quirks below apply to it.
 foot/foot.ini                  — terminal: JetBrainsMono NF 11pt; includes colors.ini then
                                   overrides alpha=0.88 + background=crust in a [colors] block
 foot/colors.ini                — active theme's 16 ANSI colors + foreground (written by paperweight-theme)
@@ -172,6 +183,12 @@ Quick reference — nine files required per theme (all under
 Also add `etc/greetd/themes/<name>.css` for the gtkgreet login screen.
 `debian/install` uses directory globs — no manifest changes needed.
 `$mod+t` opens the wofi theme picker.
+
+`paperweight-set-greeter-theme` (called by `paperweight-theme` when the user
+is in the `sudo` group) also writes the theme's wallpaper path to
+`/etc/greetd/background`, which `start-greeter` passes to gtkgreet's `-b`
+flag — see THEME-AUTHORING.md's Wallpaper section for the full priority
+order and why it differs from the desktop's.
 
 The fastfetch theme's colors must be ANSI SGR strings, not hex — generate
 it with `./fastfetch-theme-gen.py <name>` (repo root) instead of hand-editing;

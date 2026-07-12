@@ -2,6 +2,9 @@
 
 window {
     background-color: #303446;
+    background-image: url("file:///usr/share/paperweight-os/wallpapers/frappe-wallpaper1.jpg");
+    background-size: cover;
+    background-position: center;
 }
 
 #clock-label {

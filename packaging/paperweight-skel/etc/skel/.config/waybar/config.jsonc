@@ -9,7 +9,7 @@
     "margin-right": 8,
 
     "modules-left": [
-        "custom/launcher",
+        "image#launcher",
         "cpu",
         "memory",
         "custom/cava",
@@ -211,8 +211,9 @@
         "format-alt": "{:%H:%M %d/%m/%y}"
     },
 
-    "custom/launcher": {
-        "format": "󰣥",
+    "image#launcher": {
+        "exec": "echo $HOME/.config/waybar/paperweight-logo.png",
+        "size": 20,
         "tooltip": false,
         "on-click": "wofi --show drun"
     },

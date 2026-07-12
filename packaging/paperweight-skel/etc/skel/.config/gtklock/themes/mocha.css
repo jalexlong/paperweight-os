@@ -2,6 +2,9 @@
 
 window {
     background-color: #1e1e2e;
+    background-image: url("file:///usr/share/paperweight-os/wallpapers/mocha-wallpaper1.jpg");
+    background-size: cover;
+    background-position: center;
 }
 
 #clock-label {

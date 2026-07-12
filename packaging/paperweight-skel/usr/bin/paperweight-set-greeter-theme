@@ -7,3 +7,17 @@ if [ ! -f "$SRC" ]; then
     exit 1
 fi
 cp "$SRC" /etc/greetd/gtkgreet.css
+
+# Wallpaper: prefer the branded "-wallpaper2" artwork (has the PaperweightOS
+# wordmark), then "-wallpaper1", then the flat solid-color PNG. start-greeter
+# reads this path and passes it to gtkgreet's -b flag.
+WP_DIR="/usr/share/paperweight-os/wallpapers"
+if [ -f "$WP_DIR/${THEME}-wallpaper2.jpg" ]; then
+    printf '%s\n' "$WP_DIR/${THEME}-wallpaper2.jpg" > /etc/greetd/background
+elif [ -f "$WP_DIR/${THEME}-wallpaper1.jpg" ]; then
+    printf '%s\n' "$WP_DIR/${THEME}-wallpaper1.jpg" > /etc/greetd/background
+elif [ -f "$WP_DIR/${THEME}.png" ]; then
+    printf '%s\n' "$WP_DIR/${THEME}.png" > /etc/greetd/background
+else
+    rm -f /etc/greetd/background
+fi

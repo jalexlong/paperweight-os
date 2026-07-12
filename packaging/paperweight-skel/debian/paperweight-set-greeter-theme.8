@@ -14,6 +14,24 @@ making it the active theme for the
 .BR gtkgreet (1)
 login screen.
 .PP
+It also resolves a wallpaper for the theme and writes its path to
+.IR /etc/greetd/background ,
+preferring
+.I <theme>\-wallpaper2.jpg
+(branded artwork with the PaperweightOS wordmark), then
+.IR <theme>\-wallpaper1.jpg ,
+then the solid\-color
+.I <theme>.png
+fallback, all under
+.IR /usr/share/paperweight\-os/wallpapers/ .
+If none exist,
+.I /etc/greetd/background
+is removed.
+.B start\-greeter
+reads this file at greeter startup and passes it to gtkgreet's
+.B \-b
+flag.
+.PP
 Must be run as root.
 Normally invoked automatically by
 .BR paperweight-theme (1)
@@ -32,6 +50,16 @@ Directory containing per-theme CSS files for gtkgreet.
 .TP
 .I /etc/greetd/gtkgreet.css
 Active gtkgreet stylesheet, overwritten by this command.
+.TP
+.I /usr/share/paperweight\-os/wallpapers/
+Directory of wallpaper images, shipped by
+.IR paperweight\-wallpapers .
+.TP
+.I /etc/greetd/background
+Path to the active wallpaper image, written (or removed) by this command;
+read by
+.B start\-greeter
+at greeter startup.
 .SH SEE ALSO
 .BR paperweight-theme (1),
 .BR gtkgreet (1)

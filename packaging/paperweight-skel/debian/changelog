@@ -1,3 +1,36 @@
+paperweight-skel (0.2.70-1) trixie; urgency=low
+
+  * Waybar launcher: replace the generic Nerd Font glyph with an actual
+    PaperweightOS logo (rock.png, the same asset fastfetch uses) via
+    waybar's "image" module. The "path" key does not expand $HOME or
+    "~" (it's opened directly, not through a shell), so the module uses
+    "exec": "echo $HOME/.config/waybar/paperweight-logo.png" instead,
+    which does run through a shell. CSS selector for a "type#name"
+    module (as opposed to "custom/name", which becomes "#custom-name")
+    turned out to be "#launcher" with GTK also matching "#image.launcher"
+    and "image#launcher" — the stylesheet targets all three since the
+    exact selector waybar assigns isn't documented. Icon size 20px (not
+    24px) to stay within the existing 40px bar height; 24px pushed
+    waybar to request 42px.
+  * greetd login screen: pass gtkgreet's native -b/--background flag
+    with the active theme's branded wallpaper
+    (/usr/share/paperweight-os/wallpapers/<theme>-wallpaper2.jpg,
+    falling back to -wallpaper1.jpg then the flat <theme>.png if
+    paperweight-wallpapers isn't installed). start-greeter reads the
+    path from the new /etc/greetd/background file; paperweight-set-
+    greeter-theme writes it alongside the existing gtkgreet.css copy
+    so it stays in sync with theme switches. Verified standalone that
+    -b composites behind the existing gtkgreet.css (which only styles
+    the login card, not the full window) without conflict.
+  * gtklock lock screen: add background-image (theme's branded
+    wallpaper, same selection convention as greetd above) to each
+    theme's window rule, with background-color kept as a fallback.
+    gtklock links libgtk-3, not GTK4, so the "invalid property rejects
+    the whole stylesheet" GTK4 gotcha (see this file's Known Issues)
+    does not apply here.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 12 Jul 2026 00:00:00 -0500
+
 paperweight-skel (0.2.69-1) trixie; urgency=low
 
   * Give fastfetch a real logo: source it from paperweight-plymouth's

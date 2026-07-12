@@ -2,6 +2,9 @@
 
 window {
     background-color: #eff1f5;
+    background-image: url("file:///usr/share/paperweight-os/wallpapers/latte-wallpaper2.jpg");
+    background-size: cover;
+    background-position: center;
 }
 
 #clock-label {

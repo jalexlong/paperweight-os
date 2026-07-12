@@ -119,12 +119,29 @@ Key selectors:
 
 ### 5. `gtklock/themes/<name>.css`
 
-CSS for the gtklock screen locker. Uses hardcoded hex values. GTK4 CSS
-restrictions apply: no `display: none`, no `max-height`, no unitless
-`font-size: 0`. To hide elements use `opacity: 0` with `padding: 0; margin: 0`.
+CSS for the gtklock screen locker. Uses hardcoded hex values. gtklock links
+GTK3 (`libgtk-3.so`), not GTK4, so none of the GTK4 quirks noted under
+gtkgreet below apply here — plain `background-image`, `display: none`, etc.
+all work normally.
 
 Key selectors: `window`, `#clock-label`, `#date-label`, `box#body`,
 `entry`, `entry:focus`, `button`, `button:hover`, `button:active`.
+
+`window` also carries a background wallpaper — see
+[Wallpaper (optional)](#wallpaper-optional) below. Unlike the desktop
+wallpaper, this is *not* resolved at runtime: pick whichever wallpaper
+variant exists for `<name>` (`-wallpaper2.jpg` > `-wallpaper1.jpg` > none)
+and hardcode its path directly in the CSS, since plain CSS can't probe for
+file existence:
+
+```css
+window {
+    background-color: #24273a; /* fallback if the image fails to load */
+    background-image: url("file:///usr/share/paperweight-os/wallpapers/<name>-wallpaper2.jpg");
+    background-size: cover;
+    background-position: center;
+}
+```
 
 ### 6. `wofi/themes/<name>.css`
 
@@ -323,12 +340,17 @@ differently-shaped image may need different `width`/`height` values
 
 ## Wallpaper (optional)
 
-`paperweight-theme` resolves the wallpaper for a theme in this order:
+Three surfaces draw from the same `/usr/share/paperweight-os/wallpapers/`
+directory (shipped by `paperweight-wallpapers`), but each resolves the
+active image differently:
+
+**Desktop** — `paperweight-theme` resolves the wallpaper in this order:
 
 1. `~/.config/paperweight-os/wallpapers/<name>` — user override file
-   containing a single absolute path to an image.
+   containing a single absolute path to an image (written by the
+   `paperweight-wallpaper` picker, `$mod+w`).
 2. `/usr/share/paperweight-os/wallpapers/<name>-wallpaper1.jpg` — package
-   default artwork (shipped by `paperweight-wallpapers`).
+   default artwork.
 3. `/usr/share/paperweight-os/wallpapers/<name>.png` — solid-color PNG
    fallback.
 
@@ -337,7 +359,29 @@ set. The wallpaper path is written into
 `~/.config/sway/config.d/91-wallpaper.conf` so it persists through
 `swaymsg reload` and reboots.
 
-To ship a default wallpaper for a new theme, add the image to:
+**gtkgreet (login screen)** — `paperweight-set-greeter-theme` resolves the
+wallpaper in a *different* order (no per-user override — the greeter runs
+as its own system user with no access to a real user's home):
+
+1. `/usr/share/paperweight-os/wallpapers/<name>-wallpaper2.jpg` — branded
+   artwork with the PaperweightOS wordmark, preferred when present.
+2. `/usr/share/paperweight-os/wallpapers/<name>-wallpaper1.jpg`.
+3. `/usr/share/paperweight-os/wallpapers/<name>.png` — solid-color fallback.
+
+The resolved path is written to `/etc/greetd/background`; `start-greeter`
+reads it and passes it to gtkgreet's own `-b`/`--background` flag (composites
+behind the login card — does not conflict with `gtkgreet.css`).
+
+**gtklock (lock screen)** — not runtime-resolved at all; see
+`gtklock/themes/<name>.css` above. Pick `-wallpaper2.jpg` if it exists for
+the theme, else `-wallpaper1.jpg`, and hardcode that filename into the CSS.
+
+Note the *desktop* still prefers `-wallpaper1.jpg` while *gtkgreet and
+gtklock* prefer `-wallpaper2.jpg` — an intentional-for-now inconsistency
+(gtkgreet/gtklock were built after the desktop's wallpaper1-first
+convention was already established); unify them only if asked.
+
+To ship a default wallpaper for a new theme, add the image(s) to:
 `packaging/paperweight-wallpapers/usr/share/paperweight-os/wallpapers/`
 
 ---
@@ -363,6 +407,11 @@ override the Adwaita headerbar.
 `paperweight-theme` calls `paperweight-set-greeter-theme` automatically
 when the user is in the `sudo` group. Non-sudo users can manually add the
 CSS file to `/etc/greetd/themes/` and call the helper with `sudo`.
+
+`paperweight-set-greeter-theme` also resolves and writes the wallpaper for
+the theme to `/etc/greetd/background` (see
+[Wallpaper (optional)](#wallpaper-optional)) — one invocation keeps both
+the CSS and the background image in sync.
 
 ### GRUB boot menu
 
@@ -420,7 +469,10 @@ output. See the script itself for details.
    new files automatically.
 5. Add a gtkgreet CSS at `packaging/paperweight-skel/etc/greetd/themes/<name>.css`.
 6. Bump `paperweight-skel` version and add a changelog entry.
-7. Optionally add a wallpaper to `paperweight-wallpapers` (bump that version too).
+7. Optionally add wallpaper art to `paperweight-wallpapers` (bump that
+   version too) — if you do, hardcode the matching filename into
+   `gtklock/themes/<name>.css`'s `background-image` (step 2 above); gtkgreet
+   and the desktop pick it up automatically at runtime, gtklock does not.
 
 ### Full path (new theme family, non-Catppuccin)
 
@@ -471,7 +523,15 @@ paperweight-theme <name>
 
 # System surfaces (if in sudo group)
 sudo paperweight-set-greeter-theme <name>   # gtkgreet CSS applied
+cat /etc/greetd/background                  # should show the theme's wallpaper path
 sudo paperweight-grub-theme <name>          # should print "GRUB theme set" or "already <name>"
 sudo paperweight-plymouth-theme <name>      # backs up initramfs, rebuilds
 ls -lh /boot/initrd.img-$(uname -r)*       # .bak should exist alongside the rebuilt one
+
+# gtklock wallpaper — no runtime resolution, so just confirm the CSS applied
+grep background-image ~/.config/gtklock/style.css
+
+# gtkgreet wallpaper only actually renders on a real greeter session; preview
+# without logging out:
+gtkgreet -c sway -s /etc/greetd/gtkgreet.css -b "$(cat /etc/greetd/background)"
 ```

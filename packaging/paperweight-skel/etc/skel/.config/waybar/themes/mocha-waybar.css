@@ -193,16 +193,17 @@ window#waybar {
 
 /* ── Launcher (far left) ──────────────────────────────── */
 
-#custom-launcher {
-  color: @mauve;
+#launcher,
+#image.launcher,
+image#launcher {
   background-color: alpha(@surface0, 0.92);
   border-radius: 1rem;
-  padding: 0.45rem 0.85rem;
+  padding: 0.3rem 0.7rem;
   margin: 5px 0.5rem 5px 1rem;
 }
 
-#custom-launcher:hover {
-  color: @lavender;
+#launcher:hover {
+  background-color: alpha(@surface1, 0.92);
 }
 
 /* ── Power menu (far right) ───────────────────────────── */

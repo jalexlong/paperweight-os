@@ -5,6 +5,7 @@ etc/skel/.config/sway/config                              etc/skel/.config/sway/
 etc/skel/.config/sway/config.d/                           etc/skel/.config/sway/
 etc/skel/.config/waybar/config.jsonc                      etc/skel/.config/waybar/
 etc/skel/.config/waybar/style.css                         etc/skel/.config/waybar/
+etc/skel/.config/waybar/paperweight-logo.png              etc/skel/.config/waybar/
 etc/skel/.config/waybar/themes/                           etc/skel/.config/waybar/
 etc/skel/.config/swaync/config.json                       etc/skel/.config/swaync/
 etc/skel/.config/swaync/style.css                         etc/skel/.config/swaync/
@@ -36,6 +37,7 @@ etc/skel/.config/paperweight-os/bashrc.d/                 etc/skel/.config/paper
 usr/lib/udev/rules.d/70-paperweight-backlight.rules       usr/lib/udev/rules.d/
 etc/greetd/config.toml                                    etc/greetd/
 etc/greetd/gtkgreet.css                                   etc/greetd/
+etc/greetd/background                                     etc/greetd/
 etc/greetd/themes/                                        etc/greetd/
 etc/sudoers.d/paperweight-greeter                         etc/sudoers.d/
 usr/bin/paperweight-set-greeter-theme                     usr/bin/
