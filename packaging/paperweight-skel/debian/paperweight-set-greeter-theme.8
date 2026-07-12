@@ -14,9 +14,7 @@ making it the active theme for the
 .BR gtkgreet (1)
 login screen.
 .PP
-It also resolves a wallpaper for the theme and writes its path to
-.IR /etc/greetd/background ,
-preferring
+It also resolves a wallpaper for the theme, preferring
 .I <theme>\-wallpaper2.jpg
 (branded artwork with the PaperweightOS wordmark), then
 .IR <theme>\-wallpaper1.jpg ,
@@ -24,13 +22,26 @@ then the solid\-color
 .I <theme>.png
 fallback, all under
 .IR /usr/share/paperweight\-os/wallpapers/ .
-If none exist,
+The resolved path is written to
 .I /etc/greetd/background
-is removed.
-.B start\-greeter
-reads this file at greeter startup and passes it to gtkgreet's
-.B \-b
-flag.
+for diagnostics (or removed if none exist), and a
+.B window { background\-image: ... }
+rule is appended directly onto
+.IR /etc/greetd/gtkgreet.css .
+This does
+.B not
+use gtkgreet's own
+.B \-b / \-\-background
+flag:
+.BR gtkgreet (1)
+documents that flag as anchoring the image to the upper\-left corner at 1:1
+scale and not handling other DPI scaling values correctly, which crops into
+the image's corner \(em hiding centered artwork such as the wordmark \(em on
+any scaled display. A CSS
+.B background\-image
+with
+.B background\-size: cover
+renders correctly at any scale instead.
 .PP
 Must be run as root.
 Normally invoked automatically by
@@ -56,10 +67,13 @@ Directory of wallpaper images, shipped by
 .IR paperweight\-wallpapers .
 .TP
 .I /etc/greetd/background
-Path to the active wallpaper image, written (or removed) by this command;
-read by
+Path to the active wallpaper image, written (or removed) by this command
+for diagnostics; not read by
 .B start\-greeter
-at greeter startup.
+(the same path is baked into
+.I /etc/greetd/gtkgreet.css
+as a CSS
+.BR background\-image ).
 .SH SEE ALSO
 .BR paperweight-theme (1),
 .BR gtkgreet (1)

@@ -1,3 +1,19 @@
+paperweight-skel (0.2.71-1) trixie; urgency=low
+
+  * greetd login screen: fix wallpaper appearing zoomed in/cropped, hiding
+    the branded wordmark. gtkgreet's -b/--background flag (added in
+    0.2.70-1) is documented by gtkgreet-1(1) itself as anchoring the image
+    to the upper-left corner at 1:1 and not handling DPI scaling values
+    other than 1 correctly — on any scaled display this crops into the
+    image's corner. Switched to embedding the wallpaper as a
+    "window { background-image: ...; background-size: cover; }" rule
+    appended onto /etc/greetd/gtkgreet.css by paperweight-set-greeter-theme
+    (the same approach already used for gtklock), which scales correctly
+    at any DPI. start-greeter no longer passes -b; /etc/greetd/background
+    is now written for diagnostics only.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 12 Jul 2026 17:27:45 -0500
+
 paperweight-skel (0.2.70-1) trixie; urgency=low
 
   * Waybar launcher: replace the generic Nerd Font glyph with an actual

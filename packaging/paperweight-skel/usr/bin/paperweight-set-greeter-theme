@@ -9,15 +9,37 @@ fi
 cp "$SRC" /etc/greetd/gtkgreet.css
 
 # Wallpaper: prefer the branded "-wallpaper2" artwork (has the PaperweightOS
-# wordmark), then "-wallpaper1", then the flat solid-color PNG. start-greeter
-# reads this path and passes it to gtkgreet's -b flag.
+# wordmark), then "-wallpaper1", then the flat solid-color PNG.
 WP_DIR="/usr/share/paperweight-os/wallpapers"
 if [ -f "$WP_DIR/${THEME}-wallpaper2.jpg" ]; then
-    printf '%s\n' "$WP_DIR/${THEME}-wallpaper2.jpg" > /etc/greetd/background
+    WP="$WP_DIR/${THEME}-wallpaper2.jpg"
 elif [ -f "$WP_DIR/${THEME}-wallpaper1.jpg" ]; then
-    printf '%s\n' "$WP_DIR/${THEME}-wallpaper1.jpg" > /etc/greetd/background
+    WP="$WP_DIR/${THEME}-wallpaper1.jpg"
 elif [ -f "$WP_DIR/${THEME}.png" ]; then
-    printf '%s\n' "$WP_DIR/${THEME}.png" > /etc/greetd/background
+    WP="$WP_DIR/${THEME}.png"
+else
+    WP=""
+fi
+
+if [ -n "$WP" ]; then
+    printf '%s\n' "$WP" > /etc/greetd/background
+    # Embed the wallpaper as a CSS background-image rather than using
+    # gtkgreet's -b/--background flag: gtkgreet-1(1) documents that -b
+    # anchors the image to the upper-left corner at 1:1 and "does not
+    # handle scaling values other than 1 correctly" — on any display
+    # with DPI scaling != 1 this crops into the image's corner, cutting
+    # off centered artwork like the PaperweightOS wordmark. A stylesheet
+    # background-image with background-size: cover renders correctly at
+    # any scale, per that same man page's recommendation.
+    cat >> /etc/greetd/gtkgreet.css <<EOF
+
+window {
+    background-image: url("file://$WP");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+EOF
 else
     rm -f /etc/greetd/background
 fi

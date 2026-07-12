@@ -368,9 +368,15 @@ as its own system user with no access to a real user's home):
 2. `/usr/share/paperweight-os/wallpapers/<name>-wallpaper1.jpg`.
 3. `/usr/share/paperweight-os/wallpapers/<name>.png` — solid-color fallback.
 
-The resolved path is written to `/etc/greetd/background`; `start-greeter`
-reads it and passes it to gtkgreet's own `-b`/`--background` flag (composites
-behind the login card — does not conflict with `gtkgreet.css`).
+The resolved path is written to `/etc/greetd/background` (kept for
+diagnostics — `cat` it to check what a theme resolved to), and a
+`window { background-image: url(...); background-size: cover; }` rule is
+appended straight onto `/etc/greetd/gtkgreet.css`. This does *not* use
+gtkgreet's own `-b`/`--background` flag: gtkgreet-1(1) documents that flag as
+anchoring the image to the upper-left corner at 1:1 and not handling DPI
+scaling correctly, which crops into the image's corner on any scaled display
+— hiding centered artwork like the wordmark. A CSS `background-image` with
+`background-size: cover` renders correctly at any scale instead.
 
 **gtklock (lock screen)** — not runtime-resolved at all; see
 `gtklock/themes/<name>.css` above. Pick `-wallpaper2.jpg` if it exists for
@@ -408,8 +414,8 @@ override the Adwaita headerbar.
 when the user is in the `sudo` group. Non-sudo users can manually add the
 CSS file to `/etc/greetd/themes/` and call the helper with `sudo`.
 
-`paperweight-set-greeter-theme` also resolves and writes the wallpaper for
-the theme to `/etc/greetd/background` (see
+`paperweight-set-greeter-theme` also resolves the wallpaper for the theme
+and appends its `background-image` rule onto the same `gtkgreet.css` (see
 [Wallpaper (optional)](#wallpaper-optional)) — one invocation keeps both
 the CSS and the background image in sync.
 
@@ -523,7 +529,7 @@ paperweight-theme <name>
 
 # System surfaces (if in sudo group)
 sudo paperweight-set-greeter-theme <name>   # gtkgreet CSS applied
-cat /etc/greetd/background                  # should show the theme's wallpaper path
+grep -A4 '^window' /etc/greetd/gtkgreet.css # should show background-image: url(...<name>...)
 sudo paperweight-grub-theme <name>          # should print "GRUB theme set" or "already <name>"
 sudo paperweight-plymouth-theme <name>      # backs up initramfs, rebuilds
 ls -lh /boot/initrd.img-$(uname -r)*       # .bak should exist alongside the rebuilt one
@@ -532,6 +538,7 @@ ls -lh /boot/initrd.img-$(uname -r)*       # .bak should exist alongside the reb
 grep background-image ~/.config/gtklock/style.css
 
 # gtkgreet wallpaper only actually renders on a real greeter session; preview
-# without logging out:
-gtkgreet -c sway -s /etc/greetd/gtkgreet.css -b "$(cat /etc/greetd/background)"
+# without logging out. Do NOT pass -b here — the CSS already embeds the
+# background-image, and -b crops into the image's corner on scaled displays.
+gtkgreet -c sway -s /etc/greetd/gtkgreet.css
 ```

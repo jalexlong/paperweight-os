@@ -185,10 +185,14 @@ Also add `etc/greetd/themes/<name>.css` for the gtkgreet login screen.
 `$mod+t` opens the wofi theme picker.
 
 `paperweight-set-greeter-theme` (called by `paperweight-theme` when the user
-is in the `sudo` group) also writes the theme's wallpaper path to
-`/etc/greetd/background`, which `start-greeter` passes to gtkgreet's `-b`
-flag — see THEME-AUTHORING.md's Wallpaper section for the full priority
-order and why it differs from the desktop's.
+is in the `sudo` group) also resolves the theme's wallpaper and appends a
+`window { background-image: ... }` rule straight into `/etc/greetd/gtkgreet.css`
+— *not* gtkgreet's own `-b`/`--background` flag, which gtkgreet-1(1) itself
+documents as anchoring the image to the upper-left corner at 1:1 and not
+handling DPI scaling correctly (crops into the corner, hiding centered
+artwork like the wordmark, on any scaled display). See THEME-AUTHORING.md's
+Wallpaper section for the full priority order and why it differs from the
+desktop's.
 
 The fastfetch theme's colors must be ANSI SGR strings, not hex — generate
 it with `./fastfetch-theme-gen.py <name>` (repo root) instead of hand-editing;

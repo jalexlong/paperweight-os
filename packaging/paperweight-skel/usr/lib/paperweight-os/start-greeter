@@ -10,16 +10,8 @@ cd "${HOME:-/var/lib/greetd}" 2>/dev/null || cd /tmp
 export GDK_BACKEND=wayland
 export XDG_DATA_DIRS=/usr/local/share:/usr/share
 
-# Background wallpaper, if set by paperweight-set-greeter-theme (see there
-# for the theme-artwork-first, solid-color-fallback selection logic).
-BG=""
-if [ -f /etc/greetd/background ]; then
-    BG=$(cat /etc/greetd/background)
-    [ -f "$BG" ] || BG=""
-fi
-
-if [ -n "$BG" ]; then
-    exec cage -s -- gtkgreet -l -c sway -s /etc/greetd/gtkgreet.css -b "$BG"
-else
-    exec cage -s -- gtkgreet -l -c sway -s /etc/greetd/gtkgreet.css
-fi
+# Background wallpaper is baked into /etc/greetd/gtkgreet.css as a CSS
+# background-image by paperweight-set-greeter-theme (not passed via
+# gtkgreet's -b flag, which crops into the image's corner on any display
+# with DPI scaling != 1 — see paperweight-set-greeter-theme for details).
+exec cage -s -- gtkgreet -l -c sway -s /etc/greetd/gtkgreet.css

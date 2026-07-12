@@ -91,3 +91,10 @@ combobox * {
     padding: 0;
     margin: 0;
 }
+
+window {
+    background-image: url("file:///usr/share/paperweight-os/wallpapers/macchiato-wallpaper2.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
