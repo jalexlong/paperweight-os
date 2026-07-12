@@ -36,6 +36,9 @@ paperweight-os/
 │   └── conf/                    # reprepro config (SignWith key must be set)
 ├── publish.sh                   # Build all .debs → sign → push gh-pages
 ├── setup-gpg.sh                 # One-time GPG key generation
+├── sync-skel.sh                 # Rsync skel configs to $HOME for live-editing without a package build
+├── fastfetch-theme-gen.py       # Generate a fastfetch theme .jsonc from a sway theme's palette
+├── test-paperweight-theme.sh    # Headless paperweight-theme test harness (no Sway session needed)
 └── CLAUDE.md                    # This file
 ```
 

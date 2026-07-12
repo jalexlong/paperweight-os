@@ -434,7 +434,19 @@ All of the above, plus:
 
 ## Testing checklist
 
-After creating all files, test in this order:
+No display, no Sway session, or just want a fast correctness check before
+touching a real desktop? Run `./test-paperweight-theme.sh <name>` (repo
+root) first — it exercises `paperweight-theme` in a scratch `$HOME` with
+every external command it shells out to stubbed, and diffs each resulting
+"active" file against its `themes/<name>.*` source. Catches an incomplete
+theme (missing file), a typo'd theme name, or a `paperweight-theme` logic
+regression without needing hardware. Run with no arguments to check every
+theme at once, or `--keep` to leave the scratch `$HOME` on disk for
+inspection. It does *not* cover rendering (CSS looking right, fastfetch
+colors looking right, wallpaper actually applying) — that still needs the
+manual checklist below on real hardware.
+
+After creating all files, test on real hardware in this order:
 
 ```sh
 # Validate without applying (dry-run: paperweight-theme checks all files first)
