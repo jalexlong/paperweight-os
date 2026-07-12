@@ -5,6 +5,34 @@ case "$1" in
     configure)
         dconf update 2>/dev/null || true
 
+        # Rebrand /etc/os-release as PaperweightOS. base-files owns this
+        # file (Essential package) so we can't ship it directly — patch
+        # the display fields in place instead, same pattern used for
+        # /etc/adduser.conf below. ID stays "debian" deliberately: tooling
+        # that keys off an exact ID match (package-manager detection,
+        # VS Code remote-SSH, hardware scripts) should keep working: only
+        # the human-facing fields change. VERSION_CODENAME and
+        # DEBIAN_VERSION_FULL are left alone — still genuinely Trixie
+        # underneath. Distro version is bumped manually at milestones,
+        # independent of individual .deb package versions (see CLAUDE.md).
+        # Idempotent: safe to re-run on every upgrade. Note: a future
+        # base-files upgrade may prompt to keep local vs. maintainer
+        # changes to this conffile — expected for this pattern.
+        if [ -f /etc/os-release ]; then
+            sed -i \
+                -e 's/^PRETTY_NAME=.*/PRETTY_NAME="PaperweightOS 0.1"/' \
+                -e 's/^NAME=.*/NAME="PaperweightOS"/' \
+                -e 's/^VERSION_ID=.*/VERSION_ID="0.1"/' \
+                -e 's/^VERSION=.*/VERSION="0.1 (trixie)"/' \
+                -e 's#^HOME_URL=.*#HOME_URL="https://github.com/jalexlong/paperweight-os"#' \
+                -e 's#^SUPPORT_URL=.*#SUPPORT_URL="https://github.com/jalexlong/paperweight-os/issues"#' \
+                -e 's#^BUG_REPORT_URL=.*#BUG_REPORT_URL="https://github.com/jalexlong/paperweight-os/issues"#' \
+                /etc/os-release
+            if ! grep -q '^ID_LIKE=' /etc/os-release; then
+                echo 'ID_LIKE=debian' >> /etc/os-release
+            fi
+        fi
+
         # greetd takes over VT1; mask getty@tty1 so they don't race.
         systemctl mask getty@tty1.service 2>/dev/null || true
 
@@ -70,6 +98,8 @@ case "$1" in
                           "$TARGET_HOME/.config/wlogout/" 2>/dev/null || true
                     # fastfetch config is new — existing users won't have it yet.
                     cp -n /etc/skel/.config/fastfetch/config.jsonc \
+                          "$TARGET_HOME/.config/fastfetch/" 2>/dev/null || true
+                    cp -n /etc/skel/.config/fastfetch/paperweight-logo.png \
                           "$TARGET_HOME/.config/fastfetch/" 2>/dev/null || true
                     cp -n /etc/skel/.config/fastfetch/themes/* \
                           "$TARGET_HOME/.config/fastfetch/themes/" 2>/dev/null || true

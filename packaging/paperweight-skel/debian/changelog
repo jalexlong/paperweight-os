@@ -1,3 +1,48 @@
+paperweight-skel (0.2.69-1) trixie; urgency=low
+
+  * Give fastfetch a real logo: source it from paperweight-plymouth's
+    rock.png — the rock alone, without the paper stack, since fine detail
+    doesn't survive downsampling to character art — and render it via
+    fastfetch's "chafa" logo type (ANSI truecolor character blocks),
+    replacing the built-in "small" Debian ASCII placeholder. Chose
+    "chafa" over "auto": observed "auto" dump raw PNG bytes when a
+    terminal doesn't answer fastfetch's capability query, where "chafa"
+    falls back cleanly to the built-in Debian logo on the same failure;
+    "chafa" also renders as plain ANSI text, which — unlike sixel/kitty
+    graphics — works inside tmux without passthrough configuration.
+  * Set both logo width and height explicitly instead of width alone
+    with preserveAspectRatio: leaving height implicit let fastfetch
+    miscompute the logo's row count, desyncing the cursor math used to
+    align info lines next to it (fragments of the logo bled onto the end
+    of some info lines; others lost their left indent).
+  * Render the logo with "chafa": { "fgOnly": true }: chafa draws only
+    foreground-colored glyphs and leaves every cell's background
+    untouched, so the terminal's own translucent, wallpaper-blended
+    background shows through around the rock instead of a drawn-in
+    color. (Tried pre-compositing the source onto a flat per-theme
+    background color first, to fix chafa defaulting transparent edge
+    pixels to black — fastfetch's chafa integration has no way to tell
+    it what to blend against. That produced an opaque patch that didn't
+    match the terminal's real background, which looked worse than the
+    fringe it replaced; fgOnly avoids both problems and keeps the logo
+    theme-agnostic — one shared PNG again, no Pillow dependency needed.)
+  * Widen the key column (8 -> 10 chars): "Battery", the longest key
+    label, was exactly one column short of leaving room for the
+    key/value separator, so the percentage ran directly into it with no
+    space (e.g. "Battery69%").
+  * Rebrand /etc/os-release as "PaperweightOS 0.1" (PRETTY_NAME/NAME/
+    VERSION/VERSION_ID/HOME_URL/SUPPORT_URL/BUG_REPORT_URL, plus
+    ID_LIKE=debian) via an idempotent postinst sed patch, since
+    /etc/os-release is owned by the Essential base-files package and
+    can't be shipped directly. ID stays "debian" deliberately, to avoid
+    breaking tooling that keys off an exact ID match. This is what makes
+    fastfetch's OS line show "PaperweightOS 0.1" instead of "Debian GNU/
+    Linux 13 (trixie)" — no fastfetch-specific override needed. Distro
+    version is a new, separate major.minor number bumped at milestones,
+    independent of individual .deb package versions (see CLAUDE.md).
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 12 Jul 2026 00:00:00 -0500
+
 paperweight-skel (0.2.68-1) trixie; urgency=low
 
   * Add a minimalist fastfetch config (~/.config/fastfetch/config.jsonc):

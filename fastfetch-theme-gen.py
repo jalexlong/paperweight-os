@@ -8,6 +8,27 @@ canonical source per THEME-AUTHORING.md) and emits a matching
 ~/.config/fastfetch/themes/<name>.jsonc, so a new theme's fastfetch colors
 never have to be hand-converted or re-typed.
 
+The logo (sourced from paperweight-plymouth's rock.png artwork — the rock
+alone without the paper stack, chosen because fine detail doesn't survive
+being downsampled to ~18x9 characters) is rendered via fastfetch's "chafa"
+logo type — chosen over "auto" because it fails safe to the built-in
+Debian ASCII logo when a terminal doesn't answer fastfetch's capability
+query, and because it renders as plain ANSI truecolor blocks, which (unlike
+sixel/kitty graphics) works inside tmux without passthrough configuration.
+
+The logo uses "chafa": {"fgOnly": true} — chafa draws only foreground-
+colored glyphs and leaves every cell's background untouched, so the
+terminal's own (translucent, wallpaper-blended) background shows through
+around the rock instead of a drawn-in color. This was chosen over
+pre-compositing the source onto each theme's flat background color: that
+approach fixed transparent-edge fringing but produced a solid opaque patch
+that didn't match the terminal's actual translucent background — visually
+worse than the fringe it was meant to fix. fgOnly avoids both: no solid
+background is ever drawn, so there's nothing to mismatch, and any leftover
+haloing from anti-aliased source edges is confined to individual glyphs'
+foreground color rather than a whole rectangle. The logo image is therefore
+theme-agnostic again — one shared file, referenced by all four themes.
+
 Usage:
     ./fastfetch-theme-gen.py <name> [--label "Display Name"]
     ./fastfetch-theme-gen.py macchiato
@@ -25,6 +46,7 @@ paperweight-skel:
 
 import argparse
 import re
+import shutil
 import sys
 from pathlib import Path
 
@@ -32,6 +54,13 @@ REPO_ROOT = Path(__file__).resolve().parent
 SKEL_CONFIG = REPO_ROOT / "packaging" / "paperweight-skel" / "etc" / "skel" / ".config"
 SWAY_THEMES = SKEL_CONFIG / "sway" / "themes"
 FASTFETCH_THEMES = SKEL_CONFIG / "fastfetch" / "themes"
+LOGO_SOURCE = (
+    REPO_ROOT / "packaging" / "paperweight-plymouth" / "usr" / "share"
+    / "plymouth" / "themes" / "paperweight" / "rock.png"
+)
+LOGO_DEST = SKEL_CONFIG / "fastfetch" / "paperweight-logo.png"
+LOGO_WIDTH = 18
+LOGO_HEIGHT = 9
 
 # Maps the fastfetch theme's semantic roles to sway palette variable names.
 # See THEME-AUTHORING.md's "26 palette variables" table.
@@ -53,13 +82,17 @@ TEMPLATE = """// PaperweightOS fastfetch theme — {label}
 {{
     "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
     "logo": {{
-        "type": "small",
-        "padding": {{ "top": 1 }},
-        "color": {{ "1": "{lavender_bold}" }}
+        "type": "chafa",
+        "source": "~/.config/fastfetch/paperweight-logo.png",
+        "width": {logo_width},
+        "height": {logo_height},
+        "preserveAspectRatio": true,
+        "padding": {{ "top": 1, "right": 2 }},
+        "chafa": {{ "fgOnly": true }}
     }},
     "display": {{
         "separator": " ",
-        "key": {{ "width": 8 }},
+        "key": {{ "width": 10 }},
         "color": {{
             "keys": "{lavender_bold}",
             "output": "{text}",
@@ -125,7 +158,22 @@ def guess_label(conf_path: Path, name: str) -> str:
     return name.capitalize()
 
 
-def generate(name: str, label: str | None, sway_dir: Path, out_dir: Path) -> Path:
+def sync_logo(logo_src: Path, logo_dest: Path) -> None:
+    """Copy the shared, theme-agnostic logo source into the skel tree."""
+    if not logo_src.is_file():
+        sys.exit(f"error: logo source not found at {logo_src}")
+    logo_dest.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(logo_src, logo_dest)
+
+
+def generate(
+    name: str,
+    label: str | None,
+    sway_dir: Path,
+    out_dir: Path,
+    logo_src: Path,
+    logo_dest: Path,
+) -> Path:
     conf_path = sway_dir / f"{name}.conf"
     if not conf_path.is_file():
         sys.exit(f"error: no sway theme found at {conf_path}")
@@ -137,9 +185,13 @@ def generate(name: str, label: str | None, sway_dir: Path, out_dir: Path) -> Pat
 
     label = label or guess_label(conf_path, name)
 
+    sync_logo(logo_src, logo_dest)
+
     content = TEMPLATE.format(
         name=name,
         label=label,
+        logo_width=LOGO_WIDTH,
+        logo_height=LOGO_HEIGHT,
         lavender_bold=hex_to_sgr(palette["lavender"], bold=True),
         blue_bold=hex_to_sgr(palette["blue"], bold=True),
         overlay1=hex_to_sgr(palette["overlay1"]),
@@ -162,6 +214,8 @@ def main() -> None:
     parser.add_argument("--label", help="display label for the generated file's header comment")
     parser.add_argument("--sway-dir", type=Path, default=SWAY_THEMES, help="directory containing sway theme .conf files")
     parser.add_argument("--out-dir", type=Path, default=FASTFETCH_THEMES, help="directory to write the fastfetch theme .jsonc into")
+    parser.add_argument("--logo-src", type=Path, default=LOGO_SOURCE, help="raw logo PNG to copy into the skel tree")
+    parser.add_argument("--logo-dest", type=Path, default=LOGO_DEST, help="path to copy the shared logo PNG to")
     parser.add_argument("--hex", help="convert a single #rrggbb color to fastfetch SGR format and exit")
     parser.add_argument("--bold", action="store_true", help="with --hex, emit the bold variant")
     args = parser.parse_args()
@@ -173,7 +227,7 @@ def main() -> None:
     if not args.name:
         parser.error("name is required unless --hex is given")
 
-    out_path = generate(args.name, args.label, args.sway_dir, args.out_dir)
+    out_path = generate(args.name, args.label, args.sway_dir, args.out_dir, args.logo_src, args.logo_dest)
     print(f"wrote {out_path.relative_to(REPO_ROOT)}")
 
 
