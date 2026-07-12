@@ -10,6 +10,7 @@
 #   ~/.config/gtklock/themes/<name>.css
 #   ~/.config/foot/themes/<name>.ini
 #   ~/.config/wlogout/themes/<name>.css
+#   ~/.config/fastfetch/themes/<name>.jsonc
 #
 # With no argument, prompts via wofi.
 
@@ -20,6 +21,7 @@ GTKLOCK_THEMES="$HOME/.config/gtklock/themes"
 WOFI_THEMES="$HOME/.config/wofi/themes"
 FOOT_THEMES="$HOME/.config/foot/themes"
 WLOGOUT_THEMES="$HOME/.config/wlogout/themes"
+FASTFETCH_THEMES="$HOME/.config/fastfetch/themes"
 
 # Logging: timestamped lines to ~/.local/share/paperweight-os/theme-switch.log
 # and stdout (so interactive runs show progress).
@@ -87,7 +89,8 @@ for f in \
     "$GTKLOCK_THEMES/$THEME.css" \
     "$WOFI_THEMES/$THEME.css" \
     "$FOOT_THEMES/$THEME.ini" \
-    "$WLOGOUT_THEMES/$THEME.css"
+    "$WLOGOUT_THEMES/$THEME.css" \
+    "$FASTFETCH_THEMES/$THEME.jsonc"
 do
     [ -f "$f" ] || missing="$missing\n  $f"
 done
@@ -115,7 +118,8 @@ cp "$GTKLOCK_THEMES/$THEME.css" "$HOME/.config/gtklock/style.css"
 cp "$WOFI_THEMES/$THEME.css"    "$HOME/.config/wofi/style.css"
 cp "$FOOT_THEMES/$THEME.ini"    "$HOME/.config/foot/colors.ini"
 cp "$WLOGOUT_THEMES/$THEME.css" "$HOME/.config/wlogout/style.css"
-log "swaync, gtklock, wofi, foot, wlogout: applied"
+cp "$FASTFETCH_THEMES/$THEME.jsonc" "$HOME/.config/fastfetch/config.jsonc"
+log "swaync, gtklock, wofi, foot, wlogout, fastfetch: applied"
 
 # Record active theme
 mkdir -p "$HOME/.config/paperweight-os"

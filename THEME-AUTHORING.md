@@ -4,9 +4,9 @@
 
 The theme system has two independent layers:
 
-**Per-user theme** — eight files in `~/.config/`, switched live with
+**Per-user theme** — nine files in `~/.config/`, switched live with
 `paperweight-theme <name>`. No sudo required. Covers sway window borders,
-waybar, swaync, gtklock, wofi, foot, and wlogout.
+waybar, swaync, gtklock, wofi, foot, wlogout, and fastfetch.
 
 **System surfaces** — gtkgreet (login screen), GRUB boot menu, and Plymouth
 boot splash. Each has its own `sudo` helper. These are separate from the
@@ -18,10 +18,10 @@ is in the `sudo` group.
 ## Naming rules
 
 - Lowercase ASCII only — no spaces, no accents, no special characters.
-- The name is used verbatim as a filename component across all eight files and
+- The name is used verbatim as a filename component across all nine files and
   two directories. A typo or non-ASCII character (e.g. `frappé` instead of
   `frappe`) will silently break validation.
-- `paperweight-theme` validates that all eight files exist before touching
+- `paperweight-theme` validates that all nine files exist before touching
   anything. A partial set of files will produce an error and leave the active
   theme unchanged.
 
@@ -50,7 +50,7 @@ the rest.
 
 ## Per-user theme files
 
-All eight files live under `~/.config/` on the installed system. In the
+All nine files live under `~/.config/` on the installed system. In the
 packaging tree they live under:
 `packaging/paperweight-skel/etc/skel/.config/`
 
@@ -218,6 +218,54 @@ instead (see `margin: 220px 16px;` in the shipped themes).
 
 `wlogout/style.css` is the active theme file written by `paperweight-theme`.
 
+### 9. `fastfetch/themes/<name>.jsonc`
+
+The full fastfetch config for the theme — module list *and* colors in one
+file, since fastfetch only loads a single `-c` config at a time (no
+`@import`-style composition like waybar/wofi CSS). Copy an existing theme
+file and regenerate rather than hand-editing the color values.
+
+**fastfetch doesn't accept hex colors.** Its `color` fields want an ANSI SGR
+parameter string — e.g. `#8aadf4` (Catppuccin blue) becomes
+`"1;38;2;138;173;244"` (bold truecolor). Use **`fastfetch-theme-gen.py`**
+(repo root) instead of converting by hand:
+
+```sh
+# Reads packaging/paperweight-skel/etc/skel/.config/sway/themes/<name>.conf
+# (the canonical palette — see "26 palette variables" above) and writes
+# packaging/paperweight-skel/etc/skel/.config/fastfetch/themes/<name>.jsonc
+./fastfetch-theme-gen.py <name>
+
+# Spot-convert a single hex value, e.g. for a one-off tweak:
+./fastfetch-theme-gen.py --hex 8aadf4 --bold
+```
+
+The script pulls eight roles off the sway palette — `lavender`, `blue`,
+`overlay1`, `surface2`, `text`, `green`, `yellow`, `red` — and maps them to:
+
+| Role | Used for |
+|---|---|
+| `lavender` (bold) | Logo color, key labels, title hostname — the desktop's primary accent (same color as sway's focused window border) |
+| `blue` (bold) | Title username |
+| `overlay1` | Title `@` separator |
+| `surface2` | The dashed separator line under the title |
+| `text` | Module value color |
+| `green` / `yellow` / `red` | Percentage thresholds (memory/disk/battery/CPU usage) |
+
+Requires the sway theme file to already define all eight roles — run this
+*after* step 1, not before. If you want a different mapping (e.g. a
+non-Catppuccin theme where `lavender` isn't the right "primary" accent),
+edit the `ROLES` dict or `TEMPLATE` string at the top of the script rather
+than hand-editing generated `.jsonc` files, so regeneration stays lossless.
+
+The module list itself (which fields fastfetch prints — currently OS,
+Kernel, Uptime, CPU, Memory, Disk, LAN IPv4, Battery behind a small logo)
+is identical across all themes and only needs to change once, in the
+script's `TEMPLATE`, rather than in four separate files.
+
+`fastfetch/config.jsonc` is the active theme file written by
+`paperweight-theme`.
+
 ---
 
 ## Wallpaper (optional)
@@ -296,9 +344,12 @@ output. See the script itself for details.
 
 ### Minimal path (per-user only, Catppuccin variant)
 
-1. Create all eight files in the packaging tree:
+1. Create the sway palette first — the rest of the flow reads from it:
    ```
    packaging/paperweight-skel/etc/skel/.config/sway/themes/<name>.conf
+   ```
+2. Create the remaining seven hand-written files in the packaging tree:
+   ```
    packaging/paperweight-skel/etc/skel/.config/waybar/themes/<name>-palette.css
    packaging/paperweight-skel/etc/skel/.config/waybar/themes/<name>-waybar.css
    packaging/paperweight-skel/etc/skel/.config/swaync/themes/<name>.css
@@ -307,11 +358,16 @@ output. See the script itself for details.
    packaging/paperweight-skel/etc/skel/.config/foot/themes/<name>.ini
    packaging/paperweight-skel/etc/skel/.config/wlogout/themes/<name>.css
    ```
-2. No changes to `debian/install` — the `themes/` directory globs pick up
+3. Generate the ninth file instead of writing it by hand:
+   ```sh
+   ./fastfetch-theme-gen.py <name>
+   # writes packaging/paperweight-skel/etc/skel/.config/fastfetch/themes/<name>.jsonc
+   ```
+4. No changes to `debian/install` — the `themes/` directory globs pick up
    new files automatically.
-3. Add a gtkgreet CSS at `packaging/paperweight-skel/etc/greetd/themes/<name>.css`.
-4. Bump `paperweight-skel` version and add a changelog entry.
-5. Optionally add a wallpaper to `paperweight-wallpapers` (bump that version too).
+5. Add a gtkgreet CSS at `packaging/paperweight-skel/etc/greetd/themes/<name>.css`.
+6. Bump `paperweight-skel` version and add a changelog entry.
+7. Optionally add a wallpaper to `paperweight-wallpapers` (bump that version too).
 
 ### Full path (new theme family, non-Catppuccin)
 
@@ -335,6 +391,7 @@ paperweight-theme <name>    # should apply cleanly; check for notify-send error
 swaymsg -t get_outputs      # check wallpaper path
 pgrep -x waybar             # should be exactly 1
 cat ~/.config/paperweight-os/active-theme   # should be <name>
+fastfetch                   # `ff` alias — logo/keys/host should be in the new accent color
 
 # Verify persistence
 swaymsg reload              # wallpaper should survive

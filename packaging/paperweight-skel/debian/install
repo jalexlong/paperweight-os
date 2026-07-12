@@ -42,3 +42,5 @@ usr/bin/paperweight-set-greeter-theme                     usr/bin/
 usr/lib/paperweight-os/start-greeter                      usr/lib/paperweight-os/
 usr/share/applications/paperweight-nvim.desktop           usr/share/applications/
 usr/share/applications/mimeapps.list                      usr/share/applications/
+etc/skel/.config/fastfetch/config.jsonc                    etc/skel/.config/fastfetch/
+etc/skel/.config/fastfetch/themes/                         etc/skel/.config/fastfetch/

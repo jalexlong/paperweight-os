@@ -52,7 +52,8 @@ case "$1" in
                         "$TARGET_HOME/.config/foot/themes" \
                         "$TARGET_HOME/.config/wofi/themes" \
                         "$TARGET_HOME/.config/wlogout/themes" \
-                        "$TARGET_HOME/.config/paperweight-os/bashrc.d"
+                        "$TARGET_HOME/.config/paperweight-os/bashrc.d" \
+                        "$TARGET_HOME/.config/fastfetch/themes"
                     cp -n /etc/skel/.config/foot/themes/* \
                           "$TARGET_HOME/.config/foot/themes/" 2>/dev/null || true
                     cp -n /etc/skel/.config/wofi/themes/* \
@@ -67,6 +68,11 @@ case "$1" in
                           "$TARGET_HOME/.config/wlogout/" 2>/dev/null || true
                     cp -n /etc/skel/.config/wlogout/style.css \
                           "$TARGET_HOME/.config/wlogout/" 2>/dev/null || true
+                    # fastfetch config is new — existing users won't have it yet.
+                    cp -n /etc/skel/.config/fastfetch/config.jsonc \
+                          "$TARGET_HOME/.config/fastfetch/" 2>/dev/null || true
+                    cp -n /etc/skel/.config/fastfetch/themes/* \
+                          "$TARGET_HOME/.config/fastfetch/themes/" 2>/dev/null || true
                     # Always overwrite package-maintained files so they stay
                     # in sync with the installed version.
                     cp /etc/skel/.config/foot/foot.ini \
@@ -88,6 +94,7 @@ case "$1" in
                         "$TARGET_HOME/.config/wofi/themes" \
                         "$TARGET_HOME/.config/wlogout" \
                         "$TARGET_HOME/.config/paperweight-os/bashrc.d" \
+                        "$TARGET_HOME/.config/fastfetch" \
                         2>/dev/null || true
                 fi
 

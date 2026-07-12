@@ -48,6 +48,7 @@ Depends:
  yazi,
  tmux,
  btop,
+ fastfetch,
  zoxide,
  ncdu,
  fzf,

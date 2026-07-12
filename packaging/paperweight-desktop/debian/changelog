@@ -1,3 +1,10 @@
+paperweight-desktop (0.1.16-1) trixie; urgency=low
+
+  * Add fastfetch to Depends: powers the new `ff` alias / minimalist
+    system-info config shipped by paperweight-skel.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 12 Jul 2026 00:00:00 -0500
+
 paperweight-desktop (0.1.15-1) trixie; urgency=low
 
   * Remove hx (Helix) from Depends: standardizing on neovim as the
