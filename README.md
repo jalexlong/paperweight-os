@@ -256,9 +256,11 @@ sudo apt install devscripts debhelper build-essential grub-common reprepro
 cd packaging/paperweight-skel
 dpkg-buildpackage -us -uc -b
 
-# Build, sign, and publish all packages to the apt repo
+# Build, sign, and publish all packages to the apt repo — CI does this
+# automatically on push to main. Only run this yourself for a manual/local
+# publish.
 bash setup-gpg.sh   # one-time: generate your GPG signing key
-bash publish.sh
+bash manual_publish.sh
 ```
 
 ---
