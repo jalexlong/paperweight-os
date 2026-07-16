@@ -1,3 +1,17 @@
+paperweight-secrets (0.1.2-1) trixie; urgency=high
+
+  * Fix gpg-agent.conf pointing pinentry-program at /usr/bin/pinentry-gtk2
+    (found during live testing: "No pinentry" on any operation needing the
+    secret key). The pinentry-gtk2 *package* installs its binary at
+    /usr/bin/pinentry-gtk-2 (hyphenated) — never verified against the real
+    installed path, just assumed it matched the package name. Fixed in
+    both the skel gpg-agent.conf default and paperweight-secrets-init's
+    merge logic. Existing installs need a manual one-line sed fix to
+    ~/.gnupg/gpg-agent.conf; re-running paperweight-secrets-init won't
+    correct an already-present (wrong) directive.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 16 Jul 2026 16:00:00 -0500
+
 paperweight-secrets (0.1.1-1) trixie; urgency=high
 
   * Fix $mod+p doing nothing on existing-user installs (found during live
