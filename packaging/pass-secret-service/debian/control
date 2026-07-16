@@ -9,6 +9,8 @@ Rules-Requires-Root: no
 
 Package: pass-secret-service
 Architecture: all
+Conflicts: gnome-keyring
+Replaces: gnome-keyring
 Depends:
  ${python3:Depends},
  ${misc:Depends},

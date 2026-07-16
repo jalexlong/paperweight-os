@@ -1,3 +1,15 @@
+pass-secret-service (0~git20260715.4ba0f4b6-2) trixie; urgency=high
+
+  * Add Conflicts/Replaces: gnome-keyring (found during live testing):
+    both packages ship the same D-Bus activation file
+    (usr/share/dbus-1/services/org.freedesktop.secrets.service) for the
+    same well-known bus name — they cannot coexist, and dpkg refuses to
+    silently overwrite a file owned by another package. Replacing
+    gnome-keyring's Secret Service role was always the intent (see
+    CLAUDE.md); it just wasn't declared.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 16 Jul 2026 15:00:00 -0500
+
 pass-secret-service (0~git20260715.4ba0f4b6-1) trixie; urgency=low
 
   * Initial packaging. Builds upstream develop branch snapshot (commit
