@@ -37,7 +37,8 @@ paperweight-os/
 │   └── rebuild-preseed.sh       # fast preseed-only rebuild (clears binary_hooks stage, reruns lb binary)
 ├── apt-repo/
 │   └── conf/                    # reprepro config (SignWith key must be set)
-├── publish.sh                   # Build all .debs → sign → push gh-pages
+├── manual_publish.sh             # Manual/local-only: build all .debs → sign → push gh-pages
+│                                 # (CI does this automatically on push to main — see below)
 ├── setup-gpg.sh                 # One-time GPG key generation
 ├── sync-skel.sh                 # Rsync skel configs to $HOME for live-editing without a package build
 ├── fastfetch-theme-gen.py       # Generate a fastfetch theme .jsonc from a sway theme's palette
@@ -269,8 +270,10 @@ bash setup-gpg.sh
 cd packaging/paperweight-skel
 dpkg-buildpackage -us -uc -b
 
-# Build + sign + publish all packages to gh-pages apt repo
-bash publish.sh
+# Build + sign + publish all packages to gh-pages apt repo — CI
+# (.github/workflows/build-and-publish.yml) does this automatically on
+# every push to main. Only run this yourself for a manual/local publish.
+bash manual_publish.sh
 ```
 
 GitHub Pages must be enabled on the repo (Settings → Pages → gh-pages branch, root).
