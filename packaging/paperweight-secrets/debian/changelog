@@ -1,3 +1,14 @@
+paperweight-secrets (0.1.1-1) trixie; urgency=high
+
+  * Fix $mod+p doing nothing on existing-user installs (found during live
+    testing): postinst propagated the new bashrc.d fragment to an
+    already-existing user's home directory but never the sway keybind
+    fragment (60-secrets-keys.conf) — /etc/skel only reaches brand-new
+    accounts via adduser. Now propagated the same way as the bashrc.d
+    fragment.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 16 Jul 2026 14:00:00 -0500
+
 paperweight-secrets (0.1.0-1) trixie; urgency=low
 
   * Initial packaging. Distro-wide secrets manager: pass + pam-gnupg +
