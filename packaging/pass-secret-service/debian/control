@@ -1,0 +1,31 @@
+Source: pass-secret-service
+Section: python
+Priority: optional
+Maintainer: Alex Long <johnalexanderlong@gmail.com>
+Build-Depends: debhelper-compat (= 13), dh-python, python3-all, python3-setuptools, curl
+Standards-Version: 4.6.2
+Homepage: https://github.com/mdellweg/pass_secret_service
+Rules-Requires-Root: no
+
+Package: pass-secret-service
+Architecture: all
+Depends:
+ ${python3:Depends},
+ ${misc:Depends},
+ pass,
+ python3-click,
+ python3-cryptography,
+ python3-dbus-next,
+ python3-decorator,
+ python3-pypass
+Description: Secret Service D-Bus API backed by pass (upstream source build)
+ Implements the org.freedesktop.secrets D-Bus interface (as used by
+ libsecret-consuming apps, e.g. Firefox saved logins) with pass(1) as the
+ storage backend, in place of gnome-keyring.
+ .
+ Auto-started on demand via D-Bus session-bus activation
+ (org.freedesktop.secrets.service); no manual startup required once a
+ pass(1) store exists.
+ .
+ This package builds an upstream source snapshot rather than repackaging a
+ release, since pass-secret-service has no tagged releases.

@@ -1,0 +1,17 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: pam-gnupg
+Upstream-Contact: https://github.com/cruegge/pam-gnupg
+Source: https://github.com/cruegge/pam-gnupg
+
+Files: *
+Copyright: 2016-2022 Christian Ruegger and contributors
+License: GPL-3
+
+Files: debian/*
+Copyright: 2026 Alex Long <johnalexanderlong@gmail.com>
+License: GPL-3
+
+License: GPL-3
+ On Debian systems, the complete text of the GNU General
+ Public License version 3 can be found in
+ "/usr/share/common-licenses/GPL-3".

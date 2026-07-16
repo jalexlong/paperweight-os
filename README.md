@@ -37,6 +37,9 @@ Installing `paperweight-desktop` pulls in:
 **Chat**
 - **Vesktop** — Discord client with Vencord modifications and improved Wayland support; workspace 4 (`Super+d`). Also symlinked as `/usr/bin/discord`
 
+**Security**
+- **pass + pam-gnupg + pass-secret-service** — GPG-backed password store, unlocked automatically at login via PAM, exposed to libsecret apps (e.g. Firefox) over D-Bus — no gnome-keyring. `Super+p` passmenu picker.
+
 **Development**
 - **Neovim, Vim** — terminal editors
 - **yazi** — fast TUI file manager (alongside Thunar for GUI)
@@ -136,6 +139,31 @@ file browser and add your library. ncspot requires a Spotify Premium account.
 Vesktop is included in `paperweight-desktop` (as a Recommended package) and ships
 in the paperweight apt repo. `Super+d` launches it on workspace 4 automatically.
 
+### Password manager
+
+`paperweight-secrets` ships `pass` + `pass-secret-service` + `pam-gnupg` as a
+distro-wide default (Recommended by `paperweight-desktop`). One-time setup:
+
+```bash
+gpg --full-generate-key   # if you don't already have a GPG key
+paperweight-secrets-init
+```
+
+`paperweight-secrets-init` never generates key material itself — it wires up
+everything mechanical after you have a key: `~/.pam-gnupg` keygrips,
+`~/.gnupg/gpg-agent.conf`, and `pass init`. After logging out and back in,
+your GnuPG key unlocks automatically with your login password. `Super+p`
+opens a wofi picker to copy a password to the clipboard (clears after 45s).
+Any libsecret-consuming app (e.g. Firefox saved logins) will use `pass` as
+its backend automatically via D-Bus activation — no gnome-keyring involved.
+
+CLI-managed passwords and app-created secrets live in two separate namespaces
+by design (`pass-secret-service` only scans what it created, once, at
+startup). Run `paperweight-secrets-sync` after adding CLI passwords you want
+visible to apps — it mirrors them in as symlinks and restarts the D-Bus
+service. The reverse direction needs no syncing: `Super+p` already shows
+app-created secrets by their real name instead of an internal id.
+
 ---
 
 ## Key Bindings
@@ -185,6 +213,7 @@ Music (workspace 3) is terminal-launched — `Super+3`, open a terminal, run `nc
 | `Super+Ctrl+W` | Restart waybar |
 | `Super+t` | Theme picker |
 | `Super+n` | Wi-Fi network picker |
+| `Super+p` | Password picker (copies to clipboard, clears in 45s) |
 | `Super+Shift+N` | Toggle notification center |
 | `Ctrl+Alt+Delete` / `Ctrl+Alt+BackSpace` | Power menu (wlogout) — lock/logout/suspend/restart/shutdown (BackSpace covers Chromebook keyboards) |
 | `Print` | Screenshot → ~/Pictures/ |
@@ -212,6 +241,9 @@ lock screen). On the Chromebook, the top-row keys send these by default;
 | `yazi` | 26.5.6 | Fast TUI file manager (upstream musl binary repack) |
 | `vesktop` | 1.6.5 | Discord client with Vencord (upstream binary repack) |
 | `paperweight-wallpapers` | 0.3.2 | Catppuccin wallpapers |
+| `paperweight-secrets` | 0.1.0 | Secrets manager glue: PAM wiring, gpg-agent, passmenu |
+| `pam-gnupg` | 0.4 | PAM module unlocking GnuPG at login (upstream source build) |
+| `pass-secret-service` | 0~git20260715 | Secret Service D-Bus API over pass (upstream source build) |
 
 ---
 

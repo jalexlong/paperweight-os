@@ -12,11 +12,15 @@ packaging/ncspot/ncspot
 packaging/paperweight-grub/**/*.pf2
 packaging/yazi/yazi-upstream.deb
 packaging/yazi/upstream-extract/
+packaging/**/upstream-src/
+packaging/**/.pybuild/
 packaging/**/*.changes
 packaging/**/debian/.debhelper/
 packaging/**/debian/debhelper-build-stamp
 packaging/**/debian/files
 packaging/**/debian/*.substvars
+packaging/**/debian/*.debhelper
+packaging/**/debian/*.debhelper.log
 packaging/**/debian/tmp/
 packaging/**/debian/*/
 

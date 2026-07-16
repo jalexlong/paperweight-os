@@ -1,0 +1,37 @@
+Source: paperweight-secrets
+Section: misc
+Priority: optional
+Maintainer: Alex Long <johnalexanderlong@gmail.com>
+Build-Depends: debhelper-compat (= 13)
+Standards-Version: 4.6.2
+Homepage: https://github.com/jalexlong/paperweight-os
+Rules-Requires-Root: no
+
+Package: paperweight-secrets
+Architecture: all
+Depends:
+ ${misc:Depends},
+ paperweight-skel,
+ pass,
+ pam-gnupg,
+ pass-secret-service,
+ pinentry-gtk2,
+ wl-clipboard,
+ python3
+Description: Secrets manager stack — pass, pam-gnupg, pass-secret-service
+ Wires up a distro-wide secrets stack: pass(1) as the password store,
+ pass-secret-service exposing it over the org.freedesktop.secrets D-Bus API
+ (libsecret apps, e.g. Firefox saved logins), and pam-gnupg unlocking the
+ GnuPG key with the login password.
+ .
+ Patches /etc/pam.d/greetd and /etc/pam.d/gtklock to preset the gpg-agent
+ passphrase cache on login and screen-unlock. Ships default
+ ~/.gnupg/gpg-agent.conf, a paperweight-passmenu wofi picker bound to
+ $mod+p, and paperweight-secrets-init(1) to guide first-time setup
+ (GPG key generation is left to the user — never done silently).
+ .
+ paperweight-secrets-sync bridges the CLI and D-Bus worlds: it mirrors
+ regular pass(1) entries into pass-secret-service's store as symlinks so
+ apps can see them too; paperweight-passmenu already shows app-created
+ secrets by their D-Bus Label. Run after adding CLI passwords you want
+ visible to apps.

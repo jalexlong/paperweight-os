@@ -1,0 +1,70 @@
+#!/bin/sh
+# Pick a pass(1) entry via wofi and copy its password to the clipboard.
+# Clipboard is cleared after 45s, but only if it still holds that password
+# (avoids clobbering something the user copied in the meantime).
+#
+# Lists two kinds of entries:
+#   - regular pass(1) entries (shown by their path)
+#   - secrets created by apps through pass-secret-service, living under
+#     secret_service/<collection>/<uuid>.gpg — shown by their D-Bus Label
+#     (read from the sibling .properties file) instead of the raw uuid.
+#     secret_service/cli_mirror/ is skipped here: those are symlinks back
+#     to regular entries already listed above (see paperweight-secrets-sync).
+
+PREFIX="${PASSWORD_STORE_DIR:-$HOME/.password-store}"
+
+if [ ! -d "$PREFIX" ]; then
+    notify-send -u critical "pass" "No password store at $PREFIX — run paperweight-secrets-init first."
+    exit 1
+fi
+
+MAP=$(mktemp)
+trap 'rm -f "$MAP"' EXIT
+
+find "$PREFIX" -type f -name '*.gpg' -not -path "$PREFIX/secret_service/*" \
+    | sed -e "s|^$PREFIX/||" -e "s|\.gpg\$||" \
+    | while IFS= read -r REL; do
+        printf '%s\t%s\n' "$REL" "$REL" >> "$MAP"
+    done
+
+find "$PREFIX/secret_service" -mindepth 2 -maxdepth 2 -type f -name '*.gpg' \
+    -not -path "$PREFIX/secret_service/cli_mirror/*" 2>/dev/null \
+    | while IFS= read -r ITEM; do
+        REL=$(printf '%s' "$ITEM" | sed -e "s|^$PREFIX/||" -e "s|\.gpg\$||")
+        PROPS="${ITEM%.gpg}.properties"
+        LABEL=$(python3 -c '
+import json, sys
+try:
+    with open(sys.argv[1]) as fp:
+        props = json.load(fp)
+    print(props.get("org.freedesktop.Secret.Item.Label", "") or "")
+except Exception:
+    pass
+' "$PROPS" 2>/dev/null)
+        [ -n "$LABEL" ] || LABEL="$REL"
+        printf '\xf0\x9f\x94\x92 %s\t%s\n' "$LABEL" "$REL" >> "$MAP"
+    done
+
+DISPLAY=$(cut -f1 "$MAP" | sort | wofi --dmenu --prompt "pass:" --lines 12)
+[ -z "$DISPLAY" ] && exit 0
+
+ENTRY=$(awk -F'\t' -v d="$DISPLAY" '$1 == d { print $2; exit }' "$MAP")
+[ -z "$ENTRY" ] && exit 0
+
+PASSWORD=$(pass show "$ENTRY" 2>/dev/null | head -n1)
+if [ -z "$PASSWORD" ]; then
+    notify-send -u critical "pass" "Failed to decrypt \"$DISPLAY\""
+    exit 1
+fi
+
+printf '%s' "$PASSWORD" | wl-copy
+notify-send "pass" "Copied \"$DISPLAY\" — clears in 45s"
+
+(
+    sleep 45
+    CURRENT=$(wl-paste -n 2>/dev/null)
+    if [ "$CURRENT" = "$PASSWORD" ]; then
+        wl-copy --clear
+    fi
+) &
+disown

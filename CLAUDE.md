@@ -23,7 +23,10 @@ paperweight-os/
 │   ├── paperweight-wallpapers/  # Per-theme wallpaper art (JPG) + solid-color PNG fallback + picker
 │   ├── paperweight-grub/        # Catppuccin Macchiato GRUB2 theme
 │   ├── paperweight-plymouth/    # Catppuccin Macchiato Plymouth boot splash
-│   └── paperweight-chromebook/  # Hardware add-on for Chromebook/coreboot
+│   ├── paperweight-chromebook/  # Hardware add-on for Chromebook/coreboot
+│   ├── paperweight-secrets/     # Secrets manager glue: PAM wiring, gpg-agent, passmenu
+│   ├── pam-gnupg/                # Upstream source build: PAM module (not in Debian)
+│   └── pass-secret-service/      # Upstream source build: Secret Service over pass (not in Debian)
 ├── live-build/                  # live-build ISO config
 │   ├── auto/                    # lb config/build/clean scripts
 │   ├── config/
@@ -47,7 +50,7 @@ paperweight-os/
 ```
 paperweight-desktop
   └── Depends: paperweight-skel + sway stack + fonts + tools
-  └── Recommends: paperweight-grub, paperweight-plymouth
+  └── Recommends: paperweight-grub, paperweight-plymouth, paperweight-secrets
 
 paperweight-grub        (recommended, installed by default)
   └── Catppuccin Macchiato GRUB2 theme; sets GRUB_THEME in /etc/default/grub
@@ -58,6 +61,31 @@ paperweight-plymouth    (recommended, installed by default)
 paperweight-chromebook  (optional add-on)
   └── Depends: paperweight-desktop + Chromebook-specific packages
   └── postinst sets GRUB_GFXMODE=1366x768,auto + GRUB_GFXPAYLOAD_LINUX=keep
+
+paperweight-secrets     (recommended, installed by default)
+  └── Depends: paperweight-skel, pass, pam-gnupg, pass-secret-service, pinentry-gtk2
+  └── postinst patches /etc/pam.d/greetd + /etc/pam.d/gtklock to preset the
+      gpg-agent passphrase cache at login/unlock using pam_gnupg.so; ships
+      ~/.gnupg/gpg-agent.conf default, a $mod+p passmenu wofi picker, and
+      paperweight-secrets-init(1) for guided first-run setup (never generates
+      GPG key material itself — that's left to the user's own
+      `gpg --full-generate-key`)
+  └── CLI pass(1) entries and D-Bus/app-created secrets are two separate
+      namespaces (pass-secret-service only scans what it created, once, at
+      startup — see its pass_store.py). paperweight-secrets-sync bridges
+      CLI → apps by mirroring pass(1) entries into pass-secret-service's
+      store as symlinks (readable Label via a synthesized .properties
+      sidecar), then restarts the D-Bus service; paperweight-passmenu
+      already bridges apps → CLI by showing D-Bus-created secrets under
+      their real Label instead of the internal id, no sync needed for that
+      direction
+
+pam-gnupg / pass-secret-service   (upstream source builds, not in Debian Trixie)
+  └── pam-gnupg: autotools C build of github.com/cruegge/pam-gnupg v0.4
+  └── pass-secret-service: pybuild of github.com/mdellweg/pass_secret_service
+      (git snapshot — upstream has no tagged releases); implements
+      org.freedesktop.secrets over D-Bus, backed by pass; auto-started via
+      D-Bus session-bus activation, no exec line needed in sway config.d
 ```
 
 ### Config fragment philosophy
@@ -215,6 +243,7 @@ App-launch bindings (from `40-workspaces.conf`) switch to the workspace and open
 | `$mod+space` | App launcher (wofi) |
 | `$mod+t` | Theme picker (paperweight-theme) |
 | `$mod+n` | Network picker (paperweight-network) |
+| `$mod+p` | Password picker (paperweight-passmenu) — copies to clipboard, clears in 45s |
 | `$mod+q` | Kill window |
 | `$mod+g` | Toggle floating / tiled |
 | `$mod+m` | Fullscreen |

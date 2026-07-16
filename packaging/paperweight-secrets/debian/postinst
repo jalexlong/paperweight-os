@@ -1,0 +1,63 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    configure)
+        chmod +x /usr/bin/paperweight-passmenu /usr/bin/paperweight-secrets-init \
+                 /usr/bin/paperweight-secrets-sync
+
+        # Wire pam-gnupg into the login and screen-unlock PAM stacks.
+        # Both files are owned by other packages (greetd, gtklock) so we
+        # patch them in place, guarded by grep for idempotency — same
+        # pattern paperweight-grub uses for /etc/default/grub. The "-"
+        # prefix means PAM ignores a missing module rather than failing;
+        # /etc/pam.d/greetd already ships pam_gnome_keyring.so/pam_kwallet5.so
+        # stanzas in this exact style as an upstream placeholder for keyring
+        # integration, so this follows that file's own established convention.
+        if [ -f /etc/pam.d/greetd ] && ! grep -q "pam_gnupg.so" /etc/pam.d/greetd; then
+            {
+                echo ''
+                echo '-auth        optional        pam_gnupg.so store-only'
+                echo '-session     optional        pam_gnupg.so'
+            } >> /etc/pam.d/greetd
+        fi
+
+        if [ -f /etc/pam.d/gtklock ] && ! grep -q "pam_gnupg.so" /etc/pam.d/gtklock; then
+            {
+                echo ''
+                echo '-auth        optional        pam_gnupg.so'
+            } >> /etc/pam.d/gtklock
+        fi
+
+        # dh_fixperms normalizes shipped files to 644/755 — .gnupg needs
+        # 700 and gpg-agent.conf 600 or gpg will warn/refuse to use them.
+        if [ -d /etc/skel/.gnupg ]; then
+            chmod 700 /etc/skel/.gnupg
+            [ -f /etc/skel/.gnupg/gpg-agent.conf ] && chmod 600 /etc/skel/.gnupg/gpg-agent.conf
+        fi
+
+        # Propagate the new bashrc.d fragment to an already-existing user's
+        # home directory — /etc/skel only reaches *new* users automatically.
+        # The bashrc.d source loop itself is wired up by paperweight-skel,
+        # which this package Depends on, so it's already in place by now.
+        TARGET_USER=""
+        if [ -n "${SUDO_USER:-}" ] && [ "$SUDO_USER" != "root" ]; then
+            TARGET_USER="$SUDO_USER"
+        else
+            TARGET_USER=$(getent passwd 1000 2>/dev/null | cut -d: -f1 || true)
+        fi
+
+        if [ -n "$TARGET_USER" ]; then
+            TARGET_HOME=$(getent passwd "$TARGET_USER" | cut -d: -f6)
+            if [ -d "$TARGET_HOME" ]; then
+                install -d -m 755 "$TARGET_HOME/.config/paperweight-os/bashrc.d"
+                cp -n /etc/skel/.config/paperweight-os/bashrc.d/20-gpg-agent.sh \
+                      "$TARGET_HOME/.config/paperweight-os/bashrc.d/" 2>/dev/null || true
+                chown -R "${TARGET_USER}:" \
+                    "$TARGET_HOME/.config/paperweight-os/bashrc.d" 2>/dev/null || true
+            fi
+        fi
+        ;;
+esac
+
+#DEBHELPER#

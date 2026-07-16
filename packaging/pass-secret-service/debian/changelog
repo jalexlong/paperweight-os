@@ -1,0 +1,10 @@
+pass-secret-service (0~git20260715.4ba0f4b6-1) trixie; urgency=low
+
+  * Initial packaging. Builds upstream develop branch snapshot (commit
+    4ba0f4b6c0667192263c385c13b5ec42a87af9ff, 2026-07-15) via pybuild;
+    upstream has no tagged releases. Part of the PaperweightOS
+    secrets-manager stack (pass + pass-secret-service + pam-gnupg).
+  * Installs upstream's systemd/dbus service-activation files, with
+    ExecStart corrected from /usr/local/bin to /usr/bin.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 16 Jul 2026 09:00:00 -0500

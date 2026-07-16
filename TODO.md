@@ -54,6 +54,16 @@ Trixie installs. See git log for details.
 
 ## Packaging
 
+- [x] **Secrets manager stack added** — `paperweight-secrets` (glue package:
+  PAM wiring, gpg-agent.conf, `$mod+p` passmenu, `paperweight-secrets-init`)
+  plus two new upstream-source-build packages not in Debian Trixie:
+  `pam-gnupg` (autotools, v0.4) and `pass-secret-service` (pybuild, git
+  snapshot — no upstream releases). Added to `paperweight-desktop`
+  Recommends. pinentry-gtk2 chosen over pinentry-gnome3 to avoid pulling in
+  `gcr` (no GNOME dependency anywhere else in this distro). 0.1.0-1 /
+  pam-gnupg 0.4-1 / pass-secret-service 0~git20260715.4ba0f4b6-1 /
+  paperweight-desktop 0.1.17-1.
+
 - [x] **`waypaper` replaced with yad+wofi picker** — `paperweight-wallpaper`
   now uses `yad --list` with an IMG thumbnail column (scanning system wallpapers
   and `~/Pictures/`) with a `wofi --dmenu` fallback. `waypaper` dep dropped;
@@ -141,6 +151,13 @@ Trixie installs. See git log for details.
   system surfaces (gtkgreet, GRUB, Plymouth), wallpaper convention, packaging
   registration steps, and a testing checklist. CLAUDE.md stub updated to
   reference it and corrected from "five files" to seven.
+
+- [ ] **Tighter gpg-agent / SSH agent coupling** — `paperweight-secrets`
+  deliberately keeps the standard separate `ssh-agent` for now (decided
+  2026-07-16). Revisit `gpg-agent --enable-ssh-support` once the basic
+  3-piece stack (pass + pam-gnupg + pass-secret-service) is validated on
+  real hardware — would let pam-gnupg's login unlock cover SSH keys too,
+  at the cost of `SSH_AUTH_SOCK` session wiring and GPG_TTY debugging surface.
 
 - [ ] **Additional themes beyond Catppuccin** — the architecture supports arbitrary
   themes but only Catppuccin variants exist. A Nord or Dracula variant would

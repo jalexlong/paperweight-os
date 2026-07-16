@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+
+case "$1" in
+    remove|purge)
+        # Key-only match, not the full line — robust even if a user
+        # hand-edited the surrounding lines (same rationale as
+        # paperweight-chromebook's /etc/default/grub cleanup).
+        [ -f /etc/pam.d/greetd ] && sed -i '/pam_gnupg\.so/d' /etc/pam.d/greetd
+        [ -f /etc/pam.d/gtklock ] && sed -i '/pam_gnupg\.so/d' /etc/pam.d/gtklock
+        # ~/.gnupg and ~/.password-store are never touched — private key
+        # material and secrets are always user-owned, never removed here.
+        ;;
+esac
+
+#DEBHELPER#

@@ -1,0 +1,23 @@
+Source: pam-gnupg
+Section: admin
+Priority: optional
+Maintainer: Alex Long <johnalexanderlong@gmail.com>
+Build-Depends: debhelper-compat (= 13), autoconf, automake, libtool, pkg-config, libpam0g-dev, curl
+Standards-Version: 4.6.2
+Homepage: https://github.com/cruegge/pam-gnupg
+Rules-Requires-Root: no
+
+Package: pam-gnupg
+Architecture: amd64
+Depends: ${shlibs:Depends}, ${misc:Depends}, gnupg (>= 2.1)
+Description: PAM module to unlock GnuPG keys at login (upstream source build)
+ pam-gnupg presets the GnuPG agent's passphrase cache using the login
+ password, so a user's GnuPG key (and anything backed by it, such as a
+ pass(1) password store) is unlocked automatically at login instead of
+ prompting separately.
+ .
+ This package builds upstream's autotools source (v0.4) rather than
+ repackaging a binary, since pam-gnupg ships no pre-built releases.
+ .
+ System-level PAM stack wiring (/etc/pam.d/*) is handled by
+ paperweight-secrets, not by this package.

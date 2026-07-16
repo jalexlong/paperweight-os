@@ -1,0 +1,16 @@
+paperweight-secrets (0.1.0-1) trixie; urgency=low
+
+  * Initial packaging. Distro-wide secrets manager: pass + pam-gnupg +
+    pass-secret-service. Patches /etc/pam.d/greetd and /etc/pam.d/gtklock
+    to preset the gpg-agent passphrase cache at login and screen-unlock.
+    Ships gpg-agent.conf skel default, a $mod+p passmenu wofi picker, and
+    paperweight-secrets-init(1) for guided first-time setup.
+  * Add paperweight-secrets-sync: mirrors CLI pass(1) entries into
+    pass-secret-service's store as symlinks (readable Label via a synthesized
+    .properties sidecar) so libsecret apps can see them too; prunes stale
+    mirrors and best-effort restarts the D-Bus service to pick up changes.
+    paperweight-passmenu updated to show D-Bus-created secrets by their
+    Label instead of their raw id — the two directions of the CLI/app
+    bridge, verified end-to-end against a real pass-secret-service instance.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 16 Jul 2026 09:00:00 -0500

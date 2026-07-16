@@ -1,0 +1,51 @@
+.TH PAPERWEIGHT\-PASSMENU 1 "2026-07-16" "paperweight-secrets 0.1.0" "User Commands"
+.SH NAME
+paperweight\-passmenu \- wofi picker for pass(1) entries
+.SH SYNOPSIS
+.B paperweight\-passmenu
+.SH DESCRIPTION
+.B paperweight\-passmenu
+lists password entries in a
+.BR wofi (1)
+menu and copies the selected password to the clipboard, clearing it again
+after 45 seconds (only if the clipboard still holds that exact value).
+.PP
+Two kinds of entries are listed together:
+.TP
+.B regular pass(1) entries
+shown by their path, e.g.
+.IR Applications/example .
+.TP
+.B app\-created secrets
+entries created by another application through
+.BR pass\-secret\-service (1)
+(e.g. a browser saving a login), shown prefixed with a lock icon and
+their D\-Bus
+.I Label
+instead of their internal id.
+.PP
+Entries mirrored into
+.I secret_service/cli_mirror/
+by
+.BR paperweight\-secrets\-sync (1)
+are not listed a second time under their mirror id \(em they already
+appear once, under their original path.
+.SH EXIT STATUS
+Exits 0 if no entry is selected (Escape) or on success.
+Exits 1 if the password store is missing or decryption fails, after
+sending a desktop notification.
+.SH FILES
+.TP
+.I ~/.password-store
+The pass(1) store, or
+.I $PASSWORD_STORE_DIR
+if set.
+.TP
+.I ~/.password-store/secret_service/*/*.properties
+Read to look up the
+.I Label
+of app\-created secrets.
+.SH SEE ALSO
+.BR pass (1),
+.BR paperweight\-secrets\-init (1),
+.BR paperweight\-secrets\-sync (1)

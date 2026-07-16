@@ -1,0 +1,27 @@
+#!/usr/bin/make -f
+
+PASS_SECRET_SERVICE_COMMIT = 4ba0f4b6c0667192263c385c13b5ec42a87af9ff
+URL = https://github.com/mdellweg/pass_secret_service/archive/$(PASS_SECRET_SERVICE_COMMIT).tar.gz
+SRCDIR = upstream-src
+PYBUILD_ARGS = --buildsystem=pybuild --sourcedirectory=$(SRCDIR)
+
+%:
+	dh $@ --with python3 $(PYBUILD_ARGS)
+
+override_dh_auto_clean:
+
+override_dh_auto_configure:
+	mkdir -p $(SRCDIR)
+	curl -fsSL $(URL) | tar -xz -C $(SRCDIR) --strip-components=1
+	sed -i 's|/usr/local/bin/pass_secret_service|/usr/bin/pass_secret_service|' \
+		$(SRCDIR)/systemd/dbus-org.freedesktop.secrets.service
+	dh_auto_configure $(PYBUILD_ARGS)
+
+override_dh_auto_test:
+
+override_dh_auto_install:
+	dh_auto_install $(PYBUILD_ARGS)
+	install -Dm644 $(SRCDIR)/systemd/dbus-org.freedesktop.secrets.service \
+		debian/pass-secret-service/usr/lib/systemd/user/dbus-org.freedesktop.secrets.service
+	install -Dm644 $(SRCDIR)/systemd/org.freedesktop.secrets.service \
+		debian/pass-secret-service/usr/share/dbus-1/services/org.freedesktop.secrets.service

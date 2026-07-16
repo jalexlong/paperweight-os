@@ -1,0 +1,8 @@
+pam-gnupg (0.4-1) trixie; urgency=low
+
+  * Initial packaging. Builds upstream v0.4 from source (autotools);
+    not available in Debian Trixie. Part of the PaperweightOS secrets-manager
+    stack (pass + pass-secret-service + pam-gnupg); PAM stack wiring lives in
+    paperweight-secrets.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 16 Jul 2026 09:00:00 -0500

@@ -1,0 +1,22 @@
+#!/usr/bin/make -f
+
+PAM_GNUPG_VERSION = 0.4
+URL = https://github.com/cruegge/pam-gnupg/archive/refs/tags/v$(PAM_GNUPG_VERSION).tar.gz
+MODULEDIR = /usr/lib/x86_64-linux-gnu/security
+SRCDIR = $(CURDIR)/upstream-src
+
+%:
+	dh $@
+
+override_dh_auto_build:
+	mkdir -p $(SRCDIR)
+	curl -fsSL $(URL) | tar -xz -C $(SRCDIR) --strip-components=1
+	cd $(SRCDIR) && ./autogen.sh && ./configure --prefix=/usr --with-moduledir=$(MODULEDIR)
+	$(MAKE) -C $(SRCDIR)
+
+override_dh_auto_configure:
+
+override_dh_auto_test:
+
+override_dh_auto_install:
+	$(MAKE) -C $(SRCDIR) install DESTDIR=$(CURDIR)/debian/pam-gnupg
