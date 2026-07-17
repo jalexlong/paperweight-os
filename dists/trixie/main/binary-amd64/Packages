@@ -18,6 +18,32 @@ Description: ncurses Spotify client (upstream binary repack)
  .
  This package repackages the upstream pre-built binary release.
 
+Package: pam-gnupg
+Version: 0.4-1
+Architecture: amd64
+Maintainer: Alex Long <johnalexanderlong@gmail.com>
+Installed-Size: 46
+Depends: libc6 (>= 2.38), libpam0g (>= 0.99.7.1), gnupg (>= 2.1)
+Homepage: https://github.com/cruegge/pam-gnupg
+Priority: optional
+Section: admin
+Filename: pool/main/p/pam-gnupg/pam-gnupg_0.4-1_amd64.deb
+Size: 9078
+SHA256: 0bde9c89b4d720c15a7446479ed8a036fef0644da12bc6ebc28a62677510a9d5
+SHA1: 55e61bc4f488416ec8afd832b8c15362bbc05179
+MD5sum: d6afe79263fc663bdebb6c16b622d2eb
+Description: PAM module to unlock GnuPG keys at login (upstream source build)
+ pam-gnupg presets the GnuPG agent's passphrase cache using the login
+ password, so a user's GnuPG key (and anything backed by it, such as a
+ pass(1) password store) is unlocked automatically at login instead of
+ prompting separately.
+ .
+ This package builds upstream's autotools source (v0.4) rather than
+ repackaging a binary, since pam-gnupg ships no pre-built releases.
+ .
+ System-level PAM stack wiring (/etc/pam.d/*) is handled by
+ paperweight-secrets, not by this package.
+
 Package: paperweight-chromebook
 Version: 0.1.12-1
 Architecture: all
@@ -42,20 +68,20 @@ Description: PaperweightOS hardware support for Chromebook 11 (3180)
  automatic composition with the base paperweight-skel configuration.
 
 Package: paperweight-desktop
-Version: 0.1.16-1
+Version: 0.1.17-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
 Installed-Size: 10
 Depends: paperweight-skel, paperweight-fonts, sway, waybar, gtklock, swayidle, sway-notification-center, wofi, wlogout, foot, firefox-esr, thunar, grim, slurp, wl-clipboard, brightnessctl, playerctl, network-manager, pipewire, pipewire-pulse, wireplumber, pavucontrol, xdg-desktop-portal-wlr, mosh, xdg-user-dirs, fonts-font-awesome, fonts-noto-color-emoji, git, curl, wget, vim, neovim, cava, cmus, ncspot, yazi, tmux, btop, fastfetch, zoxide, ncdu, fzf, ripgrep, bat, tig, mtr-tiny, iotop, nethogs, lnav, ca-certificates, power-profiles-daemon, dconf-cli, greetd, gtkgreet, cage
-Recommends: paperweight-grub, paperweight-plymouth, vesktop
+Recommends: paperweight-grub, paperweight-plymouth, vesktop, paperweight-secrets
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: metapackages
-Filename: pool/main/p/paperweight-desktop/paperweight-desktop_0.1.16-1_all.deb
-Size: 3510
-SHA256: 0a41222b20c7f3aea5a3be1ea5c321fea430eb5c7f1dc4f7eac25e58213e0238
-SHA1: fc5d4b391ece1bde39cc79a9770b3c3a36547770
-MD5sum: 02e3f5900ce5295c6fd413de55df52b7
+Filename: pool/main/p/paperweight-desktop/paperweight-desktop_0.1.17-1_all.deb
+Size: 3588
+SHA256: 3294f8c1342447ad334c7ffe32777c5541c537478900ea22f0a629954c628517
+SHA1: dddf3476c21d4fdd66439482c00c575dd2049813
+MD5sum: c38c3ce0219417d93dabe0dda8ddca9c
 Description: PaperweightOS desktop environment metapackage
  Installs all packages required for the PaperweightOS Sway-based desktop
  environment on Debian Stable (Trixie). Intended for use on refurbished
@@ -159,21 +185,53 @@ Description: PaperweightOS Plymouth theme — all four Catppuccin variants
  Sets the Plymouth default theme and rebuilds the initramfs on install and
  removal. On eMMC storage this may take 30-60 seconds.
 
-Package: paperweight-skel
-Version: 0.2.71-1
+Package: paperweight-secrets
+Version: 0.1.5-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
-Installed-Size: 251
+Installed-Size: 50
+Depends: paperweight-skel, pass, pam-gnupg, pass-secret-service, pinentry-gtk2, wl-clipboard, python3
+Homepage: https://github.com/jalexlong/paperweight-os
+Priority: optional
+Section: misc
+Filename: pool/main/p/paperweight-secrets/paperweight-secrets_0.1.5-1_all.deb
+Size: 14158
+SHA256: 910a5f0b7d5bc8e4bcce5341b62bbf7b5c3fda7b34a03a9923fc138a6ab9c13d
+SHA1: d3712a5091e3093ee4b45adfa03be01150781d32
+MD5sum: 7634c5db42c58d311b65a62c75657e17
+Description: Secrets manager stack — pass, pam-gnupg, pass-secret-service
+ Wires up a distro-wide secrets stack: pass(1) as the password store,
+ pass-secret-service exposing it over the org.freedesktop.secrets D-Bus API
+ (libsecret apps, e.g. Firefox saved logins), and pam-gnupg unlocking the
+ GnuPG key with the login password.
+ .
+ Patches /etc/pam.d/greetd and /etc/pam.d/gtklock to preset the gpg-agent
+ passphrase cache on login and screen-unlock. Ships default
+ ~/.gnupg/gpg-agent.conf, a paperweight-passmenu wofi picker bound to
+ $mod+p, and paperweight-secrets-init(1) to guide first-time setup
+ (GPG key generation is left to the user — never done silently).
+ .
+ paperweight-secrets-sync bridges the CLI and D-Bus worlds: it mirrors
+ regular pass(1) entries into pass-secret-service's store as symlinks so
+ apps can see them too; paperweight-passmenu already shows app-created
+ secrets by their D-Bus Label. Run after adding CLI passwords you want
+ visible to apps.
+
+Package: paperweight-skel
+Version: 0.2.73-1
+Architecture: all
+Maintainer: Alex Long <johnalexanderlong@gmail.com>
+Installed-Size: 253
 Depends: python3
 Replaces: greetd (<< 1.0)
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.71-1_all.deb
-Size: 43394
-SHA256: 565007e051aca65efb6d2ddcb6f403a09c40fa5fcc5076f1741166063294625f
-SHA1: e22dbd709cd8cbbe3281a49520de58cd2efe4703
-MD5sum: 752a62a34bf3d3b5ab21be76c7086e18
+Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.73-1_all.deb
+Size: 44430
+SHA256: 33ce24c6659d23687ceb2e38040bbe6bc1b6fce891e3bfd2aa8610e9e5fe29ab
+SHA1: c6fa6ae3114c2e913df187c3a69f7a5b2193aa18
+MD5sum: d812f7ef6a1e2d36eb132194d12a8a50
 Description: PaperweightOS default configuration skeleton
  Provides default XDG configuration files for the PaperweightOS desktop,
  installed to /etc/skel so they are copied into new user home directories
@@ -237,6 +295,34 @@ Description: Blazing fast terminal file manager (upstream binary repack)
  (video), poppler-utils (PDF), fd-find, ripgrep, fzf, zoxide.
  .
  This package repackages the upstream musl pre-built binary release.
+
+Package: pass-secret-service
+Version: 0~git20260715.4ba0f4b6-2
+Architecture: all
+Maintainer: Alex Long <johnalexanderlong@gmail.com>
+Installed-Size: 103
+Depends: python3-click, python3-cryptography, python3-dbus-next, python3-decorator, python3-pypass, python3:any, pass
+Conflicts: gnome-keyring
+Replaces: gnome-keyring
+Homepage: https://github.com/mdellweg/pass_secret_service
+Priority: optional
+Section: python
+Filename: pool/main/p/pass-secret-service/pass-secret-service_0~git20260715.4ba0f4b6-2_all.deb
+Size: 22104
+SHA256: 18054b16eb84fe47e2ce0af91033a612d47ec4411fd561e35ae3b2aad202f14f
+SHA1: 5ea6f288dcd18cf370d329885a47137cdbc5b144
+MD5sum: 82436211dc3c2ac2779f2d1d3843a1de
+Description: Secret Service D-Bus API backed by pass (upstream source build)
+ Implements the org.freedesktop.secrets D-Bus interface (as used by
+ libsecret-consuming apps, e.g. Firefox saved logins) with pass(1) as the
+ storage backend, in place of gnome-keyring.
+ .
+ Auto-started on demand via D-Bus session-bus activation
+ (org.freedesktop.secrets.service); no manual startup required once a
+ pass(1) store exists.
+ .
+ This package builds an upstream source snapshot rather than repackaging a
+ release, since pass-secret-service has no tagged releases.
 
 Package: vesktop
 Version: 1.6.5-1
