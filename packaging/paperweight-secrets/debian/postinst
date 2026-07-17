@@ -36,10 +36,17 @@ case "$1" in
             [ -f /etc/skel/.gnupg/gpg-agent.conf ] && chmod 600 /etc/skel/.gnupg/gpg-agent.conf
         fi
 
-        # Propagate new skel fragments to an already-existing user's home
+        # Propagate skel fragments to an already-existing user's home
         # directory — /etc/skel only reaches *new* users automatically.
         # The bashrc.d source loop itself is wired up by paperweight-skel,
         # which this package Depends on, so it's already in place by now.
+        #
+        # Always overwrite (not cp -n): these are package-maintained files,
+        # not meant for user customization, same as paperweight-skel does
+        # for foot.ini/waybar config.jsonc/etc. cp -n here would silently
+        # skip delivering fixes to already-provisioned machines on upgrade
+        # — found the hard way when a gpg-agent env-refresh fix added to
+        # 60-secrets-keys.conf didn't reach an existing install.
         TARGET_USER=""
         if [ -n "${SUDO_USER:-}" ] && [ "$SUDO_USER" != "root" ]; then
             TARGET_USER="$SUDO_USER"
@@ -52,11 +59,11 @@ case "$1" in
             if [ -d "$TARGET_HOME" ]; then
                 install -d -m 755 "$TARGET_HOME/.config/paperweight-os/bashrc.d" \
                                    "$TARGET_HOME/.config/sway/config.d"
-                cp -n /etc/skel/.config/paperweight-os/bashrc.d/20-gpg-agent.sh \
-                      "$TARGET_HOME/.config/paperweight-os/bashrc.d/" 2>/dev/null || true
-                cp -n /etc/skel/.config/sway/config.d/60-secrets-keys.conf \
-                      "$TARGET_HOME/.config/sway/config.d/" 2>/dev/null || true
-                cp -n /etc/skel/.gtkrc-2.0 "$TARGET_HOME/.gtkrc-2.0" 2>/dev/null || true
+                cp /etc/skel/.config/paperweight-os/bashrc.d/20-gpg-agent.sh \
+                   "$TARGET_HOME/.config/paperweight-os/bashrc.d/" 2>/dev/null || true
+                cp /etc/skel/.config/sway/config.d/60-secrets-keys.conf \
+                   "$TARGET_HOME/.config/sway/config.d/" 2>/dev/null || true
+                cp /etc/skel/.gtkrc-2.0 "$TARGET_HOME/.gtkrc-2.0" 2>/dev/null || true
                 chown -R "${TARGET_USER}:" \
                     "$TARGET_HOME/.config/paperweight-os/bashrc.d" \
                     "$TARGET_HOME/.config/sway/config.d" 2>/dev/null || true

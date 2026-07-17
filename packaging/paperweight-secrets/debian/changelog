@@ -1,3 +1,24 @@
+paperweight-secrets (0.1.5-1) trixie; urgency=high
+
+  * Fix gpg-agent 60s "Timeout" hang on first pinentry launch (found
+    during live testing): gpg-agent is socket-activated on first use and
+    can start with an empty DISPLAY/WAYLAND_DISPLAY if something reaches
+    it before the sway session environment is fully imported (e.g.
+    pam_gnupg's login-time priming) — pinentry-gtk-2 then can't find a
+    display and gpg-agent times out after 60s instead of prompting.
+    60-secrets-keys.conf now also runs
+    "gpg-connect-agent updatestartuptty /bye" at sway startup, after
+    50-systemd-user.conf's environment import, so gpg-agent's cached
+    display/tty reference is refreshed every session.
+  * Fix postinst using cp -n (no-clobber) for package-maintained skel
+    fragments (bashrc.d fragment, sway keybind fragment, .gtkrc-2.0):
+    upgrades on an already-provisioned machine were silently skipping
+    delivery of fixes to those files, including the one above. Changed
+    to unconditional cp, matching paperweight-skel's existing convention
+    for package-maintained (not user-customized) config.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 16 Jul 2026 19:00:00 -0500
+
 paperweight-secrets (0.1.4-1) trixie; urgency=low
 
   * paperweight-passmenu: add timestamped logging (entries found,
