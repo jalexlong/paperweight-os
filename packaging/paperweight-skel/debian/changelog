@@ -1,3 +1,16 @@
+paperweight-skel (0.2.75-1) trixie; urgency=medium
+
+  * fastfetch: two-tone the rock logo instead of a single flat lavender —
+    light facets stay lavender, dark facets/outline use the same hue
+    darkened (darken_hex() scales RGB channels uniformly, preserving hue
+    and saturation, since Catppuccin has no "dark lavender" role to
+    reuse). Inline $1/$2 markers are inserted only at light/dark run
+    boundaries (apply_two_tone() in fastfetch-theme-gen.py), confirmed
+    fastfetch substitutes them in source order and the terminal's own SGR
+    state carries each color forward.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 16 Jul 2026 21:40:00 -0500
+
 paperweight-skel (0.2.74-1) trixie; urgency=medium
 
   * fastfetch: redraw the rock logo smaller and traced from the actual

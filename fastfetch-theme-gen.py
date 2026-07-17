@@ -9,15 +9,16 @@ canonical source per THEME-AUTHORING.md) and emits a matching
 never have to be hand-converted or re-typed.
 
 The logo is a fixed ASCII-art rock (ROCK_LOGO below), rendered via
-fastfetch's "data" logo type and colored with a single `$1` placeholder
-tied to the theme's `lavender` role. "data" was chosen over the earlier
-"chafa" raster approach (which shelled out to chafa to downsample
-paperweight-plymouth's rock.png) because it needs no external image, no
-chafa dependency, and no width/height/aspect-ratio tuning to keep fastfetch's
-cursor math aligned with the info lines — it's just text, so it renders
-identically in any terminal, including over SSH and inside tmux with no
-passthrough configuration. The art is theme-agnostic; only its color
-changes per theme.
+fastfetch's "data" logo type and two-toned with `$1`/`$2` placeholders:
+`$1` (the theme's `lavender` role) for the rock's light facets, `$2` (the
+same hue, darkened — see darken_hex()) for its dark facets and outline.
+"data" was chosen over the earlier "chafa" raster approach (which shelled
+out to chafa to downsample paperweight-plymouth's rock.png) because it
+needs no external image, no chafa dependency, and no width/height/aspect-
+ratio tuning to keep fastfetch's cursor math aligned with the info lines —
+it's just text, so it renders identically in any terminal, including over
+SSH and inside tmux with no passthrough configuration. The art and its
+light/dark split are theme-agnostic; only the two colors change per theme.
 
 Usage:
     ./fastfetch-theme-gen.py <name> [--label "Display Name"]
@@ -45,8 +46,9 @@ SKEL_CONFIG = REPO_ROOT / "packaging" / "paperweight-skel" / "etc" / "skel" / ".
 SWAY_THEMES = SKEL_CONFIG / "sway" / "themes"
 FASTFETCH_THEMES = SKEL_CONFIG / "fastfetch" / "themes"
 
-# Fixed ASCII-art rock logo, colored as a single `$1`-tagged block (see
-# TEMPLATE below). Kept here as a plain multi-line string, not per-theme.
+# Fixed ASCII-art rock logo, two-toned via inline `$1`/`$2` markers (see
+# apply_two_tone() and TEMPLATE below). Kept here as a plain multi-line
+# string, not per-theme.
 #
 # Traced from the actual rock.png brand asset (see
 # packaging/paperweight-plymouth/.../rock.png), not hand-drawn: that PNG is
@@ -67,6 +69,35 @@ ROCK_LOGO = """        @@..----@@
 @***%%%%%*********%@
   @@%%%%%%****@@%
          @%@"""
+
+# Which density characters get the light vs. dark tone (see apply_two_tone).
+# '.' and '-' are the brighter/highlight facets; '+', '*', '%', '@' cover the
+# mid-tone facets, dark facets, and the black outline.
+LIGHT_CHARS = ".-"
+DARK_CHARS = "+*%@"
+
+
+def apply_two_tone(art: str, light_chars: str = LIGHT_CHARS, dark_chars: str = DARK_CHARS) -> str:
+    """Insert `$1`/`$2` color markers into ASCII art at each light/dark run boundary.
+
+    fastfetch's "data" logo type substitutes `$1`, `$2`, ... verbatim with the
+    matching entry from the logo's "color" object and lets the terminal's own
+    SGR state carry that color forward until the next marker — so a marker is
+    only needed where the tone actually changes, not on every character.
+    Whitespace and newlines don't affect the active tone (no marker needed
+    around them), which keeps the output free of redundant markers.
+    """
+    out = []
+    active = None
+    for ch in art:
+        if ch in light_chars and active != "1":
+            out.append("$1")
+            active = "1"
+        elif ch in dark_chars and active != "2":
+            out.append("$2")
+            active = "2"
+        out.append(ch)
+    return "".join(out)
 
 # Maps the fastfetch theme's semantic roles to sway palette variable names.
 # See THEME-AUTHORING.md's "26 palette variables" table.
@@ -90,7 +121,7 @@ TEMPLATE = """// PaperweightOS fastfetch theme — {label}
     "logo": {{
         "type": "data",
         "source": {logo_source},
-        "color": {{ "1": "{lavender_bold}" }},
+        "color": {{ "1": "{lavender_bold}", "2": "{lavender_dark}" }},
         "padding": {{ "top": 1, "right": 2 }}
     }},
     "display": {{
@@ -141,6 +172,23 @@ def hex_to_sgr(hexval: str, bold: bool = False) -> str:
     return f"{prefix}38;2;{r};{g};{b}"
 
 
+def darken_hex(hexval: str, factor: float = 0.55) -> str:
+    """Scale a #rrggbb color's channels uniformly to darken it in place.
+
+    Scaling R, G, and B by the same factor changes only HSV value — hue and
+    saturation ratios between channels are untouched — so this gives a
+    same-hue "shadow" tone for the rock logo's dark facets/outline without
+    needing a second named palette role (Catppuccin has no "dark lavender").
+    """
+    m = HEX_RE.match(hexval.strip())
+    if not m:
+        raise ValueError(f"not a 6-digit hex color: {hexval!r}")
+    h = m.group(1)
+    r, g, b = int(h[0:2], 16), int(h[2:4], 16), int(h[4:6], 16)
+    r, g, b = (max(0, min(255, round(c * factor))) for c in (r, g, b))
+    return f"#{r:02x}{g:02x}{b:02x}"
+
+
 def parse_sway_palette(conf_path: Path) -> dict[str, str]:
     """Parse `set $name #hexhex` lines out of a sway theme file."""
     palette = {}
@@ -181,8 +229,9 @@ def generate(
     content = TEMPLATE.format(
         name=name,
         label=label,
-        logo_source=json.dumps("$1" + ROCK_LOGO),
+        logo_source=json.dumps(apply_two_tone(ROCK_LOGO)),
         lavender_bold=hex_to_sgr(palette["lavender"], bold=True),
+        lavender_dark=hex_to_sgr(darken_hex(palette["lavender"])),
         blue_bold=hex_to_sgr(palette["blue"], bold=True),
         overlay1=hex_to_sgr(palette["overlay1"]),
         surface2=hex_to_sgr(palette["surface2"]),

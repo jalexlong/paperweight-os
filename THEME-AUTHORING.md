@@ -282,10 +282,19 @@ rather than in four separate files.
 
 **The logo is theme-agnostic ASCII art, not raster art.** It's a fixed
 multi-line string (`ROCK_LOGO` in `fastfetch-theme-gen.py`), rendered via
-fastfetch's `"data"` logo type and colored with a single `$1` placeholder
-tied to each theme's `lavender` role (`"color": { "1": "{lavender_bold}" }`
-in `TEMPLATE`). All four theme files embed the same art; only its color
-changes per theme. This replaced an earlier `chafa`-rendered PNG (a
+fastfetch's `"data"` logo type and two-toned with inline `$1`/`$2`
+placeholders: `$1` is each theme's `lavender` role (bold) for the rock's
+light facets, `$2` is the *same hue, darkened* (`darken_hex()` scales all
+three RGB channels by a fixed factor, which changes only HSV value —
+hue/saturation ratios between channels are untouched) for its dark facets
+and outline — there's no separate named "dark lavender" role in Catppuccin
+to reuse instead. `apply_two_tone()` walks `ROCK_LOGO` once and inserts a
+marker only where the tone actually changes (`LIGHT_CHARS = ".-"`,
+`DARK_CHARS = "+*%@"`), relying on the terminal's own SGR state to carry
+each color forward until the next marker — confirmed empirically that
+fastfetch substitutes `$1`/`$2` in place, in source order, so this works
+correctly. All four theme files embed the same art and split; only the two
+colors change per theme. This replaced an earlier `chafa`-rendered PNG (a
 downsampled crop of paperweight-plymouth's `rock.png`) for a few reasons:
 
 - **No external asset or renderer.** The old approach shipped a
@@ -310,11 +319,12 @@ downsampled crop of paperweight-plymouth's `rock.png`) for a few reasons:
 
 If you swap in new artwork later, edit `ROCK_LOGO` at the top of
 `fastfetch-theme-gen.py` and re-run the generator for each theme — no
-per-theme `.jsonc` needs hand-editing, since the art is one shared string
-formatted into all four. Keep it inside a monochrome density ramp (e.g.
-`" .:-=+*#%@"` light→dark) since only one color placeholder (`$1`) is
-wired up; a multi-color logo would need additional `$2`, `$3`, ... markers
-in the string and matching entries in `TEMPLATE`'s `"color"` object.
+per-theme `.jsonc` needs hand-editing, since the art and the two-tone split
+are one shared string/character-set formatted into all four. Keep it
+inside a density ramp (e.g. `" .:-=+*#%@"` light→dark) and update
+`LIGHT_CHARS`/`DARK_CHARS` if you change which characters represent which
+facets; a third tone would need a `$3` marker in `apply_two_tone()` plus a
+matching entry in `TEMPLATE`'s `"color"` object.
 
 `fastfetch/config.jsonc` is the active theme file written by
 `paperweight-theme`.
