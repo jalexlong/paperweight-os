@@ -269,10 +269,7 @@ The script pulls eight roles off the sway palette — `lavender`, `blue`,
 | `text` | Module value color |
 | `green` / `yellow` / `red` | Percentage thresholds (memory/disk/battery/CPU usage) |
 
-It also reads `base` — not to render it into the template, but to decide
-which fixed grey pair the ASCII logo uses (see below).
-
-Requires the sway theme file to already define all nine roles — run this
+Requires the sway theme file to already define all eight roles — run this
 *after* step 1, not before. If you want a different mapping (e.g. a
 non-Catppuccin theme where `lavender` isn't the right "primary" accent),
 edit the `ROLES` dict or `TEMPLATE` string at the top of the script rather
@@ -290,35 +287,18 @@ to abbreviate fastfetch's built-in "7 hours, 39 mins remaining" down to
 
 **The logo is theme-agnostic ASCII art, not raster art.** It's a fixed
 multi-line string (`ROCK_LOGO` in `fastfetch-theme-gen.py`), rendered via
-fastfetch's `"data"` logo type and two-toned grey/silver with inline
-`$1`/`$2` placeholders. Both grey shades are **fixed hex**, not sourced
-from the theme's own palette — `GREY_ON_DARK_BG` / `GREY_ON_LIGHT_BG` at
-the top of the script. Two earlier versions tried tying the logo's color
-to the theme instead (a single flat `lavender`, then a lavender-hued
-two-tone) and even reusing Catppuccin's own `overlay2`/`overlay0` neutral
-roles for a "theme-safe" two-tone — but Catppuccin's whole neutral scale
-is tinted toward the same blue-violet family as `lavender`, so all three
-still read as "the accent color," not "a rock." Fixed grey, sampled to
-match `rock.png`'s own silvery coloring, was the only version that
-actually looked like the rock.
-
-Which of the two fixed pairs applies is still chosen per theme, via
-`is_dark_hex()` testing the theme's `base` role (WCAG relative luminance)
-— macchiato/mocha/frappe all get the same `GREY_ON_DARK_BG` pair, latte
-gets `GREY_ON_LIGHT_BG`, a darker pair so the logo stays visible against
-its near-white background (confirmed against WCAG contrast ratios and by
-rendering the logo over all four themes' actual background colors — a
-single fixed pair can't have good contrast against both a near-black and a
-near-white background at once). `apply_two_tone()` walks `ROCK_LOGO` once
-and inserts a marker only where the tone actually changes (`LIGHT_CHARS =
-".-"`, `DARK_CHARS = "+*%@"`), relying on the terminal's own SGR state to
-carry each color forward until the next marker — confirmed empirically
-that fastfetch substitutes `$1`/`$2` in place, in source order, so this
-works correctly. All four theme files embed the same art and split; only
-the grey pair changes, and only between the dark-base and light-base
-groups, not per individual theme. This replaced an earlier `chafa`-rendered
-PNG (a downsampled crop of paperweight-plymouth's `rock.png`) for a few
-reasons:
+fastfetch's `"data"` logo type and colored a single flat `$1`, tied to the
+same `lavender` role used for the title hostname — so the logo always
+matches the hostname color exactly. Two multi-tone versions were tried in
+between (a lavender-hued two-tone, then a "theme-safe" grey/silver
+two-tone using Catppuccin's `overlay2`/`overlay0` neutral roles, then a
+fixed achromatic grey pair once the neutral roles turned out to still read
+as lavender-tinted) before landing back on single-color on request. The
+two-tone machinery (`apply_two_tone()`, `LIGHT_CHARS`/`DARK_CHARS`,
+`GREY_ON_DARK_BG`/`GREY_ON_LIGHT_BG`, `is_dark_hex()`) isn't in the script
+anymore — `git log -p -- fastfetch-theme-gen.py` has it if it's worth
+resurrecting later. This replaced an earlier `chafa`-rendered PNG (a
+downsampled crop of paperweight-plymouth's `rock.png`) for a few reasons:
 
 - **No external asset or renderer.** The old approach shipped a
   `paperweight-logo.png` in the skel tree and shelled out to `chafa` at
@@ -342,12 +322,8 @@ reasons:
 
 If you swap in new artwork later, edit `ROCK_LOGO` at the top of
 `fastfetch-theme-gen.py` and re-run the generator for each theme — no
-per-theme `.jsonc` needs hand-editing, since the art and the two-tone split
-are one shared string/character-set formatted into all four. Keep it
-inside a density ramp (e.g. `" .:-=+*#%@"` light→dark) and update
-`LIGHT_CHARS`/`DARK_CHARS` if you change which characters represent which
-facets; a third tone would need a `$3` marker in `apply_two_tone()` plus a
-matching entry in `TEMPLATE`'s `"color"` object.
+per-theme `.jsonc` needs hand-editing, since the art is one shared string
+formatted into all four with the same single `$1` color.
 
 `fastfetch/config.jsonc` is the active theme file written by
 `paperweight-theme`.

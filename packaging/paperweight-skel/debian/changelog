@@ -1,3 +1,15 @@
+paperweight-skel (0.2.81-1) trixie; urgency=medium
+
+  * fastfetch: revert the rock logo to a single flat color, tied to
+    `lavender` — the same role used for the title hostname, so the logo
+    always matches the hostname exactly. Drops the two-tone/fixed-grey
+    machinery from 0.2.75-1 through 0.2.80-1 (apply_two_tone(),
+    LIGHT_CHARS/DARK_CHARS, GREY_ON_DARK_BG/GREY_ON_LIGHT_BG,
+    is_dark_hex()) per request; still in git history if worth
+    resurrecting later.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 16 Jul 2026 23:20:00 -0500
+
 paperweight-skel (0.2.80-1) trixie; urgency=medium
 
   * fastfetch: brighten GREY_ON_DARK_BG's dark facet further,
