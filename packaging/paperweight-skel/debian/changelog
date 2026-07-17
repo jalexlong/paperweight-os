@@ -1,3 +1,17 @@
+paperweight-skel (0.2.78-1) trixie; urgency=medium
+
+  * fastfetch: rock logo is now fixed achromatic grey, not sourced from
+    the theme palette at all. 0.2.77-1's overlay2/overlay0 fix was still
+    visibly lavender-tinted in live testing — turns out Catppuccin's
+    entire neutral scale carries the same blue-violet undertone as
+    lavender, it's not true grey. Two fixed pairs now live directly in
+    fastfetch-theme-gen.py (GREY_ON_DARK_BG / GREY_ON_LIGHT_BG); which
+    one a theme gets is decided by testing its own base color's WCAG
+    luminance (is_dark_hex()), since a single grey pair can't contrast
+    well against both a near-black and a near-white background.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 16 Jul 2026 22:45:00 -0500
+
 paperweight-skel (0.2.77-1) trixie; urgency=medium
 
   * fastfetch: recolor the rock logo grey/silver instead of lavender.

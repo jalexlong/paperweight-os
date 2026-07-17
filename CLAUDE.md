@@ -185,9 +185,10 @@ fastfetch/
                                    fastfetch-theme-gen.py (repo root) from the sway palette; logo
                                    is inline ASCII art (fastfetch's "data" logo type), not a
                                    rendered image, two-toned grey/silver via $1/$2 placeholders —
-                                   overlay2 for light facets, overlay0 for dark facets/outline —
-                                   to match rock.png's own coloring rather than tinting it lavender
-                                   (see THEME-AUTHORING.md §9); theme-agnostic art, per-theme color
+                                   fixed hex, not theme-palette roles (Catppuccin's neutral scale
+                                   is itself lavender-tinted), picked per theme by whether its
+                                   base color is dark or light (see THEME-AUTHORING.md §9);
+                                   theme-agnostic art, per-theme (well, per-dark-or-light) color
 .local/bin/
   cava-waybar                  — Python3: pipes cava frames → waybar JSON (Unicode blocks)
 ```

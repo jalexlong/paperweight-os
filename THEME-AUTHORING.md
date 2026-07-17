@@ -257,22 +257,22 @@ parameter string — e.g. `#8aadf4` (Catppuccin blue) becomes
 ./fastfetch-theme-gen.py --hex 8aadf4 --bold
 ```
 
-The script pulls ten roles off the sway palette — `lavender`, `blue`,
-`overlay2`, `overlay1`, `overlay0`, `surface2`, `text`, `green`, `yellow`,
-`red` — and maps them to:
+The script pulls eight roles off the sway palette — `lavender`, `blue`,
+`overlay1`, `surface2`, `text`, `green`, `yellow`, `red` — and maps them to:
 
 | Role | Used for |
 |---|---|
 | `lavender` (bold) | Key labels, title hostname — the desktop's primary accent (same color as sway's focused window border) |
 | `blue` (bold) | Title username |
-| `overlay2` (bold) | ASCII logo's light facets |
 | `overlay1` | Title `@` separator |
-| `overlay0` | ASCII logo's dark facets/outline |
 | `surface2` | The dashed separator line under the title |
 | `text` | Module value color |
 | `green` / `yellow` / `red` | Percentage thresholds (memory/disk/battery/CPU usage) |
 
-Requires the sway theme file to already define all ten roles — run this
+It also reads `base` — not to render it into the template, but to decide
+which fixed grey pair the ASCII logo uses (see below).
+
+Requires the sway theme file to already define all nine roles — run this
 *after* step 1, not before. If you want a different mapping (e.g. a
 non-Catppuccin theme where `lavender` isn't the right "primary" accent),
 edit the `ROLES` dict or `TEMPLATE` string at the top of the script rather
@@ -291,25 +291,34 @@ to abbreviate fastfetch's built-in "7 hours, 39 mins remaining" down to
 **The logo is theme-agnostic ASCII art, not raster art.** It's a fixed
 multi-line string (`ROCK_LOGO` in `fastfetch-theme-gen.py`), rendered via
 fastfetch's `"data"` logo type and two-toned grey/silver with inline
-`$1`/`$2` placeholders: `$1` is each theme's `overlay2` role (bold) for the
-rock's light facets, `$2` is `overlay0` (a darker step on the same neutral
-scale) for its dark facets and outline. Grey rather than an accent color,
-to match the actual `rock.png` asset's own silvery coloring instead of
-tinting it lavender (an earlier version did exactly that, both as a single
-flat color and as a lavender-hued two-tone — both read as "the accent
-color", not "a rock"). These are named palette roles rather than a
-hardcoded hex pair because Catppuccin's neutral scale is already tuned per
-theme for contrast against that theme's own background — including
-latte's inverted light/dark ordering — where a fixed grey pair would wash
-out against latte's near-white background or macchiato/mocha/frappe's
-near-black ones. `apply_two_tone()` walks `ROCK_LOGO` once and inserts a
-marker only where the tone actually changes (`LIGHT_CHARS = ".-"`,
-`DARK_CHARS = "+*%@"`), relying on the terminal's own SGR state to carry
-each color forward until the next marker — confirmed empirically that
-fastfetch substitutes `$1`/`$2` in place, in source order, so this works
-correctly. All four theme files embed the same art and split; only the two
-colors change per theme. This replaced an earlier `chafa`-rendered PNG (a
-downsampled crop of paperweight-plymouth's `rock.png`) for a few reasons:
+`$1`/`$2` placeholders. Both grey shades are **fixed hex**, not sourced
+from the theme's own palette — `GREY_ON_DARK_BG` / `GREY_ON_LIGHT_BG` at
+the top of the script. Two earlier versions tried tying the logo's color
+to the theme instead (a single flat `lavender`, then a lavender-hued
+two-tone) and even reusing Catppuccin's own `overlay2`/`overlay0` neutral
+roles for a "theme-safe" two-tone — but Catppuccin's whole neutral scale
+is tinted toward the same blue-violet family as `lavender`, so all three
+still read as "the accent color," not "a rock." Fixed grey, sampled to
+match `rock.png`'s own silvery coloring, was the only version that
+actually looked like the rock.
+
+Which of the two fixed pairs applies is still chosen per theme, via
+`is_dark_hex()` testing the theme's `base` role (WCAG relative luminance)
+— macchiato/mocha/frappe all get the same `GREY_ON_DARK_BG` pair, latte
+gets `GREY_ON_LIGHT_BG`, a darker pair so the logo stays visible against
+its near-white background (confirmed against WCAG contrast ratios and by
+rendering the logo over all four themes' actual background colors — a
+single fixed pair can't have good contrast against both a near-black and a
+near-white background at once). `apply_two_tone()` walks `ROCK_LOGO` once
+and inserts a marker only where the tone actually changes (`LIGHT_CHARS =
+".-"`, `DARK_CHARS = "+*%@"`), relying on the terminal's own SGR state to
+carry each color forward until the next marker — confirmed empirically
+that fastfetch substitutes `$1`/`$2` in place, in source order, so this
+works correctly. All four theme files embed the same art and split; only
+the grey pair changes, and only between the dark-base and light-base
+groups, not per individual theme. This replaced an earlier `chafa`-rendered
+PNG (a downsampled crop of paperweight-plymouth's `rock.png`) for a few
+reasons:
 
 - **No external asset or renderer.** The old approach shipped a
   `paperweight-logo.png` in the skel tree and shelled out to `chafa` at
