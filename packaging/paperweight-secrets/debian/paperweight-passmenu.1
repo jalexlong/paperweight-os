@@ -30,6 +30,13 @@ by
 .BR paperweight\-secrets\-sync (1)
 are not listed a second time under their mirror id \(em they already
 appear once, under their original path.
+.PP
+A second invocation while one is already running (e.g. a repeated
+$mod+p press before the first has finished) is ignored rather than
+started concurrently \(em
+.BR gpg\-agent (1)
+only allows one live pinentry session at a time, so racing invocations
+would otherwise fail unpredictably.
 .SH EXIT STATUS
 Exits 0 if no entry is selected (Escape) or on success.
 Exits 1 if the password store is missing or decryption fails, after
@@ -45,6 +52,16 @@ if set.
 Read to look up the
 .I Label
 of app\-created secrets.
+.TP
+.I ~/.local/share/paperweight-os/passmenu.log
+Timestamped log of each run: entries found, selection, decrypt timing,
+and any error output from
+.BR pass (1).
+Rotated at 1000 lines. Mode 600 \(em entry paths can be revealing even
+though passwords themselves are never logged.
+.TP
+.I ~/.local/share/paperweight-os/passmenu.lock
+Concurrency-guard lock file.
 .SH SEE ALSO
 .BR pass (1),
 .BR paperweight\-secrets\-init (1),

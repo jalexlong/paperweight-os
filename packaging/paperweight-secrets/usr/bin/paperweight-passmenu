@@ -13,7 +13,37 @@
 
 PREFIX="${PASSWORD_STORE_DIR:-$HOME/.password-store}"
 
+LOG_DIR="$HOME/.local/share/paperweight-os"
+LOG="$LOG_DIR/passmenu.log"
+LOCK="$LOG_DIR/passmenu.lock"
+mkdir -p "$LOG_DIR"
+touch "$LOG"
+chmod 600 "$LOG"
+log() { printf '[%s] %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$*" >> "$LOG"; }
+ms()  { date +%s%3N; }
+
+# Log rotation: keep last 800 lines when file exceeds 1000 — matches
+# paperweight-theme's approach, bounds disk use on eMMC.
+if [ "$(wc -l < "$LOG")" -gt 1000 ]; then
+    tail -n 800 "$LOG" > "$LOG.tmp" && mv "$LOG.tmp" "$LOG"
+fi
+
+# Concurrency guard: a second $mod+p while one's already open would race
+# two pinentry sessions against each other (gpg-agent only allows one at
+# a time). Just ignore duplicate invocations rather than queue them —
+# unlike paperweight-theme's theme switch, there's no "pending intent"
+# worth replaying here.
+exec 9>"$LOCK"
+if ! flock -n 9; then
+    log "already running; ignoring duplicate invocation"
+    notify-send -u low "pass" "Already open"
+    exit 0
+fi
+
+log "started"
+
 if [ ! -d "$PREFIX" ]; then
+    log "ERROR: no password store at $PREFIX"
     notify-send -u critical "pass" "No password store at $PREFIX — run paperweight-secrets-init first."
     exit 1
 fi
@@ -45,26 +75,46 @@ except Exception:
         printf '\xf0\x9f\x94\x92 %s\t%s\n' "$LABEL" "$REL" >> "$MAP"
     done
 
+log "entry list built: $(wc -l < "$MAP") entries"
+
 DISPLAY=$(cut -f1 "$MAP" | sort | wofi --dmenu --prompt "pass:" --lines 12)
-[ -z "$DISPLAY" ] && exit 0
+if [ -z "$DISPLAY" ]; then
+    log "no selection (escape)"
+    exit 0
+fi
 
 ENTRY=$(awk -F'\t' -v d="$DISPLAY" '$1 == d { print $2; exit }' "$MAP")
-[ -z "$ENTRY" ] && exit 0
+if [ -z "$ENTRY" ]; then
+    log "ERROR: selection '$DISPLAY' not found in map"
+    exit 0
+fi
 
-PASSWORD=$(pass show "$ENTRY" 2>/dev/null | head -n1)
+log "selected: $ENTRY — decrypting (pinentry may be waiting on input)..."
+_t=$(ms)
+PASSWORD=$(pass show "$ENTRY" 2>"$LOG_DIR/passmenu.stderr" | head -n1)
+STATUS=$?
+DECRYPT_MS=$(( $(ms) - _t ))
+
 if [ -z "$PASSWORD" ]; then
+    ERR=$(cat "$LOG_DIR/passmenu.stderr" 2>/dev/null)
+    log "ERROR: decrypt failed after ${DECRYPT_MS}ms (pass show exit $STATUS): $ERR"
     notify-send -u critical "pass" "Failed to decrypt \"$DISPLAY\""
     exit 1
 fi
+log "decrypted in ${DECRYPT_MS}ms"
 
 printf '%s' "$PASSWORD" | wl-copy
 notify-send "pass" "Copied \"$DISPLAY\" — clears in 45s"
+log "copied to clipboard"
 
 (
     sleep 45
     CURRENT=$(wl-paste -n 2>/dev/null)
     if [ "$CURRENT" = "$PASSWORD" ]; then
         wl-copy --clear
+        log "clipboard cleared"
     fi
 ) &
 disown
+
+log "done"

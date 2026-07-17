@@ -1,3 +1,19 @@
+paperweight-secrets (0.1.4-1) trixie; urgency=low
+
+  * paperweight-passmenu: add timestamped logging (entries found,
+    selection, decrypt timing, pass(1) stderr on failure) to
+    ~/.local/share/paperweight-os/passmenu.log — same rotation pattern as
+    paperweight-theme's log. Found during live testing: a hung/timed-out
+    first invocation had no diagnostic trail to look at afterward.
+  * paperweight-passmenu: add an flock concurrency guard (matches
+    paperweight-theme's pattern) — a repeated $mod+p press while one
+    invocation is already running is now ignored instead of racing a
+    second pinentry session against gpg-agent's single-session limit,
+    which was producing a spurious "Failed to decrypt" notification from
+    the losing invocation.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 16 Jul 2026 18:00:00 -0500
+
 paperweight-secrets (0.1.3-1) trixie; urgency=low
 
   * Ship ~/.gtkrc-2.0 skel default: Catppuccin Macchiato dark colors for
