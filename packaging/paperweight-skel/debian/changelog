@@ -1,3 +1,13 @@
+paperweight-skel (0.2.79-1) trixie; urgency=medium
+
+  * fastfetch: brighten GREY_ON_DARK_BG's rock logo pair (light facet
+    #c8ccd0 -> #e6e8ea, dark facet #6b6f75 -> #7a7e85) — the dark-theme
+    silver read as a bit flat/dim against macchiato/mocha/frappe.
+    GREY_ON_LIGHT_BG (latte) is untouched. Checked WCAG contrast and
+    rendered against all three dark bases before picking these values.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 16 Jul 2026 23:00:00 -0500
+
 paperweight-skel (0.2.78-1) trixie; urgency=medium
 
   * fastfetch: rock logo is now fixed achromatic grey, not sourced from
