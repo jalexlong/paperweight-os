@@ -1,3 +1,22 @@
+paperweight-skel (0.2.74-1) trixie; urgency=medium
+
+  * fastfetch: redraw the rock logo smaller and traced from the actual
+    rock.png asset's discrete facet grays + outline (was a hand-drawn
+    smooth blob), cutting it from 14 rows to 10.
+  * postinst: existing users' fastfetch/themes/*.jsonc and the active
+    theme's rendered config.jsonc were only ever copied in with `cp -n`
+    on upgrade, on the assumption fastfetch config was new and untouched
+    — so package-side fixes like the logo redraw above never reached an
+    upgrade, only fresh installs. Theme jsonc files are fully
+    package-generated (never hand-edited), so now always overwritten on
+    upgrade like foot.ini/waybar config.jsonc already are; config.jsonc
+    is refreshed from themes/<active-theme>.jsonc (read from
+    ~/.config/paperweight-os/active-theme) so it picks up fixes too,
+    falling back to the old no-clobber copy only if that state file
+    predates this version.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 16 Jul 2026 21:20:00 -0500
+
 paperweight-skel (0.2.73-1) trixie; urgency=high
 
   * Fix 0.2.72-1 breaking installs entirely (found during live testing,

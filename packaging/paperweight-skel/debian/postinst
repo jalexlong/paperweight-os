@@ -121,13 +121,32 @@ case "$1" in
                           "$TARGET_HOME/.config/wlogout/" 2>/dev/null || true
                     cp -n /etc/skel/.config/wlogout/style.css \
                           "$TARGET_HOME/.config/wlogout/" 2>/dev/null || true
-                    # fastfetch config is new — existing users won't have it yet.
-                    cp -n /etc/skel/.config/fastfetch/config.jsonc \
-                          "$TARGET_HOME/.config/fastfetch/" 2>/dev/null || true
-                    cp -n /etc/skel/.config/fastfetch/paperweight-logo.png \
-                          "$TARGET_HOME/.config/fastfetch/" 2>/dev/null || true
-                    cp -n /etc/skel/.config/fastfetch/themes/* \
-                          "$TARGET_HOME/.config/fastfetch/themes/" 2>/dev/null || true
+                    # fastfetch theme files are entirely package-generated
+                    # (fastfetch-theme-gen.py) and never hand-edited, so
+                    # always overwrite them — same treatment as foot.ini /
+                    # waybar config.jsonc below — to pick up art/color fixes
+                    # like the rock-logo redraw on upgrade, not just on the
+                    # user's next manual theme switch.
+                    cp /etc/skel/.config/fastfetch/themes/*.jsonc \
+                       "$TARGET_HOME/.config/fastfetch/themes/" 2>/dev/null || true
+                    # Refresh the *active* theme's rendered config.jsonc too,
+                    # mirroring what paperweight-theme itself does on switch,
+                    # so an in-place upgrade doesn't leave a stale logo/colors
+                    # behind until the user happens to reselect their theme.
+                    ACTIVE_THEME_FILE="$TARGET_HOME/.config/paperweight-os/active-theme"
+                    if [ -f "$ACTIVE_THEME_FILE" ]; then
+                        ACTIVE_THEME=$(cat "$ACTIVE_THEME_FILE")
+                        if [ -f "/etc/skel/.config/fastfetch/themes/$ACTIVE_THEME.jsonc" ]; then
+                            cp "/etc/skel/.config/fastfetch/themes/$ACTIVE_THEME.jsonc" \
+                               "$TARGET_HOME/.config/fastfetch/config.jsonc"
+                        fi
+                    else
+                        # Predates active-theme tracking, or a fresh-ish
+                        # install that hasn't switched themes yet — don't
+                        # clobber a config.jsonc we can't confirm matches.
+                        cp -n /etc/skel/.config/fastfetch/config.jsonc \
+                              "$TARGET_HOME/.config/fastfetch/" 2>/dev/null || true
+                    fi
                     # Always overwrite package-maintained files so they stay
                     # in sync with the installed version.
                     cp /etc/skel/.config/foot/foot.ini \
