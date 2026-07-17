@@ -1,3 +1,21 @@
+paperweight-skel (0.2.72-1) trixie; urgency=high
+
+  * Fix etc/skel/.bashrc missing from debian/install (known since the
+    0.2.49 CI failure, never actually fixed): dh_install silently omits
+    unlisted files, so .bashrc has never actually shipped in the built
+    .deb — every skel-copied user got no .bashrc at all from this
+    package. Added the missing debian/install line.
+  * Bake the bashrc.d source loop directly into etc/skel/.bashrc (found
+    during paperweight-secrets live testing): postinst only ever wires
+    the loop into the .bashrc of the one user installing the package
+    ($SUDO_USER / UID 1000) — a user created later via `adduser` just
+    gets etc/skel copied wholesale, and never got the loop at all, so any
+    package relying on it (e.g. paperweight-secrets' 20-gpg-agent.sh
+    fragment) silently never ran for them. postinst's runtime patch is
+    kept as-is for upgrades on installs whose .bashrc predates this.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 16 Jul 2026 20:00:00 -0500
+
 paperweight-skel (0.2.71-1) trixie; urgency=low
 
   * greetd login screen: fix wallpaper appearing zoomed in/cropped, hiding

@@ -111,3 +111,7 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# PaperweightOS bash fragments
+for _pw in ~/.config/paperweight-os/bashrc.d/*.sh; do [ -f "$_pw" ] && . "$_pw"; done
+unset _pw

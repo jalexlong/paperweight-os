@@ -128,8 +128,13 @@ case "$1" in
                         2>/dev/null || true
                 fi
 
-                # Wire up bashrc.d source loop — works on any .bashrc, including
-                # stripped ones. The grep guard makes this idempotent on upgrades.
+                # Wire up bashrc.d source loop for this specific installing user.
+                # The loop is now also baked into etc/skel/.bashrc itself, so any
+                # *future* adduser-created user gets it automatically without
+                # this postinst ever running again for them — this block exists
+                # for upgrades on installs whose .bashrc predates that addition,
+                # or any hand-stripped .bashrc missing it. Grep guard makes it
+                # idempotent either way.
                 if [ -f "$TARGET_HOME/.bashrc" ] && \
                    ! grep -q "paperweight-os/bashrc.d" "$TARGET_HOME/.bashrc"; then
                     printf '\n# PaperweightOS bash fragments\nfor _pw in ~/.config/paperweight-os/bashrc.d/*.sh; do [ -f "$_pw" ] && . "$_pw"; done\nunset _pw\n' \
