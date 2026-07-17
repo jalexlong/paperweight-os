@@ -130,7 +130,7 @@ ROLES = {
 # by rendering the logo against all four themes' actual backgrounds and
 # checking WCAG contrast; GREY_ON_LIGHT_BG's tones are darker overall than
 # GREY_ON_DARK_BG's since latte's background is inverted (near-white).
-GREY_ON_DARK_BG = ("#e6e8ea", "#7a7e85")   # (light facet, dark facet)
+GREY_ON_DARK_BG = ("#e6e8ea", "#8b8f96")   # (light facet, dark facet)
 GREY_ON_LIGHT_BG = ("#787d84", "#33363b")
 
 TEMPLATE = """// PaperweightOS fastfetch theme — {label}

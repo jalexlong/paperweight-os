@@ -1,3 +1,13 @@
+paperweight-skel (0.2.80-1) trixie; urgency=medium
+
+  * fastfetch: brighten GREY_ON_DARK_BG's dark facet further,
+    #7a7e85 -> #8b8f96 (light facet #e6e8ea unchanged) — 0.2.79-1's dark
+    tone still read as dim against macchiato/mocha/frappe. Checked WCAG
+    contrast against all three dark bases and against the light facet
+    (to keep the two-tone split legible) before picking this value.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 16 Jul 2026 23:10:00 -0500
+
 paperweight-skel (0.2.79-1) trixie; urgency=medium
 
   * fastfetch: brighten GREY_ON_DARK_BG's rock logo pair (light facet
