@@ -1,3 +1,18 @@
+paperweight-skel (0.2.73-1) trixie; urgency=high
+
+  * Fix 0.2.72-1 breaking installs entirely (found during live testing,
+    same day): shipping etc/skel/.bashrc via debian/install conflicts
+    with the bash package, which owns and ships /etc/skel/.bashrc
+    directly — dpkg refuses to overwrite a file owned by another package
+    ("trying to overwrite '/etc/skel/.bashrc', which is also in package
+    bash"). Reverted the debian/install line and the shipped file;
+    0.2.72-1's actual goal (force_color_prompt=yes, color grep/ls
+    aliases, the bashrc.d loop) is now applied via an idempotent sed +
+    grep-guarded append against /etc/skel/.bashrc in place, same pattern
+    already used for /etc/os-release just above it in this same postinst.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 16 Jul 2026 20:30:00 -0500
+
 paperweight-skel (0.2.72-1) trixie; urgency=high
 
   * Fix etc/skel/.bashrc missing from debian/install (known since the

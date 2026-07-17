@@ -33,6 +33,31 @@ case "$1" in
             fi
         fi
 
+        # Enable color prompt/aliases and add the bashrc.d fragment loop in
+        # /etc/skel/.bashrc. The bash package owns this file (ships it
+        # directly), so shipping a competing copy via debian/install causes
+        # a dpkg overwrite conflict on unpack — found the hard way. Patch
+        # in place instead, same pattern as /etc/os-release above.
+        # Idempotent: sed only matches the commented form, so re-running
+        # on an already-patched file is a no-op; the bashrc.d append is
+        # grep-guarded the same way the existing-user propagation below
+        # already does it for a live user's homedir .bashrc.
+        if [ -f /etc/skel/.bashrc ]; then
+            sed -i \
+                -e 's/^#force_color_prompt=yes/force_color_prompt=yes/' \
+                -e 's/^\(\s*\)#\(alias grep=\)/\1\2/' \
+                -e 's/^\(\s*\)#\(alias fgrep=\)/\1\2/' \
+                -e 's/^\(\s*\)#\(alias egrep=\)/\1\2/' \
+                -e 's/^#\(alias ll=\)/\1/' \
+                -e 's/^#\(alias la=\)/\1/' \
+                -e 's/^#\(alias l=\)/\1/' \
+                /etc/skel/.bashrc
+            if ! grep -q "paperweight-os/bashrc.d" /etc/skel/.bashrc; then
+                printf '\n# PaperweightOS bash fragments\nfor _pw in ~/.config/paperweight-os/bashrc.d/*.sh; do [ -f "$_pw" ] && . "$_pw"; done\nunset _pw\n' \
+                    >> /etc/skel/.bashrc
+            fi
+        fi
+
         # greetd takes over VT1; mask getty@tty1 so they don't race.
         systemctl mask getty@tty1.service 2>/dev/null || true
 
