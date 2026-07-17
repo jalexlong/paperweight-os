@@ -153,7 +153,11 @@ TEMPLATE = """// PaperweightOS fastfetch theme — {label}
         {{ "type": "memory", "key": "Memory" }},
         {{ "type": "disk", "folders": "/", "key": "Disk" }},
         {{ "type": "localip", "defaultRouteOnly": true, "key": "IP" }},
-        {{ "type": "battery", "key": "Battery" }}
+        {{
+            "type": "battery",
+            "key": "Battery",
+            "format": "{{capacity}} ({{time-hours}}h {{time-minutes}}m remaining) [{{status}}]"
+        }}
     ]
 }}
 """

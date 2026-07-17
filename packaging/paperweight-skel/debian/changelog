@@ -1,3 +1,16 @@
+paperweight-skel (0.2.76-1) trixie; urgency=medium
+
+  * fastfetch: abbreviate the battery module's time-remaining text from
+    "7 hours, 39 mins remaining" to "7h 39m remaining" via an explicit
+    --battery-format string ({capacity} ({time-hours}h {time-minutes}m
+    remaining) [{status}]), matching the built-in default's structure
+    (verified against `fastfetch -s battery --format json` and a live
+    discharging battery) but abbreviating the units. Note {capacity}
+    already renders its own trailing "%" — a literal "%" placed right
+    after it in a format string doubles up ("55%%"), confirmed by testing.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 16 Jul 2026 22:05:00 -0500
+
 paperweight-skel (0.2.75-1) trixie; urgency=medium
 
   * fastfetch: two-tone the rock logo instead of a single flat lavender —
