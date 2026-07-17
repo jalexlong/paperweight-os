@@ -1,3 +1,19 @@
+paperweight-secrets (0.1.6-1) trixie; urgency=low
+
+  * paperweight-secrets-init and paperweight-secrets-sync: add timestamped
+    logging (~/.local/share/paperweight-os/{secrets-init,secrets-sync}.log,
+    mode 600, same rotation pattern as paperweight-passmenu's log) —
+    neither had any diagnostic trail before this, despite
+    paperweight-secrets-init being the actual source of most of this
+    session's live-testing failures (pinentry/passphrase issues) and
+    paperweight-secrets-sync being documented as suitable for unattended
+    cron/timer use, where there's no terminal to see output in at all.
+  * paperweight-secrets-sync: bound the pass-secret-service restart to a
+    5s timeout — observed hanging ~90s with no reachable systemd user
+    session before failing, which defeats the point of being cron-safe.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 16 Jul 2026 21:00:00 -0500
+
 paperweight-secrets (0.1.5-1) trixie; urgency=high
 
   * Fix gpg-agent 60s "Timeout" hang on first pinentry launch (found
