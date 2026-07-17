@@ -1,3 +1,17 @@
+paperweight-skel (0.2.77-1) trixie; urgency=medium
+
+  * fastfetch: recolor the rock logo grey/silver instead of lavender.
+    The previous two-tone version (0.2.75-1) used the theme's accent hue
+    for both light and dark facets, which just read as "the accent
+    color" rather than "a rock" — swapped $1/$2 for the overlay2/overlay0
+    neutral-scale roles instead, matching rock.png's actual silvery
+    coloring. Named roles rather than a hardcoded grey pair because
+    Catppuccin's neutral scale is already tuned per theme for contrast
+    against that theme's own background, including latte's inverted
+    light/dark ordering.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 16 Jul 2026 22:20:00 -0500
+
 paperweight-skel (0.2.76-1) trixie; urgency=medium
 
   * fastfetch: abbreviate the battery module's time-remaining text from

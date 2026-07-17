@@ -9,9 +9,17 @@ canonical source per THEME-AUTHORING.md) and emits a matching
 never have to be hand-converted or re-typed.
 
 The logo is a fixed ASCII-art rock (ROCK_LOGO below), rendered via
-fastfetch's "data" logo type and two-toned with `$1`/`$2` placeholders:
-`$1` (the theme's `lavender` role) for the rock's light facets, `$2` (the
-same hue, darkened — see darken_hex()) for its dark facets and outline.
+fastfetch's "data" logo type and two-toned grey/silver with `$1`/`$2`
+placeholders: `$1` (the theme's `overlay2` role) for the rock's light
+facets, `$2` (`overlay0`, a darker step on the same neutral scale) for its
+dark facets and outline. Grey rather than an accent color, to match the
+actual rock.png asset's own silvery coloring instead of tinting it lavender;
+these two roles (not a hardcoded hex pair) because Catppuccin's neutral
+scale is already tuned per theme for contrast against that theme's own
+background — including latte's inverted light/dark ordering — where a
+fixed grey pair would wash out against latte's near-white background or
+macchiato/mocha/frappe's near-black ones.
+
 "data" was chosen over the earlier "chafa" raster approach (which shelled
 out to chafa to downsample paperweight-plymouth's rock.png) because it
 needs no external image, no chafa dependency, and no width/height/aspect-
@@ -104,7 +112,9 @@ def apply_two_tone(art: str, light_chars: str = LIGHT_CHARS, dark_chars: str = D
 ROLES = {
     "lavender": "lavender",
     "blue": "blue",
+    "overlay2": "overlay2",
     "overlay1": "overlay1",
+    "overlay0": "overlay0",
     "surface2": "surface2",
     "text": "text",
     "green": "green",
@@ -121,7 +131,7 @@ TEMPLATE = """// PaperweightOS fastfetch theme — {label}
     "logo": {{
         "type": "data",
         "source": {logo_source},
-        "color": {{ "1": "{lavender_bold}", "2": "{lavender_dark}" }},
+        "color": {{ "1": "{overlay2_bold}", "2": "{overlay0}" }},
         "padding": {{ "top": 1, "right": 2 }}
     }},
     "display": {{
@@ -176,23 +186,6 @@ def hex_to_sgr(hexval: str, bold: bool = False) -> str:
     return f"{prefix}38;2;{r};{g};{b}"
 
 
-def darken_hex(hexval: str, factor: float = 0.55) -> str:
-    """Scale a #rrggbb color's channels uniformly to darken it in place.
-
-    Scaling R, G, and B by the same factor changes only HSV value — hue and
-    saturation ratios between channels are untouched — so this gives a
-    same-hue "shadow" tone for the rock logo's dark facets/outline without
-    needing a second named palette role (Catppuccin has no "dark lavender").
-    """
-    m = HEX_RE.match(hexval.strip())
-    if not m:
-        raise ValueError(f"not a 6-digit hex color: {hexval!r}")
-    h = m.group(1)
-    r, g, b = int(h[0:2], 16), int(h[2:4], 16), int(h[4:6], 16)
-    r, g, b = (max(0, min(255, round(c * factor))) for c in (r, g, b))
-    return f"#{r:02x}{g:02x}{b:02x}"
-
-
 def parse_sway_palette(conf_path: Path) -> dict[str, str]:
     """Parse `set $name #hexhex` lines out of a sway theme file."""
     palette = {}
@@ -235,7 +228,8 @@ def generate(
         label=label,
         logo_source=json.dumps(apply_two_tone(ROCK_LOGO)),
         lavender_bold=hex_to_sgr(palette["lavender"], bold=True),
-        lavender_dark=hex_to_sgr(darken_hex(palette["lavender"])),
+        overlay2_bold=hex_to_sgr(palette["overlay2"], bold=True),
+        overlay0=hex_to_sgr(palette["overlay0"]),
         blue_bold=hex_to_sgr(palette["blue"], bold=True),
         overlay1=hex_to_sgr(palette["overlay1"]),
         surface2=hex_to_sgr(palette["surface2"]),

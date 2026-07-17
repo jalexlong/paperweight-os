@@ -257,19 +257,22 @@ parameter string — e.g. `#8aadf4` (Catppuccin blue) becomes
 ./fastfetch-theme-gen.py --hex 8aadf4 --bold
 ```
 
-The script pulls eight roles off the sway palette — `lavender`, `blue`,
-`overlay1`, `surface2`, `text`, `green`, `yellow`, `red` — and maps them to:
+The script pulls ten roles off the sway palette — `lavender`, `blue`,
+`overlay2`, `overlay1`, `overlay0`, `surface2`, `text`, `green`, `yellow`,
+`red` — and maps them to:
 
 | Role | Used for |
 |---|---|
-| `lavender` (bold) | Key labels, title hostname, ASCII logo — the desktop's primary accent (same color as sway's focused window border) |
+| `lavender` (bold) | Key labels, title hostname — the desktop's primary accent (same color as sway's focused window border) |
 | `blue` (bold) | Title username |
+| `overlay2` (bold) | ASCII logo's light facets |
 | `overlay1` | Title `@` separator |
+| `overlay0` | ASCII logo's dark facets/outline |
 | `surface2` | The dashed separator line under the title |
 | `text` | Module value color |
 | `green` / `yellow` / `red` | Percentage thresholds (memory/disk/battery/CPU usage) |
 
-Requires the sway theme file to already define all eight roles — run this
+Requires the sway theme file to already define all ten roles — run this
 *after* step 1, not before. If you want a different mapping (e.g. a
 non-Catppuccin theme where `lavender` isn't the right "primary" accent),
 edit the `ROLES` dict or `TEMPLATE` string at the top of the script rather
@@ -278,17 +281,28 @@ than hand-editing generated `.jsonc` files, so regeneration stays lossless.
 The module list itself (which fields fastfetch prints — currently OS,
 Kernel, Uptime, CPU, Memory, Disk, LAN IPv4, Battery) is identical across
 all themes and only needs to change once, in the script's `TEMPLATE`,
-rather than in four separate files.
+rather than in four separate files. Battery uses an explicit `format`
+string (`{capacity} ({time-hours}h {time-minutes}m remaining) [{status}]`)
+to abbreviate fastfetch's built-in "7 hours, 39 mins remaining" down to
+"7h 39m remaining" — note `{capacity}` already renders its own trailing
+`%`, so a literal `%` placed right after it in a format string doubles up
+("55%%"), confirmed by testing against a live discharging battery.
 
 **The logo is theme-agnostic ASCII art, not raster art.** It's a fixed
 multi-line string (`ROCK_LOGO` in `fastfetch-theme-gen.py`), rendered via
-fastfetch's `"data"` logo type and two-toned with inline `$1`/`$2`
-placeholders: `$1` is each theme's `lavender` role (bold) for the rock's
-light facets, `$2` is the *same hue, darkened* (`darken_hex()` scales all
-three RGB channels by a fixed factor, which changes only HSV value —
-hue/saturation ratios between channels are untouched) for its dark facets
-and outline — there's no separate named "dark lavender" role in Catppuccin
-to reuse instead. `apply_two_tone()` walks `ROCK_LOGO` once and inserts a
+fastfetch's `"data"` logo type and two-toned grey/silver with inline
+`$1`/`$2` placeholders: `$1` is each theme's `overlay2` role (bold) for the
+rock's light facets, `$2` is `overlay0` (a darker step on the same neutral
+scale) for its dark facets and outline. Grey rather than an accent color,
+to match the actual `rock.png` asset's own silvery coloring instead of
+tinting it lavender (an earlier version did exactly that, both as a single
+flat color and as a lavender-hued two-tone — both read as "the accent
+color", not "a rock"). These are named palette roles rather than a
+hardcoded hex pair because Catppuccin's neutral scale is already tuned per
+theme for contrast against that theme's own background — including
+latte's inverted light/dark ordering — where a fixed grey pair would wash
+out against latte's near-white background or macchiato/mocha/frappe's
+near-black ones. `apply_two_tone()` walks `ROCK_LOGO` once and inserts a
 marker only where the tone actually changes (`LIGHT_CHARS = ".-"`,
 `DARK_CHARS = "+*%@"`), relying on the terminal's own SGR state to carry
 each color forward until the next marker — confirmed empirically that
