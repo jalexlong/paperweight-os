@@ -11,16 +11,17 @@ never have to be hand-converted or re-typed.
 The logo is a fixed ASCII-art rock (ROCK_LOGO below), rendered via
 fastfetch's "data" logo type and colored a single flat `$1`, tied to the
 same `lavender` role used for the title hostname — so the logo always
-matches the hostname color exactly, whatever the theme. This is actually
-the *second* time this file has landed here: it started single-color,
-went through a two-tone lavender phase, then a two-tone "theme-safe"
-grey/silver phase (Catppuccin's neutral roles turned out to still read as
-lavender-tinted, then a fixed achromatic grey pair worked but didn't match
-the hostname), before coming back to single-color on request. If you want
-multi-tone shading again, `git log -p -- fastfetch-theme-gen.py` has the
-two-tone (`apply_two_tone()`, `LIGHT_CHARS`/`DARK_CHARS`) and fixed-grey
-(`GREY_ON_DARK_BG`/`GREY_ON_LIGHT_BG`, `is_dark_hex()`) machinery to
-resurrect rather than reinvent.
+matches the hostname color exactly, whatever the theme. This isn't the
+first time it's been single-color: it started here, went through a
+two-tone lavender phase, then a two-tone grey/silver phase meant to be
+more theme-safe (Catppuccin's neutral roles turned out to still read as
+lavender-tinted), then a fixed achromatic grey pair (which worked but no
+longer matched the hostname), before landing back on single-color per
+request. If you want multi-tone shading again, `git log -p --
+fastfetch-theme-gen.py` has the two-tone (`apply_two_tone()`,
+`LIGHT_CHARS`/`DARK_CHARS`) and fixed-grey (`GREY_ON_DARK_BG`/
+`GREY_ON_LIGHT_BG`, `is_dark_hex()`) machinery to resurrect rather than
+reinvent.
 
 "data" was chosen over the earlier "chafa" raster approach (which shelled
 out to chafa to downsample paperweight-plymouth's rock.png) because it
