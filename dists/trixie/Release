@@ -1,19 +1,19 @@
 Origin: PaperweightOS
 Label: PaperweightOS
 Codename: trixie
-Date: Fri, 17 Jul 2026 01:37:50 UTC
+Date: Fri, 17 Jul 2026 02:23:54 UTC
 Architectures: amd64
 Components: main
 Description: PaperweightOS package repository
 MD5Sum:
- 9f9fb31874376b480fa40977e74d7ff4 16292 main/binary-amd64/Packages
- ed4ddd4a2f956c686a7fa0f577cdf8c3 5913 main/binary-amd64/Packages.gz
+ 0d539e54ef2469964eadb2e1b55dd59e 16292 main/binary-amd64/Packages
+ 19d087e3ad5108877ade46db180f949c 5914 main/binary-amd64/Packages.gz
  2a5b562e92f35e9a3f9efbca426607d3 125 main/binary-amd64/Release
 SHA1:
- cbdab3709447b4da5a041547469f7bf6022e04b7 16292 main/binary-amd64/Packages
- f910dcf56440ec67126a451d6687724df26d364f 5913 main/binary-amd64/Packages.gz
+ 5c6f6f916ce20cf472c2342402cd79321e9b83fe 16292 main/binary-amd64/Packages
+ 3beb2a79d512ea82a61151c1ecc45935ae370183 5914 main/binary-amd64/Packages.gz
  0e69efac0057bcf7153e8dfb097d68bff8883215 125 main/binary-amd64/Release
 SHA256:
- 4c9b5f6cdc3ecda01a6b7c1ffa124f5b25f9c037bf2f1e5db303f30d00ac299a 16292 main/binary-amd64/Packages
- 3aeb4a9b2ea97c16323550f4d9dfc699848844c7d027e84c1a59fd48f319f7e0 5913 main/binary-amd64/Packages.gz
+ 3f4ea10614c6220a55408ee80c86919224cb3781a785f5bf7d7ab4d4ed8d34a0 16292 main/binary-amd64/Packages
+ dfa79a54bf4795f96630f73d074a6415e8d268befff43f364cb7045316d10182 5914 main/binary-amd64/Packages.gz
  cc615ee67c628c10068d765690fa8ae3b374f95ee7ad42cdf14e3115f83156d8 125 main/binary-amd64/Release

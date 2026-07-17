@@ -218,20 +218,20 @@ Description: Secrets manager stack — pass, pam-gnupg, pass-secret-service
  visible to apps.
 
 Package: paperweight-skel
-Version: 0.2.73-1
+Version: 0.2.74-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
-Installed-Size: 253
+Installed-Size: 252
 Depends: python3
 Replaces: greetd (<< 1.0)
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.73-1_all.deb
-Size: 44430
-SHA256: 33ce24c6659d23687ceb2e38040bbe6bc1b6fce891e3bfd2aa8610e9e5fe29ab
-SHA1: c6fa6ae3114c2e913df187c3a69f7a5b2193aa18
-MD5sum: d812f7ef6a1e2d36eb132194d12a8a50
+Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.74-1_all.deb
+Size: 44974
+SHA256: 45903836f1eecff101507611d4866fa5cfb4afa636ac6fd22a7f9f3dce1e755f
+SHA1: c91144aa7ad9809cace18859a4f4ef1bc5b63fe7
+MD5sum: 138b3e328889e85730ed3317f6952126
 Description: PaperweightOS default configuration skeleton
  Provides default XDG configuration files for the PaperweightOS desktop,
  installed to /etc/skel so they are copied into new user home directories
