@@ -186,19 +186,19 @@ Description: PaperweightOS Plymouth theme — all four Catppuccin variants
  removal. On eMMC storage this may take 30-60 seconds.
 
 Package: paperweight-secrets
-Version: 0.1.5-1
+Version: 0.1.6-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
-Installed-Size: 50
+Installed-Size: 52
 Depends: paperweight-skel, pass, pam-gnupg, pass-secret-service, pinentry-gtk2, wl-clipboard, python3
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-secrets/paperweight-secrets_0.1.5-1_all.deb
-Size: 14158
-SHA256: 910a5f0b7d5bc8e4bcce5341b62bbf7b5c3fda7b34a03a9923fc138a6ab9c13d
-SHA1: d3712a5091e3093ee4b45adfa03be01150781d32
-MD5sum: 7634c5db42c58d311b65a62c75657e17
+Filename: pool/main/p/paperweight-secrets/paperweight-secrets_0.1.6-1_all.deb
+Size: 15056
+SHA256: 383df03a43b09431796a34112bfc5da09fe245111b943d9c3ca334a12609227a
+SHA1: 2a2d8801ab7d0aa495fba21679db9b3e2dedeac8
+MD5sum: 5eaaa6a06a2cd3f46422fdd0411850b3
 Description: Secrets manager stack — pass, pam-gnupg, pass-secret-service
  Wires up a distro-wide secrets stack: pass(1) as the password store,
  pass-secret-service exposing it over the org.freedesktop.secrets D-Bus API
