@@ -1,4 +1,5 @@
 etc/skel/.gnupg/gpg-agent.conf                              etc/skel/.gnupg/
+etc/skel/.gtkrc-2.0                                          etc/skel/
 etc/skel/.config/paperweight-os/bashrc.d/20-gpg-agent.sh    etc/skel/.config/paperweight-os/bashrc.d/
 etc/skel/.config/sway/config.d/60-secrets-keys.conf         etc/skel/.config/sway/config.d/
 usr/bin/paperweight-passmenu                                usr/bin/

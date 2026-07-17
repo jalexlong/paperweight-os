@@ -56,9 +56,11 @@ case "$1" in
                       "$TARGET_HOME/.config/paperweight-os/bashrc.d/" 2>/dev/null || true
                 cp -n /etc/skel/.config/sway/config.d/60-secrets-keys.conf \
                       "$TARGET_HOME/.config/sway/config.d/" 2>/dev/null || true
+                cp -n /etc/skel/.gtkrc-2.0 "$TARGET_HOME/.gtkrc-2.0" 2>/dev/null || true
                 chown -R "${TARGET_USER}:" \
                     "$TARGET_HOME/.config/paperweight-os/bashrc.d" \
                     "$TARGET_HOME/.config/sway/config.d" 2>/dev/null || true
+                chown "${TARGET_USER}:" "$TARGET_HOME/.gtkrc-2.0" 2>/dev/null || true
             fi
         fi
         ;;

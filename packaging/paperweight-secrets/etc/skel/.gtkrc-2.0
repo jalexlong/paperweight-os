@@ -1,0 +1,40 @@
+# Catppuccin Macchiato — dark colors for GTK2 apps (pinentry-gtk2).
+#
+# Direct color overrides, no theme engine — same hardcoded-per-theme
+# convention this project uses for gtklock/wofi/waybar CSS. GTK2 has no
+# "prefer-dark" toggle like GTK3+; this is the whole story for dark mode
+# here. Loaded automatically by any GTK2 app via the standard
+# ~/.gtkrc-2.0 lookup, no environment wiring needed.
+#
+# Static to Macchiato (the distro default) — doesn't track live theme
+# switching the way other components do; pinentry is a modal dialog most
+# users won't scrutinize theme-matching on across switches.
+
+style "catppuccin-macchiato-dark"
+{
+    bg[NORMAL]      = "#24273a"
+    bg[PRELIGHT]    = "#363a4f"
+    bg[ACTIVE]      = "#363a4f"
+    bg[SELECTED]    = "#8aadf4"
+    bg[INSENSITIVE] = "#1e2030"
+
+    fg[NORMAL]      = "#cad3f5"
+    fg[PRELIGHT]    = "#cad3f5"
+    fg[ACTIVE]      = "#cad3f5"
+    fg[SELECTED]    = "#24273a"
+    fg[INSENSITIVE] = "#6e738d"
+
+    base[NORMAL]      = "#363a4f"
+    base[PRELIGHT]    = "#363a4f"
+    base[ACTIVE]      = "#181926"
+    base[SELECTED]    = "#8aadf4"
+    base[INSENSITIVE] = "#1e2030"
+
+    text[NORMAL]      = "#cad3f5"
+    text[PRELIGHT]    = "#cad3f5"
+    text[ACTIVE]      = "#cad3f5"
+    text[SELECTED]    = "#24273a"
+    text[INSENSITIVE] = "#6e738d"
+}
+
+class "GtkWidget" style "catppuccin-macchiato-dark"

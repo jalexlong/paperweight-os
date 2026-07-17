@@ -1,3 +1,14 @@
+paperweight-secrets (0.1.3-1) trixie; urgency=low
+
+  * Ship ~/.gtkrc-2.0 skel default: Catppuccin Macchiato dark colors for
+    pinentry-gtk2 (and any other GTK2 app), via direct style overrides —
+    no theme engine, same hardcoded-per-theme convention already used for
+    gtklock/wofi/waybar. GTK2 has no GTK3+-style "prefer-dark" toggle, so
+    this is the whole mechanism. Static to Macchiato, doesn't track live
+    theme switching.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Thu, 16 Jul 2026 17:00:00 -0500
+
 paperweight-secrets (0.1.2-1) trixie; urgency=high
 
   * Fix gpg-agent.conf pointing pinentry-program at /usr/bin/pinentry-gtk2
