@@ -262,7 +262,7 @@ The script pulls eight roles off the sway palette — `lavender`, `blue`,
 
 | Role | Used for |
 |---|---|
-| `lavender` (bold) | Key labels, title hostname — the desktop's primary accent (same color as sway's focused window border) |
+| `lavender` (bold) | Key labels, title hostname, ASCII logo — the desktop's primary accent (same color as sway's focused window border) |
 | `blue` (bold) | Title username |
 | `overlay1` | Title `@` separator |
 | `surface2` | The dashed separator line under the title |
@@ -280,58 +280,41 @@ Kernel, Uptime, CPU, Memory, Disk, LAN IPv4, Battery) is identical across
 all themes and only needs to change once, in the script's `TEMPLATE`,
 rather than in four separate files.
 
-**The logo is theme-agnostic raster art, not a per-theme ASCII block.**
-`fastfetch/paperweight-logo.png` (copied by `fastfetch-theme-gen.py` from
-`packaging/paperweight-plymouth/usr/share/plymouth/themes/paperweight/rock.png`
-— the rock alone, without the paper stack from the full `logo.png`
-boot-splash mark, since fine detail doesn't survive being downsampled to
-~18x9 characters) is rendered via fastfetch's `chafa` logo type (ANSI
-truecolor character blocks). All four theme files point at the same image;
-only the surrounding text colors change per theme. Four deliberate choices
-here:
+**The logo is theme-agnostic ASCII art, not raster art.** It's a fixed
+multi-line string (`ROCK_LOGO` in `fastfetch-theme-gen.py`), rendered via
+fastfetch's `"data"` logo type and colored with a single `$1` placeholder
+tied to each theme's `lavender` role (`"color": { "1": "{lavender_bold}" }`
+in `TEMPLATE`). All four theme files embed the same art; only its color
+changes per theme. This replaced an earlier `chafa`-rendered PNG (a
+downsampled crop of paperweight-plymouth's `rock.png`) for a few reasons:
 
-- **`"chafa": { "fgOnly": true }`.** chafa draws only foreground-colored
-  glyphs and leaves every cell's background completely untouched, so the
-  terminal's own (translucent, wallpaper-blended) background shows through
-  around the rock. This was chosen over an earlier approach that
-  pre-composited the source onto each theme's flat `crust` color: that
-  fixed transparent-edge fringing (chafa has no way to be told what to
-  blend edge pixels against — it defaults to black) but produced a solid
-  opaque patch that didn't match the terminal's actual translucent
-  background, which read as a bigger, more visible defect (a flat grey
-  box) than the fringe it replaced. `fgOnly` avoids both failure modes at
-  once: no background is ever drawn, so nothing to mismatch, and any
-  residual anti-aliased-edge haloing is confined to individual glyphs'
-  foreground color rather than a whole rectangle.
-- **`"type": "chafa"`, not `"auto"`.** `auto` tries sixel/kitty/iterm
-  graphics protocols first and, if the terminal doesn't answer fastfetch's
-  capability query, was observed dumping the raw PNG bytes as a last-resort
-  fallback (garbage output). `chafa` renders as plain ANSI truecolor text,
-  so on the same failure it falls back cleanly to fastfetch's built-in
-  Debian ASCII logo instead.
-- **Character art, not sixel/kitty graphics, by design.** Sixel and Kitty
-  graphics protocols don't pass through tmux without explicit
-  `allow-passthrough` configuration — which would silently break the logo
-  in the exact tmux use case this whole minimalist config exists for.
-  `chafa`'s ANSI-block output works in any 24-bit-color terminal, tmux
-  pane or not.
-- **Both `width` and `height` set explicitly, not just `width` with
-  `preserveAspectRatio`.** Leaving `height` implicit was observed causing
-  fastfetch to miscalculate how many rows the logo occupies (likely from a
-  bad terminal font-cell-aspect-ratio guess), which desyncs the cursor
-  math used to align info lines next to the logo — symptoms were logo
-  fragments bleeding onto the end of some info lines and other info lines
-  losing their left indent entirely. Setting both bounds the logo to a
-  fixed row count that matches what's reserved for text alignment; worst
-  case with `preserveAspectRatio` still on is leftover blank space inside
-  that box, not misalignment.
+- **No external asset or renderer.** The old approach shipped a
+  `paperweight-logo.png` in the skel tree and shelled out to `chafa` at
+  fastfetch-run-time to rasterize it into ANSI blocks. `"data"` needs
+  neither — the art is plain text baked directly into the `.jsonc`, so
+  there's one less file to install/upgrade/clean up and one less runtime
+  dependency to worry about (chafa remains on the system regardless,
+  pulled in by yazi's image-preview feature, but fastfetch no longer
+  relies on it).
+- **No width/height/aspect-ratio tuning.** The old config needed explicit
+  `width`/`height` (leaving `height` implicit was observed desyncing
+  fastfetch's cursor math, bleeding logo fragments onto info lines) tuned
+  against a specific source image's aspect ratio. Plain text has a fixed,
+  self-evident row/column count — nothing to recompute if the art changes.
+- **No terminal capability negotiation.** `chafa`/`auto` logo types probe
+  the terminal (sixel/kitty/iterm graphics, ANSI truecolor fallback)
+  before rendering, and sixel/kitty in particular don't pass through tmux
+  without explicit `allow-passthrough` configuration. `"data"` is just
+  text — it renders identically over SSH, inside tmux, or in any terminal
+  fastfetch supports at all, with nothing to negotiate or fall back from.
 
-If you swap in new artwork later, replace `LOGO_SOURCE`'s target in
-`fastfetch-theme-gen.py` (or pass `--logo-src`) and re-run the generator —
-it re-copies `fastfetch/paperweight-logo.png` automatically, no theme
-`.jsonc` needs to change. Re-check alignment after any swap; a very
-differently-shaped image may need different `width`/`height` values
-(`LOGO_WIDTH`/`LOGO_HEIGHT` constants) in the script.
+If you swap in new artwork later, edit `ROCK_LOGO` at the top of
+`fastfetch-theme-gen.py` and re-run the generator for each theme — no
+per-theme `.jsonc` needs hand-editing, since the art is one shared string
+formatted into all four. Keep it inside a monochrome density ramp (e.g.
+`" .:-=+*#%@"` light→dark) since only one color placeholder (`$1`) is
+wired up; a multi-color logo would need additional `$2`, `$3`, ... markers
+in the string and matching entries in `TEMPLATE`'s `"color"` object.
 
 `fastfetch/config.jsonc` is the active theme file written by
 `paperweight-theme`.

@@ -5,13 +5,10 @@
 {
     "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
     "logo": {
-        "type": "chafa",
-        "source": "~/.config/fastfetch/paperweight-logo.png",
-        "width": 18,
-        "height": 9,
-        "preserveAspectRatio": true,
-        "padding": { "top": 1, "right": 2 },
-        "chafa": { "fgOnly": true }
+        "type": "data",
+        "source": "$1        @@..----@@\n      @....------*@\n    @@--.--------**@\n  @....----------***@\n@------+++++++++*****@\n@*----+++++++****%%**@\n@**--++++++******%%%%@\n@***%%%%%*********%@\n  @@%%%%%%****@@%\n         @%@",
+        "color": { "1": "1;38;2;186;187;241" },
+        "padding": { "top": 1, "right": 2 }
     },
     "display": {
         "separator": " ",
