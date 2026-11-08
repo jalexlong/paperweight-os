@@ -1,3 +1,5 @@
 usr/share/paperweight-os/wallpapers/        usr/share/paperweight-os/
+usr/share/paperweight-os/settings.d/        usr/share/paperweight-os/
+usr/share/applications/paperweight-wallpaper.desktop  usr/share/applications/
 etc/skel/.config/sway/config.d/            etc/skel/.config/sway/
-etc/skel/.local/bin/paperweight-wallpaper  etc/skel/.local/bin
+usr/bin/paperweight-wallpaper              usr/bin/

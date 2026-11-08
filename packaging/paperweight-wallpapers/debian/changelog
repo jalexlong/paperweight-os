@@ -1,3 +1,17 @@
+paperweight-wallpapers (0.3.5-1) trixie; urgency=low
+
+  * Move paperweight-wallpaper from /etc/skel/.local/bin to /usr/bin. The
+    postinst only copied it into $HOME on a fresh install, so it was often
+    missing and $mod+w ran a command that didn't exist. postinst removes
+    any stale ~/.local/bin copy.
+  * Drop $mod+w (92-wallpaper-picker.conf). The picker is now in the
+    paperweight-settings menu ($mod+comma) via settings.d/20-wallpaper,
+    and in app-launcher search via paperweight-wallpaper.desktop.
+    postinst removes the user's copy if it's still the stock file;
+    maintscript rm_conffile drops both old /etc/skel files.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 08 Nov 2026 14:00:00 -0600
+
 paperweight-wallpapers (0.3.4-1) trixie; urgency=low
 
   * Add frappe-wallpaper1.jpg and mocha-wallpaper1.jpg — placeholder artwork

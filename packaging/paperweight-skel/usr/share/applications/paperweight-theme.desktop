@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Theme
+Comment=Switch the PaperweightOS color theme
+Exec=paperweight-theme
+Icon=preferences-desktop-theme
+Terminal=false
+Categories=Settings;
+Keywords=color;colours;appearance;catppuccin;

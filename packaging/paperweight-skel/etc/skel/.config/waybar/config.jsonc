@@ -215,7 +215,8 @@
         "exec": "echo $HOME/.config/waybar/paperweight-logo.png",
         "size": 20,
         "tooltip": false,
-        "on-click": "wofi --show drun"
+        "on-click": "wofi --show drun",
+        "on-click-right": "paperweight-settings"
     },
 
     "custom/power": {

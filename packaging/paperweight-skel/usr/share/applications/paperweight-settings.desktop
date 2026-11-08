@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Settings
+Comment=PaperweightOS settings: theme, wallpaper, network, sound, power
+Exec=paperweight-settings
+Icon=preferences-system
+Terminal=false
+Categories=Settings;
+Keywords=preferences;config;

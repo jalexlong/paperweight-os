@@ -3,40 +3,44 @@ set -e
 
 case "$1" in
     configure)
-        chmod +x /etc/skel/.local/bin/paperweight-wallpaper
-
-        # On fresh install, copy skel files to the invoking user's home.
         # $SUDO_USER is set when running interactive `sudo apt install`.
         # Falls back to UID 1000 for preseed/unattended installs.
-        if [ -z "$2" ]; then
-            TARGET_USER=""
-            if [ -n "${SUDO_USER:-}" ] && [ "$SUDO_USER" != "root" ]; then
-                TARGET_USER="$SUDO_USER"
-            else
-                TARGET_USER=$(getent passwd 1000 2>/dev/null | cut -d: -f1 || true)
+        TARGET_USER=""
+        if [ -n "${SUDO_USER:-}" ] && [ "$SUDO_USER" != "root" ]; then
+            TARGET_USER="$SUDO_USER"
+        else
+            TARGET_USER=$(getent passwd 1000 2>/dev/null | cut -d: -f1 || true)
+        fi
+        TARGET_HOME=""
+        if [ -n "$TARGET_USER" ]; then
+            TARGET_HOME=$(getent passwd "$TARGET_USER" | cut -d: -f6)
+        fi
+
+        if [ -n "$TARGET_HOME" ] && [ -d "$TARGET_HOME" ]; then
+            if [ -z "$2" ]; then
+                # Fresh install: copy the wallpaper fragment to the user's home.
+                echo "paperweight-wallpapers: applying configs to $TARGET_HOME"
+                install -d -m 755 -o "$TARGET_USER" "$TARGET_HOME/.config/sway/config.d"
+                cp -n /etc/skel/.config/sway/config.d/91-wallpaper.conf \
+                      "$TARGET_HOME/.config/sway/config.d/" 2>/dev/null || true
+                chown "${TARGET_USER}:" \
+                    "$TARGET_HOME/.config/sway/config.d/91-wallpaper.conf" \
+                    2>/dev/null || true
             fi
 
-            if [ -n "$TARGET_USER" ]; then
-                TARGET_HOME=$(getent passwd "$TARGET_USER" | cut -d: -f6)
-                if [ -d "$TARGET_HOME" ]; then
-                    echo "paperweight-wallpapers: applying configs to $TARGET_HOME"
-                    install -d -m 755 -o "$TARGET_USER" \
-                        "$TARGET_HOME/.config/sway/config.d" \
-                        "$TARGET_HOME/.local/bin"
-                    cp -n /etc/skel/.config/sway/config.d/91-wallpaper.conf \
-                          "$TARGET_HOME/.config/sway/config.d/" 2>/dev/null || true
-                    cp -n /etc/skel/.config/sway/config.d/92-wallpaper-picker.conf \
-                          "$TARGET_HOME/.config/sway/config.d/" 2>/dev/null || true
-                    cp -n /etc/skel/.local/bin/paperweight-wallpaper \
-                          "$TARGET_HOME/.local/bin/" 2>/dev/null || true
-                    chmod +x "$TARGET_HOME/.local/bin/paperweight-wallpaper" \
-                          2>/dev/null || true
-                    chown "${TARGET_USER}:" \
-                        "$TARGET_HOME/.config/sway/config.d/91-wallpaper.conf" \
-                        "$TARGET_HOME/.config/sway/config.d/92-wallpaper-picker.conf" \
-                        "$TARGET_HOME/.local/bin/paperweight-wallpaper" \
-                        2>/dev/null || true
-                fi
+            # Pre-0.3.5 cleanup (runs on every configure; no-op once done):
+            # - the picker moved from ~/.local/bin to /usr/bin, so a stale
+            #   home copy would shadow the dpkg-managed one on $PATH;
+            # - $mod+w is gone (the picker is in the $mod+comma Settings
+            #   menu now). The fragment is removed only if it's still the
+            #   stock one, so a user's own edits are kept.
+            rm -f "$TARGET_HOME/.local/bin/paperweight-wallpaper"
+            PICKER_CONF="$TARGET_HOME/.config/sway/config.d/92-wallpaper-picker.conf"
+            if [ -f "$PICKER_CONF" ] && \
+               [ "$(cat "$PICKER_CONF")" = "$(printf '%s\n%s' \
+                   '# Open graphical wallpaper picker; saves choice to active theme'\''s config.' \
+                   'bindsym $mod+w exec paperweight-wallpaper')" ]; then
+                rm -f "$PICKER_CONF"
             fi
         fi
         ;;

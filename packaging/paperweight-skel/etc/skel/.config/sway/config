@@ -16,12 +16,22 @@ set $lock gtklock -d
 
 ### App launchers
     # $mod+b/$mod+d are overridden in config.d/40-workspaces.conf with workspace switching.
-    bindsym $mod+Return exec "swaymsg workspace 1 && $term"
+    # Return = terminal on the current workspace; t = terminal on workspace 1.
+    # Shift adds floating. The $mod+t pair uses sway's own `;` chaining, not
+    # `exec "swaymsg workspace 1 && ..."`: sway places a new window on the
+    # workspace that was focused when `exec` ran, so exec has to run after
+    # the switch.
+    bindsym $mod+Return exec $term
     bindsym $mod+Shift+Return exec $term --app-id floating-terminal
+    bindsym $mod+t workspace number 1; exec $term
+    bindsym $mod+Shift+t workspace number 1; exec $term --app-id floating-terminal
     for_window [app_id="floating-terminal"] floating enable, resize set width 900 px height 500 px, move position center
 
     bindsym $mod+f exec $files
     bindsym $mod+space exec $menu
+    # Settings menu (theme, wallpaper, network, sound, power); also on
+    # right-click of the waybar logo. Entries: paperweight-settings(1).
+    bindsym $mod+comma exec paperweight-settings
 
 ### Window management
     bindsym $mod+q kill

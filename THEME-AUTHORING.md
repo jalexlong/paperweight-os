@@ -340,7 +340,7 @@ active image differently:
 
 1. `~/.config/paperweight-os/wallpapers/<name>` — user override file
    containing a single absolute path to an image (written by the
-   `paperweight-wallpaper` picker, `$mod+w`).
+   `paperweight-wallpaper` picker, in the `$mod+comma` Settings menu).
 2. `/usr/share/paperweight-os/wallpapers/<name>-wallpaper1.jpg` — package
    default artwork.
 3. `/usr/share/paperweight-os/wallpapers/<name>.png` — solid-color PNG

@@ -1,0 +1,37 @@
+#!/bin/sh
+# paperweight-settings — one wofi menu for system settings ($mod+comma,
+# or right-click the waybar logo).
+#
+# Entries are drop-in files, same model as sway's config.d/:
+#   /usr/share/paperweight-os/settings.d/NN-name     shipped by packages
+#   ~/.config/paperweight-os/settings.d/NN-name      your own
+# Each file holds two lines:
+#   Name=Theme
+#   Exec=paperweight-theme
+# The NN prefix sets the order. A user file with the same name as a
+# shipped one replaces it; an empty user file hides that entry.
+
+SYS_DIR=/usr/share/paperweight-os/settings.d
+USR_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/paperweight-os/settings.d"
+
+# Print "Name<TAB>Exec" for every visible entry, in NN order.
+entries() {
+    for f in "$SYS_DIR"/* "$USR_DIR"/*; do
+        [ -f "$f" ] && basename "$f"
+    done | sort -u | while IFS= read -r n; do
+        if [ -f "$USR_DIR/$n" ]; then f="$USR_DIR/$n"; else f="$SYS_DIR/$n"; fi
+        name=$(sed -n 's/^Name=//p' "$f" | head -n 1)
+        cmd=$(sed -n 's/^Exec=//p' "$f" | head -n 1)
+        [ -n "$name" ] && [ -n "$cmd" ] && printf '%s\t%s\n' "$name" "$cmd"
+    done
+}
+
+LIST=$(entries)
+[ -n "$LIST" ] || exit 0
+
+CHOICE=$(printf '%s\n' "$LIST" | cut -f1 |
+    wofi --dmenu --prompt "Settings:" --lines "$(printf '%s\n' "$LIST" | wc -l)")
+[ -n "$CHOICE" ] || exit 0
+
+CMD=$(printf '%s\n' "$LIST" | awk -F '\t' -v c="$CHOICE" '$1 == c { print $2; exit }')
+[ -n "$CMD" ] && exec sh -c "$CMD"

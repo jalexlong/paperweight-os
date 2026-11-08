@@ -1,0 +1,2 @@
+Name=Power
+Exec=wlogout --buttons-per-row 5

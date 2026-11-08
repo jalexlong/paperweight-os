@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Wallpaper
+Comment=Pick the desktop wallpaper for the current theme
+Exec=paperweight-wallpaper
+Icon=preferences-desktop-wallpaper
+Terminal=false
+Categories=Settings;
+Keywords=background;appearance;

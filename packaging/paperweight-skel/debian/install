@@ -29,6 +29,8 @@ usr/bin/paperweight-theme                                  usr/bin/
 usr/bin/waybar-theme-status                                usr/bin/
 usr/bin/paperweight-network                                usr/bin/
 usr/bin/paperweight-volume                                 usr/bin/
+usr/bin/paperweight-settings                               usr/bin/
+usr/share/paperweight-os/settings.d/                       usr/share/paperweight-os/
 etc/skel/.config/sway/config.d/90-colors.conf             etc/skel/.config/sway/config.d/
 etc/skel/.config/sway/themes/                             etc/skel/.config/sway/
 etc/skel/.config/swaync/themes/                           etc/skel/.config/swaync/
@@ -43,6 +45,8 @@ etc/sudoers.d/paperweight-greeter                         etc/sudoers.d/
 usr/bin/paperweight-set-greeter-theme                     usr/bin/
 usr/lib/paperweight-os/start-greeter                      usr/lib/paperweight-os/
 usr/share/applications/paperweight-nvim.desktop           usr/share/applications/
+usr/share/applications/paperweight-settings.desktop       usr/share/applications/
+usr/share/applications/paperweight-theme.desktop          usr/share/applications/
 usr/share/applications/mimeapps.list                      usr/share/applications/
 etc/skel/.config/fastfetch/config.jsonc                    etc/skel/.config/fastfetch/
 etc/skel/.config/fastfetch/themes/                         etc/skel/.config/fastfetch/

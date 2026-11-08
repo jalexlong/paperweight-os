@@ -180,6 +180,32 @@ case "$1" in
                     if [ -f "$WLOGOUT_LAYOUT" ]; then
                         sed -i 's/^\t"action" : "gtklock",$/\t"action" : "gtklock -d",/' "$WLOGOUT_LAYOUT"
                     fi
+                    # Keybinding rework (0.2.85): $mod+Return = terminal on
+                    # the current workspace, $mod+t = terminal on workspace 1,
+                    # $mod+comma = paperweight-settings; theme picker moves
+                    # off $mod+t into that menu. Exact-line rewrites of the
+                    # stock lines only, so customized configs are left alone.
+                    # The sway/config edit is guarded on the old line, so it
+                    # runs once; the 40-workspaces deletions are no-ops after.
+                    if [ -f "$SWAY_CONF" ] && grep -qxF '    bindsym $mod+Return exec "swaymsg workspace 1 && $term"' "$SWAY_CONF"; then
+                        sed -i \
+                            -e 's/^    bindsym \$mod+Return exec "swaymsg workspace 1 && \$term"$/    bindsym $mod+Return exec $term/' \
+                            -e '/^    bindsym \$mod+Shift+Return exec \$term --app-id floating-terminal$/a\
+    bindsym $mod+t workspace number 1; exec $term\
+    bindsym $mod+Shift+t workspace number 1; exec $term --app-id floating-terminal' \
+                            -e '/^    bindsym \$mod+space exec \$menu$/a\
+    bindsym $mod+comma exec paperweight-settings' \
+                            "$SWAY_CONF"
+                    fi
+                    WS_CONF="$TARGET_HOME/.config/sway/config.d/40-workspaces.conf"
+                    if [ -f "$WS_CONF" ]; then
+                        sed -i \
+                            -e '/^# --- Terminal (workspace 1) ---$/d' \
+                            -e '/^assign \[app_id="foot"\] *workspace 1$/{N;/\n$/d;}' \
+                            -e '/^# Theme switcher$/d' \
+                            -e '/^bindsym \$mod+t exec paperweight-theme$/{N;/\n$/d;}' \
+                            "$WS_CONF"
+                    fi
                     # Remove stale skel copies of scripts that now live in
                     # /usr/bin/ (dpkg-managed) or have been retired outright.
                     # paperweight-power is gone: wlogout replaces it.

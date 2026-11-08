@@ -212,7 +212,8 @@ Quick reference — nine files required per theme (all under
 
 Also add `etc/greetd/themes/<name>.css` for the gtkgreet login screen.
 `debian/install` uses directory globs — no manifest changes needed.
-`$mod+t` opens the wofi theme picker.
+The theme picker is in the `$mod+comma` Settings menu (see below), not on a
+direct key.
 
 `paperweight-set-greeter-theme` (called by `paperweight-theme` when the user
 is in the `sudo` group) also resolves the theme's wallpaper and appends a
@@ -233,17 +234,24 @@ it derives the palette from the sway theme file. See THEME-AUTHORING.md §9.
 ## Sway Keybindings
 
 App-launch bindings (from `40-workspaces.conf`) switch to the workspace and open the app.
+Terminals are not `assign`ed to a workspace: `$mod+Return` opens on the current
+workspace, `$mod+t` on workspace 1. Bindings that switch workspace and then launch
+must chain with sway's own `;` (`workspace number 1; exec $term`), not
+`exec "swaymsg workspace 1 && ..."`. sway places a new window on the workspace
+that was focused when `exec` ran.
 
 | Binding | Action |
 |---|---|
-| `$mod+Return` | Terminal (foot) — workspace 1 |
-| `$mod+Shift+Return` | Floating terminal |
+| `$mod+Return` | Terminal (foot) — current workspace |
+| `$mod+Shift+Return` | Floating terminal — current workspace |
+| `$mod+t` | Terminal — workspace 1 |
+| `$mod+Shift+t` | Floating terminal — workspace 1 |
 | `$mod+b` | Browser ($browser) → workspace 2 |
 | `$mod+d` | Chat ($chat) → workspace 3 |
 | `$mod+s` | Toggle layout (tabbed / splith) |
 | `$mod+f` | Files (thunar) |
 | `$mod+space` | App launcher (wofi) |
-| `$mod+t` | Theme picker (paperweight-theme) |
+| `$mod+comma` | Settings menu (paperweight-settings): Theme, Wallpaper, Network, Sound, Power; also right-click the waybar logo |
 | `$mod+n` | Network picker (paperweight-network) |
 | `$mod+p` | Password picker (paperweight-passmenu) — copies to clipboard, clears in 45s |
 | `$mod+q` | Kill window |
@@ -258,6 +266,14 @@ App-launch bindings (from `40-workspaces.conf`) switch to the workspace and open
 | `Ctrl+Alt+Delete` / `Ctrl+Alt+BackSpace` | Power menu (wlogout) — lock/logout/suspend/restart/shutdown (BackSpace binding covers Chromebook keyboards, which lack a Delete key) |
 | `Print` | Screenshot → ~/Pictures/ |
 | `$mod+Print` | Region screenshot |
+
+Only things used daily get a direct key. Set-and-forget settings (theme,
+wallpaper) go in the Settings menu instead. Each menu entry is a drop-in file
+in `/usr/share/paperweight-os/settings.d/NN-name` (`Name=` + `Exec=` lines,
+NN = order), shipped by whichever package owns the tool. Users can add or
+override entries in `~/.config/paperweight-os/settings.d/` (an empty file
+hides one). Theme, Wallpaper and Settings also have `.desktop` entries, so
+`$mod+space` search finds them.
 
 ---
 

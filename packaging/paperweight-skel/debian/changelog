@@ -1,3 +1,28 @@
+paperweight-skel (0.2.85-1) trixie; urgency=medium
+
+  * Keybinding rework for a minimal setup: only daily-use actions get a
+    direct key; set-and-forget settings go in one menu.
+    - $mod+Return / $mod+Shift+Return: terminal / floating terminal on the
+      current workspace (was: switch to workspace 1 first).
+    - $mod+t / $mod+Shift+t: terminal / floating terminal on workspace 1.
+      Chained with sway's `;` so exec runs after the switch (sway places
+      the window on the workspace focused when exec ran).
+    - Drop `assign [app_id="foot"] workspace 1`, which forced every
+      terminal onto workspace 1.
+    - $mod+comma: new paperweight-settings wofi menu (Theme, Network,
+      Sound, Power; other packages add entries). Also on right-click of
+      the waybar logo. The theme picker moves off $mod+t into it.
+  * paperweight-settings(1): entries are drop-in files in
+    /usr/share/paperweight-os/settings.d/NN-name (Name= / Exec=); users
+    add or override them in ~/.config/paperweight-os/settings.d/.
+  * .desktop entries for Settings and Theme, so app-launcher search finds
+    them.
+  * postinst: on upgrade, rewrite the stock lines in ~/.config/sway/config
+    and config.d/40-workspaces.conf to the new bindings; customized
+    configs are left alone.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 08 Nov 2026 14:00:00 -0600
+
 paperweight-skel (0.2.84-1) trixie; urgency=medium
 
   * wlogout: lock button now runs `gtklock -d`, matching the
