@@ -173,6 +173,13 @@ case "$1" in
                     if [ -f "$SWAY_CONF" ]; then
                         sed -i 's/^set \$lock gtklock$/set $lock gtklock -d/' "$SWAY_CONF"
                     fi
+                    # wlogout/layout: pre-0.2.84 lock button ran a bare
+                    # `gtklock`; move the stock line to `gtklock -d`.
+                    # Exact-line match (tab-indented), custom actions kept.
+                    WLOGOUT_LAYOUT="$TARGET_HOME/.config/wlogout/layout"
+                    if [ -f "$WLOGOUT_LAYOUT" ]; then
+                        sed -i 's/^\t"action" : "gtklock",$/\t"action" : "gtklock -d",/' "$WLOGOUT_LAYOUT"
+                    fi
                     # Remove stale skel copies of scripts that now live in
                     # /usr/bin/ (dpkg-managed) or have been retired outright.
                     # paperweight-power is gone: wlogout replaces it.

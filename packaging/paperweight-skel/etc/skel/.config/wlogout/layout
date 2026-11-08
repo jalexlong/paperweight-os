@@ -1,6 +1,6 @@
 {
 	"label" : "lock",
-	"action" : "gtklock",
+	"action" : "gtklock -d",
 	"text" : "󰌾  Lock",
 	"keybind" : "l"
 }
