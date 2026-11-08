@@ -1,3 +1,19 @@
+paperweight-skel (0.2.82-1) trixie; urgency=medium
+
+  * sway idle: fix the double lock screen after closing the lid.
+    `swayidle -w` waits for every command to exit, and a bare `gtklock`
+    doesn't exit until unlock. So when the 750s idle lock was already up,
+    swayidle couldn't handle the lid-close PrepareForSleep until after the
+    user unlocked, and then it ran before-sleep and locked again. Locking
+    now uses `gtklock -d` (daemonizes once locked) behind a
+    `pgrep -x gtklock` guard. This also fixes the 900s display-off never
+    firing while idle-locked and the 5s logind inhibitor timeout on every
+    suspend. Also adds a `lock` handler so `loginctl lock-session` works.
+  * postinst: on upgrade, replace ~/.config/sway/config.d/30-idle.conf
+    only when it still has the old stock before-sleep line.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 08 Nov 2026 12:00:00 -0600
+
 paperweight-skel (0.2.81-1) trixie; urgency=medium
 
   * fastfetch: revert the rock logo to a single flat color, tied to

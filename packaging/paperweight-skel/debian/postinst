@@ -155,6 +155,17 @@ case "$1" in
                        "$TARGET_HOME/.config/waybar/config.jsonc"
                     cp /etc/skel/.config/paperweight-os/bashrc.d/10-colors.sh \
                        "$TARGET_HOME/.config/paperweight-os/bashrc.d/10-colors.sh"
+                    # 30-idle.conf: pre-0.2.82 versions ran a bare `gtklock`
+                    # under `swayidle -w`, which blocks swayidle until
+                    # unlock and causes a double lock after lid-close
+                    # suspend. Replace it only if it still has that stock
+                    # line, so a user's own edits are left alone.
+                    IDLE_CONF="$TARGET_HOME/.config/sway/config.d/30-idle.conf"
+                    if [ -f "$IDLE_CONF" ] && \
+                       grep -qx "    before-sleep 'gtklock'" "$IDLE_CONF"; then
+                        cp /etc/skel/.config/sway/config.d/30-idle.conf "$IDLE_CONF"
+                        chown "${TARGET_USER}:" "$IDLE_CONF" 2>/dev/null || true
+                    fi
                     # Remove stale skel copies of scripts that now live in
                     # /usr/bin/ (dpkg-managed) or have been retired outright.
                     # paperweight-power is gone: wlogout replaces it.
