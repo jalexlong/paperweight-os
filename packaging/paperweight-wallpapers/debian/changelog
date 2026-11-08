@@ -1,3 +1,12 @@
+paperweight-wallpapers (0.3.6-1) trixie; urgency=low
+
+  * Depend on paperweight-skel (>= 0.2.85-1). 0.3.5-1 dropped $mod+w in
+    favor of the Settings menu, which first ships in that skel version;
+    without it, upgrading wallpapers alone left no way to open the picker
+    except app-launcher search.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 08 Nov 2026 15:00:00 -0600
+
 paperweight-wallpapers (0.3.5-1) trixie; urgency=low
 
   * Move paperweight-wallpaper from /etc/skel/.local/bin to /usr/bin. The

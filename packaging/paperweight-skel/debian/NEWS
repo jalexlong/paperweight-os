@@ -1,0 +1,23 @@
+paperweight-skel (0.2.85-1) trixie; urgency=medium
+
+  Keybindings have changed:
+
+    $mod+Return         terminal on the CURRENT workspace (used to switch
+                        to workspace 1 first)
+    $mod+Shift+Return   floating terminal on the current workspace
+    $mod+t              terminal on workspace 1 (used to be the theme picker)
+    $mod+Shift+t        floating terminal on workspace 1
+    $mod+comma          NEW Settings menu: Theme, Wallpaper, Network, Sound,
+                        Password setup, Power. Also opens with a right-click
+                        on the PaperweightOS logo in the bar.
+
+  The theme and wallpaper pickers no longer have their own keys ($mod+t,
+  $mod+w). Open them from the Settings menu, or type "theme" or
+  "wallpaper" into the app launcher ($mod+space).
+
+  The upgrade updates ~/.config/sway for the installing user if those
+  lines are still the stock ones. Customized configs are left alone; copy
+  the new bindings from /etc/skel/.config/sway/config if you want them.
+  Run `swaymsg reload` (or log out and back in) to apply.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 08 Nov 2026 15:00:00 -0600

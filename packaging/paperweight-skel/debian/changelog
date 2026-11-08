@@ -1,3 +1,10 @@
+paperweight-skel (0.2.86-1) trixie; urgency=medium
+
+  * Add debian/NEWS describing the 0.2.85-1 keybinding changes, so
+    apt-listchanges shows them during the upgrade.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 08 Nov 2026 15:00:00 -0600
+
 paperweight-skel (0.2.85-1) trixie; urgency=medium
 
   * Keybinding rework for a minimal setup: only daily-use actions get a

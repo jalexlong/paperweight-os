@@ -9,7 +9,7 @@ Rules-Requires-Root: no
 
 Package: paperweight-wallpapers
 Architecture: all
-Depends: paperweight-skel, swaybg, yad, ${misc:Depends}
+Depends: paperweight-skel (>= 0.2.85-1), swaybg, yad, ${misc:Depends}
 Description: PaperweightOS wallpapers — Catppuccin themed backgrounds
  Provides wallpapers for PaperweightOS, installed to
  /usr/share/paperweight-os/wallpapers/:
