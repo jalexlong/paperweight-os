@@ -1,3 +1,13 @@
+paperweight-secrets (0.1.7-1) trixie; urgency=low
+
+  * Add "Password setup" to the paperweight-settings menu ($mod+comma) via
+    settings.d/50-password-setup. Opens paperweight-secrets-init in a
+    floating terminal and leaves a shell open, so its output (or the
+    "run gpg --full-generate-key first" message) stays readable and you
+    can act on it.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 08 Nov 2026 14:30:00 -0600
+
 paperweight-secrets (0.1.6-1) trixie; urgency=low
 
   * paperweight-secrets-init and paperweight-secrets-sync: add timestamped

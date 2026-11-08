@@ -251,7 +251,7 @@ that was focused when `exec` ran.
 | `$mod+s` | Toggle layout (tabbed / splith) |
 | `$mod+f` | Files (thunar) |
 | `$mod+space` | App launcher (wofi) |
-| `$mod+comma` | Settings menu (paperweight-settings): Theme, Wallpaper, Network, Sound, Power; also right-click the waybar logo |
+| `$mod+comma` | Settings menu (paperweight-settings): Theme, Wallpaper, Network, Sound, Password setup, Power; also right-click the waybar logo |
 | `$mod+n` | Network picker (paperweight-network) |
 | `$mod+p` | Password picker (paperweight-passmenu) — copies to clipboard, clears in 45s |
 | `$mod+q` | Kill window |

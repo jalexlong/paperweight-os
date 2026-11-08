@@ -5,3 +5,4 @@ etc/skel/.config/sway/config.d/60-secrets-keys.conf         etc/skel/.config/swa
 usr/bin/paperweight-passmenu                                usr/bin/
 usr/bin/paperweight-secrets-init                            usr/bin/
 usr/bin/paperweight-secrets-sync                            usr/bin/
+usr/share/paperweight-os/settings.d/50-password-setup        usr/share/paperweight-os/settings.d/
