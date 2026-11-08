@@ -218,20 +218,20 @@ Description: Secrets manager stack — pass, pam-gnupg, pass-secret-service
  visible to apps.
 
 Package: paperweight-skel
-Version: 0.2.84-1
+Version: 0.2.85-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
-Installed-Size: 255
+Installed-Size: 268
 Depends: python3
 Replaces: greetd (<< 1.0)
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.84-1_all.deb
-Size: 47604
-SHA256: c67eecd20955d095079da32961f6bd5e4142be4c2c56250ed5be936f4f99da77
-SHA1: e32eec04b0f1c90d22c712b508a8ecb8aa67c8da
-MD5sum: 219285f9834c2e44c37f8a41d2ef3d77
+Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.85-1_all.deb
+Size: 49732
+SHA256: 6761b35262ea04539a3b31f248e8e943e1d85e2b5f1a7ce786c86ccbcf211351
+SHA1: a1e5bd9ccf00c4b2c8ceff96d37c3b279188453a
+MD5sum: 453ba6cefd29f51119822387e53454c7
 Description: PaperweightOS default configuration skeleton
  Provides default XDG configuration files for the PaperweightOS desktop,
  installed to /etc/skel so they are copied into new user home directories
@@ -242,19 +242,19 @@ Description: PaperweightOS default configuration skeleton
  and are dropped into config.d/ directories for fragment-based composition.
 
 Package: paperweight-wallpapers
-Version: 0.3.4-1
+Version: 0.3.5-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
-Installed-Size: 746
+Installed-Size: 752
 Depends: paperweight-skel, swaybg, yad
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-wallpapers/paperweight-wallpapers_0.3.4-1_all.deb
-Size: 383592
-SHA256: cd35dd3a5f25ab31698e66a4d50a9c934a5c2a882102a565b6df6fab7fa07496
-SHA1: bba48e8ba34d5b4175d489d351ac95cdf582820a
-MD5sum: d1fb86af01f2ee1ce18890de8145e5de
+Filename: pool/main/p/paperweight-wallpapers/paperweight-wallpapers_0.3.5-1_all.deb
+Size: 384708
+SHA256: a66c5daa9e45161fcf405e29732c7207ca824c3e2b83c3c421d95b15b63d58e7
+SHA1: 227b2778560715e1e32c9be5cc75cfe5f52ca235
+MD5sum: 2fff492829c8b8597088a2f1c4700ddf
 Description: PaperweightOS wallpapers — Catppuccin themed backgrounds
  Provides wallpapers for PaperweightOS, installed to
  /usr/share/paperweight-os/wallpapers/:
@@ -265,8 +265,9 @@ Description: PaperweightOS wallpapers — Catppuccin themed backgrounds
  .
  Also installs a sway config fragment (91-wallpaper.conf) that applies
  the active theme's wallpaper on session start and after sway reload,
- and a wallpaper picker (paperweight-wallpaper, bound to $mod+w) that
- saves the chosen wallpaper per active theme.
+ and a wallpaper picker (paperweight-wallpaper, in the $mod+comma
+ Settings menu and the app launcher) that saves the chosen wallpaper
+ per active theme.
  .
  The picker uses yad --list with image thumbnail previews (scanning
  /usr/share/paperweight-os/wallpapers/ and ~/Pictures/ if present),
