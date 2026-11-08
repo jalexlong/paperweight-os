@@ -12,7 +12,7 @@ set $browser firefox-esr
 set $files thunar
 set $chat  vesktop
 set $menu wofi -S drun
-set $lock gtklock
+set $lock gtklock -d
 
 ### App launchers
     # $mod+b/$mod+d are overridden in config.d/40-workspaces.conf with workspace switching.

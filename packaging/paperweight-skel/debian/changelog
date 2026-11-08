@@ -1,3 +1,12 @@
+paperweight-skel (0.2.83-1) trixie; urgency=medium
+
+  * sway: `$mod+Ctrl+l` lock binding now runs `gtklock -d` (set $lock),
+    matching the swayidle lock commands from 0.2.82-1.
+  * postinst: on upgrade, rewrite the stock `set $lock gtklock` line in
+    ~/.config/sway/config to `gtklock -d`; a custom $lock is left alone.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 08 Nov 2026 12:30:00 -0600
+
 paperweight-skel (0.2.82-1) trixie; urgency=medium
 
   * sway idle: fix the double lock screen after closing the lid.

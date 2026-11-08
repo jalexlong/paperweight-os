@@ -166,6 +166,13 @@ case "$1" in
                         cp /etc/skel/.config/sway/config.d/30-idle.conf "$IDLE_CONF"
                         chown "${TARGET_USER}:" "$IDLE_CONF" 2>/dev/null || true
                     fi
+                    # sway/config: pre-0.2.83 shipped `set $lock gtklock`;
+                    # move the stock line to `gtklock -d` (daemonize once
+                    # locked). Exact-line match, so a custom $lock is kept.
+                    SWAY_CONF="$TARGET_HOME/.config/sway/config"
+                    if [ -f "$SWAY_CONF" ]; then
+                        sed -i 's/^set \$lock gtklock$/set $lock gtklock -d/' "$SWAY_CONF"
+                    fi
                     # Remove stale skel copies of scripts that now live in
                     # /usr/bin/ (dpkg-managed) or have been retired outright.
                     # paperweight-power is gone: wlogout replaces it.
