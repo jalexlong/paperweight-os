@@ -251,7 +251,7 @@ that was focused when `exec` ran.
 | `$mod+s` | Toggle layout (tabbed / splith) |
 | `$mod+f` | Files (thunar) |
 | `$mod+space` | App launcher (wofi) |
-| `$mod+comma` | Settings menu (paperweight-settings): Theme, Wallpaper, Network, Sound, Password setup, Keybindings, Power; also right-click the waybar logo |
+| `$mod+comma` | Settings menu (paperweight-settings): Theme, Wallpaper, Network, Sound, Password setup, Compose key (toggle), Keybindings, Power; also right-click the waybar logo |
 | `$mod+n` | Network picker (paperweight-network) |
 | `$mod+p` | Password picker (paperweight-passmenu) — copies to clipboard, clears in 45s |
 | `$mod+q` | Kill window |
@@ -272,7 +272,8 @@ wallpaper) go in the Settings menu instead. Each menu entry is a drop-in file
 in `/usr/share/paperweight-os/settings.d/NN-name` (`Name=` + `Exec=` lines,
 NN = order), shipped by whichever package owns the tool. Users can add or
 override entries in `~/.config/paperweight-os/settings.d/` (an empty file
-hides one). Theme, Wallpaper and Settings also have `.desktop` entries, so
+hides one). An optional `Status=` line makes an entry a toggle that shows its
+state (`Compose key: on`). Theme, Wallpaper and Settings also have `.desktop` entries, so
 `$mod+space` search finds them.
 
 **Label every new `bindsym`.** The Settings menu's Keybindings entry runs

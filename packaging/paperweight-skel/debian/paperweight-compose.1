@@ -1,0 +1,96 @@
+'\" t
+.TH PAPERWEIGHT\-COMPOSE 1 "2026-11-08" "paperweight-skel 0.2.88" "User Commands"
+.SH NAME
+paperweight\-compose \- turn the Right Alt Compose key on or off
+.SH SYNOPSIS
+.B paperweight\-compose
+.RB [ on | off | toggle | status ]
+.SH DESCRIPTION
+.B paperweight\-compose
+makes the Right Alt key a Compose key, or turns it back into a normal Alt
+key.
+It is the
+.B Compose key
+entry in
+.BR paperweight\-settings (1),
+which shows whether it is on or off.
+.PP
+With the Compose key on, press and release Right Alt, then type a short
+sequence to get a character that is not on the keyboard:
+.PP
+.RS
+.TS
+l l.
+o c	\(co
+r o	\(rg
+e \(aq	\['e]
+\- \- .	\(en
+\- \- \-	\(em
+o o	\(de
+.TE
+.RE
+.PP
+The order of the two letters matters: Compose, c, O gives \(lqǑ\(rq, not
+\(co.
+The full list of sequences is in
+.IR /usr/share/X11/locale/en_US.UTF\-8/Compose .
+.PP
+The Compose key is off by default.
+On keyboard layouts such as German or French, Right Alt is AltGr, which
+those layouts need for characters like @ and \(Eu; turning on the Compose
+key takes that away.
+.SH ARGUMENTS
+.TP
+.B toggle
+Turn it on if it is off, off if it is on.
+This is the default.
+.TP
+.B on
+Turn it on.
+.TP
+.B off
+Turn it off.
+.TP
+.B status
+Print
+.B on
+or
+.BR off .
+.PP
+.BR on ,
+.B off
+and
+.B toggle
+reload sway so the change applies at once.
+Run outside a sway session, they only update the file and the change
+applies the next time sway starts.
+.SH FILES
+.TP
+.I ~/.config/sway/config.d/60\-compose.conf
+Present while the Compose key is on; written by
+.B on
+and deleted by
+.BR off .
+The toggle only manages Right Alt
+.RB ( compose:ralt ).
+To use a different key, such as Right Ctrl, leave the toggle off and put
+.B xkb_options compose:rctrl
+(or another option from
+.BR xkeyboard\-config (7))
+in an
+.B input type:keyboard
+block in a fragment of your own, with a different file name.
+.TP
+.I ~/.XCompose
+Your own sequences.
+Start it with
+.B include \(dq%L\(dq
+to keep the standard ones.
+See
+.BR Compose (5).
+.SH SEE ALSO
+.BR paperweight\-settings (1),
+.BR paperweight\-keys (1),
+.BR Compose (5),
+.BR sway\-input (5),
+.BR xkeyboard\-config (7)

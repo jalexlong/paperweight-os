@@ -8,6 +8,9 @@
 # Each file holds two lines:
 #   Name=Theme
 #   Exec=paperweight-theme
+# and, for a toggle, an optional third whose output is shown after the name
+# ("Compose key: on"):
+#   Status=paperweight-compose status
 # The NN prefix sets the order. A user file with the same name as a
 # shipped one replaces it; an empty user file hides that entry.
 
@@ -22,6 +25,11 @@ entries() {
         if [ -f "$USR_DIR/$n" ]; then f="$USR_DIR/$n"; else f="$SYS_DIR/$n"; fi
         name=$(sed -n 's/^Name=//p' "$f" | head -n 1)
         cmd=$(sed -n 's/^Exec=//p' "$f" | head -n 1)
+        status=$(sed -n 's/^Status=//p' "$f" | head -n 1)
+        if [ -n "$status" ]; then
+            state=$(sh -c "$status" 2>/dev/null | head -n 1)
+            [ -n "$state" ] && name="$name: $state"
+        fi
         [ -n "$name" ] && [ -n "$cmd" ] && printf '%s\t%s\n' "$name" "$cmd"
     done
 }

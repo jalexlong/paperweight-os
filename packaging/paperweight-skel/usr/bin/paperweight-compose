@@ -1,0 +1,43 @@
+#!/bin/sh
+# paperweight-compose — turn the Right Alt Compose key on or off.
+# Usage: paperweight-compose [on|off|toggle|status]   (default: toggle)
+#
+# On writes ~/.config/sway/config.d/60-compose.conf (xkb_options
+# compose:ralt); off deletes it. Then sway is reloaded, so the change
+# applies at once and every other config fragment is re-read as well.
+# Off by default: on layouts like German or French, Right Alt is AltGr,
+# which those keyboards need for characters such as @ and €.
+
+CONF="${XDG_CONFIG_HOME:-$HOME/.config}/sway/config.d/60-compose.conf"
+
+is_on() { [ -f "$CONF" ] && grep -q 'compose:ralt' "$CONF"; }
+
+turn_on() {
+    mkdir -p "$(dirname "$CONF")"
+    cat > "$CONF" <<'EOF'
+# Written by paperweight-compose(1); `paperweight-compose off` deletes it.
+# Right Alt is the Compose key: press and release it, then type a
+# sequence, e.g. o c -> ©, e ' -> é, - - - -> —.
+# Full list: /usr/share/X11/locale/en_US.UTF-8/Compose
+input type:keyboard {
+    #: Right Alt | Compose key (e.g. RAlt, o, c = ©)
+    xkb_options compose:ralt
+}
+EOF
+}
+
+apply() {
+    if [ -n "${SWAYSOCK:-}" ] && swaymsg reload >/dev/null 2>&1; then
+        notify-send -u low "Compose key" "$1" 2>/dev/null || true
+    else
+        echo "$1 (takes effect the next time sway starts)"
+    fi
+}
+
+case "${1:-toggle}" in
+    status) if is_on; then echo on; else echo off; fi ;;
+    on)     turn_on; apply "On: press Right Alt, then e.g. o c for ©" ;;
+    off)    rm -f "$CONF"; apply "Off: Right Alt is a normal Alt key" ;;
+    toggle) if is_on; then exec "$0" off; else exec "$0" on; fi ;;
+    *)      echo "usage: paperweight-compose [on|off|toggle|status]" >&2; exit 2 ;;
+esac

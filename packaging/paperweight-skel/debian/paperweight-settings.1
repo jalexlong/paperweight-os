@@ -1,4 +1,4 @@
-.TH PAPERWEIGHT\-SETTINGS 1 "2026-11-08" "paperweight-skel 0.2.87" "User Commands"
+.TH PAPERWEIGHT\-SETTINGS 1 "2026-11-08" "paperweight-skel 0.2.88" "User Commands"
 .SH NAME
 paperweight\-settings \- PaperweightOS settings menu
 .SH SYNOPSIS
@@ -36,6 +36,10 @@ With the standard packages installed, the menu lists:
 .BR paperweight\-secrets\-init (1)
 in a terminal (from paperweight\-secrets)
 .TQ
+.B Compose key
+.BR paperweight\-compose (1),
+shown with its current state (on or off)
+.TQ
 .B Keybindings
 .BR paperweight\-keys (1)
 .TQ
@@ -64,6 +68,21 @@ is run with
 so it may use quoting, pipes and
 .BR ; .
 .PP
+A toggle can add a third line,
+.BR Status= ,
+naming a command whose first line of output is shown after the name each
+time the menu opens:
+.PP
+.RS
+.nf
+Name=Compose key
+Exec=paperweight\-compose toggle
+Status=paperweight\-compose status
+.fi
+.RE
+.PP
+shows as \(lqCompose key: on\(rq.
+.PP
 Name files
 .IR NN\-name ,
 where
@@ -90,6 +109,7 @@ Entries shipped by packages.
 Your own entries and overrides
 (\fI$XDG_CONFIG_HOME/paperweight\-os/settings.d/\fR if set).
 .SH SEE ALSO
+.BR paperweight\-compose (1),
 .BR paperweight\-keys (1),
 .BR paperweight\-theme (1),
 .BR paperweight\-network (1),

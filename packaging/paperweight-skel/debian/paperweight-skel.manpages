@@ -5,3 +5,4 @@ debian/paperweight-keys.1
 debian/paperweight-settings.1
 debian/paperweight-network.1
 debian/paperweight-volume.1
+debian/paperweight-compose.1

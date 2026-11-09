@@ -1,3 +1,15 @@
+paperweight-skel (0.2.88-1) trixie; urgency=medium
+
+  * paperweight-compose(1): turn the Right Alt Compose key on or off
+    (xkb_options compose:ralt via ~/.config/sway/config.d/60-compose.conf,
+    then sway reload). Off by default, because on layouts like German or
+    French Right Alt is AltGr. "Compose key" toggle in the Settings menu
+    (settings.d/70-compose).
+  * paperweight-settings: optional Status= line in entry files; its output
+    is shown after the name ("Compose key: on"), so entries can be toggles.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 08 Nov 2026 17:00:00 -0600
+
 paperweight-skel (0.2.87-1) trixie; urgency=medium
 
   * paperweight-keys(1): new searchable list of the sway keybindings in
