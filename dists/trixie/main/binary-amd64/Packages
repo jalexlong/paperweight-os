@@ -45,19 +45,19 @@ Description: PAM module to unlock GnuPG keys at login (upstream source build)
  paperweight-secrets, not by this package.
 
 Package: paperweight-chromebook
-Version: 0.1.13-1
+Version: 0.1.14-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
-Installed-Size: 31
+Installed-Size: 32
 Depends: paperweight-desktop, acpi, acpid, wtype, gdisk, rsync
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-chromebook/paperweight-chromebook_0.1.13-1_all.deb
-Size: 6754
-SHA256: 48aef898f0d7800e0b475f44d00d2f25a228258259d5e3c3400f5995cdf32f9f
-SHA1: 826ee32f207ed4510aaddf0d33bd29f3fdbcfc36
-MD5sum: e85e13a4ffbe3d276dc5412f7319fe6b
+Filename: pool/main/p/paperweight-chromebook/paperweight-chromebook_0.1.14-1_all.deb
+Size: 7356
+SHA256: e38395bdb08971b43018792c57719bff75bd707c84e0272834c8435262c50c44
+SHA1: d83443d99a63101112926b56d00f2eaf3d3d9869
+MD5sum: f264f8806ef7bf04e4c47c90bf1f942f
 Description: PaperweightOS hardware support for Chromebook 11 (3180)
  Sway config fragments for the Dell Chromebook 11 3180 running coreboot.
  Configures the Chromebook keyboard top-row as media/utility keys by default,
