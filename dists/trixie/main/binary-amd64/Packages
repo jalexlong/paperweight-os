@@ -45,7 +45,7 @@ Description: PAM module to unlock GnuPG keys at login (upstream source build)
  paperweight-secrets, not by this package.
 
 Package: paperweight-chromebook
-Version: 0.1.12-1
+Version: 0.1.13-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
 Installed-Size: 31
@@ -53,11 +53,11 @@ Depends: paperweight-desktop, acpi, acpid, wtype, gdisk, rsync
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-chromebook/paperweight-chromebook_0.1.12-1_all.deb
-Size: 6654
-SHA256: aa130a82059fc5cf8fcfe18de38bcceb5574bb9f952d871acd0a52b193c9c407
-SHA1: b55ece4f8c72ae43765081d524266ca7bfe236bd
-MD5sum: 450ba4ab45f59678fdcf5343e8be6ab3
+Filename: pool/main/p/paperweight-chromebook/paperweight-chromebook_0.1.13-1_all.deb
+Size: 6754
+SHA256: 48aef898f0d7800e0b475f44d00d2f25a228258259d5e3c3400f5995cdf32f9f
+SHA1: 826ee32f207ed4510aaddf0d33bd29f3fdbcfc36
+MD5sum: e85e13a4ffbe3d276dc5412f7319fe6b
 Description: PaperweightOS hardware support for Chromebook 11 (3180)
  Sway config fragments for the Dell Chromebook 11 3180 running coreboot.
  Configures the Chromebook keyboard top-row as media/utility keys by default,
@@ -186,7 +186,7 @@ Description: PaperweightOS Plymouth theme — all four Catppuccin variants
  removal. On eMMC storage this may take 30-60 seconds.
 
 Package: paperweight-secrets
-Version: 0.1.7-1
+Version: 0.1.8-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
 Installed-Size: 55
@@ -194,11 +194,11 @@ Depends: paperweight-skel, pass, pam-gnupg, pass-secret-service, pinentry-gtk2, 
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-secrets/paperweight-secrets_0.1.7-1_all.deb
-Size: 15378
-SHA256: 31006f2e4761291596ab518b09bcadefec91f268cb5b25134bdc55e2697bc093
-SHA1: 2509c5fa14056ecebfe5017bb088492268f2a2a4
-MD5sum: 479585a5086c29927c4cfdd17d211adf
+Filename: pool/main/p/paperweight-secrets/paperweight-secrets_0.1.8-1_all.deb
+Size: 15412
+SHA256: ba25a01616719dac0eebd2e3e93ff96f63a3b928029e8585e1d4eb9cebe0f415
+SHA1: d1bc6308f390838a7eee5598486e3491fb7ee0d1
+MD5sum: c890d9e3d961db0bf40965cfda3f466a
 Description: Secrets manager stack — pass, pam-gnupg, pass-secret-service
  Wires up a distro-wide secrets stack: pass(1) as the password store,
  pass-secret-service exposing it over the org.freedesktop.secrets D-Bus API
@@ -218,20 +218,20 @@ Description: Secrets manager stack — pass, pam-gnupg, pass-secret-service
  visible to apps.
 
 Package: paperweight-skel
-Version: 0.2.86-1
+Version: 0.2.87-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
-Installed-Size: 269
+Installed-Size: 282
 Depends: python3
 Replaces: greetd (<< 1.0)
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.86-1_all.deb
-Size: 50488
-SHA256: 927015f1aa2b8fea5016e58e1763c4b2dad9f9e5175b9e47903884f70a1f3431
-SHA1: 244ac1de289c22e0ba53088a24633b2e6368ec59
-MD5sum: 3412ad61125b83b5c1a1b4dcda7905f8
+Filename: pool/main/p/paperweight-skel/paperweight-skel_0.2.87-1_all.deb
+Size: 56288
+SHA256: cb3a5496a4c03b99381151d33568ef71dba1391702ede2bcb0c15038324468ac
+SHA1: b7f5c9c6ead851bb0c88ceef5baf3de5c9dfef93
+MD5sum: e3540268258da1405a558c0abc07035a
 Description: PaperweightOS default configuration skeleton
  Provides default XDG configuration files for the PaperweightOS desktop,
  installed to /etc/skel so they are copied into new user home directories
@@ -242,19 +242,19 @@ Description: PaperweightOS default configuration skeleton
  and are dropped into config.d/ directories for fragment-based composition.
 
 Package: paperweight-wallpapers
-Version: 0.3.6-1
+Version: 0.3.7-1
 Architecture: all
 Maintainer: Alex Long <johnalexanderlong@gmail.com>
-Installed-Size: 752
+Installed-Size: 755
 Depends: paperweight-skel (>= 0.2.85-1), swaybg, yad
 Homepage: https://github.com/jalexlong/paperweight-os
 Priority: optional
 Section: misc
-Filename: pool/main/p/paperweight-wallpapers/paperweight-wallpapers_0.3.6-1_all.deb
-Size: 384852
-SHA256: 50762599a4a0e565d899d60d4a27da5145e5fedaec61552e55d018f0a8854b96
-SHA1: 0417f561cb298d47233e38cdfdd6dd07541b7c3b
-MD5sum: bb2b38fe41cd5a3ca2a9c9ad21e2f039
+Filename: pool/main/p/paperweight-wallpapers/paperweight-wallpapers_0.3.7-1_all.deb
+Size: 385438
+SHA256: 4914af9301491c8eeb197174fb2043db23269f661ce6779147805c59d94ca73a
+SHA1: bab1235bcc9bcd42121bab6666f3a704b5d0d091
+MD5sum: 6630c3f2972ee140371b41116b304762
 Description: PaperweightOS wallpapers — Catppuccin themed backgrounds
  Provides wallpapers for PaperweightOS, installed to
  /usr/share/paperweight-os/wallpapers/:
