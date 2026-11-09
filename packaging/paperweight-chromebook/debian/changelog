@@ -1,3 +1,13 @@
+paperweight-chromebook (0.1.14-1) trixie; urgency=low
+
+  * Drop the 200ms repeat_delay override from 15-chromebook-input.conf;
+    Chromebooks now use the skel default (500ms delay, 35/s). 200ms caused
+    accidental repeated keys.
+  * postinst: replace the user's 15-chromebook-input.conf only if it's
+    byte-identical to the old stock file; edited copies are kept.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 08 Nov 2026 17:30:00 -0600
+
 paperweight-chromebook (0.1.13-1) trixie; urgency=low
 
   * Label the top-row bindings for paperweight-keys(1).

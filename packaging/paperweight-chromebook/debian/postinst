@@ -20,6 +20,27 @@ case "$1" in
                 update-grub || true
             fi
         fi
+
+        # Pre-0.1.14 15-chromebook-input.conf set repeat_delay 200, which
+        # caused accidental repeated keys. Replace the user's copy only if
+        # it's byte-identical to that single old stock version, so edits
+        # are kept. $SUDO_USER for `sudo apt`, else UID 1000.
+        TARGET_USER=""
+        if [ -n "${SUDO_USER:-}" ] && [ "$SUDO_USER" != "root" ]; then
+            TARGET_USER="$SUDO_USER"
+        else
+            TARGET_USER=$(getent passwd 1000 2>/dev/null | cut -d: -f1 || true)
+        fi
+        if [ -n "$TARGET_USER" ]; then
+            TARGET_HOME=$(getent passwd "$TARGET_USER" | cut -d: -f6)
+            INPUT_CONF="$TARGET_HOME/.config/sway/config.d/15-chromebook-input.conf"
+            OLD_SHA=1695c2afc9336449fd11e3e420f8087186944167703a508f44452374c58aa6f9
+            if [ -f "$INPUT_CONF" ] && \
+               [ "$(sha256sum "$INPUT_CONF" | cut -d' ' -f1)" = "$OLD_SHA" ]; then
+                cp /etc/skel/.config/sway/config.d/15-chromebook-input.conf "$INPUT_CONF"
+                chown "${TARGET_USER}:" "$INPUT_CONF" 2>/dev/null || true
+            fi
+        fi
         ;;
 esac
 
