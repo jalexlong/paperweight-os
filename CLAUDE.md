@@ -251,7 +251,7 @@ that was focused when `exec` ran.
 | `$mod+s` | Toggle layout (tabbed / splith) |
 | `$mod+f` | Files (thunar) |
 | `$mod+space` | App launcher (wofi) |
-| `$mod+comma` | Settings menu (paperweight-settings): Theme, Wallpaper, Network, Sound, Password setup, Power; also right-click the waybar logo |
+| `$mod+comma` | Settings menu (paperweight-settings): Theme, Wallpaper, Network, Sound, Password setup, Keybindings, Power; also right-click the waybar logo |
 | `$mod+n` | Network picker (paperweight-network) |
 | `$mod+p` | Password picker (paperweight-passmenu) — copies to clipboard, clears in 45s |
 | `$mod+q` | Kill window |
@@ -274,6 +274,16 @@ NN = order), shipped by whichever package owns the tool. Users can add or
 override entries in `~/.config/paperweight-os/settings.d/` (an empty file
 hides one). Theme, Wallpaper and Settings also have `.desktop` entries, so
 `$mod+space` search finds them.
+
+**Label every new `bindsym`.** The Settings menu's Keybindings entry runs
+`paperweight-keys`, which builds its list from `#:` comments in the live sway
+config: `#: Description` directly above a `bindsym` labels it, and
+`#: Keys | Description` adds one row for a group (focus, workspaces, ...).
+Unlabeled lines that match `/etc/skel` exactly are **hidden**, so a new stock
+binding without a `#:` label won't appear in the list. Older user configs
+borrow labels from the identical `/etc/skel` line, so adding a label needs no
+postinst change. Keep the keys column ASCII: mawk, the default `awk` on a
+minimal Debian install, measures length in bytes, so `…` misaligns the columns.
 
 ---
 

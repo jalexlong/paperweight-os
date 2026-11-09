@@ -1,3 +1,9 @@
+paperweight-secrets (0.1.8-1) trixie; urgency=low
+
+  * Label the $mod+p binding for paperweight-keys(1).
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 08 Nov 2026 16:00:00 -0600
+
 paperweight-secrets (0.1.7-1) trixie; urgency=low
 
   * Add "Password setup" to the paperweight-settings menu ($mod+comma) via

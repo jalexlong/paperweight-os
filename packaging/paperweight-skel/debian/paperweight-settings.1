@@ -1,0 +1,96 @@
+.TH PAPERWEIGHT\-SETTINGS 1 "2026-11-08" "paperweight-skel 0.2.87" "User Commands"
+.SH NAME
+paperweight\-settings \- PaperweightOS settings menu
+.SH SYNOPSIS
+.B paperweight\-settings
+.SH DESCRIPTION
+.B paperweight\-settings
+opens a
+.BR wofi (1)
+menu of system settings tools and runs the one you pick.
+It is bound to
+.B Super+,
+(\fB$mod+comma\fR) and also opens with a right\-click on the PaperweightOS
+logo in the bar.
+.PP
+PaperweightOS gives a direct key only to things used every day.
+Settings that are changed rarely, such as the theme or wallpaper, live in
+this menu instead.
+.PP
+With the standard packages installed, the menu lists:
+.TP
+.B Theme
+.BR paperweight\-theme (1)
+.TQ
+.B Wallpaper
+.BR paperweight\-wallpaper (1)
+(from paperweight\-wallpapers)
+.TQ
+.B Network
+.BR paperweight\-network (1)
+.TQ
+.B Sound
+.BR pavucontrol (1)
+.TQ
+.B Password setup
+.BR paperweight\-secrets\-init (1)
+in a terminal (from paperweight\-secrets)
+.TQ
+.B Keybindings
+.BR paperweight\-keys (1)
+.TQ
+.B Power
+.BR wlogout (1)
+.SH ENTRY FILES
+Each entry is a small file in a
+.I settings.d
+directory.
+Packages ship theirs in
+.IR /usr/share/paperweight\-os/settings.d/ ;
+yours go in
+.IR ~/.config/paperweight\-os/settings.d/ .
+A file holds two lines:
+.PP
+.RS
+.nf
+Name=Theme
+Exec=paperweight\-theme
+.fi
+.RE
+.PP
+.B Exec
+is run with
+.BR sh (1),
+so it may use quoting, pipes and
+.BR ; .
+.PP
+Name files
+.IR NN\-name ,
+where
+.I NN
+is a number that sets the position in the menu.
+A file in your directory with the same name as a shipped one replaces it,
+and an empty file with that name hides the entry.
+For example, to hide Sound:
+.PP
+.RS
+.nf
+mkdir \-p ~/.config/paperweight\-os/settings.d
+: > ~/.config/paperweight\-os/settings.d/40\-sound
+.fi
+.RE
+.PP
+Entries are read each time the menu opens, so changes apply immediately.
+.SH FILES
+.TP
+.I /usr/share/paperweight\-os/settings.d/
+Entries shipped by packages.
+.TP
+.I ~/.config/paperweight\-os/settings.d/
+Your own entries and overrides
+(\fI$XDG_CONFIG_HOME/paperweight\-os/settings.d/\fR if set).
+.SH SEE ALSO
+.BR paperweight\-keys (1),
+.BR paperweight\-theme (1),
+.BR paperweight\-network (1),
+.BR wofi (1)

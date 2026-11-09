@@ -1,3 +1,17 @@
+paperweight-skel (0.2.87-1) trixie; urgency=medium
+
+  * paperweight-keys(1): new searchable list of the sway keybindings in
+    effect, read from ~/.config/sway on every run. "Keybindings" entry in
+    the Settings menu (settings.d/80-keybindings).
+  * Label the stock bindings with `#:` comments (single bindings, plus
+    group rows for focus/move/workspaces/media keys). Older configs
+    borrow labels from the identical /etc/skel line, so no postinst edit
+    is needed.
+  * New man pages: paperweight-keys(1), paperweight-settings(1),
+    paperweight-network(1), paperweight-volume(1).
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 08 Nov 2026 16:00:00 -0600
+
 paperweight-skel (0.2.86-1) trixie; urgency=medium
 
   * Add debian/NEWS describing the 0.2.85-1 keybinding changes, so

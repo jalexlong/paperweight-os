@@ -1,0 +1,42 @@
+.TH PAPERWEIGHT\-WALLPAPER 1 "2026-11-08" "paperweight-wallpapers 0.3.7" "User Commands"
+.SH NAME
+paperweight\-wallpaper \- pick the desktop wallpaper for the current theme
+.SH SYNOPSIS
+.B paperweight\-wallpaper
+.SH DESCRIPTION
+.B paperweight\-wallpaper
+shows the available wallpapers with thumbnail previews in a
+.BR yad (1)
+window, or as a plain
+.BR wofi (1)
+list if yad is not installed.
+The one you pick is applied right away.
+.PP
+Each theme remembers its own wallpaper: the choice is saved for the theme
+that is active now, and is used again whenever you switch back to that
+theme with
+.BR paperweight\-theme (1).
+.PP
+It is the
+.B Wallpaper
+entry in
+.BR paperweight\-settings (1),
+and can also be found by typing \(lqwallpaper\(rq into the app launcher.
+.SH FILES
+.TP
+.I /usr/share/paperweight\-os/wallpapers/
+Wallpapers shipped with PaperweightOS.
+.TP
+.I ~/Pictures/
+Images here (PNG, JPEG or WebP) are offered too, in the yad picker.
+.TP
+.I ~/.config/paperweight\-os/wallpapers/<theme>
+The saved choice for each theme: a single line with the image path.
+Delete it to go back to that theme's default wallpaper.
+.TP
+.I ~/.config/paperweight\-os/active\-theme
+Name of the current theme.
+.SH SEE ALSO
+.BR paperweight\-theme (1),
+.BR paperweight\-settings (1),
+.BR swaybg (1)

@@ -1,0 +1,36 @@
+.TH PAPERWEIGHT\-NETWORK 1 "2026-11-08" "paperweight-skel 0.2.87" "User Commands"
+.SH NAME
+paperweight\-network \- pick and connect to a Wi\-Fi network
+.SH SYNOPSIS
+.B paperweight\-network
+.SH DESCRIPTION
+.B paperweight\-network
+lists the Wi\-Fi networks NetworkManager can see in a
+.BR yad (1)
+window, with signal strength, security type, and a check mark next to the
+network you are connected to.
+Pick one to connect.
+.PP
+If the network is secured, a password prompt follows.
+The result is shown as a desktop notification.
+Once connected, NetworkManager remembers the network and its password as
+usual.
+.PP
+It is bound to
+.B Super+N
+(\fB$mod+n\fR) and is the
+.B Network
+entry in
+.BR paperweight\-settings (1).
+For anything beyond picking a network (VPNs, wired settings, forgetting a
+network), use
+.BR nmtui (1),
+which opens when you click the network icon in the bar.
+.SH NOTES
+The list comes from NetworkManager's most recent scan, so a network that
+has just appeared may take a few seconds to show up.
+SSIDs that contain a colon are not parsed correctly.
+.SH SEE ALSO
+.BR nmcli (1),
+.BR nmtui (1),
+.BR paperweight\-settings (1)

@@ -1,0 +1,25 @@
+.TH PAPERWEIGHT\-VOLUME 1 "2026-11-08" "paperweight-skel 0.2.87" "User Commands"
+.SH NAME
+paperweight\-volume \- raise or lower the output volume
+.SH SYNOPSIS
+.B paperweight\-volume
+.BR up | down
+.SH DESCRIPTION
+.B paperweight\-volume
+changes the volume of the default PipeWire output by 5% using
+.BR wpctl (1).
+It unmutes the output first, so pressing a volume key always gives sound.
+.PP
+The laptop volume keys run it, including while the screen is locked.
+.SH ARGUMENTS
+.TP
+.B up
+Raise the volume by 5%, up to a limit of 200%.
+.TP
+.B down
+Lower the volume by 5%.
+.PP
+With any other argument, or none, it only unmutes the output.
+.SH SEE ALSO
+.BR wpctl (1),
+.BR pavucontrol (1)

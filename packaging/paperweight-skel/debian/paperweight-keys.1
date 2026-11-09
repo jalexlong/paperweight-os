@@ -1,0 +1,79 @@
+.TH PAPERWEIGHT\-KEYS 1 "2026-11-08" "paperweight-skel 0.2.87" "User Commands"
+.SH NAME
+paperweight\-keys \- show the sway keybindings currently in effect
+.SH SYNOPSIS
+.B paperweight\-keys
+.RB [ \-p | \-\-print ]
+.SH DESCRIPTION
+.B paperweight\-keys
+reads your sway configuration and lists its keybindings with a short
+description of each, in a searchable
+.BR wofi (1)
+window.
+Typing filters the list; Enter or Esc closes it.
+It is also the
+.B Keybindings
+entry in the
+.BR paperweight\-settings (1)
+menu.
+.PP
+The files read are the ones sway includes, in the same order:
+.I ~/.config/sway/config
+followed by
+.IR ~/.config/sway/config.d/*.conf .
+When two bindings use the same keys, the later one wins, as in sway.
+Bindings inside a
+.B mode
+block (such as the resize mode) are not listed, since they only apply
+inside that mode.
+.SH OPTIONS
+.TP
+.BR \-p ", " \-\-print
+Print the list to standard output instead of opening wofi.
+This is also the behaviour when no Wayland session is detected.
+.TP
+.BR \-h ", " \-\-help
+Show a short usage summary.
+.SH LABELS
+Descriptions come from comments that start with
+.B #:
+in the sway config:
+.TP
+.B #: Description
+labels the next
+.B bindsym
+below it (other comments in between are fine; a blank line ends it).
+.TP
+.B #: Keys | Description
+adds one row for a group of bindings, such as
+.BR "#: Super+0-9 | Switch to workspace" .
+.PP
+A binding with no label of its own borrows the label of the identical
+line in the matching file under
+.IR /etc/skel/.config/sway/ ,
+so a config copied from an older PaperweightOS version is still labeled.
+Unlabeled lines that match
+.I /etc/skel
+exactly are hidden; these are the per\-key lines a group row already covers.
+A binding you added yourself, or a stock line you changed, is listed with
+its command as the description unless you give it a
+.B #:
+label.
+.PP
+Key names are shown in a friendlier form:
+.B $mod
+(Mod4) as Super, Mod1 as Alt, Return as Enter, comma as \(lq,\(rq, and so on.
+.SH FILES
+.TP
+.I ~/.config/sway/config
+.TQ
+.I ~/.config/sway/config.d/*.conf
+Your sway configuration, read on every run.
+.TP
+.I /etc/skel/.config/sway/
+Stock configuration shipped by the PaperweightOS packages; source of
+borrowed labels.
+.SH SEE ALSO
+.BR paperweight\-settings (1),
+.BR sway (5),
+.BR wofi (1)

@@ -30,6 +30,7 @@ usr/bin/waybar-theme-status                                usr/bin/
 usr/bin/paperweight-network                                usr/bin/
 usr/bin/paperweight-volume                                 usr/bin/
 usr/bin/paperweight-settings                               usr/bin/
+usr/bin/paperweight-keys                                   usr/bin/
 usr/share/paperweight-os/settings.d/                       usr/share/paperweight-os/
 etc/skel/.config/sway/config.d/90-colors.conf             etc/skel/.config/sway/config.d/
 etc/skel/.config/sway/themes/                             etc/skel/.config/sway/

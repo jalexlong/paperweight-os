@@ -1,3 +1,7 @@
 debian/paperweight-theme.1
 debian/waybar-theme-status.1
 debian/paperweight-set-greeter-theme.8
+debian/paperweight-keys.1
+debian/paperweight-settings.1
+debian/paperweight-network.1
+debian/paperweight-volume.1

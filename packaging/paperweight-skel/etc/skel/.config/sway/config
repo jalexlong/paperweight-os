@@ -21,42 +21,61 @@ set $lock gtklock -d
     # `exec "swaymsg workspace 1 && ..."`: sway places a new window on the
     # workspace that was focused when `exec` ran, so exec has to run after
     # the switch.
+    #: Terminal (current workspace)
     bindsym $mod+Return exec $term
+    #: Floating terminal (current workspace)
     bindsym $mod+Shift+Return exec $term --app-id floating-terminal
+    #: Terminal on workspace 1
     bindsym $mod+t workspace number 1; exec $term
+    #: Floating terminal on workspace 1
     bindsym $mod+Shift+t workspace number 1; exec $term --app-id floating-terminal
     for_window [app_id="floating-terminal"] floating enable, resize set width 900 px height 500 px, move position center
 
+    #: Files
     bindsym $mod+f exec $files
+    #: App launcher
     bindsym $mod+space exec $menu
     # Settings menu (theme, wallpaper, network, sound, power); also on
     # right-click of the waybar logo. Entries: paperweight-settings(1).
+    #: Settings menu
     bindsym $mod+comma exec paperweight-settings
 
 ### Window management
+    #: Close window
     bindsym $mod+q kill
+    #: Toggle floating / tiled
     bindsym $mod+g floating toggle
+    #: Switch focus between floating and tiled
     bindsym $mod+Shift+space focus mode_toggle
+    #: Fullscreen
     bindsym $mod+m fullscreen
 
     floating_modifier $mod normal
 
 ### Session
+    #: Lock screen
     bindsym $mod+ctrl+l exec $lock
+    #: Reload sway config
     bindsym $mod+Shift+r reload
+    #: Exit sway
     bindsym $mod+Shift+q exec swaynag -t warning \
         -m 'Exit sway? This will end your Wayland session.' \
         -B 'Yes, exit' 'swaymsg exit'
+    #: Power menu (lock, log out, suspend, restart, shut down)
     bindsym Ctrl+Alt+Delete exec wlogout --buttons-per-row 5
     # Chromebook keyboards have no Delete key (BackSpace sits where Delete
     # would be), so bind the same action there too.
+    #: Power menu (Chromebook keyboards)
     bindsym Ctrl+Alt+BackSpace exec wlogout --buttons-per-row 5
 
 ### Utilities
+    #: Restart waybar
     bindsym $mod+ctrl+w exec sh -c 'pkill -SIGUSR1 waybar || waybar'
+    #: Notification center
     bindsym $mod+Shift+n exec swaync-client --toggle-panel
 
 ### Focus
+    #: Super+HJKL/arrows | Move focus
     bindsym $mod+$left focus left
     bindsym $mod+$down focus down
     bindsym $mod+$up focus up
@@ -67,6 +86,7 @@ set $lock gtklock -d
     bindsym $mod+Right focus right
 
 ### Move
+    #: Super+Shift+HJKL/arrows | Move window
     bindsym $mod+Shift+$left move left
     bindsym $mod+Shift+$down move down
     bindsym $mod+Shift+$up move up
@@ -77,6 +97,7 @@ set $lock gtklock -d
     bindsym $mod+Shift+Right move right
 
 ### Workspaces
+    #: Super+0-9 | Switch to workspace (0 = 10)
     bindsym $mod+1 workspace number 1
     bindsym $mod+2 workspace number 2
     bindsym $mod+3 workspace number 3
@@ -87,6 +108,7 @@ set $lock gtklock -d
     bindsym $mod+8 workspace number 8
     bindsym $mod+9 workspace number 9
     bindsym $mod+0 workspace number 10
+    #: Super+Shift+0-9 | Move window to workspace (0 = 10)
     bindsym $mod+Shift+1 move container to workspace number 1
     bindsym $mod+Shift+2 move container to workspace number 2
     bindsym $mod+Shift+3 move container to workspace number 3
@@ -99,7 +121,9 @@ set $lock gtklock -d
     bindsym $mod+Shift+0 move container to workspace number 10
 
 ### Scratchpad
+    #: Send window to scratchpad
     bindsym $mod+Shift+minus move scratchpad
+    #: Show scratchpad
     bindsym $mod+minus scratchpad show
 
 ### Resize mode
@@ -115,9 +139,11 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
+#: Resize mode (H/J/K/L or arrows; Enter/Esc to leave)
 bindsym $mod+r mode "resize"
 
 ### Media / brightness keys
+    #: Media keys | Volume, mic, playback, brightness (work when locked too)
     bindsym --locked XF86AudioMute exec wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
     bindsym --locked XF86AudioLowerVolume exec paperweight-volume down
     bindsym --locked XF86AudioRaiseVolume exec paperweight-volume up
@@ -128,7 +154,9 @@ bindsym $mod+r mode "resize"
     bindsym --locked XF86AudioNext exec playerctl next
     bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%- --min-value=5
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+    #: Screenshot to ~/Pictures
     bindsym Print exec grim ~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png
+    #: Screenshot a region
     bindsym $mod+Print exec grim -g "$(slurp)" ~/Pictures/screenshot-$(date +%Y%m%d-%H%M%S).png
 
 ### Bar

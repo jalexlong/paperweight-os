@@ -1,3 +1,9 @@
+paperweight-wallpapers (0.3.7-1) trixie; urgency=low
+
+  * Add paperweight-wallpaper(1) man page.
+
+ -- Alex Long <johnalexanderlong@gmail.com>  Sun, 08 Nov 2026 16:00:00 -0600
+
 paperweight-wallpapers (0.3.6-1) trixie; urgency=low
 
   * Depend on paperweight-skel (>= 0.2.85-1). 0.3.5-1 dropped $mod+w in
